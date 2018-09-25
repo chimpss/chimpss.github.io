@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="go," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="详见：go标准包：reflect  特点  大大提高程序的灵活性，特别是与interface结合能够发挥更大的效果 反射使用TypeOf和ValueOf函数从接口中获取目标对象信息 反射会将匿名字段设为独立字段（匿名字段本质） 想要利用反射修改对象信息，前提是interface.data是settble,即pointer-interface 通过反射可以动态的调用方法   demo实例12345">
+<meta name="keywords" content="go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="反射">
+<meta property="og:url" content="http://yoursite.com/技术/golang/反射/index.html">
+<meta property="og:site_name" content="秀才">
+<meta property="og:description" content="详见：go标准包：reflect  特点  大大提高程序的灵活性，特别是与interface结合能够发挥更大的效果 反射使用TypeOf和ValueOf函数从接口中获取目标对象信息 反射会将匿名字段设为独立字段（匿名字段本质） 想要利用反射修改对象信息，前提是interface.data是settble,即pointer-interface 通过反射可以动态的调用方法   demo实例12345">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-25T10:05:20.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="反射">
+<meta name="twitter:description" content="详见：go标准包：reflect  特点  大大提高程序的灵活性，特别是与interface结合能够发挥更大的效果 反射使用TypeOf和ValueOf函数从接口中获取目标对象信息 反射会将匿名字段设为独立字段（匿名字段本质） 想要利用反射修改对象信息，前提是interface.data是settble,即pointer-interface 通过反射可以动态的调用方法   demo实例12345">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/技术/golang/反射/"/>
+
+
+
+
+
+  <title>反射 | 秀才</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秀才</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/技术/golang/反射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">反射</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-15T10:19:36+08:00">
+                2018-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>详见：<a href="http://studygolang.com/pkgdoc" target="_blank" rel="noopener">go标准包：reflect</a></p>
+</blockquote>
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><blockquote>
+<ul>
+<li>大大提高程序的灵活性，特别是与interface结合能够发挥更大的效果</li>
+<li>反射使用TypeOf和ValueOf函数从接口中获取目标对象信息</li>
+<li>反射会将匿名字段设为独立字段（匿名字段本质）</li>
+<li>想要利用反射修改对象信息，前提是interface.data是settble,即pointer-interface</li>
+<li>通过反射可以<code>动态</code>的调用方法</li>
+</ul>
+</blockquote>
+<h1 id="demo实例"><a href="#demo实例" class="headerlink" title="demo实例"></a>demo实例</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id   <span class="keyword">int</span></span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">	Age  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(u User)</span> <span class="title">Hello</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"hello world"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	u := User&#123;<span class="number">12</span>, <span class="string">"zhangsan"</span>, <span class="number">33</span>&#125;</span><br><span class="line">	<span class="comment">// 此处不可以传指针</span></span><br><span class="line">	Info(u)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Info</span><span class="params">(o <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	t := reflect.TypeOf(o)</span><br><span class="line">	fmt.Println(<span class="string">"Type:"</span>, t.Name())</span><br><span class="line">	v := reflect.ValueOf(o)</span><br><span class="line">	fmt.Println(<span class="string">"Field:"</span>)</span><br><span class="line">    <span class="keyword">if</span> k := t.Kind(); k != reflect.Struct &#123;</span><br><span class="line">		fmt.Println(<span class="string">"不是interface的struct类型"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; t.NumField(); i++ &#123;</span><br><span class="line">		f := t.Field(i)</span><br><span class="line">		val := v.Field(i).Interface()</span><br><span class="line">		fmt.Println(f.Name,f.Type,f.Anonymous,val)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">Type: User</span><br><span class="line">Field:</span><br><span class="line">Id <span class="keyword">int</span> <span class="literal">false</span> <span class="number">12</span></span><br><span class="line">Name <span class="keyword">string</span> <span class="literal">false</span> zhangsan</span><br><span class="line">Age <span class="keyword">int</span> <span class="literal">false</span> <span class="number">33</span></span><br></pre></td></tr></table></figure>
+<h1 id="匿名字段的反射"><a href="#匿名字段的反射" class="headerlink" title="匿名字段的反射"></a>匿名字段的反射</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id   <span class="keyword">int</span></span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">	Age  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Manage <span class="keyword">struct</span> &#123;</span><br><span class="line">	User</span><br><span class="line">	Title <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	m := Manage&#123;User&#123;<span class="number">12</span>, <span class="string">"zhangsan"</span>, <span class="number">14</span>&#125;, <span class="string">"wangwu"</span>&#125;</span><br><span class="line">	t := reflect.TypeOf(m)</span><br><span class="line">	<span class="comment">// 匿名字段的反射</span></span><br><span class="line">	fmt.Println(t.Field(<span class="number">1</span>))</span><br><span class="line">	<span class="comment">// 取出匿名字段的值</span></span><br><span class="line">	fmt.Println(t.FieldByIndex([]<span class="keyword">int</span>&#123;<span class="number">0</span>, <span class="number">0</span>&#125;))</span><br><span class="line">	<span class="comment">// 取出正常字段的值</span></span><br><span class="line">	fmt.Println(t.FieldByIndex([]<span class="keyword">int</span>&#123;<span class="number">1</span>&#125;))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">&#123;Title  <span class="keyword">string</span>  <span class="number">32</span> [<span class="number">1</span>] <span class="literal">false</span>&#125;</span><br><span class="line">&#123;Id  <span class="keyword">int</span>  <span class="number">0</span> [<span class="number">0</span>] <span class="literal">false</span>&#125;</span><br><span class="line">&#123;Title  <span class="keyword">string</span>  <span class="number">32</span> [<span class="number">1</span>] <span class="literal">false</span>&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="通过反射改变其值"><a href="#通过反射改变其值" class="headerlink" title="通过反射改变其值"></a>通过反射改变其值</h1><blockquote>
+<p>demo1<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x := <span class="number">13</span></span><br><span class="line">v := reflect.ValueOf(&amp;x)</span><br><span class="line">v.Elem().SetInt(<span class="number">999</span>)</span><br><span class="line">fmt.Println(x)</span><br><span class="line"><span class="comment">// 结果：999</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>demo2<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">	Age  <span class="keyword">int</span></span><br><span class="line">	sex  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	u := User&#123;<span class="string">"zhansan"</span>, <span class="number">12</span>, <span class="number">2</span>&#125;</span><br><span class="line">	f := reflect.ValueOf(&amp;u)</span><br><span class="line">	v := reflect.ValueOf(u)</span><br><span class="line">	<span class="comment">// kind方法返回类型,</span></span><br><span class="line">	<span class="comment">// interface方法返回v当前持有的值（表示为/保管在interface&#123;&#125;类型），</span></span><br><span class="line">	<span class="comment">// 等价于：var i interface&#123;&#125; = (v's underlying value)</span></span><br><span class="line">	fmt.Println(v.Kind(), v.Type(), v.Interface())</span><br><span class="line">	<span class="keyword">if</span> f.Kind() == reflect.Ptr &amp;&amp; !f.Elem().CanSet() &#123;</span><br><span class="line">		fmt.Println(<span class="string">"User不能被设置"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	    <span class="comment">// Elem返回v持有的接口保管的值的Value封装，或者v持有的指针指向的值的Value封装。</span></span><br><span class="line">		f = f.Elem()</span><br><span class="line">	&#125;</span><br><span class="line">	val := f.FieldByName(<span class="string">"Name"</span>)</span><br><span class="line">	<span class="comment">// IsValid返回v是否持有一个值。如果v是Value零值会返回假，此时v除了IsValid、String、Kind之外的方法都会导致panic。</span></span><br><span class="line">	<span class="comment">// 绝大多数函数和方法都永远不返回Value零值。如果某个函数/方法返回了非法的Value，它的文档必须显式的说明具体情况。</span></span><br><span class="line">	<span class="keyword">if</span> (!val.IsValid()) &#123;</span><br><span class="line">		fmt.Println(<span class="string">"val不是有效值"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (val.Kind() == reflect.String) &#123;</span><br><span class="line">		<span class="comment">// 设置值</span></span><br><span class="line">		val.SetString(<span class="string">"wangwu"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(u)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="通过反射调用其方法"><a href="#通过反射调用其方法" class="headerlink" title="通过反射调用其方法"></a>通过反射调用其方法</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">	Age  <span class="keyword">int</span></span><br><span class="line">	sex  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	user := User&#123;<span class="string">"zhangsan"</span>, <span class="number">12</span>, <span class="number">2</span>&#125;</span><br><span class="line">	f := reflect.ValueOf(user)</span><br><span class="line">	<span class="comment">// 返回v的名为name的方法的已绑定（到v的持有值的）状态的函数形式的Value封装。</span></span><br><span class="line">	mv := f.MethodByName(<span class="string">"GetName"</span>)</span><br><span class="line">	<span class="comment">// slice格式,reflect.Value为一种reflect的value类型,包含reflect.Int...</span></span><br><span class="line">	<span class="comment">// ValueOf返回一个初始化为i接口保管的具体值的Value</span></span><br><span class="line">	args := []reflect.Value&#123;reflect.ValueOf(<span class="string">"wangwu"</span>)&#125;</span><br><span class="line">	<span class="comment">// func (v Value) Call(in []Value) []Value</span></span><br><span class="line">	<span class="comment">// Call方法使用输入的参数in调用v持有的函数。</span></span><br><span class="line">	mv.Call(args)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(user User)</span> <span class="title">GetName</span><span class="params">(name <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"hello "</span> + name + <span class="string">" my name is "</span> + user.Name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/go/" rel="tag"># go</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/技术/golang/webServer/" rel="next" title="webServer">
+                <i class="fa fa-chevron-left"></i> webServer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/技术/golang/小坑/" rel="prev" title="小坑">
+                小坑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chimps</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#特点"><span class="nav-number">1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#demo实例"><span class="nav-number">2.</span> <span class="nav-text">demo实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#匿名字段的反射"><span class="nav-number">3.</span> <span class="nav-text">匿名字段的反射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过反射改变其值"><span class="nav-number">4.</span> <span class="nav-text">通过反射改变其值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过反射调用其方法"><span class="nav-number">5.</span> <span class="nav-text">通过反射调用其方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chimps</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
