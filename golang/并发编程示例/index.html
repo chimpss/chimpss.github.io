@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="并发,go," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="并发编程示例定时任务12345678910111213141516171819func demo(input chan interface&amp;#123;&amp;#125;) &amp;#123;    t1 := time.NewTimer(time.Second * 5)    t2 := time.NewTimer(time.Second * 10)    for &amp;#123;        select &amp;">
+<meta name="keywords" content="并发,go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发编程（2）">
+<meta property="og:url" content="http://yoursite.com/golang/并发编程示例/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="并发编程示例定时任务12345678910111213141516171819func demo(input chan interface&amp;#123;&amp;#125;) &amp;#123;    t1 := time.NewTimer(time.Second * 5)    t2 := time.NewTimer(time.Second * 10)    for &amp;#123;        select &amp;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-25T10:05:46.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="并发编程（2）">
+<meta name="twitter:description" content="并发编程示例定时任务12345678910111213141516171819func demo(input chan interface&amp;#123;&amp;#125;) &amp;#123;    t1 := time.NewTimer(time.Second * 5)    t2 := time.NewTimer(time.Second * 10)    for &amp;#123;        select &amp;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/golang/并发编程示例/"/>
+
+
+
+
+
+  <title>并发编程（2） | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/并发编程示例/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">并发编程（2）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-20T10:19:36+08:00">
+                2018-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="并发编程示例"><a href="#并发编程示例" class="headerlink" title="并发编程示例"></a>并发编程示例</h1><h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">demo</span><span class="params">(input <span class="keyword">chan</span> <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    t1 := time.NewTimer(time.Second * <span class="number">5</span>)</span><br><span class="line">    t2 := time.NewTimer(time.Second * <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> msg &lt;- input:</span><br><span class="line">            <span class="built_in">println</span>(msg)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> &lt;-t1.C:</span><br><span class="line">            <span class="built_in">println</span>(<span class="string">"5s timer"</span>)</span><br><span class="line">            t1.Reset(time.Second * <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> &lt;-t2.C:</span><br><span class="line">            <span class="built_in">println</span>(<span class="string">"10s timer"</span>)</span><br><span class="line">            t2.Reset(time.Second * <span class="number">10</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="断续器"><a href="#断续器" class="headerlink" title="断续器"></a>断续器</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ticker := time.NewTicker(time.Second)</span><br><span class="line">	<span class="keyword">for</span> t := <span class="keyword">range</span> ticker.C &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ticker"</span>, t)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="超时"><a href="#超时" class="headerlink" title="超时"></a>超时</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">1</span>)</span><br><span class="line">    ch2 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> e1 := &lt;-ch1:</span><br><span class="line">        <span class="comment">//如果ch1通道成功读取数据，则执行该case处理语句</span></span><br><span class="line">            fmt.Printf(<span class="string">"1th case is selected. e1=%v"</span>,e1)</span><br><span class="line">        <span class="keyword">case</span> e2 := &lt;-ch2:</span><br><span class="line">        <span class="comment">//如果ch2通道成功读取数据，则执行该case处理语句</span></span><br><span class="line">            fmt.Printf(<span class="string">"2th case is selected. e2=%v"</span>,e2)</span><br><span class="line">        <span class="keyword">case</span> &lt;- time.After(<span class="number">2</span> * time.Second):</span><br><span class="line">            fmt.Println(<span class="string">"Timed out"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自定义定时器"><a href="#自定义定时器" class="headerlink" title="自定义定时器"></a>自定义定时器</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> t *time.Timer</span><br><span class="line"></span><br><span class="line">    f := <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Expiration time : %v.\n"</span>, time.Now())</span><br><span class="line">        fmt.Printf(<span class="string">"C`s len: %d\n"</span>, <span class="built_in">len</span>(t.C))</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    t = time.AfterFunc(<span class="number">1</span>*time.Second, f)</span><br><span class="line">    <span class="comment">//让当前Goroutine 睡眠2s，确保大于内容的完整</span></span><br><span class="line">    <span class="comment">//这样做原因是，time.AfterFunc的调用不会被阻塞。它会以一部的方式在到期事件来临执行我们自定义函数f。</span></span><br><span class="line">    time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用时间控制停止ticker"><a href="#使用时间控制停止ticker" class="headerlink" title="使用时间控制停止ticker"></a>使用时间控制停止ticker</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//初始化断续器,间隔2s</span></span><br><span class="line">    <span class="keyword">var</span> ticker *time.Ticker = time.NewTicker(<span class="number">1</span> * time.Second)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> t := <span class="keyword">range</span> ticker.C &#123;</span><br><span class="line">            fmt.Println(<span class="string">"Tick at"</span>, t)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    time.Sleep(time.Second * <span class="number">5</span>)   <span class="comment">//阻塞，则执行次数为sleep的休眠时间/ticker的时间</span></span><br><span class="line">    ticker.Stop()       <span class="comment">//停止ticker</span></span><br><span class="line">    fmt.Println(<span class="string">"Ticker stopped"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="并发读取文件夹所有文件的长度（使用通道）"><a href="#并发读取文件夹所有文件的长度（使用通道）" class="headerlink" title="并发读取文件夹所有文件的长度（使用通道）"></a>并发读取文件夹所有文件的长度（使用通道）</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test1</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 遍历文件夹，获取文件名</span></span><br><span class="line">	dir := <span class="string">"./db"</span></span><br><span class="line">	paths, err := ioutil.ReadDir(dir)</span><br><span class="line">	check(err)</span><br><span class="line">	<span class="keyword">var</span> files []<span class="keyword">string</span></span><br><span class="line">	<span class="keyword">for</span> _, path := <span class="keyword">range</span> paths &#123;</span><br><span class="line">		<span class="keyword">if</span> !path.IsDir() &#123;</span><br><span class="line">			files = <span class="built_in">append</span>(files, path.Name())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">type</span> FileInfo <span class="keyword">struct</span> &#123;</span><br><span class="line">		FileName <span class="keyword">string</span></span><br><span class="line">		Len      <span class="keyword">int</span></span><br><span class="line">		Err      error</span><br><span class="line">	&#125;</span><br><span class="line">	way := <span class="built_in">make</span>(<span class="keyword">chan</span> FileInfo, <span class="number">100</span>)</span><br><span class="line">	<span class="keyword">for</span> _, file := <span class="keyword">range</span> files &#123;</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(fileName <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">			content, err := ioutil.ReadFile(fmt.Sprintf(<span class="string">"%s/%s"</span>, dir, fileName))</span><br><span class="line">            <span class="comment">// 无论对错，都交给通道收取方</span></span><br><span class="line">			way &lt;- FileInfo&#123;</span><br><span class="line">				FileName: fileName,</span><br><span class="line">				Len:      <span class="built_in">len</span>(content),</span><br><span class="line">				Err:      err,</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;(file)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 我们知道需要从通道中取多少条数据</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(files); i++ &#123;</span><br><span class="line">		fileInfo := &lt;-way</span><br><span class="line">		<span class="keyword">if</span> fileInfo.Err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Printf(<span class="string">"[err] file:%s, err: %s \n"</span>, fileInfo.FileName, fileInfo.Err.Error())</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Printf(<span class="string">"file:%s, len: %d \n"</span>, fileInfo.FileName, fileInfo.Len)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="并发读取文件夹所有文件的长度（使用sync-WaitGroup）"><a href="#并发读取文件夹所有文件的长度（使用sync-WaitGroup）" class="headerlink" title="并发读取文件夹所有文件的长度（使用sync.WaitGroup）"></a>并发读取文件夹所有文件的长度（使用sync.WaitGroup）</h2><p>这个使用的其实就是计数器的道理<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test1</span><span class="params">()</span></span> &#123;</span><br><span class="line">	dir := <span class="string">"./db"</span></span><br><span class="line">	paths, err := ioutil.ReadDir(dir)</span><br><span class="line">	check(err)</span><br><span class="line">	<span class="keyword">var</span> files []<span class="keyword">string</span></span><br><span class="line">	<span class="keyword">for</span> _, path := <span class="keyword">range</span> paths &#123;</span><br><span class="line">		<span class="keyword">if</span> !path.IsDir() &#123;</span><br><span class="line">			files = <span class="built_in">append</span>(files, path.Name())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// sizes用来计算总长度和阻塞直至所有goroutine走完</span></span><br><span class="line">	sizes := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int64</span>)</span><br><span class="line">    <span class="comment">// 计数器</span></span><br><span class="line">	<span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">	<span class="keyword">for</span> _, file := <span class="keyword">range</span> files &#123;</span><br><span class="line">		wg.Add(<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(fileName <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">			<span class="keyword">defer</span> wg.Done()</span><br><span class="line">			fileInfo, _ := os.Stat(fmt.Sprintf(<span class="string">"%s/%s"</span>, dir, fileName))</span><br><span class="line">			sizes &lt;- fileInfo.Size()</span><br><span class="line">		&#125;(file)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		wg.Wait()</span><br><span class="line">		<span class="built_in">close</span>(sizes)</span><br><span class="line">	&#125;()</span><br><span class="line">	<span class="keyword">var</span> total <span class="keyword">int64</span></span><br><span class="line">	<span class="keyword">for</span> size := <span class="keyword">range</span> sizes &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"size:%d\n"</span>, size)</span><br><span class="line">		total += size</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"total size: %d\n"</span>, total)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="令牌-另一种信号计数器"><a href="#令牌-另一种信号计数器" class="headerlink" title="令牌-另一种信号计数器"></a>令牌-另一种信号计数器</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">check</span><span class="params">(err error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 链接列表</span></span><br><span class="line">	workList := <span class="built_in">make</span>(<span class="keyword">chan</span> []<span class="keyword">string</span>)</span><br><span class="line">	<span class="comment">// 存储已经处理的链接，使用map是为了去重</span></span><br><span class="line">	seen := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">bool</span>)</span><br><span class="line">	<span class="comment">// n是为了保证爬虫一直爬</span></span><br><span class="line">	n := <span class="number">1</span></span><br><span class="line">	<span class="comment">// 初始化 </span></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; workList &lt;- []<span class="keyword">string</span>&#123;<span class="string">"http://www.jianshu.com"</span>&#125; &#125;()</span><br><span class="line">	<span class="keyword">for</span> i := n; i &gt; <span class="number">0</span>; i++ &#123;</span><br><span class="line">		list := &lt;-workList</span><br><span class="line">		<span class="keyword">for</span> _, link := <span class="keyword">range</span> list &#123;</span><br><span class="line">			<span class="keyword">if</span> !seen[link] &#123;</span><br><span class="line">				seen[link] = <span class="literal">true</span></span><br><span class="line">				n++</span><br><span class="line">				<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(link <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">					workList &lt;- crawl(link)</span><br><span class="line">				&#125;(link)</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> tokens = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取网页的链接  通过令牌</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">crawl</span><span class="params">(url <span class="keyword">string</span>)</span> <span class="params">(list []<span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	fmt.Println(url)</span><br><span class="line">	tokens &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">	list, err := Extract(url)</span><br><span class="line">	&lt;-tokens</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Print(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取网页的链接</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Extract</span><span class="params">(url <span class="keyword">string</span>)</span> <span class="params">(list []<span class="keyword">string</span>, err error)</span></span> &#123;</span><br><span class="line">	resp, err := http.Get(url)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> resp.StatusCode != http.StatusOK &#123;</span><br><span class="line">		resp.Body.Close()</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, fmt.Errorf(<span class="string">"getting %s, err %s"</span>, url, err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">	doc, err := html.Parse(resp.Body)</span><br><span class="line">	resp.Body.Close()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, fmt.Errorf(<span class="string">"parsing %s as HTML, err %s"</span>, url, err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">	visitNode := <span class="function"><span class="keyword">func</span><span class="params">(n *html.Node)</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> n.Type == html.ElementNode &amp;&amp; n.Data == <span class="string">"a"</span> &#123;</span><br><span class="line">			<span class="keyword">for</span> _, a := <span class="keyword">range</span> n.Attr &#123;</span><br><span class="line">				<span class="keyword">if</span> a.Key != <span class="string">"href"</span> &#123;</span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				&#125;</span><br><span class="line">				link, err := resp.Request.URL.Parse(a.Val)</span><br><span class="line">				<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				&#125;</span><br><span class="line">				list = <span class="built_in">append</span>(list, link.String())</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 将函数作为参数传入（匿名函数）</span></span><br><span class="line">	forEachNode(doc, visitNode, <span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">forEachNode</span><span class="params">(n *html.Node, pre, next <span class="keyword">func</span>(node *html.Node)</span>)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> pre != <span class="literal">nil</span> &#123;</span><br><span class="line">		pre(n)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> n := n.FirstChild; n != <span class="literal">nil</span>; n = n.NextSibling &#123;</span><br><span class="line">		forEachNode(n, pre, next)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> next != <span class="literal">nil</span> &#123;</span><br><span class="line">		next(n)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并发/" rel="tag"># 并发</a>
+          
+            <a href="/tags/go/" rel="tag"># go</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/golang/并发编程/" rel="next" title="并发编程（1）">
+                <i class="fa fa-chevron-left"></i> 并发编程（1）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/golang/数组与切片/" rel="prev" title="数组与切片">
+                数组与切片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发编程示例"><span class="nav-number">1.</span> <span class="nav-text">并发编程示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定时任务"><span class="nav-number">1.1.</span> <span class="nav-text">定时任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#断续器"><span class="nav-number">1.2.</span> <span class="nav-text">断续器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超时"><span class="nav-number">1.3.</span> <span class="nav-text">超时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义定时器"><span class="nav-number">1.4.</span> <span class="nav-text">自定义定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用时间控制停止ticker"><span class="nav-number">1.5.</span> <span class="nav-text">使用时间控制停止ticker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发读取文件夹所有文件的长度（使用通道）"><span class="nav-number">1.6.</span> <span class="nav-text">并发读取文件夹所有文件的长度（使用通道）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发读取文件夹所有文件的长度（使用sync-WaitGroup）"><span class="nav-number">1.7.</span> <span class="nav-text">并发读取文件夹所有文件的长度（使用sync.WaitGroup）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#令牌-另一种信号计数器"><span class="nav-number">1.8.</span> <span class="nav-text">令牌-另一种信号计数器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
