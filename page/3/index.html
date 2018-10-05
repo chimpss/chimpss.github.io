@@ -941,8 +941,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 authorized_keys</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>验证使用SSH IP地址的方式无密码访问</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 .ssh]# ssh 192.168.1.3</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 .ssh]# ssh 192.168.1.3</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<h1 id="禁止密码登录"><a href="#禁止密码登录" class="headerlink" title="禁止密码登录"></a>禁止密码登录</h1><p>修改SSH的配置文件/etc/ssh/sshd_config，找到下面1行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure></p>
+<p>修改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication no</span><br></pre></td></tr></table></figure></p>
+<p>保存后重启SSH服务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure></p>
 
           
         
