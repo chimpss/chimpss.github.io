@@ -11,7 +11,7 @@
   <entry>
     <title><![CDATA[zsh]]></title>
     <url>%2Flinux%2Fzsh%2F</url>
-    <content type="text"><![CDATA[安装 zsh1sudo apt-get install zsh oh-my-zsh： 摘自：https://github.com/robbyrussell/oh-my-zsh1sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot; 命令高亮 摘自：https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md123git clone https://github.com/zsh-users/zsh-syntax-highlighting.gitecho &quot;source $&#123;(q-)PWD&#125;/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; $&#123;ZDOTDIR:-$HOME&#125;/.zshrcsource ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 可以设置默认sh1sudo chsh -s /bin/zsh]]></content>
+    <content type="text"><![CDATA[安装 zsh1sudo apt-get install zsh oh-my-zsh：摘自：https://github.com/robbyrussell/oh-my-zsh 1sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot; 命令高亮摘自：https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md 123git clone https://github.com/zsh-users/zsh-syntax-highlighting.gitecho &quot;source $&#123;(q-)PWD&#125;/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; $&#123;ZDOTDIR:-$HOME&#125;/.zshrcsource ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 可以设置默认sh1sudo chsh -s /bin/zsh]]></content>
       <tags>
         <tag>linux</tag>
         <tag>zsh</tag>
