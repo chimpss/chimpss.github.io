@@ -273,6 +273,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql/max_allowed_packet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/mysql/max_allowed_packet/" itemprop="url">MySQL max_allowed_packet设置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T23:19:12+08:00">
+                2018-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="查看目前配置"><a href="#查看目前配置" class="headerlink" title="查看目前配置"></a>查看目前配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show VARIABLES like &apos;%max_allowed_packet%&apos;;</span><br><span class="line">+--------------------------+------------+</span><br><span class="line">| Variable_name            | Value      |</span><br><span class="line">+--------------------------+------------+</span><br><span class="line">| max_allowed_packet       | 16777216   |</span><br><span class="line">| slave_max_allowed_packet | 1073741824 |</span><br><span class="line">+--------------------------+------------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
+<h2 id="修改方法"><a href="#修改方法" class="headerlink" title="修改方法"></a>修改方法</h2><ol>
+<li><p>编辑<code>my.cnf</code>文件</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">max_allowed_packet</span>=<span class="number">20</span>M</span><br></pre></td></tr></table></figure>
+<p>保存重启mysql</p>
+<p>如果找不到<code>my.cnf</code>，可以通过命令：<code>mysql --help | grep my.cnf</code></p>
+</li>
+<li><p>在mysql 命令行中运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global max_allowed_packet = 2*1024*1024*10</span><br></pre></td></tr></table></figure>
+<p>然后关闭掉这此mysql server链接，再进入</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/http上传下载/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1492,150 +1623,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/mgo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/mgo/" itemprop="url">mgo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>mongodb客户端的golang实现<br>mgo很有可能作为golang的标准库<br><a href="https://godoc.org/gopkg.in/mgo.v2" target="_blank" rel="noopener">mgo文档</a></p>
-</blockquote>
-<h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> database</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"full_text_search/config"</span></span><br><span class="line">	<span class="string">"gopkg.in/mgo.v2"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Session *mgo.Session</span><br><span class="line"></span><br><span class="line"><span class="comment">// 简单实现单例，只创建一个session</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> Session == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> err error</span><br><span class="line">		Session, err = mgo.Dial(config.MongoDB.Host + <span class="string">":"</span> + config.MongoDB.Port)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="built_in">panic</span>(<span class="string">"连接mongodb失败，原因："</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Collection</span><span class="params">(collectionName <span class="keyword">string</span>, f <span class="keyword">func</span>(collection *mgo.Collection)</span>) <span class="params">(err error)</span></span> &#123;</span><br><span class="line">    <span class="comment">// mgo内部实现了连接池，通过clone获取连接</span></span><br><span class="line">	session := Session.Clone()</span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		session.Close()</span><br><span class="line">		<span class="keyword">if</span> err := <span class="built_in">recover</span>(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line">	collection := session.DB(config.MongoDB.Database).C(collectionName)</span><br><span class="line">	f(collection)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Session, err = mgo.Dial(config.MongoDB.Host + <span class="string">":"</span> + config.MongoDB.Port)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(<span class="string">"连接mongodb失败，原因："</span> + err.Error())</span><br><span class="line">&#125;</span><br><span class="line">err = Session.DB(<span class="string">"admin"</span>).Login(config.MongoDB.User, config.MongoDB.Password)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</span><br><span class="line">	<span class="built_in">panic</span>(<span class="string">"登录mongodb失败，原因："</span> + err.Error())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h1><p>上述是建立连接，并执行操作</p>
-<h2 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> d <span class="keyword">struct</span> &#123;</span><br><span class="line">	X <span class="keyword">int</span></span><br><span class="line">	Y <span class="keyword">int</span></span><br><span class="line">	Z <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line">database.Collection(<span class="string">"user"</span>, <span class="function"><span class="keyword">func</span><span class="params">(collection *mgo.Collection)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> insertDatas = []<span class="keyword">interface</span>&#123;&#125;&#123;</span><br><span class="line">		d&#123;<span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>&#125;,</span><br><span class="line">		d&#123;<span class="number">7</span>, <span class="number">6</span>, <span class="number">6</span>&#125;,</span><br><span class="line">		d&#123;<span class="number">8</span>, <span class="number">6</span>, <span class="number">6</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> insertData = d&#123;<span class="number">9</span>, <span class="number">9</span>, <span class="number">9</span>&#125;</span><br><span class="line">	<span class="comment">//插入单条</span></span><br><span class="line">	collection.Insert(insertData)</span><br><span class="line">	<span class="comment">//插入多条</span></span><br><span class="line">	collection.Insert(insertDatas...)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> d <span class="keyword">struct</span> &#123;</span><br><span class="line">	X <span class="keyword">int</span></span><br><span class="line">	Y <span class="keyword">int</span></span><br><span class="line">	Z <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为了代码的可读性，没有验证错误error</span></span><br><span class="line">database.Collection(<span class="string">"user"</span>, <span class="function"><span class="keyword">func</span><span class="params">(collection *mgo.Collection)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> resDatas []d</span><br><span class="line">	<span class="keyword">var</span> resData d</span><br><span class="line">	query := collection.Find(bson.M&#123;<span class="string">"x"</span>: <span class="number">1</span>&#125;)</span><br><span class="line">	<span class="comment">//统计数目</span></span><br><span class="line">	count, _ := query.Count()</span><br><span class="line">	<span class="comment">//链式操作，类似函数式编程</span></span><br><span class="line">	query = query.Sort(<span class="string">"y"</span>).Skip(<span class="number">1</span>).Limit(<span class="number">2</span>)</span><br><span class="line">	<span class="comment">//查询所有</span></span><br><span class="line">	query.All(&amp;resDatas)</span><br><span class="line">	<span class="comment">//查询第一个</span></span><br><span class="line">	query.One(&amp;resData)</span><br><span class="line">	fmt.Println(resDatas, resData, count)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 为了代码的可读性，没有验证错误error</span></span><br><span class="line">database.Collection(<span class="string">"user"</span>, <span class="function"><span class="keyword">func</span><span class="params">(collection *mgo.Collection)</span></span> &#123;</span><br><span class="line">	collection.Remove(bson.M&#123;<span class="string">"x"</span>: <span class="number">1</span>&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="update"><a href="#update" class="headerlink" title="update"></a>update</h2><ul>
-<li><p>修改第一条，修改此条全部内容</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//struct 的键需要大写</span></span><br><span class="line">collection.Update(bson.M&#123;<span class="string">"x"</span>: <span class="number">3</span>&#125;, <span class="keyword">struct</span> &#123;</span><br><span class="line">	X <span class="keyword">int</span></span><br><span class="line">	Y <span class="keyword">int</span></span><br><span class="line">	Z <span class="keyword">int</span></span><br><span class="line">&#125;&#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改第一条，修改此条部分内容</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">collection.Update(bson.M&#123;<span class="string">"x"</span>: <span class="number">0</span>&#125;, bson.M&#123;<span class="string">"$set"</span>: bson.M&#123;<span class="string">"y"</span>: <span class="number">1</span>&#125;&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改多条，只能修改每一条的部分内容</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">changeLog, err := collection.UpdateAll(bson.M&#123;<span class="string">"x"</span>: <span class="number">6</span>&#125;, bson.M&#123;<span class="string">"$set"</span>: bson.M&#123;<span class="string">"y"</span>: <span class="number">1</span>&#125;&#125;)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	fmt.Println(err.Error())</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">"Matched:"</span>, changeLog.Matched)</span><br><span class="line">fmt.Println(<span class="string">"Removed:"</span>, changeLog.Removed)</span><br><span class="line">fmt.Println(<span class="string">"Updated:"</span>, changeLog.Updated)</span><br><span class="line">fmt.Println(<span class="string">"UpsertedId:"</span>, changeLog.UpsertedId)</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">&gt; <span class="keyword">go</span> run test.<span class="keyword">go</span></span><br><span class="line">Matched: <span class="number">2</span></span><br><span class="line">Removed: <span class="number">0</span></span><br><span class="line">Updated: <span class="number">2</span></span><br><span class="line">UpsertedId: &lt;<span class="literal">nil</span>&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1681,7 +1673,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

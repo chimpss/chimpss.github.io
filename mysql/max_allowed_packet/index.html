@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="mongo,auth," />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="insert 正常插入： 12&amp;gt; db.user.insert(&amp;#123;x:1,y:2,z:3&amp;#125;)WriteResult(&amp;#123; &quot;nInserted&quot; : 1 &amp;#125;)  循环插入 12&amp;gt; for(var i=1;i&amp;lt;100;i++) db.user.insert(&amp;#123;x:i, y:i*10, z:i*100&amp;#125;)WriteResult">
-<meta name="keywords" content="mongo,auth">
+<meta name="description" content="查看目前配置12345678mysql&amp;gt; show VARIABLES like &amp;apos;%max_allowed_packet%&amp;apos;;+--------------------------+------------+| Variable_name            | Value      |+--------------------------+------------+">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CRUD操作">
-<meta property="og:url" content="http://yoursite.com/mongodb/CRUD/index.html">
+<meta property="og:title" content="MySQL max_allowed_packet设置">
+<meta property="og:url" content="http://yoursite.com/mysql/max_allowed_packet/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="insert 正常插入： 12&amp;gt; db.user.insert(&amp;#123;x:1,y:2,z:3&amp;#125;)WriteResult(&amp;#123; &quot;nInserted&quot; : 1 &amp;#125;)  循环插入 12&amp;gt; for(var i=1;i&amp;lt;100;i++) db.user.insert(&amp;#123;x:i, y:i*10, z:i*100&amp;#125;)WriteResult">
+<meta property="og:description" content="查看目前配置12345678mysql&amp;gt; show VARIABLES like &amp;apos;%max_allowed_packet%&amp;apos;;+--------------------------+------------+| Variable_name            | Value      |+--------------------------+------------+">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T10:00:27.586Z">
+<meta property="og:updated_time" content="2018-10-08T15:25:59.122Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CRUD操作">
-<meta name="twitter:description" content="insert 正常插入： 12&amp;gt; db.user.insert(&amp;#123;x:1,y:2,z:3&amp;#125;)WriteResult(&amp;#123; &quot;nInserted&quot; : 1 &amp;#125;)  循环插入 12&amp;gt; for(var i=1;i&amp;lt;100;i++) db.user.insert(&amp;#123;x:i, y:i*10, z:i*100&amp;#125;)WriteResult">
+<meta name="twitter:title" content="MySQL max_allowed_packet设置">
+<meta name="twitter:description" content="查看目前配置12345678mysql&amp;gt; show VARIABLES like &amp;apos;%max_allowed_packet%&amp;apos;;+--------------------------+------------+| Variable_name            | Value      |+--------------------------+------------+">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/mongodb/CRUD/"/>
+  <link rel="canonical" href="http://yoursite.com/mysql/max_allowed_packet/"/>
 
 
 
 
 
-  <title>CRUD操作 | 秀才</title>
+  <title>MySQL max_allowed_packet设置 | 秀才</title>
   
 
 
@@ -277,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mongodb/CRUD/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql/max_allowed_packet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -294,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CRUD操作</h1>
+          <h1 class="post-title" itemprop="name headline">MySQL max_allowed_packet设置</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-29T10:19:36+08:00">
-                2017-04-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T23:19:12+08:00">
+                2018-10-08
               </time>
             
 
@@ -344,50 +344,18 @@
       
 
       
-        <h1 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h1><ul>
-<li><p>正常插入：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.insert(&#123;<span class="attr">x</span>:<span class="number">1</span>,<span class="attr">y</span>:<span class="number">2</span>,<span class="attr">z</span>:<span class="number">3</span>&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">"nInserted"</span> : <span class="number">1</span> &#125;)</span><br></pre></td></tr></table></figure>
+        <h2 id="查看目前配置"><a href="#查看目前配置" class="headerlink" title="查看目前配置"></a>查看目前配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show VARIABLES like &apos;%max_allowed_packet%&apos;;</span><br><span class="line">+--------------------------+------------+</span><br><span class="line">| Variable_name            | Value      |</span><br><span class="line">+--------------------------+------------+</span><br><span class="line">| max_allowed_packet       | 16777216   |</span><br><span class="line">| slave_max_allowed_packet | 1073741824 |</span><br><span class="line">+--------------------------+------------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
+<h2 id="修改方法"><a href="#修改方法" class="headerlink" title="修改方法"></a>修改方法</h2><ol>
+<li><p>编辑<code>my.cnf</code>文件</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">max_allowed_packet</span>=<span class="number">20</span>M</span><br></pre></td></tr></table></figure>
+<p>保存重启mysql</p>
+<p>如果找不到<code>my.cnf</code>，可以通过命令：<code>mysql --help | grep my.cnf</code></p>
 </li>
-<li><p>循环插入</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;<span class="number">100</span>;i++) db.user.insert(&#123;<span class="attr">x</span>:i, <span class="attr">y</span>:i*<span class="number">10</span>, <span class="attr">z</span>:i*<span class="number">100</span>&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">"nInserted"</span> : <span class="number">1</span> &#125;)</span><br></pre></td></tr></table></figure>
+<li><p>在mysql 命令行中运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global max_allowed_packet = 2*1024*1024*10</span><br></pre></td></tr></table></figure>
+<p>然后关闭掉这此mysql server链接，再进入</p>
 </li>
-</ul>
-<h1 id="update"><a href="#update" class="headerlink" title="update"></a>update</h1><ul>
-<li><p>整个更新</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.find()</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d844bae387d0c1e8d870"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">2</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d84ebae387d0c1e8d871"</span>), <span class="string">"x"</span> : <span class="number">2</span>, <span class="string">"y"</span> : <span class="number">3</span> &#125;</span><br><span class="line">&gt; db.user.update(&#123;<span class="attr">x</span>:<span class="number">1</span>&#125;,&#123;<span class="attr">x</span>:<span class="number">999</span>&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : <span class="number">1</span>, <span class="string">"nUpserted"</span> : <span class="number">0</span>, <span class="string">"nModified"</span> : <span class="number">1</span> &#125;)</span><br><span class="line">&gt; db.user.find()</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d844bae387d0c1e8d870"</span>), <span class="string">"x"</span> : <span class="number">999</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d84ebae387d0c1e8d871"</span>), <span class="string">"x"</span> : <span class="number">2</span>, <span class="string">"y"</span> : <span class="number">3</span> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>部分更新<br>使用$set操作符</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.find()</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d844bae387d0c1e8d870"</span>), <span class="string">"x"</span> : <span class="number">999</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d84ebae387d0c1e8d871"</span>), <span class="string">"x"</span> : <span class="number">2</span>, <span class="string">"y"</span> : <span class="number">3</span> &#125;</span><br><span class="line">&gt; db.user.update(&#123;<span class="attr">x</span>:<span class="number">2</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="attr">x</span>:<span class="number">999</span>&#125;&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : <span class="number">1</span>, <span class="string">"nUpserted"</span> : <span class="number">0</span>, <span class="string">"nModified"</span> : <span class="number">1</span> &#125;)</span><br><span class="line">&gt; db.user.find()</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d844bae387d0c1e8d870"</span>), <span class="string">"x"</span> : <span class="number">999</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d84ebae387d0c1e8d871"</span>), <span class="string">"x"</span> : <span class="number">999</span>, <span class="string">"y"</span> : <span class="number">3</span> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不存在则创建</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.find(&#123;<span class="attr">x</span>:<span class="number">1</span>&#125;)</span><br><span class="line">&gt; db.user.update(&#123;<span class="attr">x</span>:<span class="number">1</span>&#125;,&#123;<span class="attr">x</span>:<span class="number">2</span>&#125;,<span class="literal">true</span>)</span><br><span class="line">WriteResult(&#123;</span><br><span class="line">	<span class="string">"nMatched"</span> : <span class="number">0</span>,</span><br><span class="line">	<span class="string">"nUpserted"</span> : <span class="number">1</span>,</span><br><span class="line">	<span class="string">"nModified"</span> : <span class="number">0</span>,</span><br><span class="line">	<span class="string">"_id"</span> : ObjectId(<span class="string">"58d0da6e34123eac45d857ac"</span>)</span><br><span class="line">&#125;)</span><br><span class="line">&gt; db.user.find()</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d844bae387d0c1e8d870"</span>), <span class="string">"x"</span> : <span class="number">999</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d84ebae387d0c1e8d871"</span>), <span class="string">"x"</span> : <span class="number">999</span>, <span class="string">"y"</span> : <span class="number">3</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0da6e34123eac45d857ac"</span>), <span class="string">"x"</span> : <span class="number">2</span> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更新多条<br>mongodb默认是更新一条，据说是为了防止一时大意，<br>而且更新多条不允许更新整个，只能使用$set关键字</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.find()</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0dde9bae387d0c1e8d873"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">2</span>, <span class="string">"z"</span> : <span class="number">1</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0ddeabae387d0c1e8d874"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">1</span>, <span class="string">"z"</span> : <span class="number">1</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0ddebbae387d0c1e8d875"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">1</span>, <span class="string">"z"</span> : <span class="number">1</span> &#125;</span><br><span class="line">&gt; db.user.update(&#123;<span class="attr">x</span>:<span class="number">1</span>&#125;,&#123;<span class="attr">$set</span>:&#123;<span class="attr">y</span>:<span class="number">2</span>&#125;&#125;,<span class="literal">false</span>,<span class="literal">true</span>)</span><br><span class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : <span class="number">3</span>, <span class="string">"nUpserted"</span> : <span class="number">0</span>, <span class="string">"nModified"</span> : <span class="number">2</span> &#125;)</span><br><span class="line">&gt; db.user.find()</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0dde9bae387d0c1e8d873"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">2</span>, <span class="string">"z"</span> : <span class="number">1</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0ddeabae387d0c1e8d874"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">2</span>, <span class="string">"z"</span> : <span class="number">1</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0ddebbae387d0c1e8d875"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">2</span>, <span class="string">"z"</span> : <span class="number">1</span> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h1><ul>
-<li><p>删除某个collection所有内容</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.remove(&#123;&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">"nRemoved"</span> : <span class="number">102</span> &#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除某个</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.remove(&#123;<span class="attr">x</span>:<span class="number">3</span>&#125;)</span><br><span class="line">WriteResult(&#123; <span class="string">"nRemoved"</span> : <span class="number">1</span> &#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="find"><a href="#find" class="headerlink" title="find"></a>find</h1><ul>
-<li><p>查找所有</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.find()</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0cebcbae387d0c1e8d80a"</span>), <span class="string">"username"</span> : <span class="string">"zhangsan"</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d36abae387d0c1e8d80b"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">2</span>, <span class="string">"z"</span> : <span class="number">3</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d37dbae387d0c1e8d80c"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">2</span>, <span class="string">"z"</span> : <span class="number">3</span> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>有条件查找</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.find(&#123;<span class="attr">x</span>:<span class="number">1</span>&#125;)</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d36abae387d0c1e8d80b"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">2</span>, <span class="string">"z"</span> : <span class="number">3</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d37dbae387d0c1e8d80c"</span>), <span class="string">"x"</span> : <span class="number">1</span>, <span class="string">"y"</span> : <span class="number">2</span>, <span class="string">"z"</span> : <span class="number">3</span> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查找总数目</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.find().count()</span><br><span class="line"><span class="number">102</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>分页,排序</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.find().skip(<span class="number">5</span>).limit(<span class="number">3</span>).sort(&#123;<span class="attr">x</span>:<span class="number">1</span>&#125;)</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d453bae387d0c1e8d80f"</span>), <span class="string">"x"</span> : <span class="number">3</span>, <span class="string">"y"</span> : <span class="number">30</span>, <span class="string">"z"</span> : <span class="number">300</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d453bae387d0c1e8d810"</span>), <span class="string">"x"</span> : <span class="number">4</span>, <span class="string">"y"</span> : <span class="number">40</span>, <span class="string">"z"</span> : <span class="number">400</span> &#125;</span><br><span class="line">&#123; <span class="string">"_id"</span> : ObjectId(<span class="string">"58d0d453bae387d0c1e8d811"</span>), <span class="string">"x"</span> : <span class="number">5</span>, <span class="string">"y"</span> : <span class="number">50</span>, <span class="string">"z"</span> : <span class="number">500</span> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+</ol>
 
       
     </div>
@@ -405,9 +373,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mongo/" rel="tag"># mongo</a>
-          
-            <a href="/tags/auth/" rel="tag"># auth</a>
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
           
         </div>
       
@@ -420,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/mongodb/auth/" rel="next" title="auth认证">
-                <i class="fa fa-chevron-left"></i> auth认证
+              <a href="/golang/http上传下载/" rel="next" title="HTTP 上传 下载">
+                <i class="fa fa-chevron-left"></i> HTTP 上传 下载
               </a>
             
           </div>
@@ -429,10 +395,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/mongodb/Index/" rel="prev" title="mongoIndex">
-                mongoIndex <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -555,7 +517,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#insert"><span class="nav-number">1.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#update"><span class="nav-number">2.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#remove"><span class="nav-number">3.</span> <span class="nav-text">remove</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#find"><span class="nav-number">4.</span> <span class="nav-text">find</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看目前配置"><span class="nav-number">1.</span> <span class="nav-text">查看目前配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改方法"><span class="nav-number">2.</span> <span class="nav-text">修改方法</span></a></li></ol></div>
             
 
           </div>
