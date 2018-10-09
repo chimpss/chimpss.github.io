@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="进程查看ps 常用组合之一 aux          查看当前系统所有运行的进程-a     显示前台所有进程-u    显示用户名-x    显示后台进程user： 用户名  pid：    进程id PID %CPU    cpu占用百分比 %MEM    内存占用百分比 VSZ    虚拟内存占用量        KB RSS    固定内存占有量      kb tty    登录终端">
+<meta name="description" content="进程查看ps 常用组合之一 aux          查看当前系统所有运行的进程-a     显示前台所有进程-u    显示用户名-x    显示后台进程user： 用户名  pid：    进程id PID   %CPU    cpu占用百分比   %MEM    内存占用百分比   VSZ    虚拟内存占用量        KB   RSS    固定内存占有量      kb   tty">
 <meta name="keywords" content="linux,进程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程管理">
 <meta property="og:url" content="http://yoursite.com/linux/进程管理/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="进程查看ps 常用组合之一 aux          查看当前系统所有运行的进程-a     显示前台所有进程-u    显示用户名-x    显示后台进程user： 用户名  pid：    进程id PID %CPU    cpu占用百分比 %MEM    内存占用百分比 VSZ    虚拟内存占用量        KB RSS    固定内存占有量      kb tty    登录终端">
+<meta property="og:description" content="进程查看ps 常用组合之一 aux          查看当前系统所有运行的进程-a     显示前台所有进程-u    显示用户名-x    显示后台进程user： 用户名  pid：    进程id PID   %CPU    cpu占用百分比   %MEM    内存占用百分比   VSZ    虚拟内存占用量        KB   RSS    固定内存占有量      kb   tty">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="leanote://file/getImage?fileId=58048913ab64413a7e00ce54">
 <meta property="og:image" content="leanote://file/getImage?fileId=58048913ab64413a7e00ce55">
 <meta property="og:image" content="leanote://file/getImage?fileId=58048913ab64413a7e00ce53">
-<meta property="og:updated_time" content="2018-09-25T10:02:05.901Z">
+<meta property="og:updated_time" content="2018-10-09T03:50:25.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程管理">
-<meta name="twitter:description" content="进程查看ps 常用组合之一 aux          查看当前系统所有运行的进程-a     显示前台所有进程-u    显示用户名-x    显示后台进程user： 用户名  pid：    进程id PID %CPU    cpu占用百分比 %MEM    内存占用百分比 VSZ    虚拟内存占用量        KB RSS    固定内存占有量      kb tty    登录终端">
+<meta name="twitter:description" content="进程查看ps 常用组合之一 aux          查看当前系统所有运行的进程-a     显示前台所有进程-u    显示用户名-x    显示后台进程user： 用户名  pid：    进程id PID   %CPU    cpu占用百分比   %MEM    内存占用百分比   VSZ    虚拟内存占用量        KB   RSS    固定内存占有量      kb   tty">
 <meta name="twitter:image" content="leanote://file/getImage?fileId=58048913ab64413a7e00ce54">
 
 
@@ -353,12 +353,7 @@
 <blockquote>
 <p>查看当前系统所有运行的进程<br>-a     显示前台所有进程<br>-u    显示用户名<br>-x    显示后台进程<br>user： 用户名</p>
 <ul>
-<li>pid：    进程id PID</li>
-<li>%CPU    cpu占用百分比</li>
-<li>%MEM    内存占用百分比</li>
-<li>VSZ    虚拟内存占用量        KB</li>
-<li>RSS    固定内存占有量      kb</li>
-<li>tty    登录终端    <ul>
+<li>pid：    进程id PID<br>   %CPU    cpu占用百分比<br>   %MEM    内存占用百分比<br>   VSZ    虚拟内存占用量        KB<br>   RSS    固定内存占有量      kb<br>   tty    登录终端    <ul>
 <li>tty1-7 本地终端</li>
 <li>1-6 字符 </li>
 <li>7图形    pts/0-5 alt+F1-F7                </li>
@@ -377,12 +372,9 @@
 <li>L：被锁进内存    </li>
 <li>s：含子进程    </li>
 <li>+：位于后台    </li>
-<li>l：多线程</li>
+<li>l：多线程<br>start    进程触发时间<br>time        占用cpu时间<br>command    进程本身</li>
 </ul>
 </li>
-<li>start    进程触发时间</li>
-<li>time        占用cpu时间</li>
-<li>command    进程本身</li>
 </ul>
 </blockquote>
 </li>
@@ -433,8 +425,7 @@
 <li>登录用户，1,5,15分钟之前的平均负载</li>
 </ul>
 </li>
-<li>第二行：进程总数</li>
-<li>第三行： CPU占用率        <ul>
+<li>第二行：进程总数<br>   第三行： CPU占用率        <ul>
 <li>us 用户空间</li>
 <li>sy 内核空间</li>
 <li>ni 调整nice值后，多占用空间</li>
@@ -442,22 +433,22 @@
 <li>hi 处理硬件中断所需要时间</li>
 <li>si 处理软件中断所需要时间</li>
 <li>cs 处理上下文（进程）切换所需要时间</li>
-<li>st 虚拟化技术占用的cpu</li>
-</ul>
-</li>
-<li>第四行：内存使用：    <ul>
+<li>st 虚拟化技术占用的cpu<br>  第四行：内存使用：    </li>
 <li>VSZ 虚拟内存集</li>
 <li>RSS 常驻内存集</li>
 <li>SHM 共享内存集（share memory）</li>
 </ul>
 </li>
 <li>第五行：swap使用</li>
-<li>字段： PID，USER，PR（优先级），NI（nice优先级），VIRT（虚拟内存），RES（物理内存），SHR（），S（状态），%CPU,%MEM(内存占用)，TIME+（系统调用总时间），COMMAND（进程名称）</li>
-<li>操作命令        <ul>
-<li>M    内存排序</li>
+<li>字段： PID，USER，PR（优先级），NI（nice优先级），VIRT（虚拟内存），RES（物理内存），SHR（），S（状态），%CPU,%MEM(内存占用)，TIME+（系统调用总时间），COMMAND（进程名称）<br>   操作命令        <ul>
+<li>M    内存排序<ul>
 <li>P    CPU排序</li>
-<li>T 累计占用CPU时间排序</li>
+</ul>
+</li>
+<li>T 累计占用CPU时间排序<ul>
 <li>q    退出</li>
+</ul>
+</li>
 <li>s 修改刷新时间间隔</li>
 <li>k 终止指定的命令</li>
 </ul>
@@ -612,16 +603,10 @@
 <li>格式：kill [signal] program</li>
 </ul>
 </blockquote>
-<h2 id="4-进程管理-终止进程"><a href="#4-进程管理-终止进程" class="headerlink" title="4    进程管理        终止进程"></a>4    进程管理        终止进程</h2><pre><code>ps   aux    组合使用
-kill  PID        结束单个进程  结束进程
--9  强制         
- pstree
-killall  -9   进程名        结束一类进程
-pkill    -9   进程名
-w            判断登录用户
-pkill  -9  -t  终端号    把某个终端登录的用户踢出
-pkill  -9  -t tty     把本地登录终端1登录用户踢出
-</code></pre><h1 id="2-linux服务管理"><a href="#2-linux服务管理" class="headerlink" title="2    linux服务管理"></a>2    linux服务管理</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><pre><code>1）系统默认安装的服务            
+<p>  ​<br>     4    进程管理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   ps   aux    组合使用</span><br><span class="line">kill  PID		结束单个进程  结束进程</span><br><span class="line">-9  强制         </span><br><span class="line">    pstree</span><br><span class="line">killall  -9   进程名		结束一类进程</span><br><span class="line">pkill    -9   进程名</span><br><span class="line">w			判断登录用户</span><br><span class="line">pkill  -9  -t  终端号	把某个终端登录的用户踢出</span><br><span class="line">pkill  -9  -t tty 	把本地登录终端1登录用户踢出</span><br></pre></td></tr></table></figure>
+<p>2    linux服务管理</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><pre><code>1）系统默认安装的服务            
 2）源码包安装的服务
 </code></pre><p>（一）系统默认安装的服务</p>
 <h2 id="确定服务分类"><a href="#确定服务分类" class="headerlink" title="确定服务分类"></a>确定服务分类</h2><pre><code>chkconfig  --list        查看服务的自启动状态
@@ -648,26 +633,7 @@ pkill  -9  -t tty     把本地登录终端1登录用户踢出
         vi /etc/rc.local
         /usr/local/apache2/bin/apachectl  start
 </code></pre><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>服务管理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">RPM包安装服务</span><br><span class="line">	独立的服务</span><br><span class="line">		启动：	</span><br><span class="line">			/etc/rc.d/init.d/服务名  start</span><br><span class="line">			service  服务名  start</span><br><span class="line"></span><br><span class="line">		自启动：</span><br><span class="line">			chkconfig  --level  2345  服务名  on|off</span><br><span class="line">			vi  /etc/rc.local		推荐</span><br><span class="line">				/etc/rc.d/init.d/httpd  start</span><br><span class="line">源码包服务</span><br><span class="line">	启动</span><br><span class="line">			/usr/local/服务名/bin/服务名二进制执行文件  start</span><br><span class="line">	自启动</span><br><span class="line">			vi  /etc/rc.local</span><br><span class="line">				/usr/local/apache2/bin/apachectl  start</span><br></pre></td></tr></table></figure></p>
-<h1 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h1><pre><code>echo  11  &gt;&gt;  /root/aa        在aa文件中追加11.一会定时任务验证用
-循环定时任务                        
-crontab  -e        编辑定时任务
-*  *  *  *  *  命令
-10  *  31  *  *  命令
-10  *  *  *  *  命令
-5  4  *  5,7,10  *  命令
-*/10  *  *  *  *  命令
-第一个：一小时中第几分钟        0-59
-第二个：一天中第几个小时        0-23
-第三个：一个月中第几天        1-31
-第四个：一年第几个月            1-12
-第五个：一周中星期几            0-6        
-crontab  -l        查看系统定时任务
-crontab  -r          删除定时任务
-</code></pre><p>注意事项：</p>
-<blockquote>
-<p>选项都不能为空，必须填入，不知道的值使用通配符<em>表示任何时间<br>每个时间字段都可以指定多个值，不连续的值用,间隔，连续的值用-间隔<br>间隔固定时间执行书写为</em>/n格式<br>命令应该给出绝对路径<br>   星期几和第几天不能同时出现<br>   最小时间范围是分钟，最大时间范围是月</p>
-</blockquote>
-<h1 id="查看硬件相关信息："><a href="#查看硬件相关信息：" class="headerlink" title="查看硬件相关信息："></a>查看硬件相关信息：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo 文件保存了CPU设备信息  </span><br><span class="line">dmesg				查看系统启动信息</span><br><span class="line">cat  /var/log/dmesg		系统启动信息日志		</span><br><span class="line">dmesg | grep eth0		查看eth0信息</span><br><span class="line">dmesg | grep CPU		查看cpu信息</span><br></pre></td></tr></table></figure>
+<h2 id="查看硬件相关信息："><a href="#查看硬件相关信息：" class="headerlink" title="查看硬件相关信息："></a>查看硬件相关信息：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo 文件保存了CPU设备信息  </span><br><span class="line">dmesg				查看系统启动信息</span><br><span class="line">cat  /var/log/dmesg		系统启动信息日志		</span><br><span class="line">dmesg | grep eth0		查看eth0信息</span><br><span class="line">dmesg | grep CPU		查看cpu信息</span><br></pre></td></tr></table></figure>
 <h1 id="进程前后台切换"><a href="#进程前后台切换" class="headerlink" title="进程前后台切换"></a>进程前后台切换</h1><h2 id="前后台切换"><a href="#前后台切换" class="headerlink" title="前后台切换"></a>前后台切换</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">command &amp;   //将进程放在后台执行</span><br><span class="line">ctrl-z      //暂停当前进程 并放入后台</span><br><span class="line">jobs        //查看当前后台任务</span><br><span class="line">bg          //将任务转为后台执行</span><br><span class="line">fg          //将任务调回前台</span><br><span class="line">kill        //杀掉任务</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>如果我们在终端中直接运行一GUI程序，一般情况下，终端就会被当前进程占用了。如果我们想把它放到后台运行有两种方法：</p>
@@ -721,8 +687,8 @@ crontab  -r          删除定时任务
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/mongodb/mongo聚合/" rel="next" title="mongo聚合">
-                <i class="fa fa-chevron-left"></i> mongo聚合
+              <a href="/linux/定时任务/" rel="next" title="定时任务">
+                <i class="fa fa-chevron-left"></i> 定时任务
               </a>
             
           </div>
@@ -810,7 +776,7 @@ crontab  -r          删除定时任务
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -856,7 +822,7 @@ crontab  -r          删除定时任务
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程查看"><span class="nav-number">1.</span> <span class="nav-text">进程查看</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ps"><span class="nav-number">1.1.</span> <span class="nav-text">ps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pgrep-pkill命令"><span class="nav-number">1.2.</span> <span class="nav-text">pgrep pkill命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uptime（效果和top第一行相同）"><span class="nav-number">1.3.</span> <span class="nav-text">uptime（效果和top第一行相同）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pstree-查看进程树"><span class="nav-number">1.4.</span> <span class="nav-text">pstree    查看进程树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top"><span class="nav-number">1.5.</span> <span class="nav-text">top</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#htop-top升级版"><span class="nav-number">1.6.</span> <span class="nav-text">htop top升级版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vmstat"><span class="nav-number">1.7.</span> <span class="nav-text">vmstat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pmap"><span class="nav-number">1.8.</span> <span class="nav-text">pmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pidof"><span class="nav-number">1.9.</span> <span class="nav-text">pidof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dstat"><span class="nav-number">1.10.</span> <span class="nav-text">dstat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kill"><span class="nav-number">1.11.</span> <span class="nav-text">kill</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#killall"><span class="nav-number">1.12.</span> <span class="nav-text">killall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-进程管理-终止进程"><span class="nav-number">1.13.</span> <span class="nav-text">4    进程管理        终止进程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-linux服务管理"><span class="nav-number">2.</span> <span class="nav-text">2    linux服务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">2.1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定服务分类"><span class="nav-number">2.2.</span> <span class="nav-text">确定服务分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#独立的服务器管理"><span class="nav-number">2.3.</span> <span class="nav-text">独立的服务器管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ntsysv"><span class="nav-number">2.4.</span> <span class="nav-text">ntsysv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结："><span class="nav-number">2.5.</span> <span class="nav-text">总结：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计划任务"><span class="nav-number">3.</span> <span class="nav-text">计划任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看硬件相关信息："><span class="nav-number">4.</span> <span class="nav-text">查看硬件相关信息：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程前后台切换"><span class="nav-number">5.</span> <span class="nav-text">进程前后台切换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前后台切换"><span class="nav-number">5.1.</span> <span class="nav-text">前后台切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改变进程所在进程树的位置"><span class="nav-number">5.2.</span> <span class="nav-text">改变进程所在进程树的位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hnohup"><span class="nav-number">5.3.</span> <span class="nav-text">Hnohup</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程查看"><span class="nav-number">1.</span> <span class="nav-text">进程查看</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ps"><span class="nav-number">1.1.</span> <span class="nav-text">ps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pgrep-pkill命令"><span class="nav-number">1.2.</span> <span class="nav-text">pgrep pkill命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uptime（效果和top第一行相同）"><span class="nav-number">1.3.</span> <span class="nav-text">uptime（效果和top第一行相同）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pstree-查看进程树"><span class="nav-number">1.4.</span> <span class="nav-text">pstree    查看进程树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top"><span class="nav-number">1.5.</span> <span class="nav-text">top</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#htop-top升级版"><span class="nav-number">1.6.</span> <span class="nav-text">htop top升级版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vmstat"><span class="nav-number">1.7.</span> <span class="nav-text">vmstat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pmap"><span class="nav-number">1.8.</span> <span class="nav-text">pmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pidof"><span class="nav-number">1.9.</span> <span class="nav-text">pidof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dstat"><span class="nav-number">1.10.</span> <span class="nav-text">dstat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kill"><span class="nav-number">1.11.</span> <span class="nav-text">kill</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#killall"><span class="nav-number">1.12.</span> <span class="nav-text">killall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.13.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定服务分类"><span class="nav-number">1.14.</span> <span class="nav-text">确定服务分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#独立的服务器管理"><span class="nav-number">1.15.</span> <span class="nav-text">独立的服务器管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ntsysv"><span class="nav-number">1.16.</span> <span class="nav-text">ntsysv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结："><span class="nav-number">1.17.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看硬件相关信息："><span class="nav-number">1.18.</span> <span class="nav-text">查看硬件相关信息：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程前后台切换"><span class="nav-number">2.</span> <span class="nav-text">进程前后台切换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前后台切换"><span class="nav-number">2.1.</span> <span class="nav-text">前后台切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改变进程所在进程树的位置"><span class="nav-number">2.2.</span> <span class="nav-text">改变进程所在进程树的位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hnohup"><span class="nav-number">2.3.</span> <span class="nav-text">Hnohup</span></a></li></ol></li></ol></div>
             
 
           </div>

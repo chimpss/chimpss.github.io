@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="nginx," />
+  <meta name="keywords" content="linux," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="只允许本机访问一般用于设置内部服务器12345678910111213server &amp;#123;    listen       8888;    server_name  localhost;    root         /www/vux/vux/my;    location / &amp;#123;        allow 127.0.0.1;        deny all;">
-<meta name="keywords" content="nginx">
+<meta name="description" content="编辑定时任务1234567891011crontab  -e*  *  *  *  *  命令10  *  31  *  *  命令10  *  *  *  *  命令5  4  *  5,7,10  *  命令*/10  *  *  *  *  命令第一个：一小时中第几分钟		0-59第二个：一天中第几个小时		0-23第三个：一个月中第几天		1-31第四个：一年第几个月			1-12第五个：">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基本设置">
-<meta property="og:url" content="http://yoursite.com/nginx/基本设置/index.html">
+<meta property="og:title" content="定时任务">
+<meta property="og:url" content="http://yoursite.com/linux/定时任务/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="只允许本机访问一般用于设置内部服务器12345678910111213server &amp;#123;    listen       8888;    server_name  localhost;    root         /www/vux/vux/my;    location / &amp;#123;        allow 127.0.0.1;        deny all;">
+<meta property="og:description" content="编辑定时任务1234567891011crontab  -e*  *  *  *  *  命令10  *  31  *  *  命令10  *  *  *  *  命令5  4  *  5,7,10  *  命令*/10  *  *  *  *  命令第一个：一小时中第几分钟		0-59第二个：一天中第几个小时		0-23第三个：一个月中第几天		1-31第四个：一年第几个月			1-12第五个：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T09:59:40.571Z">
+<meta property="og:updated_time" content="2018-10-09T03:48:52.502Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基本设置">
-<meta name="twitter:description" content="只允许本机访问一般用于设置内部服务器12345678910111213server &amp;#123;    listen       8888;    server_name  localhost;    root         /www/vux/vux/my;    location / &amp;#123;        allow 127.0.0.1;        deny all;">
+<meta name="twitter:title" content="定时任务">
+<meta name="twitter:description" content="编辑定时任务1234567891011crontab  -e*  *  *  *  *  命令10  *  31  *  *  命令10  *  *  *  *  命令5  4  *  5,7,10  *  命令*/10  *  *  *  *  命令第一个：一小时中第几分钟		0-59第二个：一天中第几个小时		0-23第三个：一个月中第几天		1-31第四个：一年第几个月			1-12第五个：">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/nginx/基本设置/"/>
+  <link rel="canonical" href="http://yoursite.com/linux/定时任务/"/>
 
 
 
 
 
-  <title>基本设置 | 秀才</title>
+  <title>定时任务 | 秀才</title>
   
 
 
@@ -277,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/nginx/基本设置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/定时任务/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -294,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">基本设置</h1>
+          <h1 class="post-title" itemprop="name headline">定时任务</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T11:19:36+08:00">
-                2017-04-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-01T10:19:36+08:00">
+                2017-07-01
               </time>
             
 
@@ -344,11 +344,10 @@
       
 
       
-        <h1 id="只允许本机访问"><a href="#只允许本机访问" class="headerlink" title="只允许本机访问"></a>只允许本机访问</h1><p>一般用于设置内部服务器<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">8888</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  localhost;</span><br><span class="line">    <span class="attribute">root</span>         /www/vux/vux/my;</span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">allow</span> <span class="number">127.0.0.1</span>;</span><br><span class="line">        <span class="attribute">deny</span> all;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.php?<span class="variable">$query_string</span>;</span><br><span class="line">        <span class="attribute">autoindex</span>  <span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">index</span>  index.html index.htm index.php;</span><br><span class="line">        <span class="attribute">include</span>  /etc/nginx/conf.d/php-fpm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="域名（端口）转发"><a href="#域名（端口）转发" class="headerlink" title="域名（端口）转发"></a>域名（端口）转发</h1><p>一般用于前后端完全分离的设计<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  douniu.kouhuo.site;</span><br><span class="line">    location / &#123;</span><br><span class="line">        index  index.html index.htm index.php;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_pass http://127.0.0.1:8080;</span><br><span class="line">    &#125;</span><br><span class="line">    location /api &#123;</span><br><span class="line">        #rewrite ^.+api/?(.*)$ /$1 break; </span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_set_header Host $host; #要转发的host</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_pass http://127.0.0.1:8888/; #设置要转发的ip（域名）端口</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="访问php动态资源-fastcgi"><a href="#访问php动态资源-fastcgi" class="headerlink" title="访问php动态资源(fastcgi)"></a>访问php动态资源(fastcgi)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  local.ladmin.com local.ladmin.com;</span><br><span class="line">    root   &quot;D:/items/laravel/lesson-admin/public&quot;;</span><br><span class="line">    index  index.html index.htm index.php;</span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /index.php?$query_string;</span><br><span class="line">        #autoindex  on;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ \.php(.*)$ &#123;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;</span><br><span class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name; </span><br><span class="line">        fastcgi_param  PATH_INFO  $fastcgi_path_info;</span><br><span class="line">        fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;</span><br><span class="line">        include        fastcgi_params;</span><br><span class="line">        add_header Access-Control-Allow-Origin *;</span><br><span class="line">        add_header Access-Control-Allow-Methods &quot;POST, GET, OPTIONS&quot;;</span><br><span class="line">        add_header Access-Control-Allow-Credentials &quot;true&quot;;</span><br><span class="line">        add_header Access-Control-Allow-Headers &quot;Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Mx-ReqToken,X-Requested-With&quot;;</span><br><span class="line">        if ($request_method = &apos;OPTIONS&apos;)&#123;</span><br><span class="line">          return 204;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="配置header头的最大字节数"><a href="#配置header头的最大字节数" class="headerlink" title="配置header头的最大字节数"></a>配置header头的最大字节数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    ...</span><br><span class="line">    proxy_buffer_size   128k;</span><br><span class="line">    proxy_buffers   4 256k;</span><br><span class="line">    proxy_busy_buffers_size   256k;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="设置超时时间"><a href="#设置超时时间" class="headerlink" title="设置超时时间"></a>设置超时时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    ...</span><br><span class="line">    proxy_connect_timeout 360;</span><br><span class="line">	proxy_send_timeout 360;</span><br><span class="line">	proxy_read_timeout 360;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>编辑定时任务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">crontab  -e</span><br><span class="line">*  *  *  *  *  命令</span><br><span class="line">10  *  31  *  *  命令</span><br><span class="line">10  *  *  *  *  命令</span><br><span class="line">5  4  *  5,7,10  *  命令</span><br><span class="line">*/10  *  *  *  *  命令</span><br><span class="line">第一个：一小时中第几分钟		0-59</span><br><span class="line">第二个：一天中第几个小时		0-23</span><br><span class="line">第三个：一个月中第几天		1-31</span><br><span class="line">第四个：一年第几个月			1-12</span><br><span class="line">第五个：一周中星期几			0-6</span><br></pre></td></tr></table></figure></p>
+<p>查看系统定时任务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -l</span><br></pre></td></tr></table></figure></p>
+<p>删除定时任务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -r</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -365,7 +364,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
         </div>
       
@@ -378,8 +377,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/nginx/rewrite规则/" rel="next" title="rewrite 规则">
-                <i class="fa fa-chevron-left"></i> rewrite 规则
+              <a href="/mongodb/mongo聚合/" rel="next" title="mongo聚合">
+                <i class="fa fa-chevron-left"></i> mongo聚合
               </a>
             
           </div>
@@ -388,8 +387,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/mysql/函数/" rel="prev" title="函数">
-                函数 <i class="fa fa-chevron-right"></i>
+              <a href="/linux/进程管理/" rel="prev" title="进程管理">
+                进程管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -442,17 +441,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -503,22 +493,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#只允许本机访问"><span class="nav-number">1.</span> <span class="nav-text">只允许本机访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#域名（端口）转发"><span class="nav-number">2.</span> <span class="nav-text">域名（端口）转发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问php动态资源-fastcgi"><span class="nav-number">3.</span> <span class="nav-text">访问php动态资源(fastcgi)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置header头的最大字节数"><span class="nav-number">4.</span> <span class="nav-text">配置header头的最大字节数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置超时时间"><span class="nav-number">5.</span> <span class="nav-text">设置超时时间</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
