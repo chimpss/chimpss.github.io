@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="秀才">
 <meta property="og:description" content="ssh无密码登录公钥认证的基本思想对信息的加密和解密采用不同的key，这对key分别称作private key和public key，其中，public key存放在欲登录的服务器上，而private key为特定的客户机所持有。 当客户机向服务器发出建立安全连接的请求时，首先发送自己的public key，如果这个public key是被服务器所允许的，服务器就发送一个经过public key加">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-05T07:39:39.199Z">
+<meta property="og:updated_time" content="2018-10-09T03:37:30.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssh无密码登录">
 <meta name="twitter:description" content="ssh无密码登录公钥认证的基本思想对信息的加密和解密采用不同的key，这对key分别称作private key和public key，其中，public key存放在欲登录的服务器上，而private key为特定的客户机所持有。 当客户机向服务器发出建立安全连接的请求时，首先发送自己的public key，如果这个public key是被服务器所允许的，服务器就发送一个经过public key加">
@@ -306,8 +306,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-15T10:19:36+08:00">
-                2017-08-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
               </time>
             
 
@@ -357,10 +357,10 @@
 <li><p>将公钥复制到被管理机器Server2和Server3下的.ssh目录下（先确保存在这个目录）</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 .ssh]<span class="comment"># scp id_rsa.pub root@192.168.1.3:~/.ssh/  </span></span><br><span class="line">The authenticity of host <span class="string">'192.168.1.3(192.168.1.3)'</span> can<span class="string">'t be established.  </span></span><br><span class="line"><span class="string">RSA key fingerprint is93:eb:f9:47:b1:f6:3f:b4:2e:21:c3:d5:ab:1d:ae:65.  </span></span><br><span class="line"><span class="string">Are you sure you want to continueconnecting (yes/no)? yes  </span></span><br><span class="line"><span class="string">Warning: Permanently added '</span>192.168.1.3<span class="string">'(RSA) to the list of known hosts.  </span></span><br><span class="line"><span class="string">root@192.168.1.3'</span>s password:  </span><br><span class="line">id_rsa.pub   </span><br><span class="line">[root@server1 .ssh]<span class="comment"># scp id_rsa.pub root@192.168.1.4:~/.ssh/authorized_keys  </span></span><br><span class="line">The authenticity of host <span class="string">'192.168.1.4(192.168.1.4)'</span> can<span class="string">'t be established.  </span></span><br><span class="line"><span class="string">RSA key fingerprint is93:eb:f9:47:b1:f6:3f:b4:2e:21:c3:d5:ab:1d:ae:65.  </span></span><br><span class="line"><span class="string">Are you sure you want to continueconnecting (yes/no)? yes  </span></span><br><span class="line"><span class="string">Warning: Permanently added '</span>192.168.1.4<span class="string">'(RSA) to the list of known hosts.  </span></span><br><span class="line"><span class="string">root@192.168.1.4'</span>s password:  </span><br><span class="line">id_rsa.pub</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>到Server2和Server3目录下执行下面的命令</p>
+</li>
 </ul>
-<blockquote>
-<p>到Server2和Server3目录下执行下面的命令<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure></p>
-</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>设置文件和目录权限：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 authorized_keys</span><br></pre></td></tr></table></figure>
@@ -404,8 +404,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/linux/vim/" rel="next" title="vim">
-                <i class="fa fa-chevron-left"></i> vim
+              <a href="/http/参数/" rel="next" title="参数">
+                <i class="fa fa-chevron-left"></i> 参数
               </a>
             
           </div>
@@ -414,8 +414,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/linux/shell/" rel="prev" title="shell">
-                shell <i class="fa fa-chevron-right"></i>
+              <a href="/linux/zsh/" rel="prev" title="zsh">
+                zsh <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
