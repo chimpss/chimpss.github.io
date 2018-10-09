@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="linux," />
+  <meta name="keywords" content="linux,shell," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="编辑定时任务1234567891011crontab  -e*  *  *  *  *       命令10  *  31  *  *     命令10  *  *  *  *      命令5  4  *  5,7,10  *  命令*/10  *  *  *  *    命令第一个：一小时中第几分钟	0-59第二个：一天中第几个小时	0-23第三个：一个月中第几天		1-31第四个：一年第几个">
-<meta name="keywords" content="linux">
+<meta name="description" content="基本规则1minute   hour   day   month   week   command  minute： 表示分钟，可以是从0到59之间的任何整数。 hour：表示小时，可以是从0到23之间的任何整数。 day：表示日期，可以是从1到31之间的任何整数。 month：表示月份，可以是从1到12之间的任何整数。 week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。">
+<meta name="keywords" content="linux,shell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="定时任务">
 <meta property="og:url" content="http://yoursite.com/linux/定时任务/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="编辑定时任务1234567891011crontab  -e*  *  *  *  *       命令10  *  31  *  *     命令10  *  *  *  *      命令5  4  *  5,7,10  *  命令*/10  *  *  *  *    命令第一个：一小时中第几分钟	0-59第二个：一天中第几个小时	0-23第三个：一个月中第几天		1-31第四个：一年第几个">
+<meta property="og:description" content="基本规则1minute   hour   day   month   week   command  minute： 表示分钟，可以是从0到59之间的任何整数。 hour：表示小时，可以是从0到23之间的任何整数。 day：表示日期，可以是从1到31之间的任何整数。 month：表示月份，可以是从1到12之间的任何整数。 week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-09T04:00:58.194Z">
+<meta property="og:updated_time" content="2018-10-09T08:02:03.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="定时任务">
-<meta name="twitter:description" content="编辑定时任务1234567891011crontab  -e*  *  *  *  *       命令10  *  31  *  *     命令10  *  *  *  *      命令5  4  *  5,7,10  *  命令*/10  *  *  *  *    命令第一个：一小时中第几分钟	0-59第二个：一天中第几个小时	0-23第三个：一个月中第几天		1-31第四个：一年第几个">
+<meta name="twitter:description" content="基本规则1minute   hour   day   month   week   command  minute： 表示分钟，可以是从0到59之间的任何整数。 hour：表示小时，可以是从0到23之间的任何整数。 day：表示日期，可以是从1到31之间的任何整数。 month：表示月份，可以是从1到12之间的任何整数。 week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。">
 
 
 
@@ -344,9 +344,39 @@
       
 
       
-        <p>编辑定时任务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">crontab  -e</span><br><span class="line">*  *  *  *  *       命令</span><br><span class="line">10  *  31  *  *     命令</span><br><span class="line">10  *  *  *  *      命令</span><br><span class="line">5  4  *  5,7,10  *  命令</span><br><span class="line">*/10  *  *  *  *    命令</span><br><span class="line">第一个：一小时中第几分钟	0-59</span><br><span class="line">第二个：一天中第几个小时	0-23</span><br><span class="line">第三个：一个月中第几天		1-31</span><br><span class="line">第四个：一年第几个月		1-12</span><br><span class="line">第五个：一周中星期几		0-6</span><br></pre></td></tr></table></figure></p>
-<p>查看系统定时任务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -l</span><br></pre></td></tr></table></figure></p>
-<p>删除定时任务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -r</span><br></pre></td></tr></table></figure></p>
+        <h2 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minute   hour   day   month   week   command</span><br></pre></td></tr></table></figure>
+<ul>
+<li>minute： 表示分钟，可以是从0到59之间的任何整数。</li>
+<li>hour：表示小时，可以是从0到23之间的任何整数。</li>
+<li>day：表示日期，可以是从1到31之间的任何整数。</li>
+<li>month：表示月份，可以是从1到12之间的任何整数。</li>
+<li>week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。</li>
+<li>command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。</li>
+</ul>
+<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><ul>
+<li>星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。</li>
+<li>逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”</li>
+<li>中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</li>
+<li>正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</li>
+</ul>
+<h2 id="编辑定时任务"><a href="#编辑定时任务" class="headerlink" title="编辑定时任务"></a>编辑定时任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crontab  -e</span><br><span class="line">*  *  *  *  *       命令</span><br></pre></td></tr></table></figure>
+<h2 id="查看系统定时任务"><a href="#查看系统定时任务" class="headerlink" title="查看系统定时任务"></a>查看系统定时任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -l</span><br></pre></td></tr></table></figure>
+<h2 id="删除定时任务"><a href="#删除定时任务" class="headerlink" title="删除定时任务"></a>删除定时任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -r</span><br></pre></td></tr></table></figure>
+<h2 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h2><p>/sbin/service crond start    //启动服务<br>/sbin/service crond stop     //关闭服务<br>/sbin/service crond restart  //重启服务<br>/sbin/service crond reload   //重新载入配置</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>每1分钟执行一次command<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * command</span><br></pre></td></tr></table></figure></p>
+<p>每小时的第3和第15分钟执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 * * * * command</span><br></pre></td></tr></table></figure></p>
+<p>在上午8点到11点的第3和第15分钟执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * * command</span><br></pre></td></tr></table></figure></p>
+<p>每隔两天的上午8点到11点的第3和第15分钟执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 */2 * * command</span><br></pre></td></tr></table></figure></p>
+<p>每个星期一的上午8点到11点的第3和第15分钟执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * 1 command</span><br></pre></td></tr></table></figure></p>
+<p>每晚的21:30重启smb<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">30 21 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
+<p>每月1、10、22日的4 : 45重启smb<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 4 1,10,22 * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
+<p>每周六、周日的1:10重启smb<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 1 * * 6,0 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
+<p>每天18 : 00至23 : 00之间每隔30分钟重启smb<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0,30 18-23 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
+<p>每星期六的晚上11:00 pm重启smb<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23 * * 6 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
+<p>每一小时重启smb<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* */1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
+<p>晚上11点到早上7点之间，每隔一小时重启smb<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 23-7/1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
+<p>每月的4号与每周一到周三的11点重启smb<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 11 4 * mon-wed /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
+<p>一月一号的4点重启smb<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 4 1 jan * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -365,6 +395,8 @@
         <div class="post-tags">
           
             <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/shell/" rel="tag"># shell</a>
           
         </div>
       
@@ -437,8 +469,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -489,6 +530,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本规则"><span class="nav-number">1.</span> <span class="nav-text">基本规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊字符"><span class="nav-number">2.</span> <span class="nav-text">特殊字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑定时任务"><span class="nav-number">3.</span> <span class="nav-text">编辑定时任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看系统定时任务"><span class="nav-number">4.</span> <span class="nav-text">查看系统定时任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除定时任务"><span class="nav-number">5.</span> <span class="nav-text">删除定时任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务管理"><span class="nav-number">6.</span> <span class="nav-text">服务管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">7.</span> <span class="nav-text">例子</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
