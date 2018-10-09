@@ -273,6 +273,302 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/pdf处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux/pdf处理/" itemprop="url">pdf处理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-06T10:19:36+08:00">
+                2017-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>PDFtk 是什么？我觉得官网的一句话解释得很好。</p>
+<blockquote>
+<p>If PDF is electronic paper, then PDFtk is an electronic staple-remover, hole-punch, binder, secret-decoder-ring, and X-Ray-glasses. PDFtk is a simple tool for doing everyday things with PDF documents.</p>
+</blockquote>
+<p>其官方网站为：<br><a href="http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit" target="_blank" rel="noopener">官网</a></p>
+<p>PDFtk 目前分为三个版本：</p>
+<ul>
+<li>PDFtk Server：<br>命令行工具。支持 windows、Linux、Mac。</li>
+<li>PDFtk Free：<br>图形界面基础免费版；仅限 windows 用户；功能仅限于 PDF 合并和分割；</li>
+<li>PDFtk Pro：<br>图形界面专业收费版；仅限 windows 用户，可以对 PDF 文档进行合并、分割、旋转、加水印、加邮戳、加密。</li>
+</ul>
+<p>对于 Linux 用户，唯一的选择是免费的 PDFtk Server，其功能与收费 PDFtk Pro 完全相同，只是没有 GUI 而已。作者还是很厚道的。</p>
+<p>Linux 的各个发行版的官方源中基本都有该软件，直接 apt-get 或者 yum 安装即可。</p>
+<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><p>合并 PDF；<br>分割 PDF 页面；<br>旋转 PDF 文档或页面；<br>PDF 解密；（不是破解）<br>PDF 加密；<br>用 X/FDF 填写 PDF 表格；<br>从 PDF 表格中生成 PDF Data Stencils；<br>加背景水印或前景印章；<br>报告 PDF Metrics，书签和元数据；<br>增加 / 更新 PDF 书签或元数据；<br>给 PDF 页面或文档加附件；<br>解压 PDF 附件；<br>分解 PDF 文档为多个单页；<br>解压缩和重压缩页面流；<br>修复受损的 PDF 文档；<br>这功能完全可以与 Adobe Acrobat 相媲美了，更重要的是 PDFtk 支持 Linux 且完全免费。（个人用户免费，若用于商业用途需付费）。</p>
+<h1 id="用法示例"><a href="#用法示例" class="headerlink" title="用法示例"></a>用法示例</h1><p>具体选项看这里：</p>
+<p><a href="http://www.pdflabs.com/docs/pdftk-man-page/" target="_blank" rel="noopener">具体选项</a></p>
+<p>下面给出一些常见的例子。例子原文</p>
+<p>扫描一本书，odd.pdf 为书的全部奇数页，even.pdf 为书的全部偶数页，下面的命令可以将两个 pdf 合并成页码正常的书:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk A=odd.pdf B=even.pdf shuffle A B output collated.pdf</span><br></pre></td></tr></table></figure></p>
+<p>如果 odd.pdf 是逆序的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk A=odd.pdf B=even.pdf shuffle Aend-1 B output collated.pdf</span><br></pre></td></tr></table></figure></p>
+<p>加密 PDF:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk secured.pdf input_pw foopass output unsecured.pdf</span><br></pre></td></tr></table></figure></p>
+<p>PDF 128 位加密，保留全部权限:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk 1.pdf output 1.128.pdf owner_pw foopass</span><br></pre></td></tr></table></figure></p>
+<p>PDF 128 位加密，保留全部权限，打开文档需输入密码 “baz”:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk 1.pdf output 1.128.pdf owner_pw foo user_pw baz</span><br></pre></td></tr></table></figure></p>
+<p>PDF 128 位加密，打开文档需输入密码 “baz”，保留打印之外的其他权限:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk 1.pdf output 1.128.pdf owner_pw foo user_pw baz allow printing</span><br></pre></td></tr></table></figure></p>
+<p>合并 in1.pdf 和 in2.pdf 到新 PDF 中:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in1.pdf in2.pdf cat output out1.pdf</span><br></pre></td></tr></table></figure></p>
+<p>或（使用句柄）:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk A=in1.pdf B=in2.pdf cat A B output out1.pdf</span><br></pre></td></tr></table></figure></p>
+<p>或（使用通配符）:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk *.pdf cat output combined.pdf</span><br></pre></td></tr></table></figure></p>
+<p>去除 in1.pdf 中的第 13 页，并创建 out1.pdf:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf cat 1-12 14-end output out1.pdf</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk A=in1.pdf cat A1-12 A14-end output out1.pdf</span><br></pre></td></tr></table></figure></p>
+<p>对输出进行 40 位加密，撤销所有权限，设置 owner 密码为 foopass:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk 1.pdf 2.pdf cat output 3.pdf encrypt_40bit owner_pw foopass</span><br></pre></td></tr></table></figure></p>
+<p>合并两个文件，其中一个需要被加密。对输出不加密:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk A=secured.pdf 2.pdf input_pw A=foopass cat output 3.pdf</span><br></pre></td></tr></table></figure></p>
+<p>解压 PDF 页面流，然后就可以在文本编辑器中编辑 PDF 文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk doc.pdf output doc.unc.pdf uncompress</span><br></pre></td></tr></table></figure></p>
+<p>压缩 PDF:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk mydoc.pdf output mydoc.clear.pdf compress</span><br></pre></td></tr></table></figure></p>
+<p>修复破损的 PDF:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk broken.pdf output fixed.pdf</span><br></pre></td></tr></table></figure></p>
+<p>将一个 PDF 文档分割成一页一个文档:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf burst</span><br></pre></td></tr></table></figure></p>
+<p>将一个 PDF 文档分割成一页一个文档，并加密，允许低质量的打印:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf burst owner_pw foopass allow DegradedPrinting</span><br></pre></td></tr></table></figure></p>
+<p>获取 PDF 问的元数据和书签信息:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf dump_data output report.txt</span><br></pre></td></tr></table></figure></p>
+<p>将 PDF 第一页顺时针旋转 90 度:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf cat 1east 2-end output out.pdf</span><br></pre></td></tr></table></figure></p>
+<p>将整个 PDF 文档旋转 180 度:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf cat 1-endsouth output out.pdf</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux/shell/" itemprop="url">shell</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-27T10:19:36+08:00">
+                2017-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="判断命令是否执行成功"><a href="#判断命令是否执行成功" class="headerlink" title="判断命令是否执行成功"></a>判断命令是否执行成功</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ $? -eq 0 ]];<span class="keyword">then</span> A <span class="keyword">else</span> b;<span class="keyword">fi</span></span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ];<span class="keyword">then</span></span><br><span class="line">  命令正确的分支</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  命令失败的分支</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h1 id="在脚本中执行其他脚本"><a href="#在脚本中执行其他脚本" class="headerlink" title="在脚本中执行其他脚本"></a>在脚本中执行其他脚本</h1><ul>
+<li><p>fork  ( /directory/script.sh)：</p>
+<blockquote>
+<p>如果shell中包含执行命令，那么子命令并不影响父级的命令，在子命令执行完后再执行父级命令。子级的环境变量不会影响到父级。<br>fork是最普通的, 就是直接在脚本里面用/directory/script.sh来调用script.sh这个脚本.<br>运行的时候开一个sub-shell执行调用的脚本，sub-shell执行的时候, parent-shell还在。<br>sub-shell执行完毕后返回parent-shell. sub-shell从parent-shell继承环境变量.但是sub-shell中的环境变量不会带回parent-shell</p>
+</blockquote>
+</li>
+<li><p>exec (exec /directory/script.sh)：</p>
+<blockquote>
+<p>执行子级的命令后，不再执行父级命令。<br>exec与fork不同，不需要新开一个sub-shell来执行被调用的脚本.  被调用的脚本与父脚本在同一个shell内执行。但是使用exec调用一个新脚本以后, 父脚本中exec行之后的内容就不会再执行了。这是exec和source的区别</p>
+</blockquote>
+</li>
+<li><p>source (source /directory/script.sh)：</p>
+<blockquote>
+<p>执行子级命令后继续执行父级命令，同时子级设置的环境变量会影响到父级的环境变量。<br>与fork的区别是不新开一个sub-shell来执行被调用的脚本，而是在同一个shell中执行. 所以被调用的脚本中声明的变量和环境变量, 都可以在主脚本中得到和使用.</p>
+</blockquote>
+<h1 id="获取时间"><a href="#获取时间" class="headerlink" title="获取时间"></a>获取时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">file_name=&quot;`date +%y%m%d`.sql&quot;</span><br><span class="line"># 结果：170109.sql</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 将参数赋值给file_name变量，注意=两边不能有空格</span><br><span class="line">file_name=$1</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -386,702 +682,6 @@
 <li><code>dw</code>: 从当前光标开始删除到下一个单词头</li>
 <li><code>de</code>: 从当前光标开始删除到单词尾</li>
 </ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/网络管理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/网络管理/" itemprop="url">网络管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-15T10:19:36+08:00">
-                2017-07-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h1><ul>
-<li><p>查看端口状况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -apn</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看连接数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 80端口</span><br><span class="line">netstat -nat|grep -i &quot;80&quot;|wc -l</span><br><span class="line">// 已连接上的</span><br><span class="line">netstat -na|grep ESTABLISHED|wc -l</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="ufw"><a href="#ufw" class="headerlink" title="ufw"></a>ufw</h1><p>(端口管理)</p>
-<ul>
-<li><p>安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ufw</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>开启，默认关闭所有</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw enable </span><br><span class="line">sudo ufw default deny</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看端口状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>新增端口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow 8080</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除端口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw delete allow 8080</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>允许特定来源的访问</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow from 192.168.1.1</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="ssh翻墙"><a href="#ssh翻墙" class="headerlink" title="ssh翻墙"></a>ssh翻墙</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">参考：[实战 SSH 端口转发](http://www.ibm.com/developerworks/cn/linux/l-cn-sshforward/)</span><br><span class="line">ssh -D &lt;local port&gt; &lt;SSH Server&gt;</span><br><span class="line">例：</span><br><span class="line">ssh -D 7000 root@xbug.site</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/进程管理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/进程管理/" itemprop="url">进程管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-01T10:19:36+08:00">
-                2017-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="进程查看"><a href="#进程查看" class="headerlink" title="进程查看"></a>进程查看</h1><h2 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h2><ul>
-<li><p>常用组合之一 aux        </p>
-<blockquote>
-<p>查看当前系统所有运行的进程<br>-a     显示前台所有进程<br>-u    显示用户名<br>-x    显示后台进程<br>user： 用户名</p>
-<ul>
-<li>pid：    进程id PID<br>   %CPU    cpu占用百分比<br>   %MEM    内存占用百分比<br>   VSZ    虚拟内存占用量        KB<br>   RSS    固定内存占有量      kb<br>   tty    登录终端    <ul>
-<li>tty1-7 本地终端</li>
-<li>1-6 字符 </li>
-<li>7图形    pts/0-5 alt+F1-F7                </li>
-</ul>
-</li>
-<li>stat<ul>
-<li>S：睡眠    </li>
-<li>D：不可唤醒</li>
-<li>R：运行</li>
-<li>T：停止</li>
-<li>Z：僵死</li>
-<li>W：进入内存交换    </li>
-<li>X：死掉的进程     </li>
-<li>&lt;:高优先级    </li>
-<li>N：低优先级    </li>
-<li>L：被锁进内存    </li>
-<li>s：含子进程    </li>
-<li>+：位于后台    </li>
-<li>l：多线程<br>start    进程触发时间<br>time        占用cpu时间<br>command    进程本身</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-</li>
-<li><p>常用组合之二 -ef</p>
-<blockquote>
-<ul>
-<li>-e 显示所有进程</li>
-<li>-f 显示详细信息</li>
-<li>-F 显示完整格式的进程信息</li>
-<li>-H 以层级结构显示进程信息</li>
-</ul>
-</blockquote>
-</li>
-<li>常用组合之三 -efH</li>
-<li>常用组合之四 -eo axo<blockquote>
-<ul>
-<li>o field1,field2…<br>自定义要显示的字段，以逗号分隔<br>常用的field:pid,ni,pri,pcup,stat,comm,tty,ppid<ul>
-<li>ni: nice值；（优先级）</li>
-<li>pri：priority 优先级；</li>
-<li>rtprio:real time piority,实时优先级；<br>例：<code>ps axo pid,pri,comm</code></li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="pgrep-pkill命令"><a href="#pgrep-pkill命令" class="headerlink" title="pgrep pkill命令"></a>pgrep pkill命令</h2><blockquote>
-<ul>
-<li>英文释义：pgrep, pkill - look up or signal processes based on name and other attributes</li>
-</ul>
-</blockquote>
-</li>
-<li>格式：pgrep [options] pattern<ul>
-<li>-u uid:effective user(以谁的身份启动的)</li>
-<li>-U uid:real user</li>
-<li>-t TERMINAL:与指定终端相关的的进程</li>
-<li>-l 显示进程名</li>
-<li>-a 显示完整格式的进程名</li>
-<li>-P 显示进程的子进程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">实例：</span><br><span class="line">ps -aux | grep swoole #找到swoole进程</span><br><span class="line">或者：</span><br><span class="line">ps -efH | grep swoole #找到swoole进程</span><br><span class="line">找到进程号：如2257</span><br><span class="line">pgrep -P 2257</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="uptime（效果和top第一行相同）"><a href="#uptime（效果和top第一行相同）" class="headerlink" title="uptime（效果和top第一行相同）"></a>uptime（效果和top第一行相同）</h2><p>过去1分钟，5分钟，10分钟cpu</p>
-<h2 id="pstree-查看进程树"><a href="#pstree-查看进程树" class="headerlink" title="pstree    查看进程树"></a>pstree    查看进程树</h2><h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2><blockquote>
-<ul>
-<li>第一行：uptime信息（连敲l命令可开启或关闭第一行）<ul>
-<li>系统当前时间</li>
-<li>系统持续时间</li>
-<li>登录用户，1,5,15分钟之前的平均负载</li>
-</ul>
-</li>
-<li>第二行：进程总数<br>   第三行： CPU占用率        <ul>
-<li>us 用户空间</li>
-<li>sy 内核空间</li>
-<li>ni 调整nice值后，多占用空间</li>
-<li>id 空闲时间比例</li>
-<li>hi 处理硬件中断所需要时间</li>
-<li>si 处理软件中断所需要时间</li>
-<li>cs 处理上下文（进程）切换所需要时间</li>
-<li>st 虚拟化技术占用的cpu<br>  第四行：内存使用：    </li>
-<li>VSZ 虚拟内存集</li>
-<li>RSS 常驻内存集</li>
-<li>SHM 共享内存集（share memory）</li>
-</ul>
-</li>
-<li>第五行：swap使用</li>
-<li>字段： PID，USER，PR（优先级），NI（nice优先级），VIRT（虚拟内存），RES（物理内存），SHR（），S（状态），%CPU,%MEM(内存占用)，TIME+（系统调用总时间），COMMAND（进程名称）<br>   操作命令        <ul>
-<li>M    内存排序<ul>
-<li>P    CPU排序</li>
-</ul>
-</li>
-<li>T 累计占用CPU时间排序<ul>
-<li>q    退出</li>
-</ul>
-</li>
-<li>s 修改刷新时间间隔</li>
-<li>k 终止指定的命令</li>
-</ul>
-</li>
-<li>选项：<ul>
-<li>-d # ;更改刷新时间</li>
-<li>-b 以批处理方式显示</li>
-<li>-n #；显示多少批次</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="htop-top升级版"><a href="#htop-top升级版" class="headerlink" title="htop top升级版"></a>htop top升级版</h2><blockquote>
-<ul>
-<li>选项<ul>
-<li>-d #:指定延迟时间加载</li>
-<li>-u UserName:仅显示指定用户的进程</li>
-<li>-s COLUME:以指定字段进行排序</li>
-</ul>
-</li>
-<li>子命令<ul>
-<li>l：显示选定的进程打开的文件列表</li>
-<li>s：跟踪选定的进程的系统调用</li>
-<li>t：以层级结构显示个进程状态</li>
-<li>a：将选定的进程绑定至某指定的CPU核心</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="vmstat"><a href="#vmstat" class="headerlink" title="vmstat"></a>vmstat</h2><blockquote>
-<ul>
-<li>概要： Report virtual memory statistics</li>
-<li>格式： vmstat [options] [delay [count]] </li>
-<li>procs <ul>
-<li>r：等待运行的进程个数，CPU上等待运行的队列长度</li>
-<li>b：处于不可中断睡眠的进程个数，被阻塞的任务队列的长度</li>
-</ul>
-</li>
-<li>memory<ul>
-<li>swpd：交换内存使用总量</li>
-<li>free：空闲的物理内存总量</li>
-<li>buffer：用户buffer的内存总量</li>
-<li>cache：用户cache的内存总量</li>
-</ul>
-</li>
-<li>swap（交换分区）<ul>
-<li>si：数据进入swap中的数据速率（kb/s）</li>
-<li>so：数据离开swap中的数据速率（kb/s）</li>
-</ul>
-</li>
-<li>io<ul>
-<li>bi：从设备中读入数据到系统的速度（kb/s）</li>
-<li>bo：保存数据到块设备的速率（kb/s）</li>
-</ul>
-</li>
-<li>system<ul>
-<li>in：每秒产生的中断次数</li>
-<li>cs：每秒产生的上下文切换次数</li>
-<li>（上面这2个值越大，会看到由内核消耗的CPU时间会越多）</li>
-</ul>
-</li>
-<li>CPU<ul>
-<li>us：用户进程消耗的CPU时间百分比（us 的值比较高时，说明用户进程消耗的CPU时间多，但是如果长期超过50% 的使用，那么我们就该考虑优化程序算法或者进行加速了）（user）</li>
-<li>sy：内核进程消耗的CPU时间百分比（system）</li>
-<li>id：空闲（idle）</li>
-<li>wa：IO等待消耗的CPU时间百分比（ wa 的值高时，说明IO等待比较严重，这可能是由于磁盘大量作随机访问造成，也有可能是磁盘的带宽出现瓶颈(块操作)。）（wait）</li>
-</ul>
-</li>
-<li>选项<ul>
-<li>-s：显示内存统计数据</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="pmap"><a href="#pmap" class="headerlink" title="pmap"></a>pmap</h2><blockquote>
-<ul>
-<li>概要：pmap命令用于报告进程的内存映射关系，是Linux调试及运维一个很好的工具。</li>
-<li>格式：pmap [options] pid […]</li>
-<li>选项<ul>
-<li>-x：查看详细信息</li>
-</ul>
-</li>
-<li>另一种查看方式：cat /proc/PID/maps</li>
-</ul>
-</blockquote>
-<h2 id="pidof"><a href="#pidof" class="headerlink" title="pidof"></a>pidof</h2><blockquote>
-<ul>
-<li>概要：查看pid</li>
-<li>示例：<code>pidof nginx</code></li>
-</ul>
-</blockquote>
-<h2 id="dstat"><a href="#dstat" class="headerlink" title="dstat"></a>dstat</h2><blockquote>
-<ul>
-<li>选项<ul>
-<li>-c：显示CPU系统占用，用户占用，空闲，等待，中断，软件中断等信息。 </li>
-<li>-C：当有多个CPU时候，此参数可按需分别显示cpu状态，例：-C 0,1 是显示cpu0和cpu1的信息。 </li>
-<li>-d：显示磁盘读写数据大小。 </li>
-<li>-D hda,total：include hda and total。 </li>
-<li>-n：显示网络状态。（network）</li>
-<li>-N eth1,total：有多块网卡时，指定要显示的网卡。 </li>
-<li>-l：显示系统负载情况。</li>
-<li>-m：显示内存使用情况。 </li>
-<li>-g：显示页面使用情况。（从内存写入磁盘，从磁盘写入内存）</li>
-<li>-p：显示进程状态。(process)</li>
-<li>-s：显示交换分区使用情况。(swapped) </li>
-<li>-S：类似D/N。 </li>
-<li>-r：I/O请求情况。 </li>
-<li>-y：系统状态。 </li>
-<li>–ipc：显示ipc消息队列，信号等信息。</li>
-<li>–socket：用来显示tcp udp端口状态。 </li>
-<li>-a：此为默认选项，等同于-cdngy。</li>
-<li>-v：等同于 -pmgdsc -D total。 </li>
-<li>–tcp</li>
-<li>–udp</li>
-<li>–raw</li>
-<li>–top-cpu：最消耗cpu</li>
-<li>–top-io：最消耗磁盘io</li>
-<li>–top-mem：最消耗内存</li>
-<li>–top-lantency：延迟最大的进程</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h2><blockquote>
-<ul>
-<li>概要：用于向进程发信号，已实现进程的管理（send a signal to a process）</li>
-<li>格式：kill(选项)(参数)</li>
-<li>每个信号的标示方式有三种  <ul>
-<li>信号的数字标识</li>
-<li>信号的完整名称</li>
-<li>信号的简写名称</li>
-</ul>
-</li>
-<li>向进程发信号<ul>
-<li>kill[-s signal|-SIGNAL] pid …</li>
-<li>常用信号<ol>
-<li>（1号）SIGHUP：无需关闭进程而让其重读配置文件</li>
-<li>（2号）SIGINT：终止正在运行的进程，相当于ctrl+c</li>
-<li>（9号）SIGKILL：杀死进行中的进程</li>
-<li>（15号）SIGTREM：终止运行中的进程</li>
-<li>（18号）SIGCONT：继续</li>
-<li>（19号）SIGSTOP：停止</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="killall"><a href="#killall" class="headerlink" title="killall"></a>killall</h2><blockquote>
-<ul>
-<li>概要：kill processes by name</li>
-<li>格式：kill [signal] program</li>
-</ul>
-</blockquote>
-<p>  ​<br>     4    进程管理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   ps   aux    组合使用</span><br><span class="line">kill  PID		结束单个进程  结束进程</span><br><span class="line">-9  强制         </span><br><span class="line">    pstree</span><br><span class="line">killall  -9   进程名		结束一类进程</span><br><span class="line">pkill    -9   进程名</span><br><span class="line">w			判断登录用户</span><br><span class="line">pkill  -9  -t  终端号	把某个终端登录的用户踢出</span><br><span class="line">pkill  -9  -t tty 	把本地登录终端1登录用户踢出</span><br></pre></td></tr></table></figure>
-<p>2    linux服务管理</p>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><pre><code>1）系统默认安装的服务            
-2）源码包安装的服务
-</code></pre><p>（一）系统默认安装的服务</p>
-<h2 id="确定服务分类"><a href="#确定服务分类" class="headerlink" title="确定服务分类"></a>确定服务分类</h2><pre><code>chkconfig  --list        查看服务的自启动状态
-    运行级别：0-6
-        0    关机
-        1    单用户模式
-        2    不完全多用户，不包含NFS服务  无网络登录
-        3    完全多用户    字符界面   
-        4    未分配
-        5    图形界面
-        6    重启
-        init  0     halt 关机         init 5  startx     init 3
-        init  6    重启  init(初始化)
-        runlevel            查询系统当前运行级别
-        vi  /etc/inittab
-</code></pre><h2 id="独立的服务器管理"><a href="#独立的服务器管理" class="headerlink" title="独立的服务器管理"></a>独立的服务器管理</h2><p>1）启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/rc.d/init.d/服务名   start|stop|restart|status</span><br><span class="line">/etc/rc.d/init.d/httpd  start</span><br><span class="line">service   服务名   start|stop|restart|status</span><br></pre></td></tr></table></figure></p>
-<p>2)自启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chkconfig  --level  2345  服务名  on|off</span><br><span class="line">vi  /etc/rc.local----&gt;/etc/rc.d/rc.local</span><br><span class="line">/etc/rc.d/init.d/httpd  start</span><br></pre></td></tr></table></figure></p>
-<h2 id="ntsysv"><a href="#ntsysv" class="headerlink" title="ntsysv"></a>ntsysv</h2><pre><code>所有系统默认安装服务都可以使用ntsysv命令进行自启动管理
-（二）源码包安装的服务
-1源码包安装的服务            
-    1）绝对路径启动
-        /usr/local/apache2/bin/apachectl  start 
-    2)自启动
-        vi /etc/rc.local
-        /usr/local/apache2/bin/apachectl  start
-</code></pre><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>服务管理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">RPM包安装服务</span><br><span class="line">	独立的服务</span><br><span class="line">		启动：	</span><br><span class="line">			/etc/rc.d/init.d/服务名  start</span><br><span class="line">			service  服务名  start</span><br><span class="line"></span><br><span class="line">		自启动：</span><br><span class="line">			chkconfig  --level  2345  服务名  on|off</span><br><span class="line">			vi  /etc/rc.local		推荐</span><br><span class="line">				/etc/rc.d/init.d/httpd  start</span><br><span class="line">源码包服务</span><br><span class="line">	启动</span><br><span class="line">			/usr/local/服务名/bin/服务名二进制执行文件  start</span><br><span class="line">	自启动</span><br><span class="line">			vi  /etc/rc.local</span><br><span class="line">				/usr/local/apache2/bin/apachectl  start</span><br></pre></td></tr></table></figure></p>
-<h2 id="查看硬件相关信息："><a href="#查看硬件相关信息：" class="headerlink" title="查看硬件相关信息："></a>查看硬件相关信息：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo 文件保存了CPU设备信息  </span><br><span class="line">dmesg				查看系统启动信息</span><br><span class="line">cat  /var/log/dmesg		系统启动信息日志		</span><br><span class="line">dmesg | grep eth0		查看eth0信息</span><br><span class="line">dmesg | grep CPU		查看cpu信息</span><br></pre></td></tr></table></figure>
-<h1 id="进程前后台切换"><a href="#进程前后台切换" class="headerlink" title="进程前后台切换"></a>进程前后台切换</h1><h2 id="前后台切换"><a href="#前后台切换" class="headerlink" title="前后台切换"></a>前后台切换</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">command &amp;   //将进程放在后台执行</span><br><span class="line">ctrl-z      //暂停当前进程 并放入后台</span><br><span class="line">jobs        //查看当前后台任务</span><br><span class="line">bg          //将任务转为后台执行</span><br><span class="line">fg          //将任务调回前台</span><br><span class="line">kill        //杀掉任务</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>如果我们在终端中直接运行一GUI程序，一般情况下，终端就会被当前进程占用了。如果我们想把它放到后台运行有两种方法：</p>
-<ol>
-<li>command &amp; 在运行的命令后加一个&amp;号，就会后台运行命令</li>
-<li>ctrl-z 在终端中按ctrl-z 会将当前任务暂停并转入后台; 利用jobs命令可以查看当前后台的任务; 如果在jobs命令后增加 -l 参数 那么就会显示详细信息!</li>
-<li>可以发现终止的进程状态为Stopped 通过bg %i （i为进程的标号）命令可以将其转为运行</li>
-<li>如果想要结束任务，可以利用kill %i命令</li>
-<li>示例图：<img src="leanote://file/getImage?fileId=58048913ab64413a7e00ce54" alt="title"></li>
-</ol>
-</blockquote>
-<h2 id="改变进程所在进程树的位置"><a href="#改变进程所在进程树的位置" class="headerlink" title="改变进程所在进程树的位置"></a>改变进程所在进程树的位置</h2><ul>
-<li>默认情况下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php test_swoole_server.php</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="leanote://file/getImage?fileId=58048913ab64413a7e00ce55" alt="title"></p>
-<ul>
-<li>改变进程所在位置后<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(php test_swoole_server.php &amp;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="leanote://file/getImage?fileId=58048913ab64413a7e00ce53" alt="title"></p>
-<h2 id="Hnohup"><a href="#Hnohup" class="headerlink" title="Hnohup"></a>Hnohup</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(nohup php watch_send_email_websocket.php 2&gt;/root/log/swoole/send_email/error.log &amp;)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/定时任务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/定时任务/" itemprop="url">定时任务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-01T10:19:36+08:00">
-                2017-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>编辑定时任务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">crontab  -e</span><br><span class="line">*  *  *  *  *  命令</span><br><span class="line">10  *  31  *  *  命令</span><br><span class="line">10  *  *  *  *  命令</span><br><span class="line">5  4  *  5,7,10  *  命令</span><br><span class="line">*/10  *  *  *  *  命令</span><br><span class="line">第一个：一小时中第几分钟		0-59</span><br><span class="line">第二个：一天中第几个小时		0-23</span><br><span class="line">第三个：一个月中第几天		1-31</span><br><span class="line">第四个：一年第几个月			1-12</span><br><span class="line">第五个：一周中星期几			0-6</span><br></pre></td></tr></table></figure></p>
-<p>查看系统定时任务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -l</span><br></pre></td></tr></table></figure></p>
-<p>删除定时任务<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -r</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1915,6 +1515,129 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/nginx/基本设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/nginx/基本设置/" itemprop="url">基本设置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T11:19:36+08:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="只允许本机访问"><a href="#只允许本机访问" class="headerlink" title="只允许本机访问"></a>只允许本机访问</h1><p>一般用于设置内部服务器<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">8888</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  localhost;</span><br><span class="line">    <span class="attribute">root</span>         /www/vux/vux/my;</span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">allow</span> <span class="number">127.0.0.1</span>;</span><br><span class="line">        <span class="attribute">deny</span> all;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.php?<span class="variable">$query_string</span>;</span><br><span class="line">        <span class="attribute">autoindex</span>  <span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">index</span>  index.html index.htm index.php;</span><br><span class="line">        <span class="attribute">include</span>  /etc/nginx/conf.d/php-fpm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="域名（端口）转发"><a href="#域名（端口）转发" class="headerlink" title="域名（端口）转发"></a>域名（端口）转发</h1><p>一般用于前后端完全分离的设计<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  douniu.kouhuo.site;</span><br><span class="line">    location / &#123;</span><br><span class="line">        index  index.html index.htm index.php;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_pass http://127.0.0.1:8080;</span><br><span class="line">    &#125;</span><br><span class="line">    location /api &#123;</span><br><span class="line">        #rewrite ^.+api/?(.*)$ /$1 break; </span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_set_header Host $host; #要转发的host</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_pass http://127.0.0.1:8888/; #设置要转发的ip（域名）端口</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="访问php动态资源-fastcgi"><a href="#访问php动态资源-fastcgi" class="headerlink" title="访问php动态资源(fastcgi)"></a>访问php动态资源(fastcgi)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  local.ladmin.com local.ladmin.com;</span><br><span class="line">    root   &quot;D:/items/laravel/lesson-admin/public&quot;;</span><br><span class="line">    index  index.html index.htm index.php;</span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /index.php?$query_string;</span><br><span class="line">        #autoindex  on;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ \.php(.*)$ &#123;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;</span><br><span class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name; </span><br><span class="line">        fastcgi_param  PATH_INFO  $fastcgi_path_info;</span><br><span class="line">        fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;</span><br><span class="line">        include        fastcgi_params;</span><br><span class="line">        add_header Access-Control-Allow-Origin *;</span><br><span class="line">        add_header Access-Control-Allow-Methods &quot;POST, GET, OPTIONS&quot;;</span><br><span class="line">        add_header Access-Control-Allow-Credentials &quot;true&quot;;</span><br><span class="line">        add_header Access-Control-Allow-Headers &quot;Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Mx-ReqToken,X-Requested-With&quot;;</span><br><span class="line">        if ($request_method = &apos;OPTIONS&apos;)&#123;</span><br><span class="line">          return 204;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="配置header头的最大字节数"><a href="#配置header头的最大字节数" class="headerlink" title="配置header头的最大字节数"></a>配置header头的最大字节数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    ...</span><br><span class="line">    proxy_buffer_size   128k;</span><br><span class="line">    proxy_buffers   4 256k;</span><br><span class="line">    proxy_busy_buffers_size   256k;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="设置超时时间"><a href="#设置超时时间" class="headerlink" title="设置超时时间"></a>设置超时时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    ...</span><br><span class="line">    proxy_connect_timeout 360;</span><br><span class="line">	proxy_send_timeout 360;</span><br><span class="line">	proxy_read_timeout 360;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1965,7 +1688,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1978,7 +1701,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

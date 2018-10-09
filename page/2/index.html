@@ -273,6 +273,461 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/http/并发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/http/并发/" itemprop="url">进程-线程-协程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="进程-线程-协程"><a href="#进程-线程-协程" class="headerlink" title="进程-线程-协程"></a>进程-线程-协程</h1><h2 id="简单描述"><a href="#简单描述" class="headerlink" title="简单描述"></a>简单描述</h2><blockquote>
+<p>　　进程、线程和协程之间的关系和区别也困扰我一阵子了，最近有一些心得，写一下。<br>　　进程拥有自己独立的堆和栈，既不共享堆，亦不共享栈，进程由操作系统调度。<br>　　线程拥有自己独立的栈和共享的堆，共享堆，不共享栈，线程亦由操作系统调度(标准线程是的)。<br>　　协程和线程一样共享堆，不共享栈，协程由程序员在协程的代码里显示调度。<br>　　进程和其他两个的区别还是很明显的。<br>　　协程和线程的区别是：协程避免了无意义的调度，由此可以提高性能，但也因此，程序员必须自己承担调度的责任，同时，协程也失去了标准线程使用多CPU的能力。<br>　　打个比方吧，假设有一个操作系统，是单核的，系统上没有其他的程序需要运行，有两个线程 A 和 B ，A 和 B 在单独运行时都需要 10 秒来完成自己的任务，而且任务都是运算操作，A B 之间也没有竞争和共享数据的问题。现在 A B 两个线程并行，操作系统会不停的在 A B 　　两个线程之间切换，达到一种伪并行的效果，假设切换的频率是每秒一次，切换的成本是 0.1 秒(主要是栈切换)，总共需要 20 + 19 <em> 0.1 = 21.9 秒。如果使用协程的方式，可以先运行协程 A ，A 结束的时候让位给协程 B ，只发生一次切换，总时间是 20 + 1 </em> 0.1 = 20.1 秒。如果系统是双核的，而且线程是标准线程，那么 A B 两个线程就可以真并行，总时间只需要 10 秒，而协程的方案仍然需要 20.1 秒。</p>
+</blockquote>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><blockquote>
+<p><code>进程的出现是为了更好的利用CPU资源使到并发成为可能</code>。 假设有两个任务A和B，当A遇到IO操作，CPU默默的等待任务A读取完操作再去执行任务B，这样无疑是对CPU资源的极大的浪费。聪明的老大们就在想若在任务A读取数据时，让任务B执行，当任务A读取完数据后，再切换到任务A执行。注意关键字切换，自然是切换，那么这就涉及到了状态的保存，状态的恢复，加上任务A与任务B所需要的系统资源（内存，硬盘，键盘等等）是不一样的。自然而然的就需要有一个东西去记录任务A和任务B分别需要什么资源，怎样去识别任务A和任务B等等。登登登，进程就被发明出来了。通过进程来分配系统资源，标识任务。如何分配CPU去执行进程称之为调度，进程状态的记录，恢复，切换称之为上下文切换。<code>进程是系统资源分配的最小单位</code>，进程占用的资源有：地址空间，全局变量，文件描述符，各种硬件等等资源。</p>
+</blockquote>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><blockquote>
+<p><code>线程的出现是为了降低上下文切换的消耗，提高系统的并发性，并突破一个进程只能干一样事的缺陷，使到进程内并发成为可能</code>。假设，一个文本程序，需要接受键盘输入，将内容显示在屏幕上，还需要保存信息到硬盘中。若只有一个进程，势必造成同一时间只能干一样事的尴尬（当保存时，就不能通过键盘输入内容）。若有多个进程，每个进程负责一个任务，进程A负责接收键盘输入的任务，进程B负责将内容显示在屏幕上的任务，进程C负责保存内容到硬盘中的任务。这里进程A，B，C间的协作涉及到了进程通信问题，而且有共同都需要拥有的东西——-文本内容，不停的切换造成性能上的损失。若有一种机制，可以使任务A，B，C共享资源，这样上下文切换所需要保存和恢复的内容就少了，同时又可以减少通信所带来的性能损耗，那就好了。是的，这种机制就是线程。<code>线程共享进程的大部分资源，并参与CPU的调度, 当然线程自己也是拥有自己的资源的，例如，栈，寄存器等等</code>。 此时，进程同时也是线程的容器。线程也是有着自己的缺陷的，例如健壮性差，若一个线程挂掉了，整一个进程也挂掉了，这意味着其它线程也挂掉了，进程却没有这个问题，一个进程挂掉，另外的进程还是活着。</p>
+</blockquote>
+<h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><blockquote>
+<p><code>协程通过在线程中实现调度，避免了陷入内核级别的上下文切换造成的性能损失，进而突破了线程在IO上的性能瓶颈</code>。 当涉及到大规模的并发连接时，例如10K连接。以线程作为处理单元，系统调度的开销还是过大。当连接数很多 —&gt; 需要大量的线程来干活 —&gt; 可能大部分的线程处于ready状态 —&gt; 系统会不断地进行上下文切换。既然性能瓶颈在上下文切换，那解决思路也就有了，在线程中自己实现调度，不陷入内核级别的上下文切换。说明一下，在历史上协程比线程要出现得早，在1963年首次提出, 但没有流行开来。为什么没有流行，没有找到信服的资料，先挖个坑，以后那天了解后，再补上。</p>
+</blockquote>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><blockquote>
+<p>进程，线程，协程不断突破，更高效的处理阻塞，不断地提高CPU的利用率。但是并不是说，线程就一定比进程快，而协程就一定不线程要快。具体还是要看应用场景。可以简单粗暴的把应用分为IO密集型应用以及CPU密集型应用。</p>
+</blockquote>
+<ul>
+<li><p>多核CPU，CPU密集型应用</p>
+<blockquote>
+<p>此时多线程的效率是最高的，多线程可以使到全部CPU核心满载，又避免了协程间切换造成性能损失。当CPU密集型任务时，CPU一直在利用着，切换反而会造成性能损失，即便协程上下文切换消耗最小，但也还是有消耗的。</p>
+</blockquote>
+</li>
+<li><p>多核CPU，IO密集型应用</p>
+<blockquote>
+<p>此时采用多线程多协程效率最高，多线程可以使到全部CPU核心满载，而一个线程多协程，则更好的提高了CPU的利用率。</p>
+</blockquote>
+</li>
+<li><p>单核CPU，CPU密集型应用</p>
+<blockquote>
+<p>单进程效率是最高，此时单个进程已经使到CPU满载了。</p>
+</blockquote>
+</li>
+<li><p>单核CPU，IO密集型应用</p>
+<blockquote>
+<p>多协程，效率最高。例如，看了上面应该也是知道的了</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h1><h2 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h2><blockquote>
+<p>并发就是指同一时刻有两个或两个以上的“工作单位”在同时执行，从硬件的角度上来看就是同一时刻有两条或两条以上的指令处于执行阶段。所以，多核是并行的前提，单线程永远无法达到并行状态。可以利用多线程和度进程到达并行状态。另外的，Python的多线程由于GIL的存在，对于Python来说无法通过多线程到达并行状态。</p>
+</blockquote>
+<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><blockquote>
+<p>对于并发的理解，要从两方面去理解，</p>
+</blockquote>
+<ol>
+<li>并发设计 </li>
+<li><p>并发执行。先说并发设计，当说一个程序是并发的，更多的是指这个程序采取了并发设计。</p>
+</li>
+<li><p>并发设计的标准：</p>
+<blockquote>
+<p><code>使多个操作可以在重叠的时间段内进行</code>，这里的重点在于重叠的时间内， 重叠时间可以理解为一段时间内。例如：在时间1s秒内, 具有IO操作的task1和task2都完成，这就可以说是并发执行。所以呢，单线程也是可以做到并发运行的。当然啦，并行肯定是并发的。一个程序能否并发执行，取决于设计，也取决于部署方式。例如, 当给程序开一个线程（协程是不开的），它不可能是并发的，因为在重叠时间内根本就没有两个task在运行。当一个程序被设计成完成一个任务再去完成下一个任务的时候，即便部署是多线程多协程的也是无法达到并发运行的。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="并行与并发的关系"><a href="#并行与并发的关系" class="headerlink" title="并行与并发的关系:"></a>并行与并发的关系:</h2><blockquote>
+<p>并发的设计使到并发执行成为可能，而并行是并发执行的其中一种模式。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/http/cookie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/http/cookie/" itemprop="url">cookie</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cookie-是怎么工作的"><a href="#cookie-是怎么工作的" class="headerlink" title="cookie 是怎么工作的"></a>cookie 是怎么工作的</h1><p>当网页要发http请求时，浏览器会先检查是否有相应的<code>cookie</code>，有则自动添加在<code>request header</code>中的<code>cookie</code>字段中。这些是浏览器自动帮我们做的，而且每一次http请求浏览器都会自动帮我们做。这个特点很重要，因为这关系到“<strong>什么样的数据适合存储在cookie中</strong>”。</p>
+<p>存储在cookie中的数据，<code>每次</code>都会被浏览器自动放在<code>http请求</code>中，如果这些数据并不是每个请求都需要发给服务端的数据，浏览器这设置自动处理无疑增加了网络开销；但如果这些数据是每个请求都需要发给服务端的数据（比如身份认证信息），浏览器这设置自动处理就大大免去了重复添加操作。所以对于那设置“每次请求都要携带的信息（最典型的就是身份认证信息）”就特别适合放在cookie中，其他大多数类型的数据就不适合了。</p>
+<h1 id="cookie-属性"><a href="#cookie-属性" class="headerlink" title="cookie 属性"></a>cookie 属性</h1><p>每个cookie都有一定的属性，如什么时候失效，要发送到哪个域名，哪个路径等等。这些属性是通过cookie选项来设置的，cookie选项包括：<code>expires、domain、path、secure、HttpOnly</code>。在设置任一个cookie时都可以设置相关的这些属性，当然也可以不设置，这时会使用这些属性的默认值。在设置这些属性时，属性之间由一个<code>分号和一个空格</code>隔开。代码示例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"key=name; expires=Thu, 25 Feb 2016 04:18:00 GMT; domain=ppsc.sankuai.com; path=/; secure; HttpOnly"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h2><p>expires选项用来设置“cookie 什么时间内有效”。expires其实是<code>cookie失效日期</code>，expires必须是 GMT 格式的时间（可以通过 <code>new Date().toGMTString()</code>或者 <code>new Date().toUTCString()</code> 来获得）。</p>
+<p>expires 是 http/1.0协议中的选项，在新的http/1.1协议中expires已经由 <code>max-age</code> 选项代替，两者的作用都是限制cookie 的有效时间。expires的值是一个<code>时间点</code>（<code>cookie失效时刻= expires</code>），而max-age 的值是一个<code>以秒为单位时间段</code>（<code>cookie失效时刻= 创建时刻+ max-age</code>）。<br>另外，max-age 的默认值是 <code>-1</code>(即有效期为 session )；若max-age有三种可能值：负数、0、正数。负数：有效期session；0：删除cookie；正数：有效期为创建时刻+ max-age</p>
+<h2 id="domain-和-path"><a href="#domain-和-path" class="headerlink" title="domain 和 path"></a>domain 和 path</h2><p><code>domain</code>是域名，<code>path</code>是路径，两者加起来就构成了 URL，domain和path一起来限制 cookie 能被哪些 URL 访问。<br>一句话概括：某cookie的 <code>domain为“baidu.com”, path为“/ ”</code>，若请求的URL(URL 可以是js/html/img/css资源请求，但不包括 XHR 请求)的域名是“baidu.com”或其子域如“api.baidu.com”、“dev.api.baidu.com”，且 URL 的路径是“/ ”或子路径“/home”、“/home/login”，则浏览器会将此 cookie 添加到该请求的 cookie 头部中。<br>发生<code>跨域xhr</code>请求时，即使请求URL的域名和路径都满足 cookie 的 domain 和 path，默认情况下cookie也不会自动被添加到请求头部中</p>
+<h2 id="secure"><a href="#secure" class="headerlink" title="secure"></a>secure</h2><p>secure选项用来设置cookie只在确保<code>安全</code>的请求中才会发送。当请求是<code>HTTPS或者其他安全协议</code>时，包含 secure 选项的 cookie 才能被发送至服务器。<br>默认情况下，cookie不会带secure选项(即为<code>空</code>)。所以默认情况下，不管是HTTPS协议还是HTTP协议的请求，cookie 都会被发送至服务端</p>
+<h2 id="httpOnly"><a href="#httpOnly" class="headerlink" title="httpOnly"></a>httpOnly</h2><p>这个选项用来设置<code>cookie是否能通过 js 去访问</code>。<br>默认情况下，cookie不会带httpOnly选项(即为空)，所以默认情况下，客户端是可以通过js代码去访问（包括读取、修改、删除等）这个cookie的。<br>当cookie带httpOnly选项时，客户端则无法通过js代码去访问（包括读取、修改、删除等）这个cookie。</p>
+<h1 id="如何设置cookie"><a href="#如何设置cookie" class="headerlink" title="如何设置cookie"></a>如何设置cookie</h1><h2 id="服务端设置-cookie"><a href="#服务端设置-cookie" class="headerlink" title="服务端设置 cookie"></a>服务端设置 cookie</h2><p>不管你是请求一个资源文件（如 html/js/css/图片），还是发送一个ajax请求，服务端都会返回<code>response</code>。而<code>response header</code>中有一项叫<code>set-cookie</code>，是服务端专门用来设置cookie的。<br><code>一个set-Cookie字段只能设置一个cookie</code>，当你要想设置多个 cookie，需要添加同样多的set-Cookie字段。<br>服务端可以设置cookie 的所有选项：expires、domain、path、secure、HttpOnly</p>
+<h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><p>客户端可以设置cookie 的下列选项：expires、domain、path、secure（有条件：只有在https协议的网页中，客户端设置secure类型的 cookie 才能成功），但无法设置HttpOnly选项。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/http/跨域cors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/http/跨域cors/" itemprop="url">cors(跨域)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>摘自<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">阮老师</a><br>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）</p>
+</blockquote>
+<h1 id="两种请求"><a href="#两种请求" class="headerlink" title="两种请求"></a>两种请求</h1><p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。<br>只要同时满足以下两大条件，就属于简单请求。</p>
+<ul>
+<li><p>请求方法是以下三种方法之一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HEAD</span><br><span class="line">GET</span><br><span class="line">POST</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTTP的头信息不超出以下几种字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Accept</span><br><span class="line">Accept-Language</span><br><span class="line">Content-Language</span><br><span class="line">Last-Event-ID</span><br><span class="line">Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h1><p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /cors HTTP/1.1</span><br><span class="line">Origin: http://api.bob.com</span><br><span class="line">Host: api.alice.com</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/5.0...</span><br></pre></td></tr></table></figure></p>
+<h2 id="不同意"><a href="#不同意" class="headerlink" title="不同意"></a>不同意</h2><p>如果Origin指定的源，不在许可范围内，服务器会返回一个<code>正常的HTTP回应(虽然是拒绝的回应)</code>。浏览器发现，这个回应的头信息没有包含Access-Control-Allow-Origin字段（详见下文），就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。</p>
+<h2 id="同意"><a href="#同意" class="headerlink" title="同意"></a>同意</h2><p>如果Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://api.bob.com</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Access-Control-Expose-Headers: FooBar</span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br></pre></td></tr></table></figure></p>
+<h3 id="Access-Control-Allow-Origin"><a href="#Access-Control-Allow-Origin" class="headerlink" title="Access-Control-Allow-Origin"></a>Access-Control-Allow-Origin</h3><p>该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。</p>
+<h3 id="Access-Control-Allow-Credentials"><a href="#Access-Control-Allow-Credentials" class="headerlink" title="Access-Control-Allow-Credentials"></a>Access-Control-Allow-Credentials</h3><p>该字段可选。它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。</p>
+<h3 id="Access-Control-Expose-Headers"><a href="#Access-Control-Expose-Headers" class="headerlink" title="Access-Control-Expose-Headers"></a>Access-Control-Expose-Headers</h3><p>该字段可选。CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。<strong>如果想拿到其他字段，就必须在<code>Access-Control-Expose-Headers</code>里面指定</strong>。上面的例子指定，getResponseHeader(‘FooBar’)可以返回FooBar字段的值。</p>
+<h3 id="withCredentials-属性"><a href="#withCredentials-属性" class="headerlink" title="withCredentials 属性"></a>withCredentials 属性</h3><p>上面说到，CORS请求默认不发送Cookie和HTTP认证信息。如果要把Cookie发到服务器，一方面要服务器同意，指定Access-Control-Allow-Credentials字段。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Credentials: true</span><br></pre></td></tr></table></figure></p>
+<p>另一方面，开发者必须在AJAX请求中打开withCredentials属性。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></p>
+<p>否则，即使服务器同意发送Cookie，浏览器也不会发送。或者，服务器要求设置Cookie，浏览器也不会处理。<br>但是，如果省略withCredentials设置，有的浏览器还是会一起发送Cookie。这时，可以显式关闭withCredentials<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.withCredentials = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，如果要发送Cookie，<strong>Access-Control-Allow-Origin就不能设为星号，必须指定明确的、与请求网页一致的域名</strong>。同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且（跨源）原网页代码中的document.cookie也无法读取服务器域名下的Cookie。</p>
+<h1 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h1><h2 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h2><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是<code>PUT或DELETE</code>，或者<code>Content-Type字段的类型是application/json</code>。<br><strong>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为”预检”请求（preflight）</strong>。<br>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。<br>下面是一段浏览器的JavaScript脚本。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">'http://api.alice.com/cors'</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">'PUT'</span>, url, <span class="literal">true</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">'X-Custom-Header'</span>, <span class="string">'value'</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure></p>
+<p>浏览器发现，这是一个非简单请求，就自动发出一个”预检”请求，要求服务器确认可以这样请求。下面是这个”预检”请求的<code>HTTP头信息</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /cors HTTP/<span class="number">1.1</span></span><br><span class="line">Origin: http:<span class="comment">//api.bob.com</span></span><br><span class="line">Access-Control-Request-Method: PUT</span><br><span class="line">Access-Control-Request-Headers: X-Custom-Header</span><br><span class="line">Host: api.alice.com</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span>...</span><br></pre></td></tr></table></figure></p>
+<h3 id="关键字段是Origin"><a href="#关键字段是Origin" class="headerlink" title="关键字段是Origin"></a>关键字段是Origin</h3><p>“预检”请求用的请求方法是<code>OPTIONS</code>，表示这个请求是用来询问的。头信息里面，<code>关键字段是Origin</code>，表示请求来自哪个源。</p>
+<h3 id="除了Origin字段，”预检”请求的头信息包括两个特殊字段。"><a href="#除了Origin字段，”预检”请求的头信息包括两个特殊字段。" class="headerlink" title="除了Origin字段，”预检”请求的头信息包括两个特殊字段。"></a>除了Origin字段，”预检”请求的头信息包括两个特殊字段。</h3><p>（1）<code>Access-Control-Request-Method</code><br>该字段是必须的，用来列出浏览器的CORS请求会用到哪些HTTP方法，上例是PUT。<br>（2）<code>Access-Control-Request-Headers</code><br>该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是X-Custom-Header。</p>
+<h2 id="预检请求的回应"><a href="#预检请求的回应" class="headerlink" title="预检请求的回应"></a>预检请求的回应</h2><p>服务器收到”预检”请求以后，检查了<code>Origin、Access-Control-Request-Method和Access-Control-Request-Headers</code>字段以后，确认允许跨源请求，就可以做出回应。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Mon, 01 Dec 2008 01:15:39 GMT</span><br><span class="line">Server: Apache/2.0.61 (Unix)</span><br><span class="line">Access-Control-Allow-Origin: http://api.bob.com</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, PUT</span><br><span class="line">Access-Control-Allow-Headers: X-Custom-Header</span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Length: 0</span><br><span class="line">Keep-Alive: timeout=2, max=100</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Content-Type: text/plain</span><br></pre></td></tr></table></figure></p>
+<h3 id="Access-Control-Allow-Methods"><a href="#Access-Control-Allow-Methods" class="headerlink" title="Access-Control-Allow-Methods"></a>Access-Control-Allow-Methods</h3><p>该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次”预检”请求。</p>
+<h3 id="Access-Control-Allow-Headers"><a href="#Access-Control-Allow-Headers" class="headerlink" title="Access-Control-Allow-Headers"></a>Access-Control-Allow-Headers</h3><p>如果浏览器请求包括<code>Access-Control-Request-Headers</code>字段，则Access-Control-Allow-Headers字段是必需的。它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在”预检”中请求的字段。</p>
+<h3 id="Access-Control-Allow-Credentials-1"><a href="#Access-Control-Allow-Credentials-1" class="headerlink" title="Access-Control-Allow-Credentials"></a>Access-Control-Allow-Credentials</h3><p>该字段与简单请求时的含义相同。</p>
+<h3 id="Access-Control-Max-Age"><a href="#Access-Control-Max-Age" class="headerlink" title="Access-Control-Max-Age"></a>Access-Control-Max-Age</h3><p>该字段可选，用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是20天（1728000秒），即允许缓存该条回应1728000秒（即20天），在此期间，不用发出另一条预检请求。</p>
+<h3 id="go-gin-cors设置"><a href="#go-gin-cors设置" class="headerlink" title="go-gin cors设置"></a>go-gin cors设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router = gin.Default()</span><br><span class="line"></span><br><span class="line">config := cors.DefaultConfig()</span><br><span class="line">config.AllowAllOrigins = true</span><br><span class="line">config.AllowMethods = []string&#123;&quot;GET&quot;, &quot;POST&quot;, &quot;OPTIONS&quot;&#125;</span><br><span class="line">config.AllowHeaders = []string&#123;&quot;DNT&quot;, &quot;X-Mx-ReqToken&quot;, &quot;Keep-Alive&quot;, &quot;User-Agent&quot;, &quot;X-Requested-With&quot;, &quot;If-Modified-Since&quot;, &quot;Cache-Control&quot;, &quot;Content-Type&quot;, &quot;Authorization&quot;, &quot;X-Token&quot;&#125;</span><br><span class="line">router.Use(cors.New(config))</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/digest/论成熟的男银/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1260,392 +1715,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/小坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/小坑/" itemprop="url">小坑</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id=""><a href="#" class="headerlink" title=":="></a><code>:=</code></h1><p>如下函数：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetAll</span><span class="params">(sql <span class="keyword">string</span>)</span> <span class="params">(records []<span class="keyword">interface</span>&#123;&#125;, err error)</span></span> &#123;</span><br><span class="line">	query, err := DB.Query(sql)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	column, _ := query.Columns()</span><br><span class="line">	scans := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="built_in">len</span>(column))</span><br><span class="line">	values := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="built_in">len</span>(column))</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> values &#123;</span><br><span class="line">		scans[i] = &amp;values[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> query.Next() &#123;</span><br><span class="line">	    <span class="comment">// 如果此处写成err := query.Scan(scans...)。</span></span><br><span class="line">	    <span class="comment">// 那么在此作用域内，err 和 外层作用域不同，return会报错</span></span><br><span class="line">		err = query.Scan(scans...)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		record := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line">		<span class="keyword">for</span> i, col := <span class="keyword">range</span> values &#123;</span><br><span class="line">			<span class="keyword">if</span> col != <span class="literal">nil</span> &#123;</span><br><span class="line">				record[column[i]] = <span class="keyword">string</span>(col.([]<span class="keyword">byte</span>))</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		records = <span class="built_in">append</span>(records, record)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="mysql-NULL-值"><a href="#mysql-NULL-值" class="headerlink" title="mysql NULL 值"></a>mysql NULL 值</h1><p>如果mysql的某个值为null，go查询数据库时则会报错：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql: Scan error on column index <span class="number">2</span>: unsupported Scan, storing driver.Value <span class="keyword">type</span> &lt;<span class="literal">nil</span>&gt; into <span class="keyword">type</span> *<span class="keyword">string</span></span><br></pre></td></tr></table></figure></p>
-<p>解决办法：</p>
-<ul>
-<li><p>对于可能为NULL的字段读取，go的sql模块提供了一个sql.NullString这样的东东来解析可能为NULL的字符串，对于浮点型或者整形也有类似的数据类型。很蛋疼的样子，不过可以解决问题，下面是遵照这种方案进行的修改。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rows.Next() &#123;</span><br><span class="line">  <span class="keyword">var</span> id <span class="keyword">int</span></span><br><span class="line">  <span class="keyword">var</span> name, info sql.NullString</span><br><span class="line">  <span class="keyword">if</span> err = rows.Scan(&amp;id, &amp;name, &amp;info); err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"获取结果出错："</span> + err.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Println(<span class="string">"id:"</span>, id, <span class="string">"name:"</span>, name.String, <span class="string">"info:"</span>, info.String)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>sql语句本身也能解决这种问题<br>此时也不需要修改go代码，继续保持go的强类型风格</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>, <span class="keyword">IFNULL</span>(<span class="string">`name`</span>, <span class="string">''</span>) <span class="keyword">AS</span> <span class="string">`name`</span>, <span class="keyword">IFNULL</span>(info, <span class="string">''</span>) <span class="keyword">AS</span> info <span class="keyword">FROM</span> <span class="keyword">user</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/并发编程示例/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/并发编程示例/" itemprop="url">并发编程（2）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="并发编程示例"><a href="#并发编程示例" class="headerlink" title="并发编程示例"></a>并发编程示例</h1><h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">demo</span><span class="params">(input <span class="keyword">chan</span> <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    t1 := time.NewTimer(time.Second * <span class="number">5</span>)</span><br><span class="line">    t2 := time.NewTimer(time.Second * <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> msg &lt;- input:</span><br><span class="line">            <span class="built_in">println</span>(msg)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> &lt;-t1.C:</span><br><span class="line">            <span class="built_in">println</span>(<span class="string">"5s timer"</span>)</span><br><span class="line">            t1.Reset(time.Second * <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> &lt;-t2.C:</span><br><span class="line">            <span class="built_in">println</span>(<span class="string">"10s timer"</span>)</span><br><span class="line">            t2.Reset(time.Second * <span class="number">10</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="断续器"><a href="#断续器" class="headerlink" title="断续器"></a>断续器</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ticker := time.NewTicker(time.Second)</span><br><span class="line">	<span class="keyword">for</span> t := <span class="keyword">range</span> ticker.C &#123;</span><br><span class="line">		fmt.Println(<span class="string">"ticker"</span>, t)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="超时"><a href="#超时" class="headerlink" title="超时"></a>超时</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">1</span>)</span><br><span class="line">    ch2 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> e1 := &lt;-ch1:</span><br><span class="line">        <span class="comment">//如果ch1通道成功读取数据，则执行该case处理语句</span></span><br><span class="line">            fmt.Printf(<span class="string">"1th case is selected. e1=%v"</span>,e1)</span><br><span class="line">        <span class="keyword">case</span> e2 := &lt;-ch2:</span><br><span class="line">        <span class="comment">//如果ch2通道成功读取数据，则执行该case处理语句</span></span><br><span class="line">            fmt.Printf(<span class="string">"2th case is selected. e2=%v"</span>,e2)</span><br><span class="line">        <span class="keyword">case</span> &lt;- time.After(<span class="number">2</span> * time.Second):</span><br><span class="line">            fmt.Println(<span class="string">"Timed out"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="自定义定时器"><a href="#自定义定时器" class="headerlink" title="自定义定时器"></a>自定义定时器</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> t *time.Timer</span><br><span class="line"></span><br><span class="line">    f := <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Expiration time : %v.\n"</span>, time.Now())</span><br><span class="line">        fmt.Printf(<span class="string">"C`s len: %d\n"</span>, <span class="built_in">len</span>(t.C))</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    t = time.AfterFunc(<span class="number">1</span>*time.Second, f)</span><br><span class="line">    <span class="comment">//让当前Goroutine 睡眠2s，确保大于内容的完整</span></span><br><span class="line">    <span class="comment">//这样做原因是，time.AfterFunc的调用不会被阻塞。它会以一部的方式在到期事件来临执行我们自定义函数f。</span></span><br><span class="line">    time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="使用时间控制停止ticker"><a href="#使用时间控制停止ticker" class="headerlink" title="使用时间控制停止ticker"></a>使用时间控制停止ticker</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//初始化断续器,间隔2s</span></span><br><span class="line">    <span class="keyword">var</span> ticker *time.Ticker = time.NewTicker(<span class="number">1</span> * time.Second)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> t := <span class="keyword">range</span> ticker.C &#123;</span><br><span class="line">            fmt.Println(<span class="string">"Tick at"</span>, t)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    time.Sleep(time.Second * <span class="number">5</span>)   <span class="comment">//阻塞，则执行次数为sleep的休眠时间/ticker的时间</span></span><br><span class="line">    ticker.Stop()       <span class="comment">//停止ticker</span></span><br><span class="line">    fmt.Println(<span class="string">"Ticker stopped"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="并发读取文件夹所有文件的长度（使用通道）"><a href="#并发读取文件夹所有文件的长度（使用通道）" class="headerlink" title="并发读取文件夹所有文件的长度（使用通道）"></a>并发读取文件夹所有文件的长度（使用通道）</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test1</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 遍历文件夹，获取文件名</span></span><br><span class="line">	dir := <span class="string">"./db"</span></span><br><span class="line">	paths, err := ioutil.ReadDir(dir)</span><br><span class="line">	check(err)</span><br><span class="line">	<span class="keyword">var</span> files []<span class="keyword">string</span></span><br><span class="line">	<span class="keyword">for</span> _, path := <span class="keyword">range</span> paths &#123;</span><br><span class="line">		<span class="keyword">if</span> !path.IsDir() &#123;</span><br><span class="line">			files = <span class="built_in">append</span>(files, path.Name())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">type</span> FileInfo <span class="keyword">struct</span> &#123;</span><br><span class="line">		FileName <span class="keyword">string</span></span><br><span class="line">		Len      <span class="keyword">int</span></span><br><span class="line">		Err      error</span><br><span class="line">	&#125;</span><br><span class="line">	way := <span class="built_in">make</span>(<span class="keyword">chan</span> FileInfo, <span class="number">100</span>)</span><br><span class="line">	<span class="keyword">for</span> _, file := <span class="keyword">range</span> files &#123;</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(fileName <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">			content, err := ioutil.ReadFile(fmt.Sprintf(<span class="string">"%s/%s"</span>, dir, fileName))</span><br><span class="line">            <span class="comment">// 无论对错，都交给通道收取方</span></span><br><span class="line">			way &lt;- FileInfo&#123;</span><br><span class="line">				FileName: fileName,</span><br><span class="line">				Len:      <span class="built_in">len</span>(content),</span><br><span class="line">				Err:      err,</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;(file)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 我们知道需要从通道中取多少条数据</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(files); i++ &#123;</span><br><span class="line">		fileInfo := &lt;-way</span><br><span class="line">		<span class="keyword">if</span> fileInfo.Err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Printf(<span class="string">"[err] file:%s, err: %s \n"</span>, fileInfo.FileName, fileInfo.Err.Error())</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Printf(<span class="string">"file:%s, len: %d \n"</span>, fileInfo.FileName, fileInfo.Len)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="并发读取-文件夹所有文件的长度（使用sync-WaitGroup）"><a href="#并发读取-文件夹所有文件的长度（使用sync-WaitGroup）" class="headerlink" title="并发读取 文件夹所有文件的长度（使用sync.WaitGroup）"></a>并发读取 文件夹所有文件的长度（使用sync.WaitGroup）</h2><p>这个使用的其实就是计数器的道理<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test1</span><span class="params">()</span></span> &#123;</span><br><span class="line">	dir := <span class="string">"./db"</span></span><br><span class="line">	paths, err := ioutil.ReadDir(dir)</span><br><span class="line">	check(err)</span><br><span class="line">	<span class="keyword">var</span> files []<span class="keyword">string</span></span><br><span class="line">	<span class="keyword">for</span> _, path := <span class="keyword">range</span> paths &#123;</span><br><span class="line">		<span class="keyword">if</span> !path.IsDir() &#123;</span><br><span class="line">			files = <span class="built_in">append</span>(files, path.Name())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// sizes用来计算总长度和阻塞直至所有goroutine走完</span></span><br><span class="line">	sizes := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int64</span>)</span><br><span class="line">    <span class="comment">// 计数器</span></span><br><span class="line">	<span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">	<span class="keyword">for</span> _, file := <span class="keyword">range</span> files &#123;</span><br><span class="line">		wg.Add(<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(fileName <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">			<span class="keyword">defer</span> wg.Done()</span><br><span class="line">			fileInfo, _ := os.Stat(fmt.Sprintf(<span class="string">"%s/%s"</span>, dir, fileName))</span><br><span class="line">			sizes &lt;- fileInfo.Size()</span><br><span class="line">		&#125;(file)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		wg.Wait()</span><br><span class="line">		<span class="built_in">close</span>(sizes)</span><br><span class="line">	&#125;()</span><br><span class="line">	<span class="keyword">var</span> total <span class="keyword">int64</span></span><br><span class="line">	<span class="keyword">for</span> size := <span class="keyword">range</span> sizes &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"size:%d\n"</span>, size)</span><br><span class="line">		total += size</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"total size: %d\n"</span>, total)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="令牌-另一种信号计数器"><a href="#令牌-另一种信号计数器" class="headerlink" title="令牌-另一种信号计数器"></a>令牌-另一种信号计数器</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">check</span><span class="params">(err error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 链接列表</span></span><br><span class="line">	workList := <span class="built_in">make</span>(<span class="keyword">chan</span> []<span class="keyword">string</span>)</span><br><span class="line">	<span class="comment">//  存储 已经处理的 链接，使用 map是为了去重</span></span><br><span class="line">	seen := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">bool</span>)</span><br><span class="line">	<span class="comment">// n是为了保证 爬虫一直  爬</span></span><br><span class="line">	n := <span class="number">1</span></span><br><span class="line">	<span class="comment">// 初始化 </span></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; workList &lt;- []<span class="keyword">string</span>&#123;<span class="string">"http://www.jianshu.com"</span>&#125; &#125;()</span><br><span class="line">	<span class="keyword">for</span> i := n; i &gt; <span class="number">0</span>; i++ &#123;</span><br><span class="line">		list := &lt;-workList</span><br><span class="line">		<span class="keyword">for</span> _, link := <span class="keyword">range</span> list &#123;</span><br><span class="line">			<span class="keyword">if</span> !seen[link] &#123;</span><br><span class="line">				seen[link] = <span class="literal">true</span></span><br><span class="line">				n++</span><br><span class="line">				<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(link <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">					workList &lt;- crawl(link)</span><br><span class="line">				&#125;(link)</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> tokens = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取网页的链接  通过令牌</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">crawl</span><span class="params">(url <span class="keyword">string</span>)</span> <span class="params">(list []<span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	fmt.Println(url)</span><br><span class="line">	tokens &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">	list, err := Extract(url)</span><br><span class="line">	&lt;-tokens</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Print(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取网页的链接</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Extract</span><span class="params">(url <span class="keyword">string</span>)</span> <span class="params">(list []<span class="keyword">string</span>, err error)</span></span> &#123;</span><br><span class="line">	resp, err := http.Get(url)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> resp.StatusCode != http.StatusOK &#123;</span><br><span class="line">		resp.Body.Close()</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, fmt.Errorf(<span class="string">"getting %s, err %s"</span>, url, err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">	doc, err := html.Parse(resp.Body)</span><br><span class="line">	resp.Body.Close()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, fmt.Errorf(<span class="string">"parsing %s as HTML, err %s"</span>, url, err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">	visitNode := <span class="function"><span class="keyword">func</span><span class="params">(n *html.Node)</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> n.Type == html.ElementNode &amp;&amp; n.Data == <span class="string">"a"</span> &#123;</span><br><span class="line">			<span class="keyword">for</span> _, a := <span class="keyword">range</span> n.Attr &#123;</span><br><span class="line">				<span class="keyword">if</span> a.Key != <span class="string">"href"</span> &#123;</span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				&#125;</span><br><span class="line">				link, err := resp.Request.URL.Parse(a.Val)</span><br><span class="line">				<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				&#125;</span><br><span class="line">				list = <span class="built_in">append</span>(list, link.String())</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 将函数作为参数传入 （匿名函数）</span></span><br><span class="line">	forEachNode(doc, visitNode, <span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">forEachNode</span><span class="params">(n *html.Node, pre, next <span class="keyword">func</span>(node *html.Node)</span>)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> pre != <span class="literal">nil</span> &#123;</span><br><span class="line">		pre(n)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> n := n.FirstChild; n != <span class="literal">nil</span>; n = n.NextSibling &#123;</span><br><span class="line">		forEachNode(n, pre, next)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> next != <span class="literal">nil</span> &#123;</span><br><span class="line">		next(n)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/数据类型判断与转换/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/数据类型判断与转换/" itemprop="url">数据类型判断与转换</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="int-int64-string之间转换"><a href="#int-int64-string之间转换" class="headerlink" title="int int64 string之间转换"></a>int int64 string之间转换</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#<span class="keyword">string</span>到<span class="keyword">int</span>  </span><br><span class="line"><span class="keyword">int</span>,err:=strconv.Atoi(<span class="keyword">string</span>)  </span><br><span class="line">#<span class="keyword">string</span>到<span class="keyword">int64</span>  </span><br><span class="line"><span class="keyword">int64</span>, err := strconv.ParseInt(<span class="keyword">string</span>, <span class="number">10</span>, <span class="number">64</span>)  </span><br><span class="line">#<span class="keyword">int</span>到<span class="keyword">string</span>  </span><br><span class="line"><span class="keyword">string</span>:=strconv.Itoa(<span class="keyword">int</span>)  </span><br><span class="line">#<span class="keyword">int64</span>到<span class="keyword">string</span>  </span><br><span class="line"><span class="keyword">string</span>:=strconv.FormatInt(<span class="keyword">int64</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h1><p>Go语言里面有一个语法，可以直接判断是否是该类型的变量： <code>value, ok = element.(T)</code>，这里value就是变量的值，ok是一个bool类型，element是interface变量，T是断言的类型。<br>　　如果element里面确实存储了T类型的数值，那么ok返回true，否则返回false。</p>
-<ul>
-<li><p>demo1</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">a = <span class="string">"zhangsan"</span></span><br><span class="line"><span class="comment">// interface&#123;&#125; =&gt; string (断言)</span></span><br><span class="line">a = a.(<span class="keyword">string</span>)</span><br><span class="line"><span class="comment">// 如果直接string(a), 则报错:</span></span><br><span class="line">cannot convert a (<span class="keyword">type</span> <span class="keyword">interface</span> &#123;&#125;) to <span class="keyword">type</span> <span class="keyword">string</span>: need <span class="keyword">type</span> assertion</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>demo2</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Element <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"><span class="keyword">type</span> List [] Element</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">    name <span class="keyword">string</span></span><br><span class="line">    age <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义了String方法，实现了fmt.Stringer</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Person)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"(name: "</span> + p.name + <span class="string">" - age: "</span>+strconv.Itoa(p.age)+ <span class="string">" years)"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    list := <span class="built_in">make</span>(List, <span class="number">3</span>)</span><br><span class="line">    list[<span class="number">0</span>] = <span class="number">1</span> <span class="comment">// an int</span></span><br><span class="line">    list[<span class="number">1</span>] = <span class="string">"Hello"</span> <span class="comment">// a string</span></span><br><span class="line">    list[<span class="number">2</span>] = Person&#123;<span class="string">"Dennis"</span>, <span class="number">70</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> index, element := <span class="keyword">range</span> list &#123;</span><br><span class="line">        <span class="keyword">if</span> value, ok := element.(<span class="keyword">int</span>); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"list[%d] is an int and its value is %d\n"</span>, index, value)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> value, ok := element.(<span class="keyword">string</span>); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"list[%d] is a string and its value is %s\n"</span>, index, value)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> value, ok := element.(Person); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"list[%d] is a Person and its value is %s\n"</span>, index, value)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"list[%d] is of a different type"</span>, index)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>switch测试</strong><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Element <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"><span class="keyword">type</span> List [] Element</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">    name <span class="keyword">string</span></span><br><span class="line">    age <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Person)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"(name: "</span> + p.name + <span class="string">" - age: "</span>+strconv.Itoa(p.age)+ <span class="string">" years)"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    list := <span class="built_in">make</span>(List, <span class="number">3</span>)</span><br><span class="line">    list[<span class="number">0</span>] = <span class="number">1</span> <span class="comment">//an int</span></span><br><span class="line">    list[<span class="number">1</span>] = <span class="string">"Hello"</span> <span class="comment">//a string</span></span><br><span class="line">    list[<span class="number">2</span>] = Person&#123;<span class="string">"Dennis"</span>, <span class="number">70</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> index, element := <span class="keyword">range</span> list&#123;</span><br><span class="line">        <span class="keyword">switch</span> value := element.(<span class="keyword">type</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="keyword">int</span>:</span><br><span class="line">                fmt.Printf(<span class="string">"list[%d] is an int and its value is %d\n"</span>, index, value)</span><br><span class="line">            <span class="keyword">case</span> <span class="keyword">string</span>:</span><br><span class="line">                fmt.Printf(<span class="string">"list[%d] is a string and its value is %s\n"</span>, index, value)</span><br><span class="line">            <span class="keyword">case</span> Person:</span><br><span class="line">                fmt.Printf(<span class="string">"list[%d] is a Person and its value is %s\n"</span>, index, value)</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                fmt.Println(<span class="string">"list[%d] is of a different type"</span>, index)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>这里有一点需要强调的是：element.(type)语法不能在switch外的任何逻辑里面使用，如果你要在switch外面判断一个类型就使用comma-ok</strong>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1696,7 +1765,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1709,7 +1778,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
