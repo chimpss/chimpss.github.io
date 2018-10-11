@@ -399,135 +399,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/http/cookie/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/http/cookie/" itemprop="url">cookie</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="cookie-是怎么工作的"><a href="#cookie-是怎么工作的" class="headerlink" title="cookie 是怎么工作的"></a>cookie 是怎么工作的</h1><p>当网页要发http请求时，浏览器会先检查是否有相应的<code>cookie</code>，有则自动添加在<code>request header</code>中的<code>cookie</code>字段中。这些是浏览器自动帮我们做的，而且每一次http请求浏览器都会自动帮我们做。这个特点很重要，因为这关系到“<strong>什么样的数据适合存储在cookie中</strong>”。</p>
-<p>存储在cookie中的数据，<code>每次</code>都会被浏览器自动放在<code>http请求</code>中，如果这些数据并不是每个请求都需要发给服务端的数据，浏览器这设置自动处理无疑增加了网络开销；但如果这些数据是每个请求都需要发给服务端的数据（比如身份认证信息），浏览器这设置自动处理就大大免去了重复添加操作。所以对于那设置“每次请求都要携带的信息（最典型的就是身份认证信息）”就特别适合放在cookie中，其他大多数类型的数据就不适合了。</p>
-<h1 id="cookie-属性"><a href="#cookie-属性" class="headerlink" title="cookie 属性"></a>cookie 属性</h1><p>每个cookie都有一定的属性，如什么时候失效，要发送到哪个域名，哪个路径等等。这些属性是通过cookie选项来设置的，cookie选项包括：<code>expires、domain、path、secure、HttpOnly</code>。在设置任一个cookie时都可以设置相关的这些属性，当然也可以不设置，这时会使用这些属性的默认值。在设置这些属性时，属性之间由一个<code>分号和一个空格</code>隔开。代码示例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"key=name; expires=Thu, 25 Feb 2016 04:18:00 GMT; domain=ppsc.sankuai.com; path=/; secure; HttpOnly"</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h2><p>expires选项用来设置“cookie 什么时间内有效”。expires其实是<code>cookie失效日期</code>，expires必须是 GMT 格式的时间（可以通过 <code>new Date().toGMTString()</code>或者 <code>new Date().toUTCString()</code> 来获得）。</p>
-<p>expires 是 http/1.0协议中的选项，在新的http/1.1协议中expires已经由 <code>max-age</code> 选项代替，两者的作用都是限制cookie 的有效时间。expires的值是一个<code>时间点</code>（<code>cookie失效时刻= expires</code>），而max-age 的值是一个<code>以秒为单位时间段</code>（<code>cookie失效时刻= 创建时刻+ max-age</code>）。<br>另外，max-age 的默认值是 <code>-1</code>(即有效期为 session )；若max-age有三种可能值：负数、0、正数。负数：有效期session；0：删除cookie；正数：有效期为创建时刻+ max-age</p>
-<h2 id="domain-和-path"><a href="#domain-和-path" class="headerlink" title="domain 和 path"></a>domain 和 path</h2><p><code>domain</code>是域名，<code>path</code>是路径，两者加起来就构成了 URL，domain和path一起来限制 cookie 能被哪些 URL 访问。<br>一句话概括：某cookie的 <code>domain为“baidu.com”, path为“/ ”</code>，若请求的URL(URL 可以是js/html/img/css资源请求，但不包括 XHR 请求)的域名是“baidu.com”或其子域如“api.baidu.com”、“dev.api.baidu.com”，且 URL 的路径是“/ ”或子路径“/home”、“/home/login”，则浏览器会将此 cookie 添加到该请求的 cookie 头部中。<br>发生<code>跨域xhr</code>请求时，即使请求URL的域名和路径都满足 cookie 的 domain 和 path，默认情况下cookie也不会自动被添加到请求头部中</p>
-<h2 id="secure"><a href="#secure" class="headerlink" title="secure"></a>secure</h2><p>secure选项用来设置cookie只在确保<code>安全</code>的请求中才会发送。当请求是<code>HTTPS或者其他安全协议</code>时，包含 secure 选项的 cookie 才能被发送至服务器。<br>默认情况下，cookie不会带secure选项(即为<code>空</code>)。所以默认情况下，不管是HTTPS协议还是HTTP协议的请求，cookie 都会被发送至服务端</p>
-<h2 id="httpOnly"><a href="#httpOnly" class="headerlink" title="httpOnly"></a>httpOnly</h2><p>这个选项用来设置<code>cookie是否能通过 js 去访问</code>。<br>默认情况下，cookie不会带httpOnly选项(即为空)，所以默认情况下，客户端是可以通过js代码去访问（包括读取、修改、删除等）这个cookie的。<br>当cookie带httpOnly选项时，客户端则无法通过js代码去访问（包括读取、修改、删除等）这个cookie。</p>
-<h1 id="如何设置cookie"><a href="#如何设置cookie" class="headerlink" title="如何设置cookie"></a>如何设置cookie</h1><h2 id="服务端设置-cookie"><a href="#服务端设置-cookie" class="headerlink" title="服务端设置 cookie"></a>服务端设置 cookie</h2><p>不管你是请求一个资源文件（如 html/js/css/图片），还是发送一个ajax请求，服务端都会返回<code>response</code>。而<code>response header</code>中有一项叫<code>set-cookie</code>，是服务端专门用来设置cookie的。<br><code>一个set-Cookie字段只能设置一个cookie</code>，当你要想设置多个 cookie，需要添加同样多的set-Cookie字段。<br>服务端可以设置cookie 的所有选项：expires、domain、path、secure、HttpOnly</p>
-<h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><p>客户端可以设置cookie 的下列选项：expires、domain、path、secure（有条件：只有在https协议的网页中，客户端设置secure类型的 cookie 才能成功），但无法设置HttpOnly选项。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/http/跨域cors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -631,6 +502,135 @@
 <h3 id="Access-Control-Allow-Credentials-1"><a href="#Access-Control-Allow-Credentials-1" class="headerlink" title="Access-Control-Allow-Credentials"></a>Access-Control-Allow-Credentials</h3><p>该字段与简单请求时的含义相同。</p>
 <h3 id="Access-Control-Max-Age"><a href="#Access-Control-Max-Age" class="headerlink" title="Access-Control-Max-Age"></a>Access-Control-Max-Age</h3><p>该字段可选，用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是20天（1728000秒），即允许缓存该条回应1728000秒（即20天），在此期间，不用发出另一条预检请求。</p>
 <h3 id="go-gin-cors设置"><a href="#go-gin-cors设置" class="headerlink" title="go-gin cors设置"></a>go-gin cors设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router = gin.Default()</span><br><span class="line"></span><br><span class="line">config := cors.DefaultConfig()</span><br><span class="line">config.AllowAllOrigins = true</span><br><span class="line">config.AllowMethods = []string&#123;&quot;GET&quot;, &quot;POST&quot;, &quot;OPTIONS&quot;&#125;</span><br><span class="line">config.AllowHeaders = []string&#123;&quot;DNT&quot;, &quot;X-Mx-ReqToken&quot;, &quot;Keep-Alive&quot;, &quot;User-Agent&quot;, &quot;X-Requested-With&quot;, &quot;If-Modified-Since&quot;, &quot;Cache-Control&quot;, &quot;Content-Type&quot;, &quot;Authorization&quot;, &quot;X-Token&quot;&#125;</span><br><span class="line">router.Use(cors.New(config))</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/http/cookie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/http/cookie/" itemprop="url">cookie</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cookie-是怎么工作的"><a href="#cookie-是怎么工作的" class="headerlink" title="cookie 是怎么工作的"></a>cookie 是怎么工作的</h1><p>当网页要发http请求时，浏览器会先检查是否有相应的<code>cookie</code>，有则自动添加在<code>request header</code>中的<code>cookie</code>字段中。这些是浏览器自动帮我们做的，而且每一次http请求浏览器都会自动帮我们做。这个特点很重要，因为这关系到“<strong>什么样的数据适合存储在cookie中</strong>”。</p>
+<p>存储在cookie中的数据，<code>每次</code>都会被浏览器自动放在<code>http请求</code>中，如果这些数据并不是每个请求都需要发给服务端的数据，浏览器这设置自动处理无疑增加了网络开销；但如果这些数据是每个请求都需要发给服务端的数据（比如身份认证信息），浏览器这设置自动处理就大大免去了重复添加操作。所以对于那设置“每次请求都要携带的信息（最典型的就是身份认证信息）”就特别适合放在cookie中，其他大多数类型的数据就不适合了。</p>
+<h1 id="cookie-属性"><a href="#cookie-属性" class="headerlink" title="cookie 属性"></a>cookie 属性</h1><p>每个cookie都有一定的属性，如什么时候失效，要发送到哪个域名，哪个路径等等。这些属性是通过cookie选项来设置的，cookie选项包括：<code>expires、domain、path、secure、HttpOnly</code>。在设置任一个cookie时都可以设置相关的这些属性，当然也可以不设置，这时会使用这些属性的默认值。在设置这些属性时，属性之间由一个<code>分号和一个空格</code>隔开。代码示例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"key=name; expires=Thu, 25 Feb 2016 04:18:00 GMT; domain=ppsc.sankuai.com; path=/; secure; HttpOnly"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h2><p>expires选项用来设置“cookie 什么时间内有效”。expires其实是<code>cookie失效日期</code>，expires必须是 GMT 格式的时间（可以通过 <code>new Date().toGMTString()</code>或者 <code>new Date().toUTCString()</code> 来获得）。</p>
+<p>expires 是 http/1.0协议中的选项，在新的http/1.1协议中expires已经由 <code>max-age</code> 选项代替，两者的作用都是限制cookie 的有效时间。expires的值是一个<code>时间点</code>（<code>cookie失效时刻= expires</code>），而max-age 的值是一个<code>以秒为单位时间段</code>（<code>cookie失效时刻= 创建时刻+ max-age</code>）。<br>另外，max-age 的默认值是 <code>-1</code>(即有效期为 session )；若max-age有三种可能值：负数、0、正数。负数：有效期session；0：删除cookie；正数：有效期为创建时刻+ max-age</p>
+<h2 id="domain-和-path"><a href="#domain-和-path" class="headerlink" title="domain 和 path"></a>domain 和 path</h2><p><code>domain</code>是域名，<code>path</code>是路径，两者加起来就构成了 URL，domain和path一起来限制 cookie 能被哪些 URL 访问。<br>一句话概括：某cookie的 <code>domain为“baidu.com”, path为“/ ”</code>，若请求的URL(URL 可以是js/html/img/css资源请求，但不包括 XHR 请求)的域名是“baidu.com”或其子域如“api.baidu.com”、“dev.api.baidu.com”，且 URL 的路径是“/ ”或子路径“/home”、“/home/login”，则浏览器会将此 cookie 添加到该请求的 cookie 头部中。<br>发生<code>跨域xhr</code>请求时，即使请求URL的域名和路径都满足 cookie 的 domain 和 path，默认情况下cookie也不会自动被添加到请求头部中</p>
+<h2 id="secure"><a href="#secure" class="headerlink" title="secure"></a>secure</h2><p>secure选项用来设置cookie只在确保<code>安全</code>的请求中才会发送。当请求是<code>HTTPS或者其他安全协议</code>时，包含 secure 选项的 cookie 才能被发送至服务器。<br>默认情况下，cookie不会带secure选项(即为<code>空</code>)。所以默认情况下，不管是HTTPS协议还是HTTP协议的请求，cookie 都会被发送至服务端</p>
+<h2 id="httpOnly"><a href="#httpOnly" class="headerlink" title="httpOnly"></a>httpOnly</h2><p>这个选项用来设置<code>cookie是否能通过 js 去访问</code>。<br>默认情况下，cookie不会带httpOnly选项(即为空)，所以默认情况下，客户端是可以通过js代码去访问（包括读取、修改、删除等）这个cookie的。<br>当cookie带httpOnly选项时，客户端则无法通过js代码去访问（包括读取、修改、删除等）这个cookie。</p>
+<h1 id="如何设置cookie"><a href="#如何设置cookie" class="headerlink" title="如何设置cookie"></a>如何设置cookie</h1><h2 id="服务端设置-cookie"><a href="#服务端设置-cookie" class="headerlink" title="服务端设置 cookie"></a>服务端设置 cookie</h2><p>不管你是请求一个资源文件（如 html/js/css/图片），还是发送一个ajax请求，服务端都会返回<code>response</code>。而<code>response header</code>中有一项叫<code>set-cookie</code>，是服务端专门用来设置cookie的。<br><code>一个set-Cookie字段只能设置一个cookie</code>，当你要想设置多个 cookie，需要添加同样多的set-Cookie字段。<br>服务端可以设置cookie 的所有选项：expires、domain、path、secure、HttpOnly</p>
+<h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><p>客户端可以设置cookie 的下列选项：expires、domain、path、secure（有条件：只有在https协议的网页中，客户端设置secure类型的 cookie 才能成功），但无法设置HttpOnly选项。</p>
 
           
         
@@ -1107,6 +1107,125 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/读取配置文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/读取配置文件/" itemprop="url">读取配置文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用json格式"><a href="#使用json格式" class="headerlink" title="使用json格式"></a>使用json格式</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mysql <span class="keyword">struct</span> &#123;</span><br><span class="line">	Host <span class="keyword">string</span></span><br><span class="line">	Port <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Data mysql</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 判断是为了实现单例的效果</span></span><br><span class="line">	<span class="keyword">if</span> Data.Port == <span class="number">0</span> &#123;</span><br><span class="line">	    <span class="comment">// 当前目录应该为main.go的目录</span></span><br><span class="line">		str, err := ioutil.ReadFile(<span class="string">"./config/database.json"</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 读取json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err = json.Unmarshal(str, &amp;Data); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 解析json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		log.Println(<span class="string">"读取配置文件成功"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	log.Println(<span class="string">"执行init函数 配置文件"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/发邮件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1183,125 +1302,6 @@
 <h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1><p>主要是使用net/smtp包的<code>SendMail</code>方法<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net/smtp"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	HOST     = <span class="string">"smtp.example.com"</span></span><br><span class="line">	ADDR     = <span class="string">"smtp.example.com:25"</span></span><br><span class="line">	USER     = <span class="string">"chimps@example.com"</span></span><br><span class="line">	PASSWORD = <span class="string">"xxx"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	to := <span class="string">"to1@163.com;to1@163.com"</span></span><br><span class="line">	subject := <span class="string">"TEST EMAIL"</span></span><br><span class="line">	email_type := <span class="string">"html"</span></span><br><span class="line">	message := <span class="string">"&lt;h1&gt;hello go&lt;/h1&gt;"</span></span><br><span class="line">	<span class="keyword">if</span> err := SendEmail(to, subject, email_type, message); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"发送失败, reason:"</span> + err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SendEmail</span><span class="params">(to <span class="keyword">string</span>, subject <span class="keyword">string</span>, email_type <span class="keyword">string</span>, message <span class="keyword">string</span>)</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> content_type <span class="keyword">string</span></span><br><span class="line">	<span class="keyword">switch</span> email_type &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"html"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/html; chatset=UTF-8"</span></span><br><span class="line">	<span class="keyword">case</span> <span class="string">"text"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/plain; chatset=UTF-8"</span></span><br><span class="line">	&#125;</span><br><span class="line">	auth := smtp.PlainAuth(<span class="string">""</span>, USER, PASSWORD, HOST)</span><br><span class="line">	send_to := strings.Split(to, <span class="string">";"</span>)</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> send_to &#123;</span><br><span class="line">		<span class="keyword">var</span> msg []<span class="keyword">string</span></span><br><span class="line">		msg = <span class="built_in">append</span>(msg, <span class="string">"From:"</span>+USER, <span class="string">"To:"</span>+v, <span class="string">"Subject:"</span>+subject, content_type, <span class="string">"\r\n"</span>+message)</span><br><span class="line">		msg_string := strings.Join(msg, <span class="string">"\r\n"</span>)</span><br><span class="line">		fmt.Println(msg_string)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> err = smtp.SendMail(ADDR, auth, USER, []<span class="keyword">string</span>&#123;v&#125;, []<span class="keyword">byte</span>(msg_string)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send fail , reason: "</span> + err.Error())</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send ok :"</span> + v)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>一般情况下，发邮件时间比较耗时的事情，一般走异步处理</p>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/读取配置文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/读取配置文件/" itemprop="url">读取配置文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="使用json格式"><a href="#使用json格式" class="headerlink" title="使用json格式"></a>使用json格式</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mysql <span class="keyword">struct</span> &#123;</span><br><span class="line">	Host <span class="keyword">string</span></span><br><span class="line">	Port <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Data mysql</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 判断是为了实现单例的效果</span></span><br><span class="line">	<span class="keyword">if</span> Data.Port == <span class="number">0</span> &#123;</span><br><span class="line">	    <span class="comment">// 当前目录应该为main.go的目录</span></span><br><span class="line">		str, err := ioutil.ReadFile(<span class="string">"./config/database.json"</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 读取json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err = json.Unmarshal(str, &amp;Data); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 解析json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		log.Println(<span class="string">"读取配置文件成功"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	log.Println(<span class="string">"执行init函数 配置文件"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1503,7 +1503,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/并发编程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/小坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -1522,7 +1522,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/golang/并发编程/" itemprop="url">并发编程（1）</a></h1>
+                <a class="post-title-link" href="/golang/小坑/" itemprop="url">小坑</a></h1>
         
 
         <div class="post-meta">
@@ -1574,63 +1574,16 @@
       
         
           
-            <h1 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h1><h2 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> c <span class="keyword">struct</span> &#123;</span><br><span class="line">	word   <span class="keyword">string</span></span><br><span class="line">	wordId <span class="keyword">int</span></span><br><span class="line">	err    error</span><br><span class="line">	place  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	cpunum := runtime.NumCPU()</span><br><span class="line">	runtime.GOMAXPROCS(cpunum)</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> c, <span class="number">100</span>)</span><br><span class="line">	t1 := time.Now().Unix()</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">300</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> test(i, ch)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">300</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> res := &lt;-ch:</span><br><span class="line">			fmt.Println(res)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	t2 := time.Now().Unix()</span><br><span class="line">	log.Println(t2, t1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">(i <span class="keyword">int</span>, ch <span class="keyword">chan</span> c)</span></span> &#123;</span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">	res := c&#123;<span class="string">"test"</span>, i, <span class="literal">nil</span>, <span class="number">0</span>&#125;</span><br><span class="line">	ch &lt;- res</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h1><h2 id="操作符-lt"><a href="#操作符-lt" class="headerlink" title="操作符&lt;-"></a>操作符<code>&lt;-</code></h2><p>如果通过管道发送一个值，则将&lt;-作为二元操作符使用。通过管道接收一个值，则将其作为一元操作符使用:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ic &lt;- <span class="number">3</span>        <span class="comment">// 往管道发送3</span></span><br><span class="line">work := &lt;-wc    <span class="comment">// 从管道接收一个指向Work类型值的指针</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="channel特点"><a href="#channel特点" class="headerlink" title="channel特点"></a>channel特点</h2><blockquote>
+            <h1 id=""><a href="#" class="headerlink" title=":="></a><code>:=</code></h1><p>如下函数：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetAll</span><span class="params">(sql <span class="keyword">string</span>)</span> <span class="params">(records []<span class="keyword">interface</span>&#123;&#125;, err error)</span></span> &#123;</span><br><span class="line">	query, err := DB.Query(sql)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	column, _ := query.Columns()</span><br><span class="line">	scans := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="built_in">len</span>(column))</span><br><span class="line">	values := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="built_in">len</span>(column))</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> values &#123;</span><br><span class="line">		scans[i] = &amp;values[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> query.Next() &#123;</span><br><span class="line">	    <span class="comment">// 如果此处写成err := query.Scan(scans...)。</span></span><br><span class="line">	    <span class="comment">// 那么在此作用域内，err 和 外层作用域不同，return会报错</span></span><br><span class="line">		err = query.Scan(scans...)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		record := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line">		<span class="keyword">for</span> i, col := <span class="keyword">range</span> values &#123;</span><br><span class="line">			<span class="keyword">if</span> col != <span class="literal">nil</span> &#123;</span><br><span class="line">				record[column[i]] = <span class="keyword">string</span>(col.([]<span class="keyword">byte</span>))</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		records = <span class="built_in">append</span>(records, record)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="mysql-NULL-值"><a href="#mysql-NULL-值" class="headerlink" title="mysql NULL 值"></a>mysql NULL 值</h1><p>如果mysql的某个值为null，go查询数据库时则会报错：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql: Scan error on column index <span class="number">2</span>: unsupported Scan, storing driver.Value <span class="keyword">type</span> &lt;<span class="literal">nil</span>&gt; into <span class="keyword">type</span> *<span class="keyword">string</span></span><br></pre></td></tr></table></figure></p>
+<p>解决办法：</p>
 <ul>
-<li>Channel是Goroutine沟通的桥梁，大部分是阻塞同步的</li>
-<li>通过make创建，close关闭</li>
-<li>channel是引用类型</li>
-<li>可以使用for range来迭代不断的操作</li>
-<li>可以设置单向或双向通道</li>
-<li>可以设置缓存大小，在未被填满之前不会发生阻塞</li>
-</ul>
-</blockquote>
-<h2 id="通道阻塞"><a href="#通道阻塞" class="headerlink" title="通道阻塞"></a>通道阻塞</h2><blockquote>
-<p>对于无缓冲的channel,<code>通道的发送/接收操作在对方准备好之前是阻塞</code></p>
-</blockquote>
-<blockquote>
-<ul>
-<li>对于同一个通道，发送操作（协程或者函数中的），在接收者准备好之前是阻塞的：如果ch中的数据无人接收，就无法再给通道传入其他数据：新的输入无法在通道非空的情况下传入。所以发送操作会等待 ch 再次变为可用状态：就是通道值被接收时（可以传入变量）。</li>
-<li>对于同一个通道，接收操作是阻塞的（协程或函数中的），直到发送者可用：如果通道中没有数据，接收者就阻塞了。<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">    <span class="keyword">go</span> pump(ch1)       <span class="comment">// pump hangs</span></span><br><span class="line">    <span class="comment">// 只是接受结果一次，也就是说，下面的send方再插入一个1，2就插入不进去了，阻塞了</span></span><br><span class="line">    fmt.Println(&lt;-ch1) <span class="comment">// prints only 0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">pump</span><span class="params">(ch <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; ; i++ &#123;</span><br><span class="line">        ch &lt;- i</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果：0</span></span><br></pre></td></tr></table></figure>
+<li><p>对于可能为NULL的字段读取，go的sql模块提供了一个sql.NullString这样的东东来解析可能为NULL的字符串，对于浮点型或者整形也有类似的数据类型。很蛋疼的样子，不过可以解决问题，下面是遵照这种方案进行的修改。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rows.Next() &#123;</span><br><span class="line">  <span class="keyword">var</span> id <span class="keyword">int</span></span><br><span class="line">  <span class="keyword">var</span> name, info sql.NullString</span><br><span class="line">  <span class="keyword">if</span> err = rows.Scan(&amp;id, &amp;name, &amp;info); err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"获取结果出错："</span> + err.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Println(<span class="string">"id:"</span>, id, <span class="string">"name:"</span>, name.String, <span class="string">"info:"</span>, info.String)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>sql语句本身也能解决这种问题<br>此时也不需要修改go代码，继续保持go的强类型风格</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>, <span class="keyword">IFNULL</span>(<span class="string">`name`</span>, <span class="string">''</span>) <span class="keyword">AS</span> <span class="string">`name`</span>, <span class="keyword">IFNULL</span>(info, <span class="string">''</span>) <span class="keyword">AS</span> info <span class="keyword">FROM</span> <span class="keyword">user</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-</blockquote>
-<h2 id="常见错误示例："><a href="#常见错误示例：" class="headerlink" title="常见错误示例："></a>常见错误示例：</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f1</span><span class="params">(in <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    fmt.Println(&lt;-in)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    out := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">    out &lt;- <span class="number">2</span></span><br><span class="line">    <span class="keyword">go</span> f1(out)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述例子会照成死锁，原因很简单，一般通讯的话，有两种情况</p>
-<ul>
-<li>没有缓冲时，需要最少<code>两个goroutine</code>准备好</li>
-<li>有缓冲时，则是<code>goroutine - 中间缓冲层 - goroutine</code>之间的连接。</li>
-</ul>
-<h2 id="demo实例"><a href="#demo实例" class="headerlink" title="demo实例"></a>demo实例</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 使用make创建一个channel</span></span><br><span class="line">	channel := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"gogogo"</span>)</span><br><span class="line">		<span class="comment">// 向channel存数据</span></span><br><span class="line">		channel &lt;- <span class="literal">true</span></span><br><span class="line">		<span class="comment">// 关闭channel</span></span><br><span class="line">		<span class="built_in">close</span>(channel)</span><br><span class="line">	&#125;()</span><br><span class="line">	<span class="comment">// 迭代channel</span></span><br><span class="line">	<span class="keyword">for</span> v := <span class="keyword">range</span> channel &#123;</span><br><span class="line">		fmt.Println(v)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"this is base"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">gogogo</span><br><span class="line"><span class="literal">true</span></span><br><span class="line">this is base</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>由结果可以看出：先迭代完成才会进行下一步操作， 也就是说，迭代的过程是阻塞的，如果channel中没有值，迭代就会一直等待，一直等到它有值，<br>如果channel没有关闭，则会发生死锁（deadlock）</p>
-</blockquote>
-<h2 id="带缓冲的channel"><a href="#带缓冲的channel" class="headerlink" title="带缓冲的channel"></a>带缓冲的channel</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>, <span class="number">4</span>)</span><br><span class="line">	ch &lt;- <span class="string">"zhangsan1"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan2"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan3"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan4"</span></span><br><span class="line">	<span class="comment">// 如果加上这一行，则会死锁，是因为当超过缓冲区的时候，就成阻塞模式了</span></span><br><span class="line">	<span class="comment">//ch &lt;- "zhangsan5"</span></span><br><span class="line">	<span class="built_in">close</span>(ch)</span><br><span class="line">	fmt.Println(&lt;-ch)</span><br><span class="line">	fmt.Println(&lt;-ch)</span><br><span class="line">	fmt.Println(&lt;-ch)</span><br><span class="line">	fmt.Println(&lt;-ch)</span><br><span class="line">	fmt.Println(&lt;-ch)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">zhangsan1</span><br><span class="line">zhangsan2</span><br><span class="line">zhangsan3</span><br><span class="line">zhangsan4</span><br><span class="line">         <span class="comment">// 此处为string零值</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>可以看出带缓冲的channel略有不同。尽管已经close了，但我们依旧可以从中读出关闭前写入的3个值。第四次读取时，则会返回该channel类型的零值。向这类channel写入操作也会触发panic。</p>
-</blockquote>
-<h2 id="channel常与range配合"><a href="#channel常与range配合" class="headerlink" title="channel常与range配合"></a>channel常与range配合</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line">	<span class="keyword">go</span> generate(ch)</span><br><span class="line">	<span class="keyword">for</span> v := <span class="keyword">range</span> ch &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%s\n"</span>, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">generate</span><span class="params">(ch <span class="keyword">chan</span> <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	ch &lt;- <span class="string">"zhangsan1"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan2"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan3"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan4"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan5"</span></span><br><span class="line">	<span class="built_in">close</span>(ch)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="channel实际用途"><a href="#channel实际用途" class="headerlink" title="channel实际用途"></a>channel实际用途</h2><h3 id="可用作信号源"><a href="#可用作信号源" class="headerlink" title="可用作信号源"></a>可用作信号源</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Begin doing something!"</span>)</span><br><span class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Doing something…"</span>)</span><br><span class="line">		<span class="built_in">close</span>(c)</span><br><span class="line">	&#125;()</span><br><span class="line">	&lt;-c</span><br><span class="line">	fmt.Println(<span class="string">"Done!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="协同多个Goroutines"><a href="#协同多个Goroutines" class="headerlink" title="协同多个Goroutines"></a>协同多个Goroutines</h3><blockquote>
-<p>同上，close channel还可以用于协同多个Goroutines，比如下面这个例子，我们创建了100个Worker Goroutine，这些Goroutine在被创建出来后都阻塞在”&lt;-start”上，直到我们在main goroutine中给出开工的信号：”close(start)”，这些goroutines才开始真正的并发运行起来。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(start <span class="keyword">chan</span> <span class="keyword">bool</span>, index <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">        &lt;-start</span><br><span class="line">        fmt.Println(<span class="string">"This is Worker:"</span>, index)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        start := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++ &#123;</span><br><span class="line">                <span class="keyword">go</span> worker(start, i)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">close</span>(start)</span><br><span class="line">        <span class="keyword">select</span> &#123;&#125; <span class="comment">//deadlock we expected</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="唯一的ID服务"><a href="#唯一的ID服务" class="headerlink" title="唯一的ID服务"></a>唯一的ID服务</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">newUniqueIDService</span><span class="params">()</span> &lt;-<span class="title">chan</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    id := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> counter <span class="keyword">int64</span> = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> &#123;</span><br><span class="line">            <span class="comment">// 无缓冲 -&gt; 阻塞</span></span><br><span class="line">            id &lt;- fmt.Sprintf(<span class="string">"%x"</span>, counter)</span><br><span class="line">            counter += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">return</span> id</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    id := newUniqueIDService()</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        <span class="comment">// 这边取一个，id插入一个（自增）</span></span><br><span class="line">        fmt.Println(&lt;-id)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$ <span class="keyword">go</span> run testuniqueid.<span class="keyword">go</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
-<h1 id="select"><a href="#select" class="headerlink" title="select"></a>select</h1><h2 id="select特点"><a href="#select特点" class="headerlink" title="select特点"></a>select特点</h2><blockquote>
-<ul>
-<li>可以处理一个或多个channel的发送与接收</li>
-<li>同时有多个可用的channel时按随机顺序处理</li>
-<li>可用空的select阻塞main函数</li>
-<li>可设置超时</li>
-</ul>
-</blockquote>
-<h2 id="惯用法：for-select"><a href="#惯用法：for-select" class="headerlink" title="惯用法：for/select"></a>惯用法：for/select</h2><blockquote>
-<p>我们在使用select时很少只是对其进行一次evaluation，我们常常将其与for {}结合在一起使用，并选择适当时机从for{}中退出。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> x := &lt;- somechan:</span><br><span class="line">        <span class="comment">// … 使用x进行一些操作</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> y, ok := &lt;- someOtherchan:</span><br><span class="line">        <span class="comment">// … 使用y进行一些操作，</span></span><br><span class="line">        <span class="comment">// 检查ok值判断someOtherchan是否已经关闭</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> outputChan &lt;- z:</span><br><span class="line">        <span class="comment">// … z值被成功发送到Channel上时</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// … 上面case均无法通信时，执行此分支</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="终结workers"><a href="#终结workers" class="headerlink" title="终结workers"></a>终结workers</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch, die := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>), <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> worker(die, i, ch)</span><br><span class="line">		ch &lt;- <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line">	<span class="comment">// 此处终结worker</span></span><br><span class="line">	<span class="built_in">close</span>(die)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(die <span class="keyword">chan</span> <span class="keyword">bool</span>, index <span class="keyword">int</span>, ch <span class="keyword">chan</span> <span class="keyword">bool</span>)</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Begin: This is Worker:"</span>, index)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> &lt;-ch:</span><br><span class="line">			fmt.Println(<span class="string">"already worded:"</span>, index)</span><br><span class="line">		<span class="keyword">case</span> &lt;-die:</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="终结验证"><a href="#终结验证" class="headerlink" title="终结验证"></a>终结验证</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="comment">//"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(die <span class="keyword">chan</span> <span class="keyword">bool</span>)</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Begin: This is Worker"</span>)</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="comment">//case xx：</span></span><br><span class="line">        <span class="comment">//做事的分支</span></span><br><span class="line">        <span class="comment">// get channel message</span></span><br><span class="line">        <span class="keyword">case</span> &lt;-die:</span><br><span class="line">            fmt.Println(<span class="string">"Done: This is Worker"</span>)</span><br><span class="line">            <span class="comment">// send channel message</span></span><br><span class="line">            die &lt;- <span class="literal">true</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    die := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">    <span class="keyword">go</span> worker(die)</span><br><span class="line">    <span class="comment">// send channel message</span></span><br><span class="line">    die &lt;- <span class="literal">true</span></span><br><span class="line">    <span class="comment">// get channel message</span></span><br><span class="line">    &lt;-die</span><br><span class="line">    fmt.Println(<span class="string">"Worker goroutine has been terminated"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#  等待goroutine完成</span></span><br><span class="line"><span class="string">使用`</span>sync<span class="string">`包</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span><span class="keyword">go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">correct</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">    wg.Add(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(n <span class="keyword">int</span>)</span></span> &#123; <span class="comment">// 使用局部变量</span></span><br><span class="line">            fmt.Print(n)</span><br><span class="line">            wg.Done()</span><br><span class="line">        &#125;(i)</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">    fmt.Println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述只是等待goroutine完成，却没有进行通讯。有错误值也无法返回。所以说，最好还是使用channel<br>如果我们希望通讯，只需要在此基础上增加channel通讯即可<br>例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    people := []<span class="keyword">string</span>&#123;<span class="string">"Anna"</span>, <span class="string">"Bob"</span>, <span class="string">"Cody"</span>, <span class="string">"Dave"</span>, <span class="string">"Eva"</span>&#125;</span><br><span class="line">    match := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>, <span class="number">1</span>) <span class="comment">// 为一个未匹配的发送操作提供空间</span></span><br><span class="line">    wg := <span class="built_in">new</span>(sync.WaitGroup)</span><br><span class="line">    wg.Add(<span class="built_in">len</span>(people))</span><br><span class="line">    <span class="keyword">for</span> _, name := <span class="keyword">range</span> people &#123;</span><br><span class="line">        <span class="keyword">go</span> Seek(name, match, wg)</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> name := &lt;-match:</span><br><span class="line">        fmt.Printf(<span class="string">"No one received %s’s message.\n"</span>, name)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// 没有待处理的发送操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数Seek 发送一个name到match管道或从match管道接收一个peer，结束时通知wait group</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Seek</span><span class="params">(name <span class="keyword">string</span>, match <span class="keyword">chan</span> <span class="keyword">string</span>, wg *sync.WaitGroup)</span></span> &#123;</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> peer := &lt;-match:</span><br><span class="line">        fmt.Printf(<span class="string">"%s sent a message to %s.\n"</span>, peer, name)</span><br><span class="line">    <span class="keyword">case</span> match &lt;- name:</span><br><span class="line">        <span class="comment">// 等待某个goroutine接收我的消息</span></span><br><span class="line">    &#125;</span><br><span class="line">    wg.Done()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="利用多核"><a href="#利用多核" class="headerlink" title="利用多核"></a>利用多核</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    numcpu := runtime.NumCPU()</span><br><span class="line">    runtime.GOMAXPROCS(numcpu) <span class="comment">// 尝试使用所有可用的CPU</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
