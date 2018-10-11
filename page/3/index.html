@@ -273,6 +273,578 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/发邮件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/发邮件/" itemprop="url">发邮件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="邮件的一般格式"><a href="#邮件的一般格式" class="headerlink" title="邮件的一般格式"></a>邮件的一般格式</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">From:chimps@example.com</span><br><span class="line">To:to@163.com</span><br><span class="line">Subject:TEST EMAIL</span><br><span class="line">Content-Type: text/html; chatset=UTF-8</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello go<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="使用阿里云企业邮注意事项"><a href="#使用阿里云企业邮注意事项" class="headerlink" title="使用阿里云企业邮注意事项"></a>使用阿里云企业邮注意事项</h1><p>如果你的域名为example.com<br>在阿里的域名那里都配好之后，发邮件的配置应该如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HOST: smtp.example.com</span><br><span class="line">HOST_ADDR: smtp.example.com:25</span><br><span class="line">USER: 该企业邮箱所创建的子邮箱</span><br><span class="line">PASSWORD：user的password</span><br></pre></td></tr></table></figure></p>
+<h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1><p>主要是使用net/smtp包的<code>SendMail</code>方法<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net/smtp"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	HOST     = <span class="string">"smtp.example.com"</span></span><br><span class="line">	ADDR     = <span class="string">"smtp.example.com:25"</span></span><br><span class="line">	USER     = <span class="string">"chimps@example.com"</span></span><br><span class="line">	PASSWORD = <span class="string">"xxx"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	to := <span class="string">"to1@163.com;to1@163.com"</span></span><br><span class="line">	subject := <span class="string">"TEST EMAIL"</span></span><br><span class="line">	email_type := <span class="string">"html"</span></span><br><span class="line">	message := <span class="string">"&lt;h1&gt;hello go&lt;/h1&gt;"</span></span><br><span class="line">	<span class="keyword">if</span> err := SendEmail(to, subject, email_type, message); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"发送失败, reason:"</span> + err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SendEmail</span><span class="params">(to <span class="keyword">string</span>, subject <span class="keyword">string</span>, email_type <span class="keyword">string</span>, message <span class="keyword">string</span>)</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> content_type <span class="keyword">string</span></span><br><span class="line">	<span class="keyword">switch</span> email_type &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"html"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/html; chatset=UTF-8"</span></span><br><span class="line">	<span class="keyword">case</span> <span class="string">"text"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/plain; chatset=UTF-8"</span></span><br><span class="line">	&#125;</span><br><span class="line">	auth := smtp.PlainAuth(<span class="string">""</span>, USER, PASSWORD, HOST)</span><br><span class="line">	send_to := strings.Split(to, <span class="string">";"</span>)</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> send_to &#123;</span><br><span class="line">		<span class="keyword">var</span> msg []<span class="keyword">string</span></span><br><span class="line">		msg = <span class="built_in">append</span>(msg, <span class="string">"From:"</span>+USER, <span class="string">"To:"</span>+v, <span class="string">"Subject:"</span>+subject, content_type, <span class="string">"\r\n"</span>+message)</span><br><span class="line">		msg_string := strings.Join(msg, <span class="string">"\r\n"</span>)</span><br><span class="line">		fmt.Println(msg_string)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> err = smtp.SendMail(ADDR, auth, USER, []<span class="keyword">string</span>&#123;v&#125;, []<span class="keyword">byte</span>(msg_string)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send fail , reason: "</span> + err.Error())</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send ok :"</span> + v)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>一般情况下，发邮件时间比较耗时的事情，一般走异步处理</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/读取配置文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/读取配置文件/" itemprop="url">读取配置文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用json格式"><a href="#使用json格式" class="headerlink" title="使用json格式"></a>使用json格式</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mysql <span class="keyword">struct</span> &#123;</span><br><span class="line">	Host <span class="keyword">string</span></span><br><span class="line">	Port <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Data mysql</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 判断是为了实现单例的效果</span></span><br><span class="line">	<span class="keyword">if</span> Data.Port == <span class="number">0</span> &#123;</span><br><span class="line">	    <span class="comment">// 当前目录应该为main.go的目录</span></span><br><span class="line">		str, err := ioutil.ReadFile(<span class="string">"./config/database.json"</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 读取json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err = json.Unmarshal(str, &amp;Data); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 解析json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		log.Println(<span class="string">"读取配置文件成功"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	log.Println(<span class="string">"执行init函数 配置文件"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/数组与切片/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/数组与切片/" itemprop="url">数组与切片</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 索引数组</span></span><br><span class="line">a := [<span class="number">10</span>]<span class="keyword">int</span>&#123;<span class="number">2</span>:<span class="number">20</span>&#125;</span><br><span class="line"><span class="comment">// 不指定数组长度</span></span><br><span class="line">a := [...]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line"><span class="comment">// 多维数组,只有第一维可以使用...</span></span><br><span class="line">a := [...][<span class="number">3</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">    &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">a := [<span class="number">2</span>][<span class="number">3</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">    &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指针数组</span></span><br><span class="line">x,y := <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">a := [...]*<span class="keyword">int</span>&#123;&amp;x, &amp;y&#125;</span><br><span class="line"><span class="comment">//指向数组的指针</span></span><br><span class="line">a :=[...]<span class="keyword">int</span>&#123;<span class="number">99</span>:<span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">var</span> p *[<span class="number">100</span>]<span class="keyword">int</span> = &amp;a</span><br><span class="line"><span class="comment">// 数组之间可以使用 == 或 != 比较,只有长度和类型相同才算相同的数组，才能比较</span></span><br><span class="line">a :=[<span class="number">2</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br><span class="line">b :=[<span class="number">2</span>]<span class="keyword">int</span>&#123;<span class="number">3</span>,<span class="number">2</span>&#125;</span><br><span class="line"><span class="comment">// 使用new关键字，返回指向数组的指针</span></span><br><span class="line">a :=[<span class="number">2</span>]<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">a[<span class="number">1</span>] = <span class="number">2</span></span><br><span class="line">b = <span class="built_in">new</span>([<span class="number">2</span>]<span class="keyword">int</span>)</span><br><span class="line">b[<span class="number">1</span>] = <span class="number">2</span></span><br><span class="line"><span class="comment">// 不论是指向数组的指针还是数组本身，都可以使用a[1]的形式给数组赋值</span></span><br><span class="line"><span class="comment">// go语言的数组是值类型，不是引用类型</span></span><br><span class="line"><span class="comment">//冒泡排序</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	list := [...]<span class="keyword">int</span>&#123;<span class="number">12</span>, <span class="number">323</span>, <span class="number">4</span>, <span class="number">565</span>, <span class="number">67</span>, <span class="number">3</span>&#125;</span><br><span class="line">	fmt.Println(list)</span><br><span class="line">	<span class="keyword">var</span> lenth = <span class="built_in">len</span>(list)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; lenth; i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := i + <span class="number">1</span>; j &lt; lenth; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> list[i] &gt; list[j] &#123;</span><br><span class="line">				tmp := list[i]</span><br><span class="line">				list[i] = list[j]</span><br><span class="line">				list[j] = tmp</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(list)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">12</span> <span class="number">323</span> <span class="number">4</span> <span class="number">565</span> <span class="number">67</span> <span class="number">3</span>]</span><br><span class="line">[<span class="number">3</span> <span class="number">4</span> <span class="number">12</span> <span class="number">67</span> <span class="number">323</span> <span class="number">565</span>]</span><br></pre></td></tr></table></figure>
+<h1 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h1><h2 id="切片与数组的定义区别"><a href="#切片与数组的定义区别" class="headerlink" title="切片与数组的定义区别"></a>切片与数组的定义区别</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vs:=[]<span class="keyword">interface</span>&#123;&#125;&#123;</span><br><span class="line">    []<span class="keyword">int</span>&#123;&#125;,<span class="comment">// slice 切片</span></span><br><span class="line">    []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,<span class="comment">// slice 切片</span></span><br><span class="line">    []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;[:],<span class="comment">//切片再切还是切片</span></span><br><span class="line">    <span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">3</span>,<span class="number">10</span>),<span class="comment">//标准的slice 定义方式</span></span><br><span class="line">    [<span class="number">3</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,<span class="comment">//array 数组，确定数组长度</span></span><br><span class="line">    [...]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,<span class="comment">//array 数组，由编译器自动计算数组长度。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Reslice"><a href="#Reslice" class="headerlink" title="Reslice"></a>Reslice</h2><ul>
+<li>切片本质上是指向类型</li>
+<li>切片不能越界，如果超过底层数组，则报错，而不是追加数组长度</li>
+<li>索引不可超多数组容量<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">a := [<span class="number">10</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;</span><br><span class="line">fpm.Prinln(a)</span><br><span class="line"><span class="comment">// 0~4 容量为10</span></span><br><span class="line">s1 := a[:<span class="number">5</span>]</span><br><span class="line"><span class="comment">// 5-9, 索引5到索引9,索引10不取， 容量为5</span></span><br><span class="line">s1 := a[<span class="number">5</span>,<span class="number">10</span>]</span><br><span class="line"><span class="comment">// 使用make,</span></span><br><span class="line"><span class="comment">// 参数1：类型，</span></span><br><span class="line"><span class="comment">// 参数2：包含几个元素，</span></span><br><span class="line"><span class="comment">// 参数3：容量（先分配10个连续内存地址，如果增加到11个时，则需要从新分配，每次增加一倍，扩容至20，下次40，在下次80，造成这种现象的原因是因为：从新分配内存是一件效率非常低的）如果留空，则和参数相等</span></span><br><span class="line">s1 := <span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">3</span>,<span class="number">10</span>)</span><br><span class="line"><span class="comment">// 获取切片的长度, </span></span><br><span class="line"><span class="built_in">len</span>(s1)</span><br><span class="line"><span class="comment">// 获取切片容量</span></span><br><span class="line"><span class="keyword">map</span>(s1)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Append"><a href="#Append" class="headerlink" title="Append"></a>Append</h2><blockquote>
+<ul>
+<li>可以在slice尾部追加元素</li>
+<li>可以将一个slice追加到另一个slice</li>
+<li>如果最终长度未超过追加到slice的容量，则返回原始slice</li>
+<li>如果超过追加的slice的容量，将重新分配数据<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">s1 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">3</span>, <span class="number">6</span>)</span><br><span class="line">fmt.Printf(<span class="string">"%p\n"</span>, s1)</span><br><span class="line">s1 = <span class="built_in">append</span>(s1, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">fmt.Printf(<span class="string">"%v %p\n"</span>, s1, s1)</span><br><span class="line">s1 = <span class="built_in">append</span>(s1, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">fmt.Printf(<span class="string">"%v %p\n"</span>, s1, s1)</span><br><span class="line"><span class="comment">// 对于指向同一个数组的slice，如果数组改变了，则两个slice指向的部分同样改变</span></span><br><span class="line">a := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">s1 := a[<span class="number">2</span>:<span class="number">5</span>]</span><br><span class="line">s2 := a[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">fmt.Println(s1, s2)</span><br><span class="line">s1[<span class="number">0</span>] = <span class="number">9</span></span><br><span class="line">fmt.Println(s1, s2)</span><br><span class="line"><span class="comment">// 结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">3</span> <span class="number">4</span> <span class="number">5</span>] [<span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">[<span class="number">9</span> <span class="number">4</span> <span class="number">5</span>] [<span class="number">2</span> <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>如果一个slice通过append添加时，如果超过了容量，那么就不在指向原来的数组，而是从新分配了一个<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">	s1 := a[<span class="number">2</span>:<span class="number">5</span>]</span><br><span class="line">	s2 := a[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">	fmt.Println(s1, s2)</span><br><span class="line">	s2 = <span class="built_in">append</span>(s2, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">7</span>)</span><br><span class="line">	s1[<span class="number">0</span>] = <span class="number">9</span></span><br><span class="line">	fmt.Println(s1, s2)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">3</span> <span class="number">4</span> <span class="number">5</span>] [<span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">[<span class="number">9</span> <span class="number">4</span> <span class="number">5</span>] [<span class="number">2</span> <span class="number">3</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">5</span> <span class="number">6</span> <span class="number">6</span> <span class="number">7</span>]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h2 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h2><ul>
+<li>从参数2复制到参数1（覆盖）</li>
+<li>该函数主要是切片（slice）的拷贝，不支持数组</li>
+<li>将第二个slice里的元素拷贝到第一个slice里，拷贝的长度为两个slice中长度较小的长度值<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">s1 := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line">s2 := []<span class="keyword">int</span>&#123;<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;</span><br><span class="line"><span class="built_in">copy</span>(s2, s1)</span><br><span class="line"><span class="built_in">copy</span>(s1, s2)</span><br><span class="line">fmt.Println(s2, s1)</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>] [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"><span class="comment">// 当然可以指定位置</span></span><br><span class="line">s1 := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line">s2 := []<span class="keyword">int</span>&#123;<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;</span><br><span class="line"><span class="built_in">copy</span>(s1[<span class="number">3</span>:<span class="number">6</span>], s2)</span><br><span class="line">fmt.Println(s1)</span><br><span class="line"><span class="comment">// 结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="删除切片"><a href="#删除切片" class="headerlink" title="删除切片"></a>删除切片</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 比如想删除下标为k的切片</span></span><br><span class="line">arr = <span class="built_in">append</span>(arr[:k], arr[k+<span class="number">1</span>:]...)</span><br></pre></td></tr></table></figure>
+<h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><blockquote>
+<ul>
+<li>map是无序的<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化map</span></span><br><span class="line">m := <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>&#123;<span class="number">1</span>: <span class="string">"zhangsan"</span>, <span class="number">2</span>: <span class="string">"lisi"</span>, <span class="number">3</span>: <span class="string">"wangwu"</span>, <span class="number">4</span>: <span class="string">"zhaoliu"</span>&#125;</span><br><span class="line"><span class="comment">// 初始化slice</span></span><br><span class="line">s := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="built_in">len</span>(m))</span><br><span class="line">i := <span class="number">0</span></span><br><span class="line"><span class="comment">// range 可遍历slice或map</span></span><br><span class="line"><span class="keyword">for</span> k, _ := <span class="keyword">range</span> m &#123;</span><br><span class="line">    <span class="comment">// 将map的键赋给slice</span></span><br><span class="line">	s[i] = k</span><br><span class="line">	i++</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(s)</span><br><span class="line"><span class="comment">//结果（体现了map的无序性）</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>]</span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果使用range遍历slice和map，</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	m := <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>&#123;<span class="number">1</span>: <span class="string">"zhangsan"</span>, <span class="number">2</span>: <span class="string">"lisi"</span>, <span class="number">3</span>: <span class="string">"wangwu"</span>, <span class="number">4</span>: <span class="string">"zhaoliu"</span>&#125;</span><br><span class="line">	s := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="built_in">len</span>(m))</span><br><span class="line">	i := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> m &#123;</span><br><span class="line">		s[i] = k</span><br><span class="line">		i++</span><br><span class="line">		fmt.Println(k, v)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(s)</span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> s &#123;</span><br><span class="line">		fmt.Println(k, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果如下：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line"><span class="number">4</span> zhaoliu</span><br><span class="line"><span class="number">1</span> zhangsan</span><br><span class="line"><span class="number">2</span> lisi</span><br><span class="line"><span class="number">3</span> wangwu</span><br><span class="line">[<span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"><span class="number">0</span> <span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">2</span> <span class="number">2</span></span><br><span class="line"><span class="number">3</span> <span class="number">3</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/并发编程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/并发编程/" itemprop="url">并发编程（1）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h1><h2 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> c <span class="keyword">struct</span> &#123;</span><br><span class="line">	word   <span class="keyword">string</span></span><br><span class="line">	wordId <span class="keyword">int</span></span><br><span class="line">	err    error</span><br><span class="line">	place  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	cpunum := runtime.NumCPU()</span><br><span class="line">	runtime.GOMAXPROCS(cpunum)</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> c, <span class="number">100</span>)</span><br><span class="line">	t1 := time.Now().Unix()</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">300</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> test(i, ch)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">300</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> res := &lt;-ch:</span><br><span class="line">			fmt.Println(res)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	t2 := time.Now().Unix()</span><br><span class="line">	log.Println(t2, t1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">(i <span class="keyword">int</span>, ch <span class="keyword">chan</span> c)</span></span> &#123;</span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">	res := c&#123;<span class="string">"test"</span>, i, <span class="literal">nil</span>, <span class="number">0</span>&#125;</span><br><span class="line">	ch &lt;- res</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h1><h2 id="操作符-lt"><a href="#操作符-lt" class="headerlink" title="操作符&lt;-"></a>操作符<code>&lt;-</code></h2><p>如果通过管道发送一个值，则将&lt;-作为二元操作符使用。通过管道接收一个值，则将其作为一元操作符使用:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ic &lt;- <span class="number">3</span>        <span class="comment">// 往管道发送3</span></span><br><span class="line">work := &lt;-wc    <span class="comment">// 从管道接收一个指向Work类型值的指针</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="channel特点"><a href="#channel特点" class="headerlink" title="channel特点"></a>channel特点</h2><blockquote>
+<ul>
+<li>Channel是Goroutine沟通的桥梁，大部分是阻塞同步的</li>
+<li>通过make创建，close关闭</li>
+<li>channel是引用类型</li>
+<li>可以使用for range来迭代不断的操作</li>
+<li>可以设置单向或双向通道</li>
+<li>可以设置缓存大小，在未被填满之前不会发生阻塞</li>
+</ul>
+</blockquote>
+<h2 id="通道阻塞"><a href="#通道阻塞" class="headerlink" title="通道阻塞"></a>通道阻塞</h2><blockquote>
+<p>对于无缓冲的channel,<code>通道的发送/接收操作在对方准备好之前是阻塞</code></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>对于同一个通道，发送操作（协程或者函数中的），在接收者准备好之前是阻塞的：如果ch中的数据无人接收，就无法再给通道传入其他数据：新的输入无法在通道非空的情况下传入。所以发送操作会等待 ch 再次变为可用状态：就是通道值被接收时（可以传入变量）。</li>
+<li>对于同一个通道，接收操作是阻塞的（协程或函数中的），直到发送者可用：如果通道中没有数据，接收者就阻塞了。<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">    <span class="keyword">go</span> pump(ch1)       <span class="comment">// pump hangs</span></span><br><span class="line">    <span class="comment">// 只是接受结果一次，也就是说，下面的send方再插入一个1，2就插入不进去了，阻塞了</span></span><br><span class="line">    fmt.Println(&lt;-ch1) <span class="comment">// prints only 0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">pump</span><span class="params">(ch <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; ; i++ &#123;</span><br><span class="line">        ch &lt;- i</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果：0</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h2 id="常见错误示例："><a href="#常见错误示例：" class="headerlink" title="常见错误示例："></a>常见错误示例：</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f1</span><span class="params">(in <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    fmt.Println(&lt;-in)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    out := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">    out &lt;- <span class="number">2</span></span><br><span class="line">    <span class="keyword">go</span> f1(out)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述例子会照成死锁，原因很简单，一般通讯的话，有两种情况</p>
+<ul>
+<li>没有缓冲时，需要最少<code>两个goroutine</code>准备好</li>
+<li>有缓冲时，则是<code>goroutine - 中间缓冲层 - goroutine</code>之间的连接。</li>
+</ul>
+<h2 id="demo实例"><a href="#demo实例" class="headerlink" title="demo实例"></a>demo实例</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 使用make创建一个channel</span></span><br><span class="line">	channel := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"gogogo"</span>)</span><br><span class="line">		<span class="comment">// 向channel存数据</span></span><br><span class="line">		channel &lt;- <span class="literal">true</span></span><br><span class="line">		<span class="comment">// 关闭channel</span></span><br><span class="line">		<span class="built_in">close</span>(channel)</span><br><span class="line">	&#125;()</span><br><span class="line">	<span class="comment">// 迭代channel</span></span><br><span class="line">	<span class="keyword">for</span> v := <span class="keyword">range</span> channel &#123;</span><br><span class="line">		fmt.Println(v)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(<span class="string">"this is base"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">gogogo</span><br><span class="line"><span class="literal">true</span></span><br><span class="line">this is base</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由结果可以看出：先迭代完成才会进行下一步操作， 也就是说，迭代的过程是阻塞的，如果channel中没有值，迭代就会一直等待，一直等到它有值，<br>如果channel没有关闭，则会发生死锁（deadlock）</p>
+</blockquote>
+<h2 id="带缓冲的channel"><a href="#带缓冲的channel" class="headerlink" title="带缓冲的channel"></a>带缓冲的channel</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>, <span class="number">4</span>)</span><br><span class="line">	ch &lt;- <span class="string">"zhangsan1"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan2"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan3"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan4"</span></span><br><span class="line">	<span class="comment">// 如果加上这一行，则会死锁，是因为当超过缓冲区的时候，就成阻塞模式了</span></span><br><span class="line">	<span class="comment">//ch &lt;- "zhangsan5"</span></span><br><span class="line">	<span class="built_in">close</span>(ch)</span><br><span class="line">	fmt.Println(&lt;-ch)</span><br><span class="line">	fmt.Println(&lt;-ch)</span><br><span class="line">	fmt.Println(&lt;-ch)</span><br><span class="line">	fmt.Println(&lt;-ch)</span><br><span class="line">	fmt.Println(&lt;-ch)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">zhangsan1</span><br><span class="line">zhangsan2</span><br><span class="line">zhangsan3</span><br><span class="line">zhangsan4</span><br><span class="line">         <span class="comment">// 此处为string零值</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以看出带缓冲的channel略有不同。尽管已经close了，但我们依旧可以从中读出关闭前写入的3个值。第四次读取时，则会返回该channel类型的零值。向这类channel写入操作也会触发panic。</p>
+</blockquote>
+<h2 id="channel常与range配合"><a href="#channel常与range配合" class="headerlink" title="channel常与range配合"></a>channel常与range配合</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line">	<span class="keyword">go</span> generate(ch)</span><br><span class="line">	<span class="keyword">for</span> v := <span class="keyword">range</span> ch &#123;</span><br><span class="line">		fmt.Printf(<span class="string">"%s\n"</span>, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">generate</span><span class="params">(ch <span class="keyword">chan</span> <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	ch &lt;- <span class="string">"zhangsan1"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan2"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan3"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan4"</span></span><br><span class="line">	ch &lt;- <span class="string">"zhangsan5"</span></span><br><span class="line">	<span class="built_in">close</span>(ch)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="channel实际用途"><a href="#channel实际用途" class="headerlink" title="channel实际用途"></a>channel实际用途</h2><h3 id="可用作信号源"><a href="#可用作信号源" class="headerlink" title="可用作信号源"></a>可用作信号源</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Begin doing something!"</span>)</span><br><span class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"Doing something…"</span>)</span><br><span class="line">		<span class="built_in">close</span>(c)</span><br><span class="line">	&#125;()</span><br><span class="line">	&lt;-c</span><br><span class="line">	fmt.Println(<span class="string">"Done!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="协同多个Goroutines"><a href="#协同多个Goroutines" class="headerlink" title="协同多个Goroutines"></a>协同多个Goroutines</h3><blockquote>
+<p>同上，close channel还可以用于协同多个Goroutines，比如下面这个例子，我们创建了100个Worker Goroutine，这些Goroutine在被创建出来后都阻塞在”&lt;-start”上，直到我们在main goroutine中给出开工的信号：”close(start)”，这些goroutines才开始真正的并发运行起来。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(start <span class="keyword">chan</span> <span class="keyword">bool</span>, index <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">        &lt;-start</span><br><span class="line">        fmt.Println(<span class="string">"This is Worker:"</span>, index)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        start := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++ &#123;</span><br><span class="line">                <span class="keyword">go</span> worker(start, i)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">close</span>(start)</span><br><span class="line">        <span class="keyword">select</span> &#123;&#125; <span class="comment">//deadlock we expected</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="唯一的ID服务"><a href="#唯一的ID服务" class="headerlink" title="唯一的ID服务"></a>唯一的ID服务</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">newUniqueIDService</span><span class="params">()</span> &lt;-<span class="title">chan</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    id := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> counter <span class="keyword">int64</span> = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> &#123;</span><br><span class="line">            <span class="comment">// 无缓冲 -&gt; 阻塞</span></span><br><span class="line">            id &lt;- fmt.Sprintf(<span class="string">"%x"</span>, counter)</span><br><span class="line">            counter += <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">return</span> id</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    id := newUniqueIDService()</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        <span class="comment">// 这边取一个，id插入一个（自增）</span></span><br><span class="line">        fmt.Println(&lt;-id)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$ <span class="keyword">go</span> run testuniqueid.<span class="keyword">go</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
+<h1 id="select"><a href="#select" class="headerlink" title="select"></a>select</h1><h2 id="select特点"><a href="#select特点" class="headerlink" title="select特点"></a>select特点</h2><blockquote>
+<ul>
+<li>可以处理一个或多个channel的发送与接收</li>
+<li>同时有多个可用的channel时按随机顺序处理</li>
+<li>可用空的select阻塞main函数</li>
+<li>可设置超时</li>
+</ul>
+</blockquote>
+<h2 id="惯用法：for-select"><a href="#惯用法：for-select" class="headerlink" title="惯用法：for/select"></a>惯用法：for/select</h2><blockquote>
+<p>我们在使用select时很少只是对其进行一次evaluation，我们常常将其与for {}结合在一起使用，并选择适当时机从for{}中退出。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> x := &lt;- somechan:</span><br><span class="line">        <span class="comment">// … 使用x进行一些操作</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> y, ok := &lt;- someOtherchan:</span><br><span class="line">        <span class="comment">// … 使用y进行一些操作，</span></span><br><span class="line">        <span class="comment">// 检查ok值判断someOtherchan是否已经关闭</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> outputChan &lt;- z:</span><br><span class="line">        <span class="comment">// … z值被成功发送到Channel上时</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// … 上面case均无法通信时，执行此分支</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="终结workers"><a href="#终结workers" class="headerlink" title="终结workers"></a>终结workers</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch, die := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>), <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> worker(die, i, ch)</span><br><span class="line">		ch &lt;- <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line">	<span class="comment">// 此处终结worker</span></span><br><span class="line">	<span class="built_in">close</span>(die)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(die <span class="keyword">chan</span> <span class="keyword">bool</span>, index <span class="keyword">int</span>, ch <span class="keyword">chan</span> <span class="keyword">bool</span>)</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Begin: This is Worker:"</span>, index)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> &lt;-ch:</span><br><span class="line">			fmt.Println(<span class="string">"already worded:"</span>, index)</span><br><span class="line">		<span class="keyword">case</span> &lt;-die:</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="终结验证"><a href="#终结验证" class="headerlink" title="终结验证"></a>终结验证</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="comment">//"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(die <span class="keyword">chan</span> <span class="keyword">bool</span>)</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Begin: This is Worker"</span>)</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="comment">//case xx：</span></span><br><span class="line">        <span class="comment">//做事的分支</span></span><br><span class="line">        <span class="comment">// get channel message</span></span><br><span class="line">        <span class="keyword">case</span> &lt;-die:</span><br><span class="line">            fmt.Println(<span class="string">"Done: This is Worker"</span>)</span><br><span class="line">            <span class="comment">// send channel message</span></span><br><span class="line">            die &lt;- <span class="literal">true</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    die := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">    <span class="keyword">go</span> worker(die)</span><br><span class="line">    <span class="comment">// send channel message</span></span><br><span class="line">    die &lt;- <span class="literal">true</span></span><br><span class="line">    <span class="comment">// get channel message</span></span><br><span class="line">    &lt;-die</span><br><span class="line">    fmt.Println(<span class="string">"Worker goroutine has been terminated"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#  等待goroutine完成</span></span><br><span class="line"><span class="string">使用`</span>sync<span class="string">`包</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span><span class="keyword">go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">correct</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">    wg.Add(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(n <span class="keyword">int</span>)</span></span> &#123; <span class="comment">// 使用局部变量</span></span><br><span class="line">            fmt.Print(n)</span><br><span class="line">            wg.Done()</span><br><span class="line">        &#125;(i)</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">    fmt.Println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述只是等待goroutine完成，却没有进行通讯。有错误值也无法返回。所以说，最好还是使用channel<br>如果我们希望通讯，只需要在此基础上增加channel通讯即可<br>例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    people := []<span class="keyword">string</span>&#123;<span class="string">"Anna"</span>, <span class="string">"Bob"</span>, <span class="string">"Cody"</span>, <span class="string">"Dave"</span>, <span class="string">"Eva"</span>&#125;</span><br><span class="line">    match := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>, <span class="number">1</span>) <span class="comment">// 为一个未匹配的发送操作提供空间</span></span><br><span class="line">    wg := <span class="built_in">new</span>(sync.WaitGroup)</span><br><span class="line">    wg.Add(<span class="built_in">len</span>(people))</span><br><span class="line">    <span class="keyword">for</span> _, name := <span class="keyword">range</span> people &#123;</span><br><span class="line">        <span class="keyword">go</span> Seek(name, match, wg)</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> name := &lt;-match:</span><br><span class="line">        fmt.Printf(<span class="string">"No one received %s’s message.\n"</span>, name)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// 没有待处理的发送操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数Seek 发送一个name到match管道或从match管道接收一个peer，结束时通知wait group</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Seek</span><span class="params">(name <span class="keyword">string</span>, match <span class="keyword">chan</span> <span class="keyword">string</span>, wg *sync.WaitGroup)</span></span> &#123;</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> peer := &lt;-match:</span><br><span class="line">        fmt.Printf(<span class="string">"%s sent a message to %s.\n"</span>, peer, name)</span><br><span class="line">    <span class="keyword">case</span> match &lt;- name:</span><br><span class="line">        <span class="comment">// 等待某个goroutine接收我的消息</span></span><br><span class="line">    &#125;</span><br><span class="line">    wg.Done()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="利用多核"><a href="#利用多核" class="headerlink" title="利用多核"></a>利用多核</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    numcpu := runtime.NumCPU()</span><br><span class="line">    runtime.GOMAXPROCS(numcpu) <span class="comment">// 尝试使用所有可用的CPU</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/小坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1020,581 +1592,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/字符串/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/字符串/" itemprop="url">字符串</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="实现随机数"><a href="#实现随机数" class="headerlink" title="实现随机数"></a>实现随机数</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CreateRandom</span><span class="params">(strLen <span class="keyword">int</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	strRandom := <span class="string">"qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM"</span></span><br><span class="line">	bytes := []<span class="keyword">byte</span>(strRandom)</span><br><span class="line">	strByte := []<span class="keyword">byte</span>&#123;&#125;</span><br><span class="line">	<span class="comment">// 需要一个随机种子（torrent），不然每次都是一样的随机数</span></span><br><span class="line">	r := rand.New(rand.NewSource(time.Now().UnixNano()))</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; strLen; i++ &#123;</span><br><span class="line">		subNum := r.Intn(<span class="built_in">len</span>(bytes))</span><br><span class="line">		sep := bytes[subNum]</span><br><span class="line">		strByte = <span class="built_in">append</span>(strByte, sep)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">string</span>(strByte)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="MD5加密"><a href="#MD5加密" class="headerlink" title="MD5加密"></a>MD5加密</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Md5</span><span class="params">(str <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	m := md5.New()</span><br><span class="line">	m.Write([]<span class="keyword">byte</span>(str))</span><br><span class="line">	<span class="keyword">return</span> hex.EncodeToString(m.Sum(<span class="literal">nil</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/docker/docker-compose/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/docker/docker-compose/" itemprop="url">docker-compose</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>最为推荐：<br><code>$ sudo pip install -U docker-compose</code><br>之后，可以添加 bash 补全命令：<br><code>curl -L https://raw.githubusercontent.com/docker/compose/1.2.0/contrib/completion/bash/docker-compose &gt; /etc/bash_completion.d/docker-compose</code></p>
-<h1 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h1><p>基本的使用格式是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose [options] [COMMAND] [ARGS...]</span><br></pre></td></tr></table></figure></p>
-<h2 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--verbose 输出更多调试信息。</span><br><span class="line">--version 打印版本并退出。</span><br><span class="line">-f, --file FILE 使用特定的 compose 模板文件，默认为 docker-compose.yml。</span><br><span class="line">-p, --project-name NAME 指定项目名称，默认使用目录名称。</span><br></pre></td></tr></table></figure>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="build"><a href="#build" class="headerlink" title="build"></a>build</h3><p>构建或重新构建服务。<br>服务一旦构建后，将会带上一个标记名，例如 web_db。<br>可以随时在项目目录下运行 docker-compose build 来重新构建服务。</p>
-<h3 id="help"><a href="#help" class="headerlink" title="help"></a>help</h3><p>获得一个命令的帮助。</p>
-<h3 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h3><p>通过发送 SIGKILL 信号来强制停止服务容器。支持通过参数来指定发送的信号，例如<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose <span class="built_in">kill</span> -s SIGINT</span><br></pre></td></tr></table></figure></p>
-<h3 id="logs"><a href="#logs" class="headerlink" title="logs"></a>logs</h3><p>查看服务的输出。</p>
-<h3 id="port"><a href="#port" class="headerlink" title="port"></a>port</h3><p>打印绑定的公共端口。</p>
-<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>列出所有容器。</p>
-<h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h3><p>拉取服务镜像。</p>
-<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>删除停止的服务容器。</p>
-<h3 id="run"><a href="#run" class="headerlink" title="run"></a>run</h3><p>在一个服务上执行一个命令。<br>例如：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose run ubuntu ping docker.com</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>将会启动一个 ubuntu 服务，执行 ping docker.com 命令。<br>默认情况下，所有关联的服务将会自动被启动，除非这些服务已经在运行中。<br>该命令类似启动容器后运行指定的命令，相关卷、链接等等都将会按照期望创建。<br>两个不同点：</p>
-<ul>
-<li>给定命令将会覆盖原有的自动运行命令；</li>
-<li>不会自动创建端口，以避免冲突。<br>如果不希望自动启动关联的容器，可以使用 –no-deps 选项，例如<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose run --no-deps web python manage.py shell</span><br><span class="line">将不会启动 web 容器所关联的其它容器。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<h3 id="scale"><a href="#scale" class="headerlink" title="scale"></a>scale</h3><p>设置同一个服务运行的容器个数。<br>通过 service=num 的参数来设置数量。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose scale web=2 worker=3</span><br></pre></td></tr></table></figure></p>
-<h3 id="start"><a href="#start" class="headerlink" title="start"></a>start</h3><p>启动一个已经存在的服务容器。</p>
-<h3 id="stop"><a href="#stop" class="headerlink" title="stop"></a>stop</h3><p>停止一个已经运行的容器，但不删除它。通过 <code>docker-compose start</code> 可以再次启动这些容器。</p>
-<h3 id="up"><a href="#up" class="headerlink" title="up"></a>up</h3><p>构建，（重新）创建，启动，链接一个服务相关的容器。<br>链接的服务都将会启动，除非他们已经运行。<br>默认情况， <code>docker-compose up</code> 将会整合所有容器的输出，并且退出时，所有容器将会停止。<br>如果使用 <code>docker-compose up -d</code> ，将会在后台启动并运行所有的容器。<br>默认情况，如果该服务的容器已经存在， docker-compose up 将会停止并尝试重新创建他们（保持使用 volumes-from 挂载的卷），以保证 docker-compose.yml 的修改生效。如果你不想容器被停止并重新创建，可以使用 <code>docker-compose up --no-recreate</code>。如果需要的话，这样将会启动已经停止的容器。</p>
-<hr>
-<h1 id="YAML模板"><a href="#YAML模板" class="headerlink" title="YAML模板"></a>YAML模板</h1><h2 id="image"><a href="#image" class="headerlink" title="image"></a>image</h2><p>指定为镜像名称或镜像 ID。如果镜像在本地不存在，Compose 将会尝试拉去这个镜像。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">image: ubuntu</span><br><span class="line">image: orchardup/postgresql</span><br><span class="line">image: a4bc65fd</span><br></pre></td></tr></table></figure></p>
-<h2 id="build-1"><a href="#build-1" class="headerlink" title="build"></a>build</h2><p>指定 Dockerfile 所在文件夹的路径。 Compose 将会利用它自动构建这个镜像，然后使用这个镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">build: /path/to/build/dir</span><br></pre></td></tr></table></figure></p>
-<h2 id="command"><a href="#command" class="headerlink" title="command"></a>command</h2><p>覆盖容器启动后默认执行的命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command: bundle exec thin -p 3000</span><br></pre></td></tr></table></figure></p>
-<h2 id="links"><a href="#links" class="headerlink" title="links"></a>links</h2><p>链接到其它服务中的容器。使用服务名称（同时作为别名）或服务名称：服务别名 （SERVICE:ALIAS） 格式都可以。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">links:</span><br><span class="line"> - db</span><br><span class="line"> - db:database</span><br><span class="line"> - redis</span><br></pre></td></tr></table></figure></p>
-<p>使用的别名将会自动在服务容器中的 /etc/hosts 里创建。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">172.17.2.186  db</span><br><span class="line">172.17.2.186  database</span><br><span class="line">172.17.2.187  redis</span><br></pre></td></tr></table></figure></p>
-<p>相应的环境变量也将被创建。</p>
-<h2 id="external-links"><a href="#external-links" class="headerlink" title="external_links"></a>external_links</h2><p>链接到 docker-compose.yml 外部的容器，甚至 并非 Compose 管理的容器。参数格式跟 links 类似。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">external_links:</span><br><span class="line"> - redis_1</span><br><span class="line"> - project_db_1:mysql</span><br><span class="line"> - project_db_1:postgresql</span><br></pre></td></tr></table></figure></p>
-<h2 id="ports"><a href="#ports" class="headerlink" title="ports"></a>ports</h2><p>暴露端口信息。<br>使用宿主：容器 （HOST:CONTAINER）格式或者仅仅指定容器的端口（宿主将会随机选择端口）都可以。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ports:</span><br><span class="line"> - &quot;3000&quot;</span><br><span class="line"> - &quot;8000:8000&quot;</span><br><span class="line"> - &quot;49100:22&quot;</span><br><span class="line"> - &quot;127.0.0.1:8001:8001&quot;</span><br></pre></td></tr></table></figure></p>
-<p>注：当使用 HOST:CONTAINER 格式来映射端口时，如果你使用的容器端口小于 60 你可能会得到错误得结果，因为 YAML 将会解析 xx:yy 这种数字格式为 60 进制。所以建议采用字符串格式。</p>
-<h2 id="expose"><a href="#expose" class="headerlink" title="expose"></a>expose</h2><p>暴露端口，但不映射到宿主机，只被连接的服务访问。<br>仅可以指定内部端口为参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expose:</span><br><span class="line"> - &quot;3000&quot;</span><br><span class="line"> - &quot;8000&quot;</span><br></pre></td></tr></table></figure></p>
-<h2 id="volumes"><a href="#volumes" class="headerlink" title="volumes"></a>volumes</h2><p>卷挂载路径设置。可以设置宿主机路径 （HOST:CONTAINER） 或加上访问模式 （HOST:CONTAINER:ro）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">volumes:</span><br><span class="line"> - /var/lib/mysql</span><br><span class="line"> - cache/:/tmp/cache</span><br><span class="line"> - ~/configs:/etc/configs/:ro</span><br><span class="line">volumes_from</span><br></pre></td></tr></table></figure></p>
-<p>从另一个服务或容器挂载它的所有卷。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">volumes_from:</span><br><span class="line"> - service_name</span><br><span class="line"> - container_name</span><br></pre></td></tr></table></figure></p>
-<h2 id="environment"><a href="#environment" class="headerlink" title="environment"></a>environment</h2><p>设置环境变量。你可以使用数组或字典两种格式。<br>只给定名称的变量会自动获取它在 Compose 主机上的值，可以用来防止泄露不必要的数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">environment:</span><br><span class="line">  RACK_ENV: development</span><br><span class="line">  SESSION_SECRET:</span><br><span class="line">environment:</span><br><span class="line">  - RACK_ENV=development</span><br><span class="line">  - SESSION_SECRET</span><br></pre></td></tr></table></figure></p>
-<h2 id="env-file"><a href="#env-file" class="headerlink" title="env_file"></a>env_file</h2><p>从文件中获取环境变量，可以为单独的文件路径或列表。<br>如果通过 docker-compose -f FILE 指定了模板文件，则 env_file 中路径会基于模板文件路径。<br>如果有变量名称与 environment 指令冲突，则以后者为准。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">env_file: .env</span><br><span class="line"></span><br><span class="line">env_file:</span><br><span class="line">  - ./common.env</span><br><span class="line">  - ./apps/web.env</span><br><span class="line">  - /opt/secrets.env</span><br></pre></td></tr></table></figure></p>
-<p>环境变量文件中每一行必须符合格式，支持 #  开头的注释行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#  common.env: Set Rails/Rack environment</span><br><span class="line">RACK_ENV=development</span><br></pre></td></tr></table></figure></p>
-<h2 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h2><p>基于已有的服务进行扩展。例如我们已经有了一个 webapp 服务，模板文件为 common.yml。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#  common.yml</span><br><span class="line">webapp:</span><br><span class="line">  build: ./webapp</span><br><span class="line">  environment:</span><br><span class="line">    - DEBUG=false</span><br><span class="line">    - SEND_EMAILS=false</span><br></pre></td></tr></table></figure></p>
-<p>编写一个新的 development.yml 文件，使用 common.yml 中的 webapp 服务进行扩展。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#  development.yml</span><br><span class="line">web:</span><br><span class="line">  extends:</span><br><span class="line">    file: common.yml</span><br><span class="line">    service: webapp</span><br><span class="line">  ports:</span><br><span class="line">    - &quot;8000:8000&quot;</span><br><span class="line">  links:</span><br><span class="line">    - db</span><br><span class="line">  environment:</span><br><span class="line">    - DEBUG=true</span><br><span class="line">db:</span><br><span class="line">  image: postgres</span><br></pre></td></tr></table></figure></p>
-<p>后者会自动继承 common.yml 中的 webapp 服务及相关环节变量。</p>
-<h2 id="net"><a href="#net" class="headerlink" title="net"></a>net</h2><p>设置网络模式。使用和 docker client 的 –net 参数一样的值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net: &quot;bridge&quot;</span><br><span class="line">net: &quot;none&quot;</span><br><span class="line">net: &quot;container:[name or id]&quot;</span><br><span class="line">net: &quot;host&quot;</span><br></pre></td></tr></table></figure></p>
-<h2 id="pid"><a href="#pid" class="headerlink" title="pid"></a>pid</h2><p>跟主机系统共享进程命名空间。打开该选项的容器可以相互通过进程 ID 来访问和操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pid: &quot;host&quot;</span><br></pre></td></tr></table></figure></p>
-<h2 id="dns"><a href="#dns" class="headerlink" title="dns"></a>dns</h2><p>配置 DNS 服务器。可以是一个值，也可以是一个列表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dns: 8.8.8.8</span><br><span class="line">dns:</span><br><span class="line">  - 8.8.8.8</span><br><span class="line">  - 9.9.9.9</span><br></pre></td></tr></table></figure></p>
-<h2 id="cap-add-cap-drop"><a href="#cap-add-cap-drop" class="headerlink" title="cap_add, cap_drop"></a>cap_add, cap_drop</h2><p>添加或放弃容器的 Linux 能力（Capabiliity）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cap_add:</span><br><span class="line">  - ALL</span><br><span class="line"></span><br><span class="line">cap_drop:</span><br><span class="line">  - NET_ADMIN</span><br><span class="line">  - SYS_ADMIN</span><br></pre></td></tr></table></figure></p>
-<h2 id="dns-search"><a href="#dns-search" class="headerlink" title="dns_search"></a>dns_search</h2><p>配置 DNS 搜索域。可以是一个值，也可以是一个列表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dns_search: example.com</span><br><span class="line">dns_search:</span><br><span class="line">  - domain1.example.com</span><br><span class="line">  - domain2.example.com</span><br></pre></td></tr></table></figure></p>
-<h2 id="working-dir-entrypoint-user-hostname-domainname-mem-limit-privileged-restart-stdin-open-tty-cpu-shares"><a href="#working-dir-entrypoint-user-hostname-domainname-mem-limit-privileged-restart-stdin-open-tty-cpu-shares" class="headerlink" title="working_dir, entrypoint, user, hostname, domainname, mem_limit, privileged, restart, stdin_open, tty, cpu_shares"></a>working_dir, entrypoint, user, hostname, domainname, mem_limit, privileged, restart, stdin_open, tty, cpu_shares</h2><p>这些都是和 docker run 支持的选项类似。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cpu_shares: 73</span><br><span class="line"></span><br><span class="line">working_dir: /code</span><br><span class="line">entrypoint: /code/entrypoint.sh</span><br><span class="line">user: postgresql</span><br><span class="line"></span><br><span class="line">hostname: foo</span><br><span class="line">domainname: foo.com</span><br><span class="line"></span><br><span class="line">mem_limit: 1000000000</span><br><span class="line">privileged: true</span><br><span class="line"></span><br><span class="line">restart: always</span><br><span class="line"></span><br><span class="line">stdin_open: true</span><br><span class="line">tty: true</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/docker/常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/docker/常用命令/" itemprop="url">常用命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<blockquote>
-<p>最好是查看<a href="https://docker.github.io/engine/reference/commandline/" target="_blank" rel="noopener">docker文档</a></p>
-</blockquote>
-<hr>
-<h1 id="查看docker信息（version、info）"><a href="#查看docker信息（version、info）" class="headerlink" title="查看docker信息（version、info）"></a>查看docker信息（version、info）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 查看docker版本  </span><br><span class="line">docker version  </span><br><span class="line">  </span><br><span class="line"># 显示docker系统的信息  </span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
-<h1 id="对image的操作（search、pull、images、rmi、history）"><a href="#对image的操作（search、pull、images、rmi、history）" class="headerlink" title="对image的操作（search、pull、images、rmi、history）"></a>对image的操作（search、pull、images、rmi、history）</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检索image  </span></span><br><span class="line"><span class="variable">$docker</span> search image_name  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 下载image  </span></span><br><span class="line"><span class="variable">$docker</span> pull image_name  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 列出镜像列表; -a, --all=false Show all images; --no-trunc=false Don't truncate output; -q, --quiet=false Only show numeric IDs  </span></span><br><span class="line"><span class="variable">$docker</span> images  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 删除一个或者多个镜像; -f, --force=false Force; --no-prune=false Do not delete untagged parents  </span></span><br><span class="line"><span class="variable">$docker</span> rmi image_name  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 显示一个镜像的历史; --no-trunc=false Don't truncate output; -q, --quiet=false Only show numeric IDs  </span></span><br><span class="line"><span class="variable">$docker</span> <span class="built_in">history</span> image_name</span><br></pre></td></tr></table></figure>
-<h1 id="启动容器（run）"><a href="#启动容器（run）" class="headerlink" title="启动容器（run）"></a>启动容器（run）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$docker run image_name echo &quot;hello word&quot;  </span><br><span class="line">  </span><br><span class="line"># 交互式进入容器中  </span><br><span class="line">$docker run -i -t image_name /bin/bash  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"># 在容器中安装新的程序  </span><br><span class="line">$docker run image_name apt-get install -y app_name</span><br></pre></td></tr></table></figure>
-<h1 id="查看容器（ps）"><a href="#查看容器（ps）" class="headerlink" title="查看容器（ps）"></a>查看容器（ps）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 列出当前所有正在运行的container  </span><br><span class="line">$docker ps  </span><br><span class="line"># 列出所有的container  </span><br><span class="line">$docker ps -a  </span><br><span class="line"># 列出最近一次启动的container  </span><br><span class="line">$docker ps -l</span><br></pre></td></tr></table></figure>
-<h1 id="保存对容器的修改（commit）"><a href="#保存对容器的修改（commit）" class="headerlink" title="保存对容器的修改（commit）"></a>保存对容器的修改（commit）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 保存对容器的修改; -a, --author=&quot;&quot; Author; -m, --message=&quot;&quot; Commit message  </span><br><span class="line">$docker commit ID new_image_name</span><br></pre></td></tr></table></figure>
-<h1 id="对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）"><a href="#对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）" class="headerlink" title="对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）"></a>对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 删除所有容器  </span><br><span class="line">$docker rm `docker ps -a -q`  </span><br><span class="line">  </span><br><span class="line"># 删除单个容器; -f, --force=false; -l, --link=false Remove the specified link and not the underlying container; -v, --volumes=false Remove the volumes associated to the container  </span><br><span class="line">$docker rm Name/ID  </span><br><span class="line">  </span><br><span class="line"># 停止、启动、杀死一个容器  </span><br><span class="line">$docker stop Name/ID  </span><br><span class="line">$docker start Name/ID  </span><br><span class="line">$docker kill Name/ID  </span><br><span class="line">  </span><br><span class="line"># 从一个容器中取日志; -f, --follow=false Follow log output; -t, --timestamps=false Show timestamps  </span><br><span class="line">$docker logs Name/ID  </span><br><span class="line">  </span><br><span class="line"># 列出一个容器里面被改变的文件或者目录，list列表会显示出三种事件，A 增加的，D 删除的，C 被改变的  </span><br><span class="line">$docker diff Name/ID  </span><br><span class="line">  </span><br><span class="line"># 显示一个运行的容器里面的进程信息  </span><br><span class="line">$docker top Name/ID  </span><br><span class="line">  </span><br><span class="line"># 从容器里面拷贝文件/目录到本地一个路径  </span><br><span class="line">$docker cp Name:/container_path to_path  </span><br><span class="line">$docker cp ID:/container_path to_path  </span><br><span class="line">  </span><br><span class="line"># 重启一个正在运行的容器; -t, --time=10 Number of seconds to try to stop for before killing the container, Default=10  </span><br><span class="line">$docker restart Name/ID  </span><br><span class="line">  </span><br><span class="line"># 附加到一个运行的容器上面; --no-stdin=false Do not attach stdin; --sig-proxy=true Proxify all received signal to the process  </span><br><span class="line">$docker attach ID</span><br></pre></td></tr></table></figure>
-<h1 id="保存和加载镜像（save、load）"><a href="#保存和加载镜像（save、load）" class="headerlink" title="保存和加载镜像（save、load）"></a>保存和加载镜像（save、load）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$docker save image_name -o file_path  </span><br><span class="line"># 加载一个tar包格式的镜像; -i, --input=&quot;&quot; Read from a tar archive file  </span><br><span class="line">$docker load -i file_path  </span><br><span class="line">  </span><br><span class="line"># 机器a  </span><br><span class="line">$docker save image_name &gt; /home/save.tar  </span><br><span class="line"># 使用scp将save.tar拷到机器b上，然后：  </span><br><span class="line">$docker load &lt; /home/save.tar</span><br></pre></td></tr></table></figure>
-<h1 id="登录registry-server（login）"><a href="#登录registry-server（login）" class="headerlink" title="登录registry server（login）"></a>登录registry server（login）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 登陆registry server; -e, --email=&quot;&quot; Email; -p, --password=&quot;&quot; Password; -u, --username=&quot;&quot; Username  </span><br><span class="line">$docker login</span><br></pre></td></tr></table></figure>
-<h1 id="发布image（push）"><a href="#发布image（push）" class="headerlink" title="发布image（push）"></a>发布image（push）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 发布docker镜像  </span><br><span class="line">$docker push new_image_name</span><br></pre></td></tr></table></figure>
-<h1 id="根据Dockerfile-构建出一个容器（build）"><a href="#根据Dockerfile-构建出一个容器（build）" class="headerlink" title="根据Dockerfile 构建出一个容器（build）"></a>根据Dockerfile 构建出一个容器（build）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#build  </span><br><span class="line">      --no-cache=false Do not use cache when building the image  </span><br><span class="line">      -q, --quiet=false Suppress the verbose output generated by the containers  </span><br><span class="line">      --rm=true Remove intermediate containers after a successful build  </span><br><span class="line">      -t, --tag=&quot;&quot; Repository name (and optionally a tag) to be applied to the resulting image in case of success  </span><br><span class="line">$docker build -t image_name Dockerfile_path</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/Awk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/Awk/" itemprop="url">Awk</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-26T10:19:36+08:00">
-                2017-09-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>参见<a href="http://man.linuxde.net/awk" target="_blank" rel="noopener">linux手册awk部分</a></p>
-</blockquote>
-<h1 id="示例文本"><a href="#示例文本" class="headerlink" title="示例文本"></a>示例文本</h1><p>test.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Beth	4.00	0</span><br><span class="line">Dan	3.75	0</span><br><span class="line">kathy	4.00	10</span><br><span class="line">Mark	5.00	20</span><br><span class="line">Mary	5.50	22</span><br><span class="line">Susie	4.25	18</span><br></pre></td></tr></table></figure></p>
-<h1 id="基本语法示例"><a href="#基本语法示例" class="headerlink" title="基本语法示例"></a>基本语法示例</h1><p><code>awk &#39;$3 &gt;0 { print $1, $2 * $3 }&#39; emp.data</code></p>
-<h1 id="通过awk脚本文件"><a href="#通过awk脚本文件" class="headerlink" title="通过awk脚本文件"></a>通过awk脚本文件</h1><p>test.awk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/.+th/ &#123;</span><br><span class="line">    print $0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f test.awk test.txt</span><br><span class="line"># 结果：</span><br><span class="line">Beth    4.00    0</span><br><span class="line">kathy   4.00    10</span><br></pre></td></tr></table></figure></p>
-<h1 id="BEGIN与END"><a href="#BEGIN与END" class="headerlink" title="BEGIN与END"></a>BEGIN与END</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    print &quot;begin search&quot;</span><br><span class="line">&#125;</span><br><span class="line">END&#123;</span><br><span class="line">    print &quot;all end&quot;</span><br><span class="line">&#125;</span><br><span class="line">/.+th/&#123;</span><br><span class="line">    print $0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f test.awk test.txt</span><br><span class="line"># 结果</span><br><span class="line">begin search</span><br><span class="line">Beth    4.00    0</span><br><span class="line">kathy   4.00    10</span><br><span class="line">all end</span><br></pre></td></tr></table></figure></p>
-<h1 id="内置变量"><a href="#内置变量" class="headerlink" title="内置变量"></a>内置变量</h1><h2 id="ARGC"><a href="#ARGC" class="headerlink" title="ARGC"></a>ARGC</h2><p>表示在命令中提供的参数的个数<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;BEGIN &#123;print &quot;Arguments =&quot;, ARGC&#125;&apos; One Two Three Four</span><br></pre></td></tr></table></figure></p>
-<p>结果：<code>Arguments = 5</code></p>
-<h2 id="ARGV"><a href="#ARGV" class="headerlink" title="ARGV"></a>ARGV</h2><p>这个变量表示存储命令行输入参数的数组,数组的有效索引是从 0 到 ARGC-1<br>例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    for (i = 0; i &lt; ARGC ;i++)&#123;  </span><br><span class="line">        printf &quot;ARGV[%d]=%s\n&quot;, i, ARGV[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">END&#123;</span><br><span class="line">    print &quot;all end&quot;</span><br><span class="line">&#125;</span><br><span class="line">/.+th/&#123;</span><br><span class="line">    print $0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f test.awk test.txt</span><br><span class="line"># 结果</span><br><span class="line">ARGV[0]=awk</span><br><span class="line">ARGV[1]=test.txt</span><br><span class="line">Beth    4.00    0</span><br><span class="line">kathy   4.00    10</span><br><span class="line">all end</span><br></pre></td></tr></table></figure></p>
-<h2 id="ENVISON环境变量"><a href="#ENVISON环境变量" class="headerlink" title="ENVISON环境变量"></a>ENVISON环境变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    for (n in ENVIRON)&#123;</span><br><span class="line">        print n &quot;: &quot; ENVIRON[n]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f test.awk test.txt</span><br><span class="line"># 结果</span><br><span class="line">GOROOT: /usr/local/Cellar/go/1.7.4_1/libexec</span><br><span class="line">LESS: -R</span><br><span class="line">PAGER: less</span><br><span class="line">AWKPATH: .:/usr/local/Cellar/gawk/4.1.4_1/share/awk</span><br><span class="line">OLDPWD: ...</span><br><span class="line">TERM_PROGRAM: iTerm.app</span><br></pre></td></tr></table></figure></p>
-<h2 id="FILENAME"><a href="#FILENAME" class="headerlink" title="FILENAME"></a>FILENAME</h2><p>文件名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    print FILENAME</span><br><span class="line">&#125;</span><br><span class="line">END&#123;</span><br><span class="line">    print FILENAME</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/chimps/linux/awk awk -f test.awk test.txt</span><br><span class="line"></span><br><span class="line">test.txt</span><br></pre></td></tr></table></figure></p>
-<p>可以看出在begin的时候FILENAME变量为空值</p>
-<h2 id="FS"><a href="#FS" class="headerlink" title="FS"></a>FS</h2><p>此变量表示输入的数据域之间的分隔符，其默认值是空格。 你可以使用 -F 命令行选项改变它的默认值。</p>
-<h2 id="NF"><a href="#NF" class="headerlink" title="NF"></a>NF</h2><p>此变量表示当前输入记录中域的数量<br>test.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Marks</span><br><span class="line">Mark	5.00</span><br><span class="line">Mary	5.50	22</span><br><span class="line">Susie	4.25	18</span><br></pre></td></tr></table></figure></p>
-<p>test.awk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NF&gt;2&#123;</span><br><span class="line">    print $0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/chimps/linux/awk awk -f test.awk test.txt</span><br><span class="line">Mary	5.50	22</span><br><span class="line">Susie	4.25	18</span><br></pre></td></tr></table></figure></p>
-<h2 id="NR（FNR）"><a href="#NR（FNR）" class="headerlink" title="NR（FNR）"></a>NR（FNR）</h2><p>默认的就是读取的数据行数，NR可以理解为Number of Record的缩写,FNR则为File Number of Record<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># class1:</span><br><span class="line">zhaoyun 85 87</span><br><span class="line">guanyu 87 88</span><br><span class="line">liubei 90 86</span><br><span class="line"># class2:</span><br><span class="line">caocao 92 87 90</span><br><span class="line">guojia 99 96 92</span><br><span class="line"># test.awk:</span><br><span class="line">&#123;</span><br><span class="line">    print NR,FNR,$0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/chimps/linux/awk awk -f test.awk class1 class2</span><br><span class="line">1 1 zhaoyun 85 87</span><br><span class="line">2 2 guanyu 87 88</span><br><span class="line">3 3 liubei 90 86</span><br><span class="line">4 1 caocao 92 87 90</span><br><span class="line">5 2 guojia 99 96 92</span><br></pre></td></tr></table></figure></p>
-<h1 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    arr[1] = &quot;zhangsan&quot;</span><br><span class="line">    arr[&quot;lisi&quot;] = &quot;lisi&quot;</span><br><span class="line">    arr[2] = &quot;wangwu&quot;</span><br><span class="line"></span><br><span class="line">    for (n in arr)&#123;</span><br><span class="line">        print arr[n]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/chimps/linux/awk awk -f test.awk test.txt</span><br><span class="line">lisi</span><br><span class="line">zhangsan</span><br><span class="line">wangwu</span><br></pre></td></tr></table></figure></p>
-<h2 id="判断数组中是否存在某一项"><a href="#判断数组中是否存在某一项" class="headerlink" title="判断数组中是否存在某一项"></a>判断数组中是否存在某一项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    arr[&quot;zhangsan&quot;] = &quot;wangwu&quot;</span><br><span class="line">    if(&quot;zhangsan&quot; in arr)&#123;</span><br><span class="line">        print &quot;zhangsan ok&quot;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        print &quot;zhangsan not found&quot;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(&quot;lisi&quot; in arr)&#123;</span><br><span class="line">        print &quot;lisi ok&quot;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        print &quot;lisi not found&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/chimps/linux/awk awk -f deal_err.awk</span><br><span class="line">zhangsan ok</span><br><span class="line">lisi not found</span><br></pre></td></tr></table></figure></p>
-<h1 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h1><h2 id="获取每个进程的内存占用"><a href="#获取每个进程的内存占用" class="headerlink" title="获取每个进程的内存占用"></a>获取每个进程的内存占用</h2><p>test.awk:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NR != 1 &amp;&amp; $4 &gt; 0&#123;</span><br><span class="line">    mem[$4] = $11</span><br><span class="line">&#125;</span><br><span class="line">END&#123;</span><br><span class="line">    asorti(mem, Nmem)</span><br><span class="line">    for (k in Nmem)&#123;</span><br><span class="line">        print mem[Nmem[k]], Nmem[k]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行：<br><code>ps aux | awk -f test.awk</code></p>
-<h2 id="多行日志处理"><a href="#多行日志处理" class="headerlink" title="多行日志处理"></a>多行日志处理</h2><p>file.log：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[2017-02-17 16:19:04] [285]</span><br><span class="line">&lt;- /v2/api/file/item/476</span><br><span class="line">-&gt; &#123;&quot;success&quot;:true,&quot;successInfo&quot;:&#123;&#125;&#125;</span><br><span class="line"></span><br><span class="line">[2017-03-10 11:57:42] []</span><br><span class="line">&lt;- /v2/api/file/diff?fid1=381&amp;fid2=287</span><br><span class="line">-&gt; &#123;&quot;success&quot;:false,&quot;errorInfo&quot;:&quot;长度不能为空&quot;,&quot;successInfo&quot;:&#123;&#125;,&quot;debug&quot;:&#123;&quot;line&quot;:37,&quot;info&quot;:null&#125;&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<h3 id="方式一：使用数组"><a href="#方式一：使用数组" class="headerlink" title="方式一：使用数组"></a>方式一：使用数组</h3><p>deal_err.awk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    sub_index = 0</span><br><span class="line">&#125;</span><br><span class="line">/^\[/&#123;</span><br><span class="line">    arr_line[sub_index] = $1 &quot;\t&quot; $2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/^&lt;-/&#123;</span><br><span class="line">    arr_line[sub_index] = arr_line[sub_index] &quot;\t&quot; $2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/^-&gt;/&#123;</span><br><span class="line">    text = substr($2, 2, length($2)-2)</span><br><span class="line">    split(text, text_arr, &quot;,&quot;)</span><br><span class="line">    split(text_arr[1], text_arr1, &quot;:&quot;)</span><br><span class="line">    if (text_arr1[2] == &quot;false&quot;)&#123;</span><br><span class="line">        arr[sub_index] = arr_line[sub_index] &quot;\t&quot; text_arr[2]</span><br><span class="line">        sub_index ++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">END&#123;</span><br><span class="line">    for (k in arr) &#123;</span><br><span class="line">        print k,arr[k] &gt;&gt; &quot;output.txt&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -f deal_err.awk file.log</span><br></pre></td></tr></table></figure></p>
-<h3 id="方式二：匹配成功就写到文件"><a href="#方式二：匹配成功就写到文件" class="headerlink" title="方式二：匹配成功就写到文件"></a>方式二：匹配成功就写到文件</h3><p>deal_err.awk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/^\[/&#123;</span><br><span class="line">    url = $1 &quot;\t&quot; $2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/^&lt;-/&#123;</span><br><span class="line">    request = arr_line[sub_index] &quot;\t&quot; $2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/^-&gt;/&#123;</span><br><span class="line">    response = substr($2, 2, length($2)-2)</span><br><span class="line">    split(response, res_arr, &quot;,&quot;)</span><br><span class="line">    split(res_arr[1], res_arr1, &quot;:&quot;)</span><br><span class="line">    if (res_arr1[2] == &quot;false&quot;)&#123;</span><br><span class="line">        print url,request,res_arr[2] &gt; &quot;output.txt&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>很明显，这样可读性好一些<br>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -f deal_err.awk file.log</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1645,7 +1642,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

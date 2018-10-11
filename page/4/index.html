@@ -273,6 +273,581 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/字符串/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/字符串/" itemprop="url">字符串</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="实现随机数"><a href="#实现随机数" class="headerlink" title="实现随机数"></a>实现随机数</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CreateRandom</span><span class="params">(strLen <span class="keyword">int</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	strRandom := <span class="string">"qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM"</span></span><br><span class="line">	bytes := []<span class="keyword">byte</span>(strRandom)</span><br><span class="line">	strByte := []<span class="keyword">byte</span>&#123;&#125;</span><br><span class="line">	<span class="comment">// 需要一个随机种子（torrent），不然每次都是一样的随机数</span></span><br><span class="line">	r := rand.New(rand.NewSource(time.Now().UnixNano()))</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; strLen; i++ &#123;</span><br><span class="line">		subNum := r.Intn(<span class="built_in">len</span>(bytes))</span><br><span class="line">		sep := bytes[subNum]</span><br><span class="line">		strByte = <span class="built_in">append</span>(strByte, sep)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">string</span>(strByte)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="MD5加密"><a href="#MD5加密" class="headerlink" title="MD5加密"></a>MD5加密</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Md5</span><span class="params">(str <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	m := md5.New()</span><br><span class="line">	m.Write([]<span class="keyword">byte</span>(str))</span><br><span class="line">	<span class="keyword">return</span> hex.EncodeToString(m.Sum(<span class="literal">nil</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/docker/docker-compose/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/docker/docker-compose/" itemprop="url">docker-compose</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>最为推荐：<br><code>$ sudo pip install -U docker-compose</code><br>之后，可以添加 bash 补全命令：<br><code>curl -L https://raw.githubusercontent.com/docker/compose/1.2.0/contrib/completion/bash/docker-compose &gt; /etc/bash_completion.d/docker-compose</code></p>
+<h1 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h1><p>基本的使用格式是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose [options] [COMMAND] [ARGS...]</span><br></pre></td></tr></table></figure></p>
+<h2 id="选项："><a href="#选项：" class="headerlink" title="选项："></a>选项：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--verbose 输出更多调试信息。</span><br><span class="line">--version 打印版本并退出。</span><br><span class="line">-f, --file FILE 使用特定的 compose 模板文件，默认为 docker-compose.yml。</span><br><span class="line">-p, --project-name NAME 指定项目名称，默认使用目录名称。</span><br></pre></td></tr></table></figure>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="build"><a href="#build" class="headerlink" title="build"></a>build</h3><p>构建或重新构建服务。<br>服务一旦构建后，将会带上一个标记名，例如 web_db。<br>可以随时在项目目录下运行 docker-compose build 来重新构建服务。</p>
+<h3 id="help"><a href="#help" class="headerlink" title="help"></a>help</h3><p>获得一个命令的帮助。</p>
+<h3 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h3><p>通过发送 SIGKILL 信号来强制停止服务容器。支持通过参数来指定发送的信号，例如<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose <span class="built_in">kill</span> -s SIGINT</span><br></pre></td></tr></table></figure></p>
+<h3 id="logs"><a href="#logs" class="headerlink" title="logs"></a>logs</h3><p>查看服务的输出。</p>
+<h3 id="port"><a href="#port" class="headerlink" title="port"></a>port</h3><p>打印绑定的公共端口。</p>
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>列出所有容器。</p>
+<h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h3><p>拉取服务镜像。</p>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>删除停止的服务容器。</p>
+<h3 id="run"><a href="#run" class="headerlink" title="run"></a>run</h3><p>在一个服务上执行一个命令。<br>例如：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose run ubuntu ping docker.com</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>将会启动一个 ubuntu 服务，执行 ping docker.com 命令。<br>默认情况下，所有关联的服务将会自动被启动，除非这些服务已经在运行中。<br>该命令类似启动容器后运行指定的命令，相关卷、链接等等都将会按照期望创建。<br>两个不同点：</p>
+<ul>
+<li>给定命令将会覆盖原有的自动运行命令；</li>
+<li>不会自动创建端口，以避免冲突。<br>如果不希望自动启动关联的容器，可以使用 –no-deps 选项，例如<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose run --no-deps web python manage.py shell</span><br><span class="line">将不会启动 web 容器所关联的其它容器。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h3 id="scale"><a href="#scale" class="headerlink" title="scale"></a>scale</h3><p>设置同一个服务运行的容器个数。<br>通过 service=num 的参数来设置数量。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose scale web=2 worker=3</span><br></pre></td></tr></table></figure></p>
+<h3 id="start"><a href="#start" class="headerlink" title="start"></a>start</h3><p>启动一个已经存在的服务容器。</p>
+<h3 id="stop"><a href="#stop" class="headerlink" title="stop"></a>stop</h3><p>停止一个已经运行的容器，但不删除它。通过 <code>docker-compose start</code> 可以再次启动这些容器。</p>
+<h3 id="up"><a href="#up" class="headerlink" title="up"></a>up</h3><p>构建，（重新）创建，启动，链接一个服务相关的容器。<br>链接的服务都将会启动，除非他们已经运行。<br>默认情况， <code>docker-compose up</code> 将会整合所有容器的输出，并且退出时，所有容器将会停止。<br>如果使用 <code>docker-compose up -d</code> ，将会在后台启动并运行所有的容器。<br>默认情况，如果该服务的容器已经存在， docker-compose up 将会停止并尝试重新创建他们（保持使用 volumes-from 挂载的卷），以保证 docker-compose.yml 的修改生效。如果你不想容器被停止并重新创建，可以使用 <code>docker-compose up --no-recreate</code>。如果需要的话，这样将会启动已经停止的容器。</p>
+<hr>
+<h1 id="YAML模板"><a href="#YAML模板" class="headerlink" title="YAML模板"></a>YAML模板</h1><h2 id="image"><a href="#image" class="headerlink" title="image"></a>image</h2><p>指定为镜像名称或镜像 ID。如果镜像在本地不存在，Compose 将会尝试拉去这个镜像。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">image: ubuntu</span><br><span class="line">image: orchardup/postgresql</span><br><span class="line">image: a4bc65fd</span><br></pre></td></tr></table></figure></p>
+<h2 id="build-1"><a href="#build-1" class="headerlink" title="build"></a>build</h2><p>指定 Dockerfile 所在文件夹的路径。 Compose 将会利用它自动构建这个镜像，然后使用这个镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">build: /path/to/build/dir</span><br></pre></td></tr></table></figure></p>
+<h2 id="command"><a href="#command" class="headerlink" title="command"></a>command</h2><p>覆盖容器启动后默认执行的命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command: bundle exec thin -p 3000</span><br></pre></td></tr></table></figure></p>
+<h2 id="links"><a href="#links" class="headerlink" title="links"></a>links</h2><p>链接到其它服务中的容器。使用服务名称（同时作为别名）或服务名称：服务别名 （SERVICE:ALIAS） 格式都可以。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">links:</span><br><span class="line"> - db</span><br><span class="line"> - db:database</span><br><span class="line"> - redis</span><br></pre></td></tr></table></figure></p>
+<p>使用的别名将会自动在服务容器中的 /etc/hosts 里创建。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">172.17.2.186  db</span><br><span class="line">172.17.2.186  database</span><br><span class="line">172.17.2.187  redis</span><br></pre></td></tr></table></figure></p>
+<p>相应的环境变量也将被创建。</p>
+<h2 id="external-links"><a href="#external-links" class="headerlink" title="external_links"></a>external_links</h2><p>链接到 docker-compose.yml 外部的容器，甚至 并非 Compose 管理的容器。参数格式跟 links 类似。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">external_links:</span><br><span class="line"> - redis_1</span><br><span class="line"> - project_db_1:mysql</span><br><span class="line"> - project_db_1:postgresql</span><br></pre></td></tr></table></figure></p>
+<h2 id="ports"><a href="#ports" class="headerlink" title="ports"></a>ports</h2><p>暴露端口信息。<br>使用宿主：容器 （HOST:CONTAINER）格式或者仅仅指定容器的端口（宿主将会随机选择端口）都可以。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ports:</span><br><span class="line"> - &quot;3000&quot;</span><br><span class="line"> - &quot;8000:8000&quot;</span><br><span class="line"> - &quot;49100:22&quot;</span><br><span class="line"> - &quot;127.0.0.1:8001:8001&quot;</span><br></pre></td></tr></table></figure></p>
+<p>注：当使用 HOST:CONTAINER 格式来映射端口时，如果你使用的容器端口小于 60 你可能会得到错误得结果，因为 YAML 将会解析 xx:yy 这种数字格式为 60 进制。所以建议采用字符串格式。</p>
+<h2 id="expose"><a href="#expose" class="headerlink" title="expose"></a>expose</h2><p>暴露端口，但不映射到宿主机，只被连接的服务访问。<br>仅可以指定内部端口为参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expose:</span><br><span class="line"> - &quot;3000&quot;</span><br><span class="line"> - &quot;8000&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="volumes"><a href="#volumes" class="headerlink" title="volumes"></a>volumes</h2><p>卷挂载路径设置。可以设置宿主机路径 （HOST:CONTAINER） 或加上访问模式 （HOST:CONTAINER:ro）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">volumes:</span><br><span class="line"> - /var/lib/mysql</span><br><span class="line"> - cache/:/tmp/cache</span><br><span class="line"> - ~/configs:/etc/configs/:ro</span><br><span class="line">volumes_from</span><br></pre></td></tr></table></figure></p>
+<p>从另一个服务或容器挂载它的所有卷。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">volumes_from:</span><br><span class="line"> - service_name</span><br><span class="line"> - container_name</span><br></pre></td></tr></table></figure></p>
+<h2 id="environment"><a href="#environment" class="headerlink" title="environment"></a>environment</h2><p>设置环境变量。你可以使用数组或字典两种格式。<br>只给定名称的变量会自动获取它在 Compose 主机上的值，可以用来防止泄露不必要的数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">environment:</span><br><span class="line">  RACK_ENV: development</span><br><span class="line">  SESSION_SECRET:</span><br><span class="line">environment:</span><br><span class="line">  - RACK_ENV=development</span><br><span class="line">  - SESSION_SECRET</span><br></pre></td></tr></table></figure></p>
+<h2 id="env-file"><a href="#env-file" class="headerlink" title="env_file"></a>env_file</h2><p>从文件中获取环境变量，可以为单独的文件路径或列表。<br>如果通过 docker-compose -f FILE 指定了模板文件，则 env_file 中路径会基于模板文件路径。<br>如果有变量名称与 environment 指令冲突，则以后者为准。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">env_file: .env</span><br><span class="line"></span><br><span class="line">env_file:</span><br><span class="line">  - ./common.env</span><br><span class="line">  - ./apps/web.env</span><br><span class="line">  - /opt/secrets.env</span><br></pre></td></tr></table></figure></p>
+<p>环境变量文件中每一行必须符合格式，支持 #  开头的注释行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#  common.env: Set Rails/Rack environment</span><br><span class="line">RACK_ENV=development</span><br></pre></td></tr></table></figure></p>
+<h2 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h2><p>基于已有的服务进行扩展。例如我们已经有了一个 webapp 服务，模板文件为 common.yml。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#  common.yml</span><br><span class="line">webapp:</span><br><span class="line">  build: ./webapp</span><br><span class="line">  environment:</span><br><span class="line">    - DEBUG=false</span><br><span class="line">    - SEND_EMAILS=false</span><br></pre></td></tr></table></figure></p>
+<p>编写一个新的 development.yml 文件，使用 common.yml 中的 webapp 服务进行扩展。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#  development.yml</span><br><span class="line">web:</span><br><span class="line">  extends:</span><br><span class="line">    file: common.yml</span><br><span class="line">    service: webapp</span><br><span class="line">  ports:</span><br><span class="line">    - &quot;8000:8000&quot;</span><br><span class="line">  links:</span><br><span class="line">    - db</span><br><span class="line">  environment:</span><br><span class="line">    - DEBUG=true</span><br><span class="line">db:</span><br><span class="line">  image: postgres</span><br></pre></td></tr></table></figure></p>
+<p>后者会自动继承 common.yml 中的 webapp 服务及相关环节变量。</p>
+<h2 id="net"><a href="#net" class="headerlink" title="net"></a>net</h2><p>设置网络模式。使用和 docker client 的 –net 参数一样的值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net: &quot;bridge&quot;</span><br><span class="line">net: &quot;none&quot;</span><br><span class="line">net: &quot;container:[name or id]&quot;</span><br><span class="line">net: &quot;host&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="pid"><a href="#pid" class="headerlink" title="pid"></a>pid</h2><p>跟主机系统共享进程命名空间。打开该选项的容器可以相互通过进程 ID 来访问和操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pid: &quot;host&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="dns"><a href="#dns" class="headerlink" title="dns"></a>dns</h2><p>配置 DNS 服务器。可以是一个值，也可以是一个列表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dns: 8.8.8.8</span><br><span class="line">dns:</span><br><span class="line">  - 8.8.8.8</span><br><span class="line">  - 9.9.9.9</span><br></pre></td></tr></table></figure></p>
+<h2 id="cap-add-cap-drop"><a href="#cap-add-cap-drop" class="headerlink" title="cap_add, cap_drop"></a>cap_add, cap_drop</h2><p>添加或放弃容器的 Linux 能力（Capabiliity）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cap_add:</span><br><span class="line">  - ALL</span><br><span class="line"></span><br><span class="line">cap_drop:</span><br><span class="line">  - NET_ADMIN</span><br><span class="line">  - SYS_ADMIN</span><br></pre></td></tr></table></figure></p>
+<h2 id="dns-search"><a href="#dns-search" class="headerlink" title="dns_search"></a>dns_search</h2><p>配置 DNS 搜索域。可以是一个值，也可以是一个列表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dns_search: example.com</span><br><span class="line">dns_search:</span><br><span class="line">  - domain1.example.com</span><br><span class="line">  - domain2.example.com</span><br></pre></td></tr></table></figure></p>
+<h2 id="working-dir-entrypoint-user-hostname-domainname-mem-limit-privileged-restart-stdin-open-tty-cpu-shares"><a href="#working-dir-entrypoint-user-hostname-domainname-mem-limit-privileged-restart-stdin-open-tty-cpu-shares" class="headerlink" title="working_dir, entrypoint, user, hostname, domainname, mem_limit, privileged, restart, stdin_open, tty, cpu_shares"></a>working_dir, entrypoint, user, hostname, domainname, mem_limit, privileged, restart, stdin_open, tty, cpu_shares</h2><p>这些都是和 docker run 支持的选项类似。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cpu_shares: 73</span><br><span class="line"></span><br><span class="line">working_dir: /code</span><br><span class="line">entrypoint: /code/entrypoint.sh</span><br><span class="line">user: postgresql</span><br><span class="line"></span><br><span class="line">hostname: foo</span><br><span class="line">domainname: foo.com</span><br><span class="line"></span><br><span class="line">mem_limit: 1000000000</span><br><span class="line">privileged: true</span><br><span class="line"></span><br><span class="line">restart: always</span><br><span class="line"></span><br><span class="line">stdin_open: true</span><br><span class="line">tty: true</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/docker/常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/docker/常用命令/" itemprop="url">常用命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<blockquote>
+<p>最好是查看<a href="https://docker.github.io/engine/reference/commandline/" target="_blank" rel="noopener">docker文档</a></p>
+</blockquote>
+<hr>
+<h1 id="查看docker信息（version、info）"><a href="#查看docker信息（version、info）" class="headerlink" title="查看docker信息（version、info）"></a>查看docker信息（version、info）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 查看docker版本  </span><br><span class="line">docker version  </span><br><span class="line">  </span><br><span class="line"># 显示docker系统的信息  </span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
+<h1 id="对image的操作（search、pull、images、rmi、history）"><a href="#对image的操作（search、pull、images、rmi、history）" class="headerlink" title="对image的操作（search、pull、images、rmi、history）"></a>对image的操作（search、pull、images、rmi、history）</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检索image  </span></span><br><span class="line"><span class="variable">$docker</span> search image_name  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 下载image  </span></span><br><span class="line"><span class="variable">$docker</span> pull image_name  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 列出镜像列表; -a, --all=false Show all images; --no-trunc=false Don't truncate output; -q, --quiet=false Only show numeric IDs  </span></span><br><span class="line"><span class="variable">$docker</span> images  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 删除一个或者多个镜像; -f, --force=false Force; --no-prune=false Do not delete untagged parents  </span></span><br><span class="line"><span class="variable">$docker</span> rmi image_name  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 显示一个镜像的历史; --no-trunc=false Don't truncate output; -q, --quiet=false Only show numeric IDs  </span></span><br><span class="line"><span class="variable">$docker</span> <span class="built_in">history</span> image_name</span><br></pre></td></tr></table></figure>
+<h1 id="启动容器（run）"><a href="#启动容器（run）" class="headerlink" title="启动容器（run）"></a>启动容器（run）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$docker run image_name echo &quot;hello word&quot;  </span><br><span class="line">  </span><br><span class="line"># 交互式进入容器中  </span><br><span class="line">$docker run -i -t image_name /bin/bash  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"># 在容器中安装新的程序  </span><br><span class="line">$docker run image_name apt-get install -y app_name</span><br></pre></td></tr></table></figure>
+<h1 id="查看容器（ps）"><a href="#查看容器（ps）" class="headerlink" title="查看容器（ps）"></a>查看容器（ps）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 列出当前所有正在运行的container  </span><br><span class="line">$docker ps  </span><br><span class="line"># 列出所有的container  </span><br><span class="line">$docker ps -a  </span><br><span class="line"># 列出最近一次启动的container  </span><br><span class="line">$docker ps -l</span><br></pre></td></tr></table></figure>
+<h1 id="保存对容器的修改（commit）"><a href="#保存对容器的修改（commit）" class="headerlink" title="保存对容器的修改（commit）"></a>保存对容器的修改（commit）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 保存对容器的修改; -a, --author=&quot;&quot; Author; -m, --message=&quot;&quot; Commit message  </span><br><span class="line">$docker commit ID new_image_name</span><br></pre></td></tr></table></figure>
+<h1 id="对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）"><a href="#对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）" class="headerlink" title="对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）"></a>对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 删除所有容器  </span><br><span class="line">$docker rm `docker ps -a -q`  </span><br><span class="line">  </span><br><span class="line"># 删除单个容器; -f, --force=false; -l, --link=false Remove the specified link and not the underlying container; -v, --volumes=false Remove the volumes associated to the container  </span><br><span class="line">$docker rm Name/ID  </span><br><span class="line">  </span><br><span class="line"># 停止、启动、杀死一个容器  </span><br><span class="line">$docker stop Name/ID  </span><br><span class="line">$docker start Name/ID  </span><br><span class="line">$docker kill Name/ID  </span><br><span class="line">  </span><br><span class="line"># 从一个容器中取日志; -f, --follow=false Follow log output; -t, --timestamps=false Show timestamps  </span><br><span class="line">$docker logs Name/ID  </span><br><span class="line">  </span><br><span class="line"># 列出一个容器里面被改变的文件或者目录，list列表会显示出三种事件，A 增加的，D 删除的，C 被改变的  </span><br><span class="line">$docker diff Name/ID  </span><br><span class="line">  </span><br><span class="line"># 显示一个运行的容器里面的进程信息  </span><br><span class="line">$docker top Name/ID  </span><br><span class="line">  </span><br><span class="line"># 从容器里面拷贝文件/目录到本地一个路径  </span><br><span class="line">$docker cp Name:/container_path to_path  </span><br><span class="line">$docker cp ID:/container_path to_path  </span><br><span class="line">  </span><br><span class="line"># 重启一个正在运行的容器; -t, --time=10 Number of seconds to try to stop for before killing the container, Default=10  </span><br><span class="line">$docker restart Name/ID  </span><br><span class="line">  </span><br><span class="line"># 附加到一个运行的容器上面; --no-stdin=false Do not attach stdin; --sig-proxy=true Proxify all received signal to the process  </span><br><span class="line">$docker attach ID</span><br></pre></td></tr></table></figure>
+<h1 id="保存和加载镜像（save、load）"><a href="#保存和加载镜像（save、load）" class="headerlink" title="保存和加载镜像（save、load）"></a>保存和加载镜像（save、load）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$docker save image_name -o file_path  </span><br><span class="line"># 加载一个tar包格式的镜像; -i, --input=&quot;&quot; Read from a tar archive file  </span><br><span class="line">$docker load -i file_path  </span><br><span class="line">  </span><br><span class="line"># 机器a  </span><br><span class="line">$docker save image_name &gt; /home/save.tar  </span><br><span class="line"># 使用scp将save.tar拷到机器b上，然后：  </span><br><span class="line">$docker load &lt; /home/save.tar</span><br></pre></td></tr></table></figure>
+<h1 id="登录registry-server（login）"><a href="#登录registry-server（login）" class="headerlink" title="登录registry server（login）"></a>登录registry server（login）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 登陆registry server; -e, --email=&quot;&quot; Email; -p, --password=&quot;&quot; Password; -u, --username=&quot;&quot; Username  </span><br><span class="line">$docker login</span><br></pre></td></tr></table></figure>
+<h1 id="发布image（push）"><a href="#发布image（push）" class="headerlink" title="发布image（push）"></a>发布image（push）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 发布docker镜像  </span><br><span class="line">$docker push new_image_name</span><br></pre></td></tr></table></figure>
+<h1 id="根据Dockerfile-构建出一个容器（build）"><a href="#根据Dockerfile-构建出一个容器（build）" class="headerlink" title="根据Dockerfile 构建出一个容器（build）"></a>根据Dockerfile 构建出一个容器（build）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#build  </span><br><span class="line">      --no-cache=false Do not use cache when building the image  </span><br><span class="line">      -q, --quiet=false Suppress the verbose output generated by the containers  </span><br><span class="line">      --rm=true Remove intermediate containers after a successful build  </span><br><span class="line">      -t, --tag=&quot;&quot; Repository name (and optionally a tag) to be applied to the resulting image in case of success  </span><br><span class="line">$docker build -t image_name Dockerfile_path</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/Awk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux/Awk/" itemprop="url">Awk</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-26T10:19:36+08:00">
+                2017-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>参见<a href="http://man.linuxde.net/awk" target="_blank" rel="noopener">linux手册awk部分</a></p>
+</blockquote>
+<h1 id="示例文本"><a href="#示例文本" class="headerlink" title="示例文本"></a>示例文本</h1><p>test.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Beth	4.00	0</span><br><span class="line">Dan	3.75	0</span><br><span class="line">kathy	4.00	10</span><br><span class="line">Mark	5.00	20</span><br><span class="line">Mary	5.50	22</span><br><span class="line">Susie	4.25	18</span><br></pre></td></tr></table></figure></p>
+<h1 id="基本语法示例"><a href="#基本语法示例" class="headerlink" title="基本语法示例"></a>基本语法示例</h1><p><code>awk &#39;$3 &gt;0 { print $1, $2 * $3 }&#39; emp.data</code></p>
+<h1 id="通过awk脚本文件"><a href="#通过awk脚本文件" class="headerlink" title="通过awk脚本文件"></a>通过awk脚本文件</h1><p>test.awk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/.+th/ &#123;</span><br><span class="line">    print $0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f test.awk test.txt</span><br><span class="line"># 结果：</span><br><span class="line">Beth    4.00    0</span><br><span class="line">kathy   4.00    10</span><br></pre></td></tr></table></figure></p>
+<h1 id="BEGIN与END"><a href="#BEGIN与END" class="headerlink" title="BEGIN与END"></a>BEGIN与END</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    print &quot;begin search&quot;</span><br><span class="line">&#125;</span><br><span class="line">END&#123;</span><br><span class="line">    print &quot;all end&quot;</span><br><span class="line">&#125;</span><br><span class="line">/.+th/&#123;</span><br><span class="line">    print $0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f test.awk test.txt</span><br><span class="line"># 结果</span><br><span class="line">begin search</span><br><span class="line">Beth    4.00    0</span><br><span class="line">kathy   4.00    10</span><br><span class="line">all end</span><br></pre></td></tr></table></figure></p>
+<h1 id="内置变量"><a href="#内置变量" class="headerlink" title="内置变量"></a>内置变量</h1><h2 id="ARGC"><a href="#ARGC" class="headerlink" title="ARGC"></a>ARGC</h2><p>表示在命令中提供的参数的个数<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;BEGIN &#123;print &quot;Arguments =&quot;, ARGC&#125;&apos; One Two Three Four</span><br></pre></td></tr></table></figure></p>
+<p>结果：<code>Arguments = 5</code></p>
+<h2 id="ARGV"><a href="#ARGV" class="headerlink" title="ARGV"></a>ARGV</h2><p>这个变量表示存储命令行输入参数的数组,数组的有效索引是从 0 到 ARGC-1<br>例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    for (i = 0; i &lt; ARGC ;i++)&#123;  </span><br><span class="line">        printf &quot;ARGV[%d]=%s\n&quot;, i, ARGV[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">END&#123;</span><br><span class="line">    print &quot;all end&quot;</span><br><span class="line">&#125;</span><br><span class="line">/.+th/&#123;</span><br><span class="line">    print $0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f test.awk test.txt</span><br><span class="line"># 结果</span><br><span class="line">ARGV[0]=awk</span><br><span class="line">ARGV[1]=test.txt</span><br><span class="line">Beth    4.00    0</span><br><span class="line">kathy   4.00    10</span><br><span class="line">all end</span><br></pre></td></tr></table></figure></p>
+<h2 id="ENVISON环境变量"><a href="#ENVISON环境变量" class="headerlink" title="ENVISON环境变量"></a>ENVISON环境变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    for (n in ENVIRON)&#123;</span><br><span class="line">        print n &quot;: &quot; ENVIRON[n]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f test.awk test.txt</span><br><span class="line"># 结果</span><br><span class="line">GOROOT: /usr/local/Cellar/go/1.7.4_1/libexec</span><br><span class="line">LESS: -R</span><br><span class="line">PAGER: less</span><br><span class="line">AWKPATH: .:/usr/local/Cellar/gawk/4.1.4_1/share/awk</span><br><span class="line">OLDPWD: ...</span><br><span class="line">TERM_PROGRAM: iTerm.app</span><br></pre></td></tr></table></figure></p>
+<h2 id="FILENAME"><a href="#FILENAME" class="headerlink" title="FILENAME"></a>FILENAME</h2><p>文件名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    print FILENAME</span><br><span class="line">&#125;</span><br><span class="line">END&#123;</span><br><span class="line">    print FILENAME</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/chimps/linux/awk awk -f test.awk test.txt</span><br><span class="line"></span><br><span class="line">test.txt</span><br></pre></td></tr></table></figure></p>
+<p>可以看出在begin的时候FILENAME变量为空值</p>
+<h2 id="FS"><a href="#FS" class="headerlink" title="FS"></a>FS</h2><p>此变量表示输入的数据域之间的分隔符，其默认值是空格。 你可以使用 -F 命令行选项改变它的默认值。</p>
+<h2 id="NF"><a href="#NF" class="headerlink" title="NF"></a>NF</h2><p>此变量表示当前输入记录中域的数量<br>test.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Marks</span><br><span class="line">Mark	5.00</span><br><span class="line">Mary	5.50	22</span><br><span class="line">Susie	4.25	18</span><br></pre></td></tr></table></figure></p>
+<p>test.awk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NF&gt;2&#123;</span><br><span class="line">    print $0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/chimps/linux/awk awk -f test.awk test.txt</span><br><span class="line">Mary	5.50	22</span><br><span class="line">Susie	4.25	18</span><br></pre></td></tr></table></figure></p>
+<h2 id="NR（FNR）"><a href="#NR（FNR）" class="headerlink" title="NR（FNR）"></a>NR（FNR）</h2><p>默认的就是读取的数据行数，NR可以理解为Number of Record的缩写,FNR则为File Number of Record<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># class1:</span><br><span class="line">zhaoyun 85 87</span><br><span class="line">guanyu 87 88</span><br><span class="line">liubei 90 86</span><br><span class="line"># class2:</span><br><span class="line">caocao 92 87 90</span><br><span class="line">guojia 99 96 92</span><br><span class="line"># test.awk:</span><br><span class="line">&#123;</span><br><span class="line">    print NR,FNR,$0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/chimps/linux/awk awk -f test.awk class1 class2</span><br><span class="line">1 1 zhaoyun 85 87</span><br><span class="line">2 2 guanyu 87 88</span><br><span class="line">3 3 liubei 90 86</span><br><span class="line">4 1 caocao 92 87 90</span><br><span class="line">5 2 guojia 99 96 92</span><br></pre></td></tr></table></figure></p>
+<h1 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    arr[1] = &quot;zhangsan&quot;</span><br><span class="line">    arr[&quot;lisi&quot;] = &quot;lisi&quot;</span><br><span class="line">    arr[2] = &quot;wangwu&quot;</span><br><span class="line"></span><br><span class="line">    for (n in arr)&#123;</span><br><span class="line">        print arr[n]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/chimps/linux/awk awk -f test.awk test.txt</span><br><span class="line">lisi</span><br><span class="line">zhangsan</span><br><span class="line">wangwu</span><br></pre></td></tr></table></figure></p>
+<h2 id="判断数组中是否存在某一项"><a href="#判断数组中是否存在某一项" class="headerlink" title="判断数组中是否存在某一项"></a>判断数组中是否存在某一项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    arr[&quot;zhangsan&quot;] = &quot;wangwu&quot;</span><br><span class="line">    if(&quot;zhangsan&quot; in arr)&#123;</span><br><span class="line">        print &quot;zhangsan ok&quot;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        print &quot;zhangsan not found&quot;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(&quot;lisi&quot; in arr)&#123;</span><br><span class="line">        print &quot;lisi ok&quot;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        print &quot;lisi not found&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/chimps/linux/awk awk -f deal_err.awk</span><br><span class="line">zhangsan ok</span><br><span class="line">lisi not found</span><br></pre></td></tr></table></figure></p>
+<h1 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h1><h2 id="获取每个进程的内存占用"><a href="#获取每个进程的内存占用" class="headerlink" title="获取每个进程的内存占用"></a>获取每个进程的内存占用</h2><p>test.awk:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NR != 1 &amp;&amp; $4 &gt; 0&#123;</span><br><span class="line">    mem[$4] = $11</span><br><span class="line">&#125;</span><br><span class="line">END&#123;</span><br><span class="line">    asorti(mem, Nmem)</span><br><span class="line">    for (k in Nmem)&#123;</span><br><span class="line">        print mem[Nmem[k]], Nmem[k]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行：<br><code>ps aux | awk -f test.awk</code></p>
+<h2 id="多行日志处理"><a href="#多行日志处理" class="headerlink" title="多行日志处理"></a>多行日志处理</h2><p>file.log：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[2017-02-17 16:19:04] [285]</span><br><span class="line">&lt;- /v2/api/file/item/476</span><br><span class="line">-&gt; &#123;&quot;success&quot;:true,&quot;successInfo&quot;:&#123;&#125;&#125;</span><br><span class="line"></span><br><span class="line">[2017-03-10 11:57:42] []</span><br><span class="line">&lt;- /v2/api/file/diff?fid1=381&amp;fid2=287</span><br><span class="line">-&gt; &#123;&quot;success&quot;:false,&quot;errorInfo&quot;:&quot;长度不能为空&quot;,&quot;successInfo&quot;:&#123;&#125;,&quot;debug&quot;:&#123;&quot;line&quot;:37,&quot;info&quot;:null&#125;&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h3 id="方式一：使用数组"><a href="#方式一：使用数组" class="headerlink" title="方式一：使用数组"></a>方式一：使用数组</h3><p>deal_err.awk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">BEGIN&#123;</span><br><span class="line">    sub_index = 0</span><br><span class="line">&#125;</span><br><span class="line">/^\[/&#123;</span><br><span class="line">    arr_line[sub_index] = $1 &quot;\t&quot; $2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/^&lt;-/&#123;</span><br><span class="line">    arr_line[sub_index] = arr_line[sub_index] &quot;\t&quot; $2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/^-&gt;/&#123;</span><br><span class="line">    text = substr($2, 2, length($2)-2)</span><br><span class="line">    split(text, text_arr, &quot;,&quot;)</span><br><span class="line">    split(text_arr[1], text_arr1, &quot;:&quot;)</span><br><span class="line">    if (text_arr1[2] == &quot;false&quot;)&#123;</span><br><span class="line">        arr[sub_index] = arr_line[sub_index] &quot;\t&quot; text_arr[2]</span><br><span class="line">        sub_index ++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">END&#123;</span><br><span class="line">    for (k in arr) &#123;</span><br><span class="line">        print k,arr[k] &gt;&gt; &quot;output.txt&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -f deal_err.awk file.log</span><br></pre></td></tr></table></figure></p>
+<h3 id="方式二：匹配成功就写到文件"><a href="#方式二：匹配成功就写到文件" class="headerlink" title="方式二：匹配成功就写到文件"></a>方式二：匹配成功就写到文件</h3><p>deal_err.awk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/^\[/&#123;</span><br><span class="line">    url = $1 &quot;\t&quot; $2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/^&lt;-/&#123;</span><br><span class="line">    request = arr_line[sub_index] &quot;\t&quot; $2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/^-&gt;/&#123;</span><br><span class="line">    response = substr($2, 2, length($2)-2)</span><br><span class="line">    split(response, res_arr, &quot;,&quot;)</span><br><span class="line">    split(res_arr[1], res_arr1, &quot;:&quot;)</span><br><span class="line">    if (res_arr1[2] == &quot;false&quot;)&#123;</span><br><span class="line">        print url,request,res_arr[2] &gt; &quot;output.txt&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>很明显，这样可读性好一些<br>运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -f deal_err.awk file.log</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/pdf处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1134,510 +1709,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mongodb/auth/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/mongodb/auth/" itemprop="url">auth认证</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-25T10:19:36+08:00">
-                2017-04-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="以auth认证方式启动"><a href="#以auth认证方式启动" class="headerlink" title="以auth认证方式启动"></a>以auth认证方式启动</h1><ul>
-<li><p>可以在config文件中加一项：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以在命令行中，添加一个option，<code>--auth</code></p>
-</li>
-</ul>
-<p>但是，如果mongodb中没有用户，认证是没有意义的。</p>
-<h1 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h1><ul>
-<li><p>选择库</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户的存储也是基于库的。管理员用户的话，需要在admin中创建。创建的第一个用户即为管理员用户</span></span><br><span class="line">&gt; use admin</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建管理员用户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;</span><br><span class="line">    user:&quot;root&quot;,</span><br><span class="line">    pwd:&quot;root&quot;,</span><br><span class="line">    roles:[</span><br><span class="line">        &#123;</span><br><span class="line">            role:&quot;userAdminAnyDatabase&quot;,</span><br><span class="line">            db:&quot;admin&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建普通用户</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;</span><br><span class="line">    user:<span class="string">"user1"</span>,</span><br><span class="line">    pwd:<span class="string">"pwd1"</span>,</span><br><span class="line">    roles:[</span><br><span class="line">        &#123;</span><br><span class="line">            role:<span class="string">"readWrite"</span>,</span><br><span class="line">            db:<span class="string">"db1"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1><h2 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// user所存储的库</span><br><span class="line">&gt; use admin</span><br><span class="line">&gt; db.auth(username, password)</span><br><span class="line">// 返回原数据库</span><br><span class="line">&gt; use blog</span><br></pre></td></tr></table></figure>
-<h2 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; mongo --host ip:port -u 用户 -p 密码 --authenticationDatabase admin</span><br></pre></td></tr></table></figure>
-<h1 id="mongodb配置文件相关参数"><a href="#mongodb配置文件相关参数" class="headerlink" title="mongodb配置文件相关参数"></a>mongodb配置文件相关参数</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#数据库数据存放目录</span><br><span class="line">dbpath=<span class="regexp">/usr/</span>local/mongodb304/data</span><br><span class="line">#数据库日志存放目录</span><br><span class="line">logpath=<span class="regexp">/usr/</span>local/mongodb304/logs/mongodb.log </span><br><span class="line">#以追加的方式记录日志</span><br><span class="line">logappend = <span class="literal">true</span></span><br><span class="line">#端口号 默认为27017</span><br><span class="line">port=<span class="number">27017</span> </span><br><span class="line">#以后台方式运行进程</span><br><span class="line">fork=<span class="literal">true</span> </span><br><span class="line"> #开启用户认证</span><br><span class="line">auth=<span class="literal">true</span></span><br><span class="line">#关闭http接口，默认关闭http端口访问</span><br><span class="line">nohttpinterface=<span class="literal">true</span></span><br><span class="line">#mongodb所绑定的ip地址</span><br><span class="line">bind_ip = <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>,<span class="number">192.168</span><span class="number">.1</span><span class="number">.140</span></span><br><span class="line">#启用日志文件，默认启用</span><br><span class="line">journal=<span class="literal">true</span> </span><br><span class="line">#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false</span><br><span class="line">quiet=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mongodb/array/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/mongodb/array/" itemprop="url">array</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-21T22:19:36+08:00">
-                2017-04-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h1><h2 id="pull-删除元素"><a href="#pull-删除元素" class="headerlink" title="$pull 删除元素"></a>$pull 删除元素</h2><p>根据值删除<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(&#123;<span class="attr">id</span>: <span class="string">"id001"</span>&#125;, &#123;<span class="attr">$pull</span>: &#123;<span class="string">"fishes"</span>: &#123;<span class="string">"tankId"</span>: <span class="number">0</span>&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>根据索引删除<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(&#123;<span class="attr">_id</span>: <span class="string">"id001"</span>&#125;, &#123;<span class="attr">$unset</span>: &#123;<span class="string">"interests.2"</span>: <span class="number">1</span> &#125;&#125;)</span><br></pre></td></tr></table></figure></p>
-<h2 id="addToSet-添加元素"><a href="#addToSet-添加元素" class="headerlink" title="$addToSet 添加元素"></a>$addToSet 添加元素</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(&#123;<span class="attr">numberId</span>: <span class="number">48960252</span>&#125;, &#123;<span class="string">"$addToSet"</span>: &#123;<span class="string">"guide"</span>: <span class="string">"fishing"</span>&#125;&#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="set-修改元素"><a href="#set-修改元素" class="headerlink" title="$set 修改元素"></a>$set 修改元素</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(&#123;<span class="string">"tanks.skin"</span>: <span class="string">""</span>&#125;, &#123;<span class="string">"$set"</span>: &#123;<span class="string">"tanks.$.skin"</span>: <span class="string">"default"</span>&#125;&#125;, <span class="literal">false</span>, <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql/函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/mysql/函数/" itemprop="url">函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-18T13:19:36+08:00">
-                2017-04-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 将id name work_date连接起来</span><br><span class="line">CONCAT(id, name, work_date)</span><br><span class="line">// 在like中用到：</span><br><span class="line">CONCAT('%',:v" . self::$number . ",'%')</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/nginx/基本设置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/nginx/基本设置/" itemprop="url">基本设置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T11:19:36+08:00">
-                2017-04-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="只允许本机访问"><a href="#只允许本机访问" class="headerlink" title="只允许本机访问"></a>只允许本机访问</h1><p>一般用于设置内部服务器<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">8888</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  localhost;</span><br><span class="line">    <span class="attribute">root</span>         /www/vux/vux/my;</span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">allow</span> <span class="number">127.0.0.1</span>;</span><br><span class="line">        <span class="attribute">deny</span> all;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.php?<span class="variable">$query_string</span>;</span><br><span class="line">        <span class="attribute">autoindex</span>  <span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">index</span>  index.html index.htm index.php;</span><br><span class="line">        <span class="attribute">include</span>  /etc/nginx/conf.d/php-fpm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="域名（端口）转发"><a href="#域名（端口）转发" class="headerlink" title="域名（端口）转发"></a>域名（端口）转发</h1><p>一般用于前后端完全分离的设计<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  douniu.kouhuo.site;</span><br><span class="line">    location / &#123;</span><br><span class="line">        index  index.html index.htm index.php;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_pass http://127.0.0.1:8080;</span><br><span class="line">    &#125;</span><br><span class="line">    location /api &#123;</span><br><span class="line">        #rewrite ^.+api/?(.*)$ /$1 break; </span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_set_header Host $host; #要转发的host</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_pass http://127.0.0.1:8888/; #设置要转发的ip（域名）端口</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="访问php动态资源-fastcgi"><a href="#访问php动态资源-fastcgi" class="headerlink" title="访问php动态资源(fastcgi)"></a>访问php动态资源(fastcgi)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  local.ladmin.com local.ladmin.com;</span><br><span class="line">    root   &quot;D:/items/laravel/lesson-admin/public&quot;;</span><br><span class="line">    index  index.html index.htm index.php;</span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /index.php?$query_string;</span><br><span class="line">        #autoindex  on;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ \.php(.*)$ &#123;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;</span><br><span class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name; </span><br><span class="line">        fastcgi_param  PATH_INFO  $fastcgi_path_info;</span><br><span class="line">        fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;</span><br><span class="line">        include        fastcgi_params;</span><br><span class="line">        add_header Access-Control-Allow-Origin *;</span><br><span class="line">        add_header Access-Control-Allow-Methods &quot;POST, GET, OPTIONS&quot;;</span><br><span class="line">        add_header Access-Control-Allow-Credentials &quot;true&quot;;</span><br><span class="line">        add_header Access-Control-Allow-Headers &quot;Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Mx-ReqToken,X-Requested-With&quot;;</span><br><span class="line">        if ($request_method = &apos;OPTIONS&apos;)&#123;</span><br><span class="line">          return 204;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="配置header头的最大字节数"><a href="#配置header头的最大字节数" class="headerlink" title="配置header头的最大字节数"></a>配置header头的最大字节数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    ...</span><br><span class="line">    proxy_buffer_size   128k;</span><br><span class="line">    proxy_buffers   4 256k;</span><br><span class="line">    proxy_busy_buffers_size   256k;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="设置超时时间"><a href="#设置超时时间" class="headerlink" title="设置超时时间"></a>设置超时时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    ...</span><br><span class="line">    proxy_connect_timeout 360;</span><br><span class="line">	proxy_send_timeout 360;</span><br><span class="line">	proxy_read_timeout 360;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1688,7 +1759,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

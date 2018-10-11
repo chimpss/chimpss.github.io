@@ -273,6 +273,510 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mongodb/auth/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/mongodb/auth/" itemprop="url">auth认证</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-25T10:19:36+08:00">
+                2017-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="以auth认证方式启动"><a href="#以auth认证方式启动" class="headerlink" title="以auth认证方式启动"></a>以auth认证方式启动</h1><ul>
+<li><p>可以在config文件中加一项：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以在命令行中，添加一个option，<code>--auth</code></p>
+</li>
+</ul>
+<p>但是，如果mongodb中没有用户，认证是没有意义的。</p>
+<h1 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h1><ul>
+<li><p>选择库</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户的存储也是基于库的。管理员用户的话，需要在admin中创建。创建的第一个用户即为管理员用户</span></span><br><span class="line">&gt; use admin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建管理员用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;</span><br><span class="line">    user:&quot;root&quot;,</span><br><span class="line">    pwd:&quot;root&quot;,</span><br><span class="line">    roles:[</span><br><span class="line">        &#123;</span><br><span class="line">            role:&quot;userAdminAnyDatabase&quot;,</span><br><span class="line">            db:&quot;admin&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建普通用户</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;</span><br><span class="line">    user:<span class="string">"user1"</span>,</span><br><span class="line">    pwd:<span class="string">"pwd1"</span>,</span><br><span class="line">    roles:[</span><br><span class="line">        &#123;</span><br><span class="line">            role:<span class="string">"readWrite"</span>,</span><br><span class="line">            db:<span class="string">"db1"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1><h2 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// user所存储的库</span><br><span class="line">&gt; use admin</span><br><span class="line">&gt; db.auth(username, password)</span><br><span class="line">// 返回原数据库</span><br><span class="line">&gt; use blog</span><br></pre></td></tr></table></figure>
+<h2 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; mongo --host ip:port -u 用户 -p 密码 --authenticationDatabase admin</span><br></pre></td></tr></table></figure>
+<h1 id="mongodb配置文件相关参数"><a href="#mongodb配置文件相关参数" class="headerlink" title="mongodb配置文件相关参数"></a>mongodb配置文件相关参数</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#数据库数据存放目录</span><br><span class="line">dbpath=<span class="regexp">/usr/</span>local/mongodb304/data</span><br><span class="line">#数据库日志存放目录</span><br><span class="line">logpath=<span class="regexp">/usr/</span>local/mongodb304/logs/mongodb.log </span><br><span class="line">#以追加的方式记录日志</span><br><span class="line">logappend = <span class="literal">true</span></span><br><span class="line">#端口号 默认为27017</span><br><span class="line">port=<span class="number">27017</span> </span><br><span class="line">#以后台方式运行进程</span><br><span class="line">fork=<span class="literal">true</span> </span><br><span class="line"> #开启用户认证</span><br><span class="line">auth=<span class="literal">true</span></span><br><span class="line">#关闭http接口，默认关闭http端口访问</span><br><span class="line">nohttpinterface=<span class="literal">true</span></span><br><span class="line">#mongodb所绑定的ip地址</span><br><span class="line">bind_ip = <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>,<span class="number">192.168</span><span class="number">.1</span><span class="number">.140</span></span><br><span class="line">#启用日志文件，默认启用</span><br><span class="line">journal=<span class="literal">true</span> </span><br><span class="line">#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false</span><br><span class="line">quiet=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mongodb/array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/mongodb/array/" itemprop="url">array</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-21T22:19:36+08:00">
+                2017-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h1><h2 id="pull-删除元素"><a href="#pull-删除元素" class="headerlink" title="$pull 删除元素"></a>$pull 删除元素</h2><p>根据值删除<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(&#123;<span class="attr">id</span>: <span class="string">"id001"</span>&#125;, &#123;<span class="attr">$pull</span>: &#123;<span class="string">"fishes"</span>: &#123;<span class="string">"tankId"</span>: <span class="number">0</span>&#125;&#125;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>根据索引删除<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(&#123;<span class="attr">_id</span>: <span class="string">"id001"</span>&#125;, &#123;<span class="attr">$unset</span>: &#123;<span class="string">"interests.2"</span>: <span class="number">1</span> &#125;&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="addToSet-添加元素"><a href="#addToSet-添加元素" class="headerlink" title="$addToSet 添加元素"></a>$addToSet 添加元素</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(&#123;<span class="attr">numberId</span>: <span class="number">48960252</span>&#125;, &#123;<span class="string">"$addToSet"</span>: &#123;<span class="string">"guide"</span>: <span class="string">"fishing"</span>&#125;&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="set-修改元素"><a href="#set-修改元素" class="headerlink" title="$set 修改元素"></a>$set 修改元素</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.update(&#123;<span class="string">"tanks.skin"</span>: <span class="string">""</span>&#125;, &#123;<span class="string">"$set"</span>: &#123;<span class="string">"tanks.$.skin"</span>: <span class="string">"default"</span>&#125;&#125;, <span class="literal">false</span>, <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql/函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/mysql/函数/" itemprop="url">函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-18T13:19:36+08:00">
+                2017-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="concat"><a href="#concat" class="headerlink" title="concat"></a>concat</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 将id name work_date连接起来</span><br><span class="line">CONCAT(id, name, work_date)</span><br><span class="line">// 在like中用到：</span><br><span class="line">CONCAT('%',:v" . self::$number . ",'%')</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/nginx/基本设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/nginx/基本设置/" itemprop="url">基本设置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T11:19:36+08:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="只允许本机访问"><a href="#只允许本机访问" class="headerlink" title="只允许本机访问"></a>只允许本机访问</h1><p>一般用于设置内部服务器<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">8888</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  localhost;</span><br><span class="line">    <span class="attribute">root</span>         /www/vux/vux/my;</span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">allow</span> <span class="number">127.0.0.1</span>;</span><br><span class="line">        <span class="attribute">deny</span> all;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.php?<span class="variable">$query_string</span>;</span><br><span class="line">        <span class="attribute">autoindex</span>  <span class="literal">on</span>;</span><br><span class="line">        <span class="attribute">index</span>  index.html index.htm index.php;</span><br><span class="line">        <span class="attribute">include</span>  /etc/nginx/conf.d/php-fpm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="域名（端口）转发"><a href="#域名（端口）转发" class="headerlink" title="域名（端口）转发"></a>域名（端口）转发</h1><p>一般用于前后端完全分离的设计<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  douniu.kouhuo.site;</span><br><span class="line">    location / &#123;</span><br><span class="line">        index  index.html index.htm index.php;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_pass http://127.0.0.1:8080;</span><br><span class="line">    &#125;</span><br><span class="line">    location /api &#123;</span><br><span class="line">        #rewrite ^.+api/?(.*)$ /$1 break; </span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_set_header Host $host; #要转发的host</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_pass http://127.0.0.1:8888/; #设置要转发的ip（域名）端口</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="访问php动态资源-fastcgi"><a href="#访问php动态资源-fastcgi" class="headerlink" title="访问php动态资源(fastcgi)"></a>访问php动态资源(fastcgi)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  local.ladmin.com local.ladmin.com;</span><br><span class="line">    root   &quot;D:/items/laravel/lesson-admin/public&quot;;</span><br><span class="line">    index  index.html index.htm index.php;</span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /index.php?$query_string;</span><br><span class="line">        #autoindex  on;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ \.php(.*)$ &#123;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;</span><br><span class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name; </span><br><span class="line">        fastcgi_param  PATH_INFO  $fastcgi_path_info;</span><br><span class="line">        fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;</span><br><span class="line">        include        fastcgi_params;</span><br><span class="line">        add_header Access-Control-Allow-Origin *;</span><br><span class="line">        add_header Access-Control-Allow-Methods &quot;POST, GET, OPTIONS&quot;;</span><br><span class="line">        add_header Access-Control-Allow-Credentials &quot;true&quot;;</span><br><span class="line">        add_header Access-Control-Allow-Headers &quot;Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Mx-ReqToken,X-Requested-With&quot;;</span><br><span class="line">        if ($request_method = &apos;OPTIONS&apos;)&#123;</span><br><span class="line">          return 204;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="配置header头的最大字节数"><a href="#配置header头的最大字节数" class="headerlink" title="配置header头的最大字节数"></a>配置header头的最大字节数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    ...</span><br><span class="line">    proxy_buffer_size   128k;</span><br><span class="line">    proxy_buffers   4 256k;</span><br><span class="line">    proxy_busy_buffers_size   256k;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="设置超时时间"><a href="#设置超时时间" class="headerlink" title="设置超时时间"></a>设置超时时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    ...</span><br><span class="line">    proxy_connect_timeout 360;</span><br><span class="line">	proxy_send_timeout 360;</span><br><span class="line">	proxy_read_timeout 360;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/nginx/rewrite规则/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -442,7 +946,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
