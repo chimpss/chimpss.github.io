@@ -83,7 +83,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="秀才">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:url" content="http://chimpss.github.io/page/4/index.html">
 <meta property="og:site_name" content="秀才">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
@@ -117,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/4/"/>
+  <link rel="canonical" href="http://chimpss.github.io/page/4/"/>
 
 
 
@@ -281,142 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/数据类型判断与转换/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/数据类型判断与转换/" itemprop="url">数据类型判断与转换</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/golang/数据类型判断与转换/" class="leancloud_visitors" data-flag-title="数据类型判断与转换">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="int-int64-string之间转换"><a href="#int-int64-string之间转换" class="headerlink" title="int int64 string之间转换"></a>int int64 string之间转换</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#<span class="keyword">string</span>到<span class="keyword">int</span>  </span><br><span class="line"><span class="keyword">int</span>,err:=strconv.Atoi(<span class="keyword">string</span>)  </span><br><span class="line">#<span class="keyword">string</span>到<span class="keyword">int64</span>  </span><br><span class="line"><span class="keyword">int64</span>, err := strconv.ParseInt(<span class="keyword">string</span>, <span class="number">10</span>, <span class="number">64</span>)  </span><br><span class="line">#<span class="keyword">int</span>到<span class="keyword">string</span>  </span><br><span class="line"><span class="keyword">string</span>:=strconv.Itoa(<span class="keyword">int</span>)  </span><br><span class="line">#<span class="keyword">int64</span>到<span class="keyword">string</span>  </span><br><span class="line"><span class="keyword">string</span>:=strconv.FormatInt(<span class="keyword">int64</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h1><p><code>value, ok = element.(T)</code></p>
-<p>demo1<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">a = <span class="string">"zhangsan"</span></span><br><span class="line"><span class="comment">// interface&#123;&#125; =&gt; string (断言)</span></span><br><span class="line">a = a.(<span class="keyword">string</span>)</span><br><span class="line"><span class="comment">// 如果直接string(a), 则报错:</span></span><br><span class="line">cannot convert a (<span class="keyword">type</span> <span class="keyword">interface</span> &#123;&#125;) to <span class="keyword">type</span> <span class="keyword">string</span>: need <span class="keyword">type</span> assertion</span><br></pre></td></tr></table></figure></p>
-<p>demo2<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> index, element := <span class="keyword">range</span> list &#123;</span><br><span class="line">        <span class="keyword">if</span> value, ok := element.(<span class="keyword">int</span>); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"list[%d] is an int and its value is %d\n"</span>, index, value)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> value, ok := element.(<span class="keyword">string</span>); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"list[%d] is a string and its value is %s\n"</span>, index, value)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> value, ok := element.(Person); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"list[%d] is a Person and its value is %s\n"</span>, index, value)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"list[%d] is of a different type"</span>, index)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>demo3<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> index, element := <span class="keyword">range</span> list&#123;</span><br><span class="line">        <span class="keyword">switch</span> value := element.(<span class="keyword">type</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="keyword">int</span>:</span><br><span class="line">                fmt.Printf(<span class="string">"list[%d] is an int and its value is %d\n"</span>, index, value)</span><br><span class="line">            <span class="keyword">case</span> <span class="keyword">string</span>:</span><br><span class="line">                fmt.Printf(<span class="string">"list[%d] is a string and its value is %s\n"</span>, index, value)</span><br><span class="line">            <span class="keyword">case</span> Person:</span><br><span class="line">                fmt.Printf(<span class="string">"list[%d] is a Person and its value is %s\n"</span>, index, value)</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                fmt.Println(<span class="string">"list[%d] is of a different type"</span>, index)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/并发编程示例/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/并发编程示例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -553,7 +418,142 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/webServer/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/数据类型判断与转换/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/数据类型判断与转换/" itemprop="url">数据类型判断与转换</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/golang/数据类型判断与转换/" class="leancloud_visitors" data-flag-title="数据类型判断与转换">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="int-int64-string之间转换"><a href="#int-int64-string之间转换" class="headerlink" title="int int64 string之间转换"></a>int int64 string之间转换</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#<span class="keyword">string</span>到<span class="keyword">int</span>  </span><br><span class="line"><span class="keyword">int</span>,err:=strconv.Atoi(<span class="keyword">string</span>)  </span><br><span class="line">#<span class="keyword">string</span>到<span class="keyword">int64</span>  </span><br><span class="line"><span class="keyword">int64</span>, err := strconv.ParseInt(<span class="keyword">string</span>, <span class="number">10</span>, <span class="number">64</span>)  </span><br><span class="line">#<span class="keyword">int</span>到<span class="keyword">string</span>  </span><br><span class="line"><span class="keyword">string</span>:=strconv.Itoa(<span class="keyword">int</span>)  </span><br><span class="line">#<span class="keyword">int64</span>到<span class="keyword">string</span>  </span><br><span class="line"><span class="keyword">string</span>:=strconv.FormatInt(<span class="keyword">int64</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h1><p><code>value, ok = element.(T)</code></p>
+<p>demo1<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">a = <span class="string">"zhangsan"</span></span><br><span class="line"><span class="comment">// interface&#123;&#125; =&gt; string (断言)</span></span><br><span class="line">a = a.(<span class="keyword">string</span>)</span><br><span class="line"><span class="comment">// 如果直接string(a), 则报错:</span></span><br><span class="line">cannot convert a (<span class="keyword">type</span> <span class="keyword">interface</span> &#123;&#125;) to <span class="keyword">type</span> <span class="keyword">string</span>: need <span class="keyword">type</span> assertion</span><br></pre></td></tr></table></figure></p>
+<p>demo2<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> index, element := <span class="keyword">range</span> list &#123;</span><br><span class="line">        <span class="keyword">if</span> value, ok := element.(<span class="keyword">int</span>); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"list[%d] is an int and its value is %d\n"</span>, index, value)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> value, ok := element.(<span class="keyword">string</span>); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"list[%d] is a string and its value is %s\n"</span>, index, value)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> value, ok := element.(Person); ok &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"list[%d] is a Person and its value is %s\n"</span>, index, value)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"list[%d] is of a different type"</span>, index)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>demo3<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> index, element := <span class="keyword">range</span> list&#123;</span><br><span class="line">        <span class="keyword">switch</span> value := element.(<span class="keyword">type</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="keyword">int</span>:</span><br><span class="line">                fmt.Printf(<span class="string">"list[%d] is an int and its value is %d\n"</span>, index, value)</span><br><span class="line">            <span class="keyword">case</span> <span class="keyword">string</span>:</span><br><span class="line">                fmt.Printf(<span class="string">"list[%d] is a string and its value is %s\n"</span>, index, value)</span><br><span class="line">            <span class="keyword">case</span> Person:</span><br><span class="line">                fmt.Printf(<span class="string">"list[%d] is a Person and its value is %s\n"</span>, index, value)</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                fmt.Println(<span class="string">"list[%d] is of a different type"</span>, index)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/webServer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -687,7 +687,138 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/正则表达式/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/文件/" itemprop="url">文件处理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/golang/文件/" class="leancloud_visitors" data-flag-title="文件处理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h1><p>使用ioutil标准包<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ListDir</span><span class="params">(filePath <span class="keyword">string</span>)</span> <span class="params">(files []<span class="keyword">string</span>, err error)</span></span> &#123;</span><br><span class="line">	paths, err := ioutil.ReadDir(filePath)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> paths &#123;</span><br><span class="line">		<span class="keyword">if</span> !f.IsDir() &#123;</span><br><span class="line">			files = <span class="built_in">append</span>(files, f.Name())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/正则表达式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -836,138 +967,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/文件/" itemprop="url">文件处理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/golang/文件/" class="leancloud_visitors" data-flag-title="文件处理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h1><p>使用ioutil标准包<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ListDir</span><span class="params">(filePath <span class="keyword">string</span>)</span> <span class="params">(files []<span class="keyword">string</span>, err error)</span></span> &#123;</span><br><span class="line">	paths, err := ioutil.ReadDir(filePath)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> paths &#123;</span><br><span class="line">		<span class="keyword">if</span> !f.IsDir() &#123;</span><br><span class="line">			files = <span class="built_in">append</span>(files, f.Name())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/字符串/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -1098,7 +1098,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/docker/docker-compose/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/docker/docker-compose/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -1277,7 +1277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/docker/常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/docker/常用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -1421,7 +1421,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/Awk/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/Awk/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -1586,7 +1586,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/pdf处理/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/pdf处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
