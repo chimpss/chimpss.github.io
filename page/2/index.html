@@ -275,6 +275,251 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang/http上传下载/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/http上传下载/" itemprop="url">HTTP 上传 下载</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T01:34:25+08:00">
+                2018-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取form文件</span></span><br><span class="line">file, err := c.FormFile(<span class="string">"attachment"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">now := time.Now()</span><br><span class="line"><span class="comment">// 检查目录</span></span><br><span class="line">dir := fmt.Sprintf(<span class="string">"upload/%d%d"</span>, now.Year(), now.Month())</span><br><span class="line"><span class="keyword">if</span> !utils.Exists(dir) &#123;</span><br><span class="line">	err = os.MkdirAll(dir, os.ModePerm)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建文件</span></span><br><span class="line">path := fmt.Sprintf(<span class="string">"%s/%d%s"</span>, dir, now.Unix()%(<span class="number">3600</span>*<span class="number">24</span>*<span class="number">30</span>), file.Filename)</span><br><span class="line">out, err := os.Create(path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">f, err := file.Open()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">_, err = io.Copy(out, f)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">file, err := os.Open(attachment.Path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取文件头信息</span></span><br><span class="line">fileHeader := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">512</span>)</span><br><span class="line">file.Read(fileHeader)</span><br><span class="line">fileContentType := http.DetectContentType(fileHeader)</span><br><span class="line">fileStat, _ := file.Stat()</span><br><span class="line">fileSize := strconv.FormatInt(fileStat.Size(), <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置response header头，gin框架也可以用c.Header("","")</span></span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment; filename="</span>+attachment.Name)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Type"</span>, fileContentType)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Length"</span>, fileSize)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意还原io读取指针</span></span><br><span class="line">file.Seek(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">_, err = io.Copy(c.Writer, file)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/digest/文摘/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/digest/文摘/" itemprop="url">文摘</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-28T17:43:29+08:00">
+                2018-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="做人难"><a href="#做人难" class="headerlink" title="做人难"></a>做人难</h1><blockquote>
+<p>“  海浪卷走了小孩的鞋子，小孩在海滩上写下：大海是小偷！一个男人在海里打捞出了一些好东西，在沙滩上写到：大海真慷慨！ 一少年溺水身亡，他的母亲在海边写了：大海是凶手！ 一个老翁打捞到了珍珠，他写到：大海真仁慈！ …这时一个海浪冲上来抹去了所有的字， 大海平静地说：如果你想成为大海， 就不要在意别人对你的评说！ 因为你做不到让所有人满意。人生如果容易的话，你当初来到这个世界时就不会从哭泣开始！  ” 共勉</p>
+</blockquote>
+<h1 id="喜欢"><a href="#喜欢" class="headerlink" title="喜欢"></a>喜欢</h1><blockquote>
+<p>有一个民谣青年曾说：最单纯的喜欢就是，就算你拒绝了我，我对你也永远没有埋怨。但我不会再靠近了。如果你有求于我，我依然会鞠躬尽瘁。从今往后我会把喜欢藏起来，不再招摇过市了，我会努力过得好，希望你也是。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux/zsh/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1252,135 +1497,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/http/cookie/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/http/cookie/" itemprop="url">cookie</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="cookie-是怎么工作的"><a href="#cookie-是怎么工作的" class="headerlink" title="cookie 是怎么工作的"></a>cookie 是怎么工作的</h1><p>当网页要发http请求时，浏览器会先检查是否有相应的<code>cookie</code>，有则自动添加在<code>request header</code>中的<code>cookie</code>字段中。这些是浏览器自动帮我们做的，而且每一次http请求浏览器都会自动帮我们做。这个特点很重要，因为这关系到“<strong>什么样的数据适合存储在cookie中</strong>”。</p>
-<p>存储在cookie中的数据，<code>每次</code>都会被浏览器自动放在<code>http请求</code>中，如果这些数据并不是每个请求都需要发给服务端的数据，浏览器这设置自动处理无疑增加了网络开销；但如果这些数据是每个请求都需要发给服务端的数据（比如身份认证信息），浏览器这设置自动处理就大大免去了重复添加操作。所以对于那设置“每次请求都要携带的信息（最典型的就是身份认证信息）”就特别适合放在cookie中，其他大多数类型的数据就不适合了。</p>
-<h1 id="cookie-属性"><a href="#cookie-属性" class="headerlink" title="cookie 属性"></a>cookie 属性</h1><p>每个cookie都有一定的属性，如什么时候失效，要发送到哪个域名，哪个路径等等。这些属性是通过cookie选项来设置的，cookie选项包括：<code>expires、domain、path、secure、HttpOnly</code>。在设置任一个cookie时都可以设置相关的这些属性，当然也可以不设置，这时会使用这些属性的默认值。在设置这些属性时，属性之间由一个<code>分号和一个空格</code>隔开。代码示例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"key=name; expires=Thu, 25 Feb 2016 04:18:00 GMT; domain=ppsc.sankuai.com; path=/; secure; HttpOnly"</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h2><p>expires选项用来设置“cookie 什么时间内有效”。expires其实是<code>cookie失效日期</code>，expires必须是 GMT 格式的时间（可以通过 <code>new Date().toGMTString()</code>或者 <code>new Date().toUTCString()</code> 来获得）。</p>
-<p>expires 是 http/1.0协议中的选项，在新的http/1.1协议中expires已经由 <code>max-age</code> 选项代替，两者的作用都是限制cookie 的有效时间。expires的值是一个<code>时间点</code>（<code>cookie失效时刻= expires</code>），而max-age 的值是一个<code>以秒为单位时间段</code>（<code>cookie失效时刻= 创建时刻+ max-age</code>）。<br>另外，max-age 的默认值是 <code>-1</code>(即有效期为 session )；若max-age有三种可能值：负数、0、正数。负数：有效期session；0：删除cookie；正数：有效期为创建时刻+ max-age</p>
-<h2 id="domain-和-path"><a href="#domain-和-path" class="headerlink" title="domain 和 path"></a>domain 和 path</h2><p><code>domain</code>是域名，<code>path</code>是路径，两者加起来就构成了 URL，domain和path一起来限制 cookie 能被哪些 URL 访问。<br>一句话概括：某cookie的 <code>domain为“baidu.com”, path为“/ ”</code>，若请求的URL(URL 可以是js/html/img/css资源请求，但不包括 XHR 请求)的域名是“baidu.com”或其子域如“api.baidu.com”、“dev.api.baidu.com”，且 URL 的路径是“/ ”或子路径“/home”、“/home/login”，则浏览器会将此 cookie 添加到该请求的 cookie 头部中。<br>发生<code>跨域xhr</code>请求时，即使请求URL的域名和路径都满足 cookie 的 domain 和 path，默认情况下cookie也不会自动被添加到请求头部中</p>
-<h2 id="secure"><a href="#secure" class="headerlink" title="secure"></a>secure</h2><p>secure选项用来设置cookie只在确保<code>安全</code>的请求中才会发送。当请求是<code>HTTPS或者其他安全协议</code>时，包含 secure 选项的 cookie 才能被发送至服务器。<br>默认情况下，cookie不会带secure选项(即为<code>空</code>)。所以默认情况下，不管是HTTPS协议还是HTTP协议的请求，cookie 都会被发送至服务端</p>
-<h2 id="httpOnly"><a href="#httpOnly" class="headerlink" title="httpOnly"></a>httpOnly</h2><p>这个选项用来设置<code>cookie是否能通过 js 去访问</code>。<br>默认情况下，cookie不会带httpOnly选项(即为空)，所以默认情况下，客户端是可以通过js代码去访问（包括读取、修改、删除等）这个cookie的。<br>当cookie带httpOnly选项时，客户端则无法通过js代码去访问（包括读取、修改、删除等）这个cookie。</p>
-<h1 id="如何设置cookie"><a href="#如何设置cookie" class="headerlink" title="如何设置cookie"></a>如何设置cookie</h1><h2 id="服务端设置-cookie"><a href="#服务端设置-cookie" class="headerlink" title="服务端设置 cookie"></a>服务端设置 cookie</h2><p>不管你是请求一个资源文件（如 html/js/css/图片），还是发送一个ajax请求，服务端都会返回<code>response</code>。而<code>response header</code>中有一项叫<code>set-cookie</code>，是服务端专门用来设置cookie的。<br><code>一个set-Cookie字段只能设置一个cookie</code>，当你要想设置多个 cookie，需要添加同样多的set-Cookie字段。<br>服务端可以设置cookie 的所有选项：expires、domain、path、secure、HttpOnly</p>
-<h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><p>客户端可以设置cookie 的下列选项：expires、domain、path、secure（有条件：只有在https协议的网页中，客户端设置secure类型的 cookie 才能成功），但无法设置HttpOnly选项。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/http/跨域cors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1519,156 +1635,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/digest/论成熟的男银/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/digest/论成熟的男银/" itemprop="url">论成熟的男银</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>摘自知乎：<a href="https://www.zhihu.com/question/21295246/answer/21828415" target="_blank" rel="noopener">吴遇安</a></p>
-<h1 id="能够解决问题的男人就是成熟的男人"><a href="#能够解决问题的男人就是成熟的男人" class="headerlink" title="能够解决问题的男人就是成熟的男人"></a>能够解决问题的男人就是成熟的男人</h1><p>这个题目看似很容易写，因为每个人都可以有自己对于“成熟”的理解，但答主更崇尚用较为理性的方式来分析这个命题，所以下面，我会尽可能用一种严谨的方式来解构这个命题。</p>
-<p>我们列出了某个界定标准，符合这个标准的，便是“成熟男人”，而这个问题便是在探讨这个标准是什么，其实这个问题下的许多回答中提出的标准，反例都太好举了，一个挖鼻孔的大色狼坂田银时，恐怕难以符合这里的大多数标准，但是难道有人认为他“不成熟”吗？</p>
-<p>再举一个著名的范例<br><strong>君子</strong><br>君子XXX<br>君子应该XXX<br>君子不应该XXX<br>XXX样的人才能算君子</p>
-<p>类似的叙述，占据了我国古代儒家著述的很大一部分，很熟悉吧？古人讨论君子的时候，其实和我们现在讨论成熟男人的情形是一样的，大家都在纷纷说，梨子是水果，苹果是水果，却没能很好的给水果做一个足够精确的描述。<br>本楼中的回答，男人们的大部分都在描述一个<strong>想象中的完美人格，甚至是想象中的自己</strong>（如同古人想象“君子”）<br>而女孩子们的回答，则大多都在描述自己<strong>理想中的爱人形象</strong>。</p>
-<p><strong>须知，这个家伙出现在现实生活中的时候，许多女孩子也会觉得他是成熟男人呢</strong>。<br><img src="https://leanote.com/api/file/getImage?fileId=58d380c5ab64417edb0008ba" alt=""><br>用这样的枚举法得到的结论，我认为并不具有很强的说服力。因此，我在这份回答里，就是希望探讨<strong>一条具有普适效用的标准，以此来界定成熟男人的边界</strong>。</p>
-<p>我们在生活中普遍认同的成熟男人形象，包含了许多的要素，冷静，善良，宽容，等等等等，那么，<strong>到底其中的哪些，才是造成“成熟男人”与“不成熟男人”的根本分界点呢</strong>，成熟男人的定义，对于实践有什么指导意义？</p>
-<p>我以前刷知乎的时候看过一个问题，问“为什么鸡汤文受人讨厌”，下面排名第一的回答叫做“因为没给勺子”。这其实就是本楼中许多答案的问题，只给了一个目标，“<strong>做到XX样就是成熟男人</strong>”，但是，为什么这样就是成熟男人，怎样才能成为成熟男人，对于这两个关键的问题，却没有进行解答，就是典型的“<strong>送汤不送勺</strong>”。而本文，则致力于解析“成熟”的本质，并且给出到达彼岸的路径。</p>
-<p>我得到的答案是：</p>
-<p>成熟与不成熟的根本分界点，在于“<strong>对于规律的理解和运用能力</strong>”</p>
-<p>在对于成熟进行解析之前，我们首先要解决的，是这个问题。<br><strong>成熟的目的是什么？</strong></p>
-<p>不要忽视这一点，成熟往往出现在两种语境之中，一曰”XX性格成熟“，二曰”XX处理某项事务的手法成熟‘，为什么我们追求成熟？因为在我们的想象和实践中，越”成熟（包括性格和处理手法）“，往往代表了<strong>对问题更强的解决能力</strong></p>
-<p>不论这个问题是追求更高的社会地位，更多的财富，更好的处理与他人的关系，更愉悦的生活和心态，或者是与这个世界更和谐地相处。以题目的题主为例，他感慨自己不成熟，其实是在感慨“<strong>处理两性关系的能力不强</strong>”！</p>
-<p>我们说，在某个领域内，张三比李四更成熟，指的是在该领域内，张三比李四有更强的解决问题的能力，而我们说张三比李四的性格更成熟，指的是张三在<strong>多个领域内均具有比李四更强的解决问题的能力</strong>。</p>
-<p>在明了成熟的目的之后，我们接下来研究的，就是，在成熟包含的许多特质之中，<strong>有哪些对于达成这个目的具有最关键的影响</strong>，那么，这个（或者这些）特质就可以<strong>被认定为是决定某人“成熟度”的核心，是区分成熟与幼稚的根本分界点</strong>。</p>
-<p>我们之前探讨的“成熟”，大多是出自对于一个完美人格的想象，这个完美的人格中包涵了许多要素，沉稳，冷静，善良，宽厚，仁爱，温柔，坚强，慷慨，自立，目标明确胸有大志等等等等。那么，如何确定哪一项特质才是区分成熟与幼稚的根本分界点呢？下面，我来介绍一种我本人分析问题时的常用方法，即“去除噪声法”，分为四步</p>
-<p>第一步，收集，<br>收集所有我们对于“成熟”特质的想象，加以总结归纳。<br>第二步，筛选，这许多的特质中，有哪些是<strong>“成熟”特有的</strong>，即“幼稚”的人几乎不可能具备的。<br>第三步，对比，“成熟”的人特有的素质中，<strong>共性在于哪里</strong>。<br>第四步，分析，“成熟”素质的共性，<strong>应当如何锻炼</strong>？</p>
-<p>第一步，收集<br>稳重，善良，冷静，宽厚，目标明确，坚强，勇敢，自立，慷慨，礼貌，低调，智慧，果断，有责任感。<br>统计了这个楼里的三百多个答案，归纳出的特质大致如此，这些素质，如果一个男人具备了，毫无疑问他是成熟的，一个女人要想找到这样的男人，做梦也要笑醒。</p>
-<p>第二步，筛选。<br>在诸多特质中，有一些是“幼稚”的男人也能够拥有的，有一些是并非是“成熟男人”必备的，（例如坂田银时不礼貌，古美门律师。。。算了我不说了。。半泽直树君爱记仇，但是我们也普遍认为这几位都是成熟男人），这些特质，我将在下面列出并加以剔除。<br>善良，幼稚男也可以有，pass 坚强，pass 礼貌，pass 有责任感，pass 勇敢，pass 宽厚，pass慷慨，pass<br>那么剩下的有 稳重 冷静 目标明确 自立 低调 智慧 果断<br>稳重，代表考虑问题全面的能力<br>冷静，代表处变不惊的能力<br>目标明确，低调和自立三种特质可以合并，为图方便，下面均以“自立”代替三者，代表不以物喜，不以己悲，内心抗击外界干扰的能力，清楚自己的需求，并且坚定不移地加以追求智慧，稳重代表考虑问题全面，而智慧则又多了一种素质，能够抓住问题的关键点，果断，代表面临选择时的决断能力。</p>
-<p>第三步，找出共性<br>第二步中提到，这五项素质，是成熟男人必备，也是成熟男人特有的能力，在这个步骤之中，我将解析，这五种素质的核心共性是什么。<br>换句话来说，<strong>你做到了某件事情，就能够自然而然的拥有这五种特质，我的任务就是解析出“这件事情”是什么</strong>。</p>
-<p>如果把团队中的工作分为”智“与”力“（可理解为思考和执行），那么我的属性就是”智“。<br>我曾经不止一次的思考过，“智”与“力”的极限在哪里，“力”的极限，可描述为“专拆南墙”，就像成语故事里无坚不摧的矛，没有捅不穿的防御。<br>而“智”的极限，我认为，是“<strong>预知</strong>”。<br>对于智者而言，<strong>学习和实践都是为了找寻事物发展变化的规律，而找寻规律，则是为了推测日后事物的形态</strong>。<br><strong>因此，“智”的极限，即是“预知”</strong>。</p>
-<p>稳重，冷静，目标明确，智慧，果断。<br>这五种素质都有一个共性，即它们的主人，已经“<strong>知道</strong>”了。<br><strong>曾经经历过，知道接下来会发生什么，并且对可能出现出现的几种结果都做好了准备</strong>。<br>因为他已经“知道”了，所以，自然能够全面的考虑问题<br>因为已经经历过了，所以不会惊慌失措，从而能够处变不惊<br>因为“知道了”，所以能够准确的找出问题的核心<br>因为已经对于各种结果都做好了应对的准备，或者说能够接受失败，所以成熟男人才能果断地下决定<br>成熟男人的目标很明确，不会被外物所扰，因为他已经“<strong>经历过</strong>”，并且“<strong>知道了</strong>”。<br>所以，这五种素质的核心，即在于“<strong>经历</strong>”，和“<strong>知道</strong>”。</p>
-<p>从实践和理论中领悟出规律，并且能够在实践中运用规律，从而获得强大的解决问题的能力，即为成熟。</p>
-<p>成熟区别于幼稚的的核心，即，<strong>对于“规律”的理解和运用</strong>。</p>
-<p><strong>最后，是第四步，应当如何锻炼</strong>。<br>多实践，多读书，多思考。<br>不是烂尾，而是我实在找不到比这九个字更好的词来描述了。<br><strong>主动地去经历事物，积极地从书中和自己的实践中总结规律，思考如何应用规律，就是达到“成熟”彼岸的通道</strong>。</p>
-<p>成熟”从本质上来说，<strong>是一种技能而非性格，性格的养成来源于技能的提升</strong>。我们从小到大被说了那么多年的不成熟，究竟传说中的成熟是什么东西？</p>
-<p>成熟绝不只是停留于高僧，老头子，中年大叔身上的专利，我们更没有必要将之神化，“鸡汤化”，<br>成熟不是性格，只是一种技能，古美门律师在处理案件的时候手法非常成熟，对自己作为律师的“道”达到了坚信不疑的程度，不可不谓之境界高深，但是在处理人际关系的时候态度却不成熟，暴躁，没礼貌，不稳重。银他妈经历了丰富的人生，面对危局处事不惊，战场上白夜叉几度血战来回，却连区区甜食的诱惑也抵挡不了。<br>他们都成熟，他们也都不成熟。</p>
-<p>维特根斯坦说过，说不出来的东西就当它不存在，我认为包括成熟男人在内，好多<strong>我们日常的概念都被过分神化了，明明是可以解析的事情，搞得神神叨叨，令人甚为不爽</strong><br>对我们这些不完美的人来说，要求一个人“成熟”起来，并非要求他“能够解决一切事情”，而是要求他“在总体解决问题的能力上达到他这个年纪的人的均值”。<br>何必急于一时？何必用完美的标准去要求所有人？</p>
-<p>对于我们少年人来说，这几个家伙何尝不是成熟？<br><img src="https://leanote.com/api/file/getImage?fileId=58d38514ab64417edb000935" alt=""></p>
-<p><em>我是要成为海贼王的男人，就算为此而死，也无所谓</em><br>　　　　　　　　　　　　　　　　　　　　　　　———Monkey D Luffy<br><img src="https://leanote.com/api/file/getImage?fileId=58d38546ab64417edb000936" alt=""></p>
-<p><em>因为我是天才</em><br>　　　　　　　　　　　　　　　　　　　　　　　———樱木花道<br>为什么你这么不成熟？<br>因为我是<strong>天才</strong>啊哈哈哈</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1719,7 +1685,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
