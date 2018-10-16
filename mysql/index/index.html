@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="http," />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="url传参 这种在各种method（get，post，delete，put）都能使用，解析速度快  body体中的参数application/x-www-form-urlencoded这应该是最常见的 POST 提交数据的方式了。浏览器的原生  表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这">
-<meta name="keywords" content="http">
+<meta name="description" content="查询索引1234SHOW &amp;#123;INDEX | INDEXES | KEYS&amp;#125;    &amp;#123;FROM | IN&amp;#125; tbl_name    [&amp;#123;FROM | IN&amp;#125; db_name]    [WHERE expr] 例子：1SHOW INDEX FROM mydb.mytable; 字段较多时，竖着看更清晰12SHOW INDEX FROM myd">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="参数">
-<meta property="og:url" content="http://yoursite.com/http/参数/index.html">
+<meta property="og:title" content="索引">
+<meta property="og:url" content="http://yoursite.com/mysql/index/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="url传参 这种在各种method（get，post，delete，put）都能使用，解析速度快  body体中的参数application/x-www-form-urlencoded这应该是最常见的 POST 提交数据的方式了。浏览器的原生  表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这">
+<meta property="og:description" content="查询索引1234SHOW &amp;#123;INDEX | INDEXES | KEYS&amp;#125;    &amp;#123;FROM | IN&amp;#125; tbl_name    [&amp;#123;FROM | IN&amp;#125; db_name]    [WHERE expr] 例子：1SHOW INDEX FROM mydb.mytable; 字段较多时，竖着看更清晰12SHOW INDEX FROM myd">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-07T07:50:00.609Z">
+<meta property="og:updated_time" content="2018-10-16T03:39:16.363Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="参数">
-<meta name="twitter:description" content="url传参 这种在各种method（get，post，delete，put）都能使用，解析速度快  body体中的参数application/x-www-form-urlencoded这应该是最常见的 POST 提交数据的方式了。浏览器的原生  表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这">
+<meta name="twitter:title" content="索引">
+<meta name="twitter:description" content="查询索引1234SHOW &amp;#123;INDEX | INDEXES | KEYS&amp;#125;    &amp;#123;FROM | IN&amp;#125; tbl_name    [&amp;#123;FROM | IN&amp;#125; db_name]    [WHERE expr] 例子：1SHOW INDEX FROM mydb.mytable; 字段较多时，竖着看更清晰12SHOW INDEX FROM myd">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/http/参数/"/>
+  <link rel="canonical" href="http://yoursite.com/mysql/index/"/>
 
 
 
 
 
-  <title>参数 | 秀才</title>
+  <title>索引 | 秀才</title>
   
 
 
@@ -279,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/http/参数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql/index/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -296,7 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">参数</h1>
+          <h1 class="post-title" itemprop="name headline">索引</h1>
         
 
         <div class="post-meta">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-16T11:25:02+08:00">
+                2018-10-16
               </time>
             
 
@@ -346,18 +346,15 @@
       
 
       
-        <h1 id="url传参"><a href="#url传参" class="headerlink" title="url传参"></a>url传参</h1><blockquote>
-<p>这种在各种method（get，post，delete，put）都能使用，解析速度快</p>
-</blockquote>
-<h1 id="body体中的参数"><a href="#body体中的参数" class="headerlink" title="body体中的参数"></a>body体中的参数</h1><h2 id="application-x-www-form-urlencoded"><a href="#application-x-www-form-urlencoded" class="headerlink" title="application/x-www-form-urlencoded"></a>application/x-www-form-urlencoded</h2><p>这应该是最常见的 POST 提交数据的方式了。浏览器的原生 <form> 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样（无关的请求头在本文中都省略掉了）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST http://www.example.com HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded;charset=utf-8</span><br><span class="line"></span><br><span class="line">title=test&amp;sub%5B%5D=1&amp;sub%5B%5D=2&amp;sub%5B%5D=3</span><br></pre></td></tr></table></figure></form></p>
-<p>首先，Content-Type 被指定为 application/x-www-form-urlencoded；其次，提交的数据按照 key1=val1&amp;key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码。大部分服务端语言都对这种方式有很好的支持。例如 PHP 中，$_POST[‘title’] 可以获取到 title 的值，$_POST[‘sub’] 可以得到 sub 数组。<br>很多时候，我们用 Ajax 提交数据时，也是使用这种方式。例如 JQuery 和 QWrap 的 Ajax，Content-Type 默认值都是「application/x-www-form-urlencoded;charset=utf-8」。</p>
-<h2 id="multipart-form-data"><a href="#multipart-form-data" class="headerlink" title="multipart/form-data"></a>multipart/form-data</h2><p>这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 <form> 表单的 enctype 等于 multipart/form-data。直接来看一个请求示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST http://www.example.com HTTP/1.1</span><br><span class="line">Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA</span><br><span class="line">Content-Disposition: form-data; name=&quot;text&quot;</span><br><span class="line"></span><br><span class="line">title</span><br><span class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA</span><br><span class="line">Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;chrome.png&quot;</span><br><span class="line">Content-Type: image/png</span><br><span class="line"></span><br><span class="line">PNG ... content of chrome.png ...</span><br><span class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA--</span><br></pre></td></tr></table></figure></form></p>
-<p>这个例子稍微复杂点。首先生成了一个 boundary 用于分割不同的字段，为了避免与正文内容重复，boundary 很长很复杂。然后 Content-Type 里指明了数据是以 multipart/form-data 来编码，本次请求的 boundary 是什么内容。消息主体里按照字段个数又分为多个结构类似的部分，每部分都是以 –boundary 开始，紧接着是内容描述信息，然后是回车，最后是字段具体内容（文本或二进制）。如果传输的是文件，还要包含文件名和文件类型信息。消息主体最后以 –boundary– 标示结束。关于 multipart/form-data 的详细定义，请前往 rfc1867 查看。<br>这种方式一般用来上传文件，各大服务端语言对它也有着良好的支持。<br>上面提到的这两种 POST 数据的方式，都是浏览器原生支持的，而且现阶段标准中原生 <form> 表单也只支持这两种方式（通过 <form> 元素的 enctype 属性指定，默认为 application/x-www-form-urlencoded。其实 enctype 还支持 text/plain，不过用得非常少）。<br>随着越来越多的 Web 站点，尤其是 WebApp，全部使用 Ajax 进行数据交互之后，我们完全可以定义新的数据提交方式，给开发带来更多便利。</form></form></p>
-<h2 id="application-json"><a href="#application-json" class="headerlink" title="application/json"></a>application/json</h2><p>application/json 这个 Content-Type 作为响应头大家肯定不陌生。实际上，现在越来越多的人把它作为请求头，用来告诉服务端消息主体是序列化后的 JSON 字符串。由于 JSON 规范的流行，除了低版本 IE 之外的各大浏览器都原生支持 JSON.stringify，服务端语言也都有处理 JSON 的函数，使用 JSON 不会遇上什么麻烦。<br>JSON 格式支持比键值对复杂得多的结构化数据，这一点也很有用。记得我几年前做一个项目时，需要提交的数据层次非常深，我就是把数据 JSON 序列化之后来提交的。不过当时我是把 JSON 字符串作为 val，仍然放在键值对里，以 x-www-form-urlencoded 方式提交。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST http://www.example.com HTTP/1.1 </span><br><span class="line">Content-Type: application/json;charset=utf-8</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">"title"</span>:<span class="string">"test"</span>,<span class="attr">"sub"</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这种方案，可以方便的提交复杂的结构化数据，特别适合 RESTful 的接口。各大抓包工具如 Chrome 自带的开发者工具、Firebug、Fiddler，都会以树形结构展示 JSON 数据，非常友好。但也有些服务端语言还没有支持这种方式，例如 php 就无法通过 $_POST 对象从上面的请求中获得内容。这时候，需要自己动手处理下：在请求头中 Content-Type 为 application/json 时，从 php://input 里获得原始输入流，再 json_decode 成对象。一些 php 框架已经开始这么做了。</p>
-<h2 id="text-xml"><a href="#text-xml" class="headerlink" title="text/xml"></a>text/xml</h2><blockquote>
-<p>本人对此格式有成见，就不赘述了。</p>
-</blockquote>
+        <h2 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> &#123;<span class="keyword">INDEX</span> | <span class="keyword">INDEXES</span> | <span class="keyword">KEYS</span>&#125;</span><br><span class="line">    &#123;<span class="keyword">FROM</span> | <span class="keyword">IN</span>&#125; tbl_name</span><br><span class="line">    [&#123;<span class="keyword">FROM</span> | <span class="keyword">IN</span>&#125; db_name]</span><br><span class="line">    [<span class="keyword">WHERE</span> expr]</span><br></pre></td></tr></table></figure>
+<p>例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">INDEX</span> <span class="keyword">FROM</span> mydb.mytable;</span><br></pre></td></tr></table></figure></p>
+<p>字段较多时，竖着看更清晰<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">INDEX</span> <span class="keyword">FROM</span> mydb.mytable\G;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">index</span> <span class="keyword">from</span> authority;</span><br></pre></td></tr></table></figure></p>
+<h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><p>直通车：<a href="https://dev.mysql.com/doc/refman/5.7/en/create-index.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/create-index.html</a><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span> | FULLTEXT | SPATIAL] <span class="keyword">INDEX</span> index_name</span><br><span class="line">    [index_type]</span><br><span class="line">    <span class="keyword">ON</span> tbl_name (key_part,...)</span><br><span class="line">    [index_option]</span><br><span class="line">    [algorithm_option | lock_option] ...</span><br><span class="line"></span><br><span class="line">key_part:</span><br><span class="line">    col_name [(<span class="keyword">length</span>)] [<span class="keyword">ASC</span> | <span class="keyword">DESC</span>]</span><br><span class="line"></span><br><span class="line">index_option:</span><br><span class="line">    KEY_BLOCK_SIZE [=] <span class="keyword">value</span></span><br><span class="line">  | index_type</span><br><span class="line">  | <span class="keyword">WITH</span> PARSER parser_name</span><br><span class="line">  | <span class="keyword">COMMENT</span> <span class="string">'string'</span></span><br><span class="line"></span><br><span class="line">index_type:</span><br><span class="line">    <span class="keyword">USING</span> &#123;BTREE | <span class="keyword">HASH</span>&#125;</span><br><span class="line"></span><br><span class="line">algorithm_option:</span><br><span class="line">    ALGORITHM [=] &#123;<span class="keyword">DEFAULT</span> | INPLACE | COPY&#125;</span><br><span class="line"></span><br><span class="line">lock_option:</span><br><span class="line">    <span class="keyword">LOCK</span> [=] &#123;<span class="keyword">DEFAULT</span> | <span class="keyword">NONE</span> | <span class="keyword">SHARED</span> | EXCLUSIVE&#125;</span><br></pre></td></tr></table></figure></p>
+<p>例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> id_index <span class="keyword">ON</span> lookup (<span class="keyword">id</span>) <span class="keyword">USING</span> BTREE;</span><br></pre></td></tr></table></figure></p>
+<h2 id="删除索引："><a href="#删除索引：" class="headerlink" title="删除索引："></a>删除索引：</h2><p>语法使用的alert，比较复杂，只放一个链接吧<br><a href="https://dev.mysql.com/doc/refman/5.7/en/alter-table.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/alter-table.html</a></p>
+<p>例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> authority <span class="keyword">drop</span> <span class="keyword">index</span> UQE_authority_page;</span><br></pre></td></tr></table></figure></p>
+<h2 id="联合索引："><a href="#联合索引：" class="headerlink" title="联合索引："></a>联合索引：</h2><p>联合索引又叫复合索引。对于复合索引:Mysql从左到右的使用索引中的字段，一个查询可以只使用索引中的一部份，但只能是最左侧部分。例如索引是key index (a,b,c). 可以支持a | a,b| a,b,c 3种组合进行查找，但不支持 b,c进行查找 .当最左侧字段是常量引用时，索引就十分有效。</p>
+<p>例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">index</span> <span class="keyword">from</span> authority;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> authority <span class="keyword">drop</span> <span class="keyword">index</span> UQE_authority_page;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">index</span> UQE_authority_page <span class="keyword">on</span> authority(company_id,page);</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -375,7 +372,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/http/" rel="tag"># http</a>
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
           
         </div>
       
@@ -388,8 +385,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/http/header/" rel="next" title="header">
-                <i class="fa fa-chevron-left"></i> header
+              <a href="/linux/eval/" rel="next" title="拼接新的变量名">
+                <i class="fa fa-chevron-left"></i> 拼接新的变量名
               </a>
             
           </div>
@@ -397,10 +394,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/linux/网络管理/" rel="prev" title="网络管理">
-                网络管理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -530,7 +523,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#url传参"><span class="nav-number">1.</span> <span class="nav-text">url传参</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#body体中的参数"><span class="nav-number">2.</span> <span class="nav-text">body体中的参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#application-x-www-form-urlencoded"><span class="nav-number">2.1.</span> <span class="nav-text">application/x-www-form-urlencoded</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multipart-form-data"><span class="nav-number">2.2.</span> <span class="nav-text">multipart/form-data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application-json"><span class="nav-number">2.3.</span> <span class="nav-text">application/json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#text-xml"><span class="nav-number">2.4.</span> <span class="nav-text">text/xml</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查询索引"><span class="nav-number">1.</span> <span class="nav-text">查询索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建索引"><span class="nav-number">2.</span> <span class="nav-text">创建索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除索引："><span class="nav-number">3.</span> <span class="nav-text">删除索引：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合索引："><span class="nav-number">4.</span> <span class="nav-text">联合索引：</span></a></li></ol></div>
             
 
           </div>
