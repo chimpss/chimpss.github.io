@@ -301,9 +301,9 @@
     </summary>
     
     
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
-    
       <category term="http" scheme="http://yoursite.com/tags/http/"/>
+    
+      <category term="go" scheme="http://yoursite.com/tags/go/"/>
     
   </entry>
   
