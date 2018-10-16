@@ -281,6 +281,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/pdf处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux/pdf处理/" itemprop="url">pdf处理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-06T10:19:36+08:00">
+                2017-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/pdf处理/" class="leancloud_visitors" data-flag-title="pdf处理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>PDFtk 是什么？我觉得官网的一句话解释得很好。</p>
+<blockquote>
+<p>If PDF is electronic paper, then PDFtk is an electronic staple-remover, hole-punch, binder, secret-decoder-ring, and X-Ray-glasses. PDFtk is a simple tool for doing everyday things with PDF documents.</p>
+</blockquote>
+<p>其官方网站为：<br><a href="http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit" target="_blank" rel="noopener">官网</a></p>
+<p>PDFtk 目前分为三个版本：</p>
+<ul>
+<li>PDFtk Server：<br>命令行工具。支持 windows、Linux、Mac。</li>
+<li>PDFtk Free：<br>图形界面基础免费版；仅限 windows 用户；功能仅限于 PDF 合并和分割；</li>
+<li>PDFtk Pro：<br>图形界面专业收费版；仅限 windows 用户，可以对 PDF 文档进行合并、分割、旋转、加水印、加邮戳、加密。</li>
+</ul>
+<p>对于 Linux 用户，唯一的选择是免费的 PDFtk Server，其功能与收费 PDFtk Pro 完全相同，只是没有 GUI 而已。作者还是很厚道的。</p>
+<p>Linux 的各个发行版的官方源中基本都有该软件，直接 apt-get 或者 yum 安装即可。</p>
+<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><p>合并 PDF；<br>分割 PDF 页面；<br>旋转 PDF 文档或页面；<br>PDF 解密；（不是破解）<br>PDF 加密；<br>用 X/FDF 填写 PDF 表格；<br>从 PDF 表格中生成 PDF Data Stencils；<br>加背景水印或前景印章；<br>报告 PDF Metrics，书签和元数据；<br>增加 / 更新 PDF 书签或元数据；<br>给 PDF 页面或文档加附件；<br>解压 PDF 附件；<br>分解 PDF 文档为多个单页；<br>解压缩和重压缩页面流；<br>修复受损的 PDF 文档；<br>这功能完全可以与 Adobe Acrobat 相媲美了，更重要的是 PDFtk 支持 Linux 且完全免费。（个人用户免费，若用于商业用途需付费）。</p>
+<h1 id="用法示例"><a href="#用法示例" class="headerlink" title="用法示例"></a>用法示例</h1><p>具体选项看这里：</p>
+<p><a href="http://www.pdflabs.com/docs/pdftk-man-page/" target="_blank" rel="noopener">具体选项</a></p>
+<p>下面给出一些常见的例子。例子原文</p>
+<p>扫描一本书，odd.pdf 为书的全部奇数页，even.pdf 为书的全部偶数页，下面的命令可以将两个 pdf 合并成页码正常的书:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk A=odd.pdf B=even.pdf shuffle A B output collated.pdf</span><br></pre></td></tr></table></figure></p>
+<p>如果 odd.pdf 是逆序的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk A=odd.pdf B=even.pdf shuffle Aend-1 B output collated.pdf</span><br></pre></td></tr></table></figure></p>
+<p>加密 PDF:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk secured.pdf input_pw foopass output unsecured.pdf</span><br></pre></td></tr></table></figure></p>
+<p>PDF 128 位加密，保留全部权限:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk 1.pdf output 1.128.pdf owner_pw foopass</span><br></pre></td></tr></table></figure></p>
+<p>PDF 128 位加密，保留全部权限，打开文档需输入密码 “baz”:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk 1.pdf output 1.128.pdf owner_pw foo user_pw baz</span><br></pre></td></tr></table></figure></p>
+<p>PDF 128 位加密，打开文档需输入密码 “baz”，保留打印之外的其他权限:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk 1.pdf output 1.128.pdf owner_pw foo user_pw baz allow printing</span><br></pre></td></tr></table></figure></p>
+<p>合并 in1.pdf 和 in2.pdf 到新 PDF 中:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in1.pdf in2.pdf cat output out1.pdf</span><br></pre></td></tr></table></figure></p>
+<p>或（使用句柄）:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk A=in1.pdf B=in2.pdf cat A B output out1.pdf</span><br></pre></td></tr></table></figure></p>
+<p>或（使用通配符）:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk *.pdf cat output combined.pdf</span><br></pre></td></tr></table></figure></p>
+<p>去除 in1.pdf 中的第 13 页，并创建 out1.pdf:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf cat 1-12 14-end output out1.pdf</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk A=in1.pdf cat A1-12 A14-end output out1.pdf</span><br></pre></td></tr></table></figure></p>
+<p>对输出进行 40 位加密，撤销所有权限，设置 owner 密码为 foopass:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk 1.pdf 2.pdf cat output 3.pdf encrypt_40bit owner_pw foopass</span><br></pre></td></tr></table></figure></p>
+<p>合并两个文件，其中一个需要被加密。对输出不加密:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk A=secured.pdf 2.pdf input_pw A=foopass cat output 3.pdf</span><br></pre></td></tr></table></figure></p>
+<p>解压 PDF 页面流，然后就可以在文本编辑器中编辑 PDF 文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk doc.pdf output doc.unc.pdf uncompress</span><br></pre></td></tr></table></figure></p>
+<p>压缩 PDF:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk mydoc.pdf output mydoc.clear.pdf compress</span><br></pre></td></tr></table></figure></p>
+<p>修复破损的 PDF:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk broken.pdf output fixed.pdf</span><br></pre></td></tr></table></figure></p>
+<p>将一个 PDF 文档分割成一页一个文档:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf burst</span><br></pre></td></tr></table></figure></p>
+<p>将一个 PDF 文档分割成一页一个文档，并加密，允许低质量的打印:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf burst owner_pw foopass allow DegradedPrinting</span><br></pre></td></tr></table></figure></p>
+<p>获取 PDF 问的元数据和书签信息:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf dump_data output report.txt</span><br></pre></td></tr></table></figure></p>
+<p>将 PDF 第一页顺时针旋转 90 度:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf cat 1east 2-end output out.pdf</span><br></pre></td></tr></table></figure></p>
+<p>将整个 PDF 文档旋转 180 度:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdftk in.pdf cat 1-endsouth output out.pdf</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/shell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1588,154 +1756,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/nginx/rewrite规则/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/nginx/rewrite规则/" itemprop="url">rewrite 规则</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-13T10:19:36+08:00">
-                2017-04-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/nginx/rewrite规则/" class="leancloud_visitors" data-flag-title="rewrite 规则">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-location正则写法"><a href="#1-location正则写法" class="headerlink" title="1. location正则写法"></a>1. location正则写法</h1><blockquote>
-<p>示例：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span>  = / &#123;</span><br><span class="line">  <span class="comment"># 精确匹配 / ，主机名后面不能带任何字符串</span></span><br><span class="line">  [ configuration A ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span>  / &#123;</span><br><span class="line">  <span class="comment"># 因为所有的地址都以 / 开头，所以这条规则将匹配到所有请求</span></span><br><span class="line">  <span class="comment"># 但是正则和最长字符串会优先匹配</span></span><br><span class="line">  [ configuration B ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span> /documents/ &#123;</span><br><span class="line">  <span class="comment"># 匹配任何以 /documents/ 开头的地址，匹配符合以后，还要继续往下搜索</span></span><br><span class="line">  <span class="comment"># 只有后面的正则表达式没有匹配到时，这一条才会采用这一条</span></span><br><span class="line">  [ configuration C ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span> <span class="regexp">~ /documents/Abc</span> &#123;</span><br><span class="line">  <span class="comment"># 匹配任何以 /documents/Abc 开头的地址，匹配符合以后，还要继续往下搜索</span></span><br><span class="line">  <span class="comment"># 只有后面的正则表达式没有匹配到时，这一条才会采用这一条</span></span><br><span class="line">  [ configuration CC ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span><span class="regexp"> ^~</span> /images/ &#123;</span><br><span class="line">  <span class="comment"># 匹配任何以 /images/ 开头的地址，匹配符合以后，停止往下搜索正则，采用这一条。</span></span><br><span class="line">  [ configuration D ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span> <span class="regexp">~* \.(gif|jpg|jpeg)$</span> &#123;</span><br><span class="line">  <span class="comment"># 匹配所有以 gif,jpg或jpeg 结尾的请求</span></span><br><span class="line">  <span class="comment"># 然而，所有请求 /images/ 下的图片会被 config D 处理，因为 ^~ 到达不了这一条正则</span></span><br><span class="line">  [ configuration E ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span> /images/ &#123;</span><br><span class="line">  <span class="comment"># 字符匹配到 /images/，继续往下，会发现 ^~ 存在</span></span><br><span class="line">  [ configuration F ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span> /images/abc &#123;</span><br><span class="line">  <span class="comment"># 最长字符匹配到 /images/abc，继续往下，会发现 ^~ 存在</span></span><br><span class="line">  <span class="comment"># F与G的放置顺序是没有关系的</span></span><br><span class="line">  [ configuration G ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span> <span class="regexp">~ /images/abc/</span> &#123;</span><br><span class="line">  <span class="comment"># 只有去掉 config D 才有效：先最长匹配 config G 开头的地址，继续往下搜索，匹配到这一条正则，采用</span></span><br><span class="line">    [ configuration H ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">location</span> <span class="regexp">~* /js/.*/\.js</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<ul>
-<li>已=开头表示精确匹配<br>如 A 中只匹配根目录结尾的请求，后面不能带任何字符串。</li>
-<li>^~ 开头表示uri以某个常规字符串开头，不是正则匹配</li>
-<li>~ 开头表示区分大小写的正则匹配;</li>
-<li>~* 开头表示不区分大小写的正则匹配</li>
-<li>/ 通用匹配, 如果没有其它匹配,任何请求都会匹配到</li>
-<li>顺序 no优先级：<br>(location =) &gt; (location 完整路径) &gt; (location ^~ 路径) &gt; (location ~,~* 正则顺序) &gt; (location 部分起始路径) &gt; (/)</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1781,7 +1806,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
