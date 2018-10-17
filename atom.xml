@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chimpss.github.io/"/>
-  <updated>2018-10-17T08:58:55.917Z</updated>
+  <updated>2018-10-17T12:00:09.630Z</updated>
   <id>http://chimpss.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis编写lua脚本</title>
+    <link href="http://chimpss.github.io/lua/%E5%A4%9A%E8%B4%A6%E5%8F%B7.1/"/>
+    <id>http://chimpss.github.io/lua/多账号.1/</id>
+    <published>2018-10-17T11:50:31.867Z</published>
+    <updated>2018-10-17T12:00:09.630Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于redis并没有类似mysql或者mongo的乐观锁机制，并发控制成了一个棘手的问题<br>这块是可以用redis的watch来做，但是如果能实现乐观锁，那就非常方便了</p><h2 id="redis使用lua的基础语法"><a href="#redis使用lua的基础语法" class="headerlink" title="redis使用lua的基础语法"></a>redis使用lua的基础语法</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">eval</span> <span class="string">"return &#123;KEYS[1],KEYS[2],ARGV[1],ARGV[2]&#125;"</span> 2 key1 key2 first second</span><br><span class="line">1) <span class="string">"key1"</span></span><br><span class="line">2) <span class="string">"key2"</span></span><br><span class="line">3) <span class="string">"first"</span></span><br><span class="line">4) <span class="string">"second"</span></span><br></pre></td></tr></table></figure><h2 id="lua可以调用的redis函数"><a href="#lua可以调用的redis函数" class="headerlink" title="lua可以调用的redis函数"></a>lua可以调用的redis函数</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis.call()</span><br><span class="line">redis.<span class="built_in">pcall</span>()</span><br></pre></td></tr></table></figure><h2 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> version = redis.call(<span class="string">"INCR"</span>, KEYS[<span class="number">2</span>])</span><br><span class="line"><span class="keyword">if</span> version == <span class="number">1</span> <span class="keyword">then</span></span><br><span class="line">    redis.call(<span class="string">"EXPIRE"</span>, KEYS[<span class="number">2</span>], ARGV[<span class="number">3</span>])</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">tostring</span>(version) ~= ARGV[<span class="number">2</span>] <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="number">-1</span>, version&#125;</span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"><span class="keyword">return</span> redis.call(<span class="string">"SET"</span>, KEYS[<span class="number">1</span>], ARGV[<span class="number">1</span>])</span><br></pre></td></tr></table></figure><p>运行方式：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli EVAL <span class="string">"<span class="variable">$(cat ./helloWorld.lua)</span>"</span> 3 mykey version1 expire 1 1 100</span><br></pre></td></tr></table></figure></p><h2 id="redis并发控制"><a href="#redis并发控制" class="headerlink" title="redis并发控制"></a>redis并发控制</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SaveAtomic 并发控制save 默认versionExpire为30秒</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(db *RedisDB)</span> <span class="title">SaveAtomic</span><span class="params">(key <span class="keyword">string</span>, val <span class="keyword">interface</span>&#123;&#125;, versionKey <span class="keyword">string</span>, versionVal <span class="keyword">int</span>, versionExpire <span class="keyword">int</span>)</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line"><span class="keyword">if</span> versionExpire == <span class="number">0</span> &#123;</span><br><span class="line">versionExpire = <span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line">storeValue, err := db.getStoreValue(val)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"><span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">conn := db.Option.Pool.Get()</span><br><span class="line"><span class="keyword">defer</span> conn.Close()</span><br><span class="line"><span class="keyword">if</span> err = conn.Err(); err != <span class="literal">nil</span> &#123;</span><br><span class="line"><span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">script := <span class="string">`</span></span><br><span class="line"><span class="string">local version = redis.call("INCR", KEYS[2])</span></span><br><span class="line"><span class="string">if version == 1 then</span></span><br><span class="line"><span class="string">    redis.call("EXPIRE", KEYS[2], ARGV[3])</span></span><br><span class="line"><span class="string">end;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if tostring(version) ~= ARGV[2] then</span></span><br><span class="line"><span class="string">    return &#123;-1, version&#125;</span></span><br><span class="line"><span class="string">end;</span></span><br><span class="line"><span class="string">return redis.call("SET", KEYS[1], ARGV[1])</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">getScript := redis.NewScript(<span class="number">3</span>, script)</span><br><span class="line">res, err := redis.String(getScript.Do(conn, key, versionKey, <span class="string">"expire"</span>, storeValue, versionVal, versionExpire))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">utils.Error(err)</span><br><span class="line"><span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> res == <span class="string">"-1"</span> &#123;</span><br><span class="line"><span class="comment">//err = ErrConflict</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="相关文档"><a href="#相关文档" class="headerlink" title="相关文档"></a>相关文档</h2><p><a href="https://redisbook.readthedocs.io/en/latest/feature/scripting.html" target="_blank" rel="noopener">Redis 命令参考 · lua 脚本</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;由于redis并没有类似mysql或者mongo的乐观锁机制，并发控制成了一个棘手的问题&lt;br&gt;这块是可以用redis的watch来做，但是如果能实现乐观锁，那就非常方便了&lt;/p&gt;
+&lt;h2 id=&quot;redis使用lua的基础语法&quot;&gt;&lt;a href=&quot;#redis使用lua的
+      
+    
+    </summary>
+    
+    
+      <category term="lua" scheme="http://chimpss.github.io/tags/lua/"/>
+    
+      <category term="redis" scheme="http://chimpss.github.io/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>goland 快捷键</title>
@@ -476,30 +502,6 @@
       <category term="go" scheme="http://chimpss.github.io/tags/go/"/>
     
       <category term="http" scheme="http://chimpss.github.io/tags/http/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文摘</title>
-    <link href="http://chimpss.github.io/digest/%E6%96%87%E6%91%98/"/>
-    <id>http://chimpss.github.io/digest/文摘/</id>
-    <published>2018-09-28T09:43:29.728Z</published>
-    <updated>2018-10-07T17:42:19.462Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="做人难"><a href="#做人难" class="headerlink" title="做人难"></a>做人难</h1><blockquote><p>“  海浪卷走了小孩的鞋子，小孩在海滩上写下：大海是小偷！一个男人在海里打捞出了一些好东西，在沙滩上写到：大海真慷慨！ 一少年溺水身亡，他的母亲在海边写了：大海是凶手！ 一个老翁打捞到了珍珠，他写到：大海真仁慈！ …这时一个海浪冲上来抹去了所有的字， 大海平静地说：如果你想成为大海， 就不要在意别人对你的评说！ 因为你做不到让所有人满意。人生如果容易的话，你当初来到这个世界时就不会从哭泣开始！  ” 共勉</p></blockquote><h1 id="喜欢"><a href="#喜欢" class="headerlink" title="喜欢"></a>喜欢</h1><blockquote><p>有一个民谣青年曾说：最单纯的喜欢就是，就算你拒绝了我，我对你也永远没有埋怨。但我不会再靠近了。如果你有求于我，我依然会鞠躬尽瘁。从今往后我会把喜欢藏起来，不再招摇过市了，我会努力过得好，希望你也是。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;做人难&quot;&gt;&lt;a href=&quot;#做人难&quot; class=&quot;headerlink&quot; title=&quot;做人难&quot;&gt;&lt;/a&gt;做人难&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;“  海浪卷走了小孩的鞋子，小孩在海滩上写下：大海是小偷！一个男人在海里打捞出了一些好东西，在沙滩上写到：
-      
-    
-    </summary>
-    
-    
-      <category term="有趣的灵魂" scheme="http://chimpss.github.io/tags/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%81%B5%E9%AD%82/"/>
     
   </entry>
   

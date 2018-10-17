@@ -281,6 +281,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/lua/多账号.1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/lua/多账号.1/" itemprop="url">redis编写lua脚本</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-17T19:50:31+08:00">
+                2018-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/lua/多账号.1/" class="leancloud_visitors" data-flag-title="redis编写lua脚本">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          由于redis并没有类似mysql或者mongo的乐观锁机制，并发控制成了一个棘手的问题这块是可以用redis的watch来做，但是如果能实现乐观锁，那就非常方便了
+redis使用lua的基础语法12345&gt; eval "return &#123;KEYS[1],KEYS[2],ARGV[1],ARGV[2]&#125;" 2 key1 key2 first second1) "key1"2) "key2"3) "first"4) "second"
+lua可以调用的redis函数12redis.call()redis.pcall()
+简单例子123456789local version = redis.call("INCR", KEYS[2])if version == 1 then    redis.call("EXPIRE", KEYS[2], ARGV[3])end;if to
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/lua/多账号.1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/ide/goland 快捷键/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1532,149 +1672,6 @@ $* 和 $@ 的区别$* 和 $@ 都表示传递给函数或脚本的所有参数，
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/digest/思考·快与慢/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/digest/思考·快与慢/" itemprop="url">思考·快与慢摘录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-16T11:44:23+08:00">
-                2018-10-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/digest/思考·快与慢/" class="leancloud_visitors" data-flag-title="思考·快与慢摘录">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          两个思维系统在我们的大脑中，存在着两个思维系统，丹尼尔·卡尼曼命名它们为系统1（快思考）和系统2（慢思考）。
-系统1系统1 就像大脑的自动反应模式，会根据生活经验总结无数下意识反应的套路，使生活简化，让我们不必每天早上起来都思考一遍如何套上衣服、扣纽扣、拧开牙膏盖、挤牙膏……
-系统1把生活中的很多事情都变成可一键执行的自动程序，节省我们日常生活中的脑力损耗。
-系统1也能够察觉一些简单的关系，比如“这两个杯子的外型是一样的”、“哥哥比弟弟高一点”……但是它无法处理多个独立话题。
-它可以快速反应出“2+7=9”，但是遇到“27×56=？”这类复杂的问题就会立地蒙圈儿，无法给出答案，而所有令它蒙圈儿的事情，就会移交给系统2处理。
-系统2系统2接到系统1的求助后，就将大脑的注意力分配到系统1碰到的难题上，集中精神处理该问题。
-值得注意的是，系统2的所有运作都需要集中注意力，一旦注意力分散，运作也会
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/digest/思考·快与慢/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1725,7 +1722,7 @@ $* 和 $@ 的区别$* 和 $@ 都表示传递给函数或脚本的所有参数，
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1738,7 +1735,7 @@ $* 和 $@ 的区别$* 和 $@ 都表示传递给函数或脚本的所有参数，
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
