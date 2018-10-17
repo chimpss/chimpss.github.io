@@ -473,9 +473,9 @@
     </summary>
     
     
-      <category term="go" scheme="http://chimpss.github.io/tags/go/"/>
-    
       <category term="http" scheme="http://chimpss.github.io/tags/http/"/>
+    
+      <category term="go" scheme="http://chimpss.github.io/tags/go/"/>
     
   </entry>
   
