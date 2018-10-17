@@ -363,17 +363,18 @@
       
         
           
-            <h2 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> &#123;<span class="keyword">INDEX</span> | <span class="keyword">INDEXES</span> | <span class="keyword">KEYS</span>&#125;</span><br><span class="line">    &#123;<span class="keyword">FROM</span> | <span class="keyword">IN</span>&#125; tbl_name</span><br><span class="line">    [&#123;<span class="keyword">FROM</span> | <span class="keyword">IN</span>&#125; db_name]</span><br><span class="line">    [<span class="keyword">WHERE</span> expr]</span><br></pre></td></tr></table></figure>
-<p>例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">INDEX</span> <span class="keyword">FROM</span> mydb.mytable;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">index</span> <span class="keyword">from</span> authority;</span><br></pre></td></tr></table></figure></p>
-<p>字段较多时，竖着看更清晰<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">INDEX</span> <span class="keyword">FROM</span> mydb.mytable\G;</span><br></pre></td></tr></table></figure></p>
-<h2 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h2><p>直通车：<a href="https://dev.mysql.com/doc/refman/5.7/en/create-index.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/create-index.html</a><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span> | FULLTEXT | SPATIAL] <span class="keyword">INDEX</span> index_name</span><br><span class="line">    [index_type]</span><br><span class="line">    <span class="keyword">ON</span> tbl_name (key_part,...)</span><br><span class="line">    [index_option]</span><br><span class="line">    [algorithm_option | lock_option] ...</span><br><span class="line"></span><br><span class="line">key_part:</span><br><span class="line">    col_name [(<span class="keyword">length</span>)] [<span class="keyword">ASC</span> | <span class="keyword">DESC</span>]</span><br><span class="line"></span><br><span class="line">index_option:</span><br><span class="line">    KEY_BLOCK_SIZE [=] <span class="keyword">value</span></span><br><span class="line">  | index_type</span><br><span class="line">  | <span class="keyword">WITH</span> PARSER parser_name</span><br><span class="line">  | <span class="keyword">COMMENT</span> <span class="string">'string'</span></span><br><span class="line"></span><br><span class="line">index_type:</span><br><span class="line">    <span class="keyword">USING</span> &#123;BTREE | <span class="keyword">HASH</span>&#125;</span><br><span class="line"></span><br><span class="line">algorithm_option:</span><br><span class="line">    ALGORITHM [=] &#123;<span class="keyword">DEFAULT</span> | INPLACE | COPY&#125;</span><br><span class="line"></span><br><span class="line">lock_option:</span><br><span class="line">    <span class="keyword">LOCK</span> [=] &#123;<span class="keyword">DEFAULT</span> | <span class="keyword">NONE</span> | <span class="keyword">SHARED</span> | EXCLUSIVE&#125;</span><br></pre></td></tr></table></figure></p>
-<p>例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> id_index <span class="keyword">ON</span> lookup (<span class="keyword">id</span>) <span class="keyword">USING</span> BTREE;</span><br></pre></td></tr></table></figure></p>
-<h2 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h2><p>语法使用的alert，比较复杂，这儿只放一个链接<br><a href="https://dev.mysql.com/doc/refman/5.7/en/alter-table.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/alter-table.html</a></p>
-<p>例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> authority <span class="keyword">drop</span> <span class="keyword">index</span> UQE_authority_page;</span><br></pre></td></tr></table></figure></p>
-<h2 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h2><p>联合索引又叫复合索引。对于复合索引:Mysql从左到右的使用索引中的字段，一个查询可以只使用索引中的一部份，但只能是最左侧部分。例如索引是key index (a,b,c). 可以支持a | a,b| a,b,c 3种组合进行查找，但不支持 b,c进行查找 .当最左侧字段是常量引用时，索引就十分有效。</p>
-<p>例子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">index</span> <span class="keyword">from</span> authority;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> authority <span class="keyword">drop</span> <span class="keyword">index</span> UQE_authority_page;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">index</span> UQE_authority_page <span class="keyword">on</span> authority(company_id,page);</span><br></pre></td></tr></table></figure></p>
-
-          
+          查询索引1234SHOW &#123;INDEX | INDEXES | KEYS&#125;    &#123;FROM | IN&#125; tbl_name    [&#123;FROM | IN&#125; db_name]    [WHERE expr]
+例子：12SHOW INDEX FROM mydb.mytable;show index from authority;
+字段较多时，竖着看更清晰1SHOW INDEX FROM mydb.mytable\G;
+创建索引直通车：https://dev.mysql.com/doc/refman/5.7/en/create-index.html1234567891011121314151617181920212223CREATE [UNIQUE | FULLTEXT | SPATIAL] INDEX index_name    [i
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/mysql/index/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -502,11 +503,18 @@
       
         
           
-            <p>##shell变量作为另一个变量名</p>
-<p>使用eval<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">i=1</span><br><span class="line"><span class="built_in">eval</span> <span class="built_in">echo</span> <span class="string">'$'</span>rediscache<span class="variable">$i</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="例1："><a href="#例1：" class="headerlink" title="例1："></a>例1：</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dev@pirate-test:~chimps (master *%) $ i=1                                                                                                              </span><br><span class="line">dev@pirate-test:~chimps (master *%) $ <span class="built_in">eval</span> <span class="built_in">echo</span> <span class="string">'$'</span>rediscache<span class="variable">$i</span></span><br><span class="line">10.100.100.100</span><br></pre></td></tr></table></figure>
-<h2 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">for ((i = 1; i &lt; 60; i++)); do</span><br><span class="line">	redis=$(eval echo &apos;$&apos;rediscache$i)</span><br><span class="line">	count=$(redis-cli -h $redis -a ***** DEL key1)</span><br><span class="line">	echo &#123;idx:,$i,redis:,$redis,count:,$count&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-          
+          ##shell变量作为另一个变量名
+使用eval123#!/bin/shi=1eval echo '$'rediscache$i
+例1：123dev@pirate-test:~chimps (master *%) $ i=1                                                                                                              dev@pirate-test:~chimps (master *%) $ eval echo '$'rediscache$i10.100.100.100
+例21234567#!/bin/shfor ((i = 1; i &lt; 60; i++)); do	redis=$(eval echo &apos;$&apos;rediscache$i)	cou
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux/eval/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -635,11 +643,18 @@
       
         
           
-            <p>在社会学领域，所谓成功就是“优势积累”的结果。</p>
-<p>职业冰球队员一开始只比最初所在球队的队友好一点点，然而这微小的优势带来的机遇，扩大了他和那些队友之间的差距，随后差距与机会交替发挥作用，微小的差距被越拉越大——最终被选中的队员成了真正出众的天才。</p>
-<p>由此可以看出，天才并非一开始就表现出众，一开始他只是比别人优秀那么一点点。</p>
+          在社会学领域，所谓成功就是“优势积累”的结果。
+职业冰球队员一开始只比最初所在球队的队友好一点点，然而这微小的优势带来的机遇，扩大了他和那些队友之间的差距，随后差距与机会交替发挥作用，微小的差距被越拉越大——最终被选中的队员成了真正出众的天才。
+由此可以看出，天才并非一开始就表现出众，一开始他只是比别人优秀那么一点点。
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/digest/异类摘录/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -768,11 +783,18 @@
       
         
           
-            <p>承认病态的自我需要勇气，佛教有一句名言：海无边，回头是岸</p>
-<p>圣人改变的是自己，走的是一条修行的路。通过完善自己，可以感召别人，唤醒别人的良知，给别人指引。</p>
-<p>与之相反，由于大恶之人害怕改变自己，所以便去改变别人，他们不择手段去控制别人，压制别人，甚至毁灭别人的生命。</p>
+          承认病态的自我需要勇气，佛教有一句名言：海无边，回头是岸
+圣人改变的是自己，走的是一条修行的路。通过完善自己，可以感召别人，唤醒别人的良知，给别人指引。
+与之相反，由于大恶之人害怕改变自己，所以便去改变别人，他们不择手段去控制别人，压制别人，甚至毁灭别人的生命。
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/digest/少有人走的路2/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -901,13 +923,18 @@
       
         
           
-            <p>今天读的一章为：过分依赖集体，个人的心智就会退化</p>
-<p>推理很到位：</p>
-<p>“自然赋予人自由意志，也就是赋予了人自主选择的权利。人生是有一个接一个的选择组成的，不同的选择导致不同的人生。但是不可否认的是，伴随着自主选择，人也就多了更多的烦恼和痛苦。选择是一件令人烦恼和痛苦的事情。首先选择意味着放弃。选择一条路，意味着放弃其他的路；有了一个选择，意味着要放弃其他选择。由于人们不愿意放弃，所以每当面临选择时，内心总是充满烦恼和痛苦。其次，选择会产生结果，人们必须为自己的选择负责，并承受选择所带来的结果。当然，好的结果令人欣喜，但坏的结果不仅会招致别人的指责、埋怨，也会让自己陷入懊恼和自责之中，令人痛苦不堪。许多人不愿意承受选择所带来的痛苦，便会把自主选择的权利拱手让给他人。这就是弗洛姆所说的逃避自由。</p>
-<p>逃避自由的人放弃了自主选择的权利，也就放弃了独立思考的能力，这意味着他们将失去独立的自我，失去自己的灵魂。一个没有灵魂的人就像一张破碎的纸片，盲目地追随着每一阵风，完全失去了掌控自我的能力，最终会成为魔鬼撒旦的工具，干出许多邪恶的事情。”</p>
-<p>我感觉说的很对，想想和以前和朋友一块儿的时候，有什么事情都是让对方做选择，虽然会让别人会觉得你随和，为他人着想。实际上是自己太多胆小，不敢承担选择所带来的风险。是因为怕，才放弃了自主思考的权利，给人一种没有底气，没有底线的感觉。</p>
-
-          
+          今天读的一章为：过分依赖集体，个人的心智就会退化
+推理很到位：
+“自然赋予人自由意志，也就是赋予了人自主选择的权利。人生是有一个接一个的选择组成的，不同的选择导致不同的人生。但是不可否认的是，伴随着自主选择，人也就多了更多的烦恼和痛苦。选择是一件令人烦恼和痛苦的事情。首先选择意味着放弃。选择一条路，意味着放弃其他的路；有了一个选择，意味着要放弃其他选择。由于人们不愿意放弃，所以每当面临选择时，内心总是充满烦恼和痛苦。其次，选择会产生结果，人们必须为自己的选择负责，并承受选择所带来的结果。当然，好的结果令人欣喜，但坏的结果不仅会招致别人的指责、埋怨，也会让自己陷入懊恼和自责之中，令人痛苦不堪。许多人不愿意承受选择所带来的痛苦，便会把自主选择的权利拱手让给他人。这就是弗洛姆所说的逃避自由。
+逃避自由的人放弃了自主选择的权利，也就放弃了独立思考的能力，这意味着他们将失去独立的自我，失去自己的灵魂
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/digest/少有人走的路1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1036,9 +1063,16 @@
       
         
           
-            <p>在与人相处时，要切记：与我们交往的不是纯粹按道理或逻辑生活的人，而是充满了感情的，带有偏见、傲慢和虚荣的人。</p>
+          在与人相处时，要切记：与我们交往的不是纯粹按道理或逻辑生活的人，而是充满了感情的，带有偏见、傲慢和虚荣的人。
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/digest/人性的弱点/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1167,28 +1201,16 @@
       
         
           
-            <h2 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">minute   hour   day   month   week   <span class="built_in">command</span></span><br><span class="line"></span><br><span class="line">- minute： 表示分钟，可以是从0到59之间的任何整数。</span><br><span class="line">- hour：表示小时，可以是从0到23之间的任何整数。</span><br><span class="line">- day：表示日期，可以是从1到31之间的任何整数。</span><br><span class="line">- month：表示月份，可以是从1到12之间的任何整数。</span><br><span class="line">- week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。</span><br><span class="line">- <span class="built_in">command</span>：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。</span><br></pre></td></tr></table></figure>
-<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。</span><br><span class="line">逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”</span><br><span class="line">中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</span><br><span class="line">正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</span><br></pre></td></tr></table></figure>
-<h2 id="编辑定时任务"><a href="#编辑定时任务" class="headerlink" title="编辑定时任务"></a>编辑定时任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crontab  -e</span><br><span class="line">*  *  *  *  *       命令</span><br></pre></td></tr></table></figure>
-<h2 id="查看系统定时任务"><a href="#查看系统定时任务" class="headerlink" title="查看系统定时任务"></a>查看系统定时任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -l</span><br></pre></td></tr></table></figure>
-<h2 id="删除定时任务"><a href="#删除定时任务" class="headerlink" title="删除定时任务"></a>删除定时任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -r</span><br></pre></td></tr></table></figure>
-<h2 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h2><p>/sbin/service crond start    //启动服务<br>/sbin/service crond stop     //关闭服务<br>/sbin/service crond restart  //重启服务<br>/sbin/service crond reload   //重新载入配置</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>每1分钟执行一次command<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * <span class="built_in">command</span></span><br></pre></td></tr></table></figure></p>
-<p>每小时的第3和第15分钟执行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 * * * * <span class="built_in">command</span></span><br></pre></td></tr></table></figure></p>
-<p>在上午8点到11点的第3和第15分钟执行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * * <span class="built_in">command</span></span><br></pre></td></tr></table></figure></p>
-<p>每隔两天的上午8点到11点的第3和第15分钟执行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 */2 * * <span class="built_in">command</span></span><br></pre></td></tr></table></figure></p>
-<p>每个星期一的上午8点到11点的第3和第15分钟执行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * 1 <span class="built_in">command</span></span><br></pre></td></tr></table></figure></p>
-<p>每晚的21:30重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">30 21 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
-<p>每月1、10、22日的4 : 45重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 4 1,10,22 * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
-<p>每周六、周日的1:10重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 1 * * 6,0 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
-<p>每天18 : 00至23 : 00之间每隔30分钟重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0,30 18-23 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
-<p>每星期六的晚上11:00 pm重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23 * * 6 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
-<p>每一小时重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* */1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
-<p>晚上11点到早上7点之间，每隔一小时重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 23-7/1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
-<p>每月的4号与每周一到周三的11点重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 11 4 * mon-wed /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
-<p>一月一号的4点重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 4 1 jan * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>
-
-          
+          基本规则12345678minute   hour   day   month   week   command- minute： 表示分钟，可以是从0到59之间的任何整数。- hour：表示小时，可以是从0到23之间的任何整数。- day：表示日期，可以是从1到31之间的任何整数。- month：表示月份，可以是从1到12之间的任何整数。- week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。- command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。
+特殊字符1234星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/linux/定时任务/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1317,21 +1339,18 @@
       
         
           
-            <h2 id="什么是max-allowed-packet"><a href="#什么是max-allowed-packet" class="headerlink" title="什么是max_allowed_packet"></a>什么是max_allowed_packet</h2><p>max_allowed_packet是mysql允许插入一条数据的大小</p>
-<h2 id="查看目前配置"><a href="#查看目前配置" class="headerlink" title="查看目前配置"></a>查看目前配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show VARIABLES like <span class="string">'%max_allowed_packet%'</span>;</span></span><br><span class="line">+--------------------------+------------+</span><br><span class="line">| Variable_name            | Value      |</span><br><span class="line">+--------------------------+------------+</span><br><span class="line">| max_allowed_packet       | 16777216   |</span><br><span class="line">| slave_max_allowed_packet | 1073741824 |</span><br><span class="line">+--------------------------+------------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
-<h2 id="修改方法"><a href="#修改方法" class="headerlink" title="修改方法"></a>修改方法</h2><ol>
-<li><p>编辑<code>my.cnf</code>文件</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">max_allowed_packet</span>=<span class="number">20</span>M</span><br></pre></td></tr></table></figure>
-<p>保存重启mysql</p>
-<p>如果找不到<code>my.cnf</code>，可以通过命令：<code>mysql --help | grep my.cnf</code></p>
-</li>
-<li><p>在mysql 命令行中运行</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> global max_allowed_packet = 2*1024*1024*10</span><br></pre></td></tr></table></figure>
-<p>然后关闭掉这此mysql server链接，再进入</p>
-</li>
-</ol>
+          什么是max_allowed_packetmax_allowed_packet是mysql允许插入一条数据的大小
+查看目前配置12345678mysql&gt; show VARIABLES like '%max_allowed_packet%';+--------------------------+------------+| Variable_name            | Value      |+--------------------------+------------+| max_allowed_packet       | 16777216   || slave_max_allowed_packet | 1073741824 |+--------------------------+------------+2 rows in set (0.01 sec)
+修改方法
 
-          
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/mysql/max_allowed_packet/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1460,9 +1479,15 @@
       
         
           
-            <h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取form文件</span></span><br><span class="line">file, err := c.FormFile(<span class="string">"attachment"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">now := time.Now()</span><br><span class="line"><span class="comment">// 检查目录</span></span><br><span class="line">dir := fmt.Sprintf(<span class="string">"upload/%d%d"</span>, now.Year(), now.Month())</span><br><span class="line"><span class="keyword">if</span> !utils.Exists(dir) &#123;</span><br><span class="line">	err = os.MkdirAll(dir, os.ModePerm)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建文件</span></span><br><span class="line">path := fmt.Sprintf(<span class="string">"%s/%d%s"</span>, dir, now.Unix()%(<span class="number">3600</span>*<span class="number">24</span>*<span class="number">30</span>), file.Filename)</span><br><span class="line">out, err := os.Create(path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">f, err := file.Open()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">_, err = io.Copy(out, f)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">file, err := os.Open(attachment.Path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取文件头信息</span></span><br><span class="line">fileHeader := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">512</span>)</span><br><span class="line">file.Read(fileHeader)</span><br><span class="line">fileContentType := http.DetectContentType(fileHeader)</span><br><span class="line">fileStat, _ := file.Stat()</span><br><span class="line">fileSize := strconv.FormatInt(fileStat.Size(), <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置response header头，gin框架也可以用c.Header("","")</span></span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment; filename="</span>+attachment.Name)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Type"</span>, fileContentType)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Length"</span>, fileSize)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意还原io读取指针</span></span><br><span class="line">file.Seek(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">_, err = io.Copy(c.Writer, file)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
+          上传12345678910111213141516171819202122232425262728// 获取form文件file, err := c.FormFile("attachment")if err != nil &#123;	return nil, GenError(err)&#125;now := time.Now()// 检查目录dir := fmt.Sprintf("upload/%d%d", now.Year(), now.Month())if !utils.Exists(dir) &#123;	err = os.MkdirAll(dir, os.ModePerm)	if err != nil &#123;		return nil, GenError(err)	&#125;&#125;// 创建文件path := fmt.Sprintf("%s/%d%s", dir, n
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/golang/http上传下载/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1591,14 +1616,21 @@
       
         
           
-            <h1 id="做人难"><a href="#做人难" class="headerlink" title="做人难"></a>做人难</h1><blockquote>
-<p>“  海浪卷走了小孩的鞋子，小孩在海滩上写下：大海是小偷！一个男人在海里打捞出了一些好东西，在沙滩上写到：大海真慷慨！ 一少年溺水身亡，他的母亲在海边写了：大海是凶手！ 一个老翁打捞到了珍珠，他写到：大海真仁慈！ …这时一个海浪冲上来抹去了所有的字， 大海平静地说：如果你想成为大海， 就不要在意别人对你的评说！ 因为你做不到让所有人满意。人生如果容易的话，你当初来到这个世界时就不会从哭泣开始！  ” 共勉</p>
-</blockquote>
-<h1 id="喜欢"><a href="#喜欢" class="headerlink" title="喜欢"></a>喜欢</h1><blockquote>
-<p>有一个民谣青年曾说：最单纯的喜欢就是，就算你拒绝了我，我对你也永远没有埋怨。但我不会再靠近了。如果你有求于我，我依然会鞠躬尽瘁。从今往后我会把喜欢藏起来，不再招摇过市了，我会努力过得好，希望你也是。</p>
-</blockquote>
+          做人难
+“  海浪卷走了小孩的鞋子，小孩在海滩上写下：大海是小偷！一个男人在海里打捞出了一些好东西，在沙滩上写到：大海真慷慨！ 一少年溺水身亡，他的母亲在海边写了：大海是凶手！ 一个老翁打捞到了珍珠，他写到：大海真仁慈！ …这时一个海浪冲上来抹去了所有的字， 大海平静地说：如果你想成为大海， 就不要在意别人对你的评说！ 因为你做不到让所有人满意。人生如果容易的话，你当初来到这个世界时就不会从哭泣开始！  ” 共勉
+
+喜欢
+有一个民谣青年曾说：最单纯的喜欢就是，就算你拒绝了我，我对你也永远没有埋怨。但我不会再靠近了。如果你有求于我，我依然会鞠躬尽瘁。从今往后我会把喜欢藏起来，不再招摇过市了，我会努力过得好，希望你也是。
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/digest/文摘/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
