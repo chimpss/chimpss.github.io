@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="查看索引123&amp;gt; db.user.getIndexSpecs() or&amp;gt; db.user.getIndexes() id索引默认创建 _id 单键索引 创建索引：1db.user.ensureIndex(&amp;#123;x:1&amp;#125;)   索引可以重复创建，如果索引已存在，则直接返回成功 复合索引1db.user.ensureIndex(&amp;#123;x:1,y:1&amp;#125;) 过期">
+<meta name="description" content="查看索引123&amp;gt; db.user.getIndexSpecs() or&amp;gt; db.user.getIndexes() id索引默认创建 _id 单键索引 创建索引：1db.user.createIndex(&amp;#123;x:1&amp;#125;)   索引可以重复创建，如果索引已存在，则直接返回成功 复合索引1db.user.createIndex(&amp;#123;x:1,y:1&amp;#125;) 过期">
 <meta name="keywords" content="mongo,index">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mongoIndex">
 <meta property="og:url" content="http://chimpss.github.io/mongodb/Index/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="查看索引123&amp;gt; db.user.getIndexSpecs() or&amp;gt; db.user.getIndexes() id索引默认创建 _id 单键索引 创建索引：1db.user.ensureIndex(&amp;#123;x:1&amp;#125;)   索引可以重复创建，如果索引已存在，则直接返回成功 复合索引1db.user.ensureIndex(&amp;#123;x:1,y:1&amp;#125;) 过期">
+<meta property="og:description" content="查看索引123&amp;gt; db.user.getIndexSpecs() or&amp;gt; db.user.getIndexes() id索引默认创建 _id 单键索引 创建索引：1db.user.createIndex(&amp;#123;x:1&amp;#125;)   索引可以重复创建，如果索引已存在，则直接返回成功 复合索引1db.user.createIndex(&amp;#123;x:1,y:1&amp;#125;) 过期">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T10:00:42.982Z">
+<meta property="og:updated_time" content="2018-10-17T08:50:10.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mongoIndex">
-<meta name="twitter:description" content="查看索引123&amp;gt; db.user.getIndexSpecs() or&amp;gt; db.user.getIndexes() id索引默认创建 _id 单键索引 创建索引：1db.user.ensureIndex(&amp;#123;x:1&amp;#125;)   索引可以重复创建，如果索引已存在，则直接返回成功 复合索引1db.user.ensureIndex(&amp;#123;x:1,y:1&amp;#125;) 过期">
+<meta name="twitter:description" content="查看索引123&amp;gt; db.user.getIndexSpecs() or&amp;gt; db.user.getIndexes() id索引默认创建 _id 单键索引 创建索引：1db.user.createIndex(&amp;#123;x:1&amp;#125;)   索引可以重复创建，如果索引已存在，则直接返回成功 复合索引1db.user.createIndex(&amp;#123;x:1,y:1&amp;#125;) 过期">
 
 
 
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-01T10:19:36+08:00">
-                2017-06-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
               </time>
             
 
@@ -366,17 +366,16 @@
         <h1 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.getIndexSpecs() </span><br><span class="line">or</span><br><span class="line">&gt; db.user.getIndexes()</span><br></pre></td></tr></table></figure>
 <h1 id="id索引"><a href="#id索引" class="headerlink" title="id索引"></a>id索引</h1><p>默认创建 _id</p>
 <h1 id="单键索引"><a href="#单键索引" class="headerlink" title="单键索引"></a>单键索引</h1><ul>
-<li>创建索引：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.user.ensureIndex(&#123;<span class="attr">x</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+<li>创建索引：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.user.createIndex(&#123;<span class="attr">x</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>索引可以重复创建，如果索引已存在，则直接返回成功</p>
-<h1 id="复合索引"><a href="#复合索引" class="headerlink" title="复合索引"></a>复合索引</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.user.ensureIndex(&#123;<span class="attr">x</span>:<span class="number">1</span>,<span class="attr">y</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
-<h1 id="过期索引"><a href="#过期索引" class="headerlink" title="过期索引"></a>过期索引</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.luffylogs.createIndex(&#123;<span class="string">"expiredAt"</span>:<span class="number">1</span>&#125;, &#123;<span class="attr">expireAfterSeconds</span>: <span class="number">604800</span>, <span class="attr">background</span>: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
-<h1 id="唯一索引"><a href="#唯一索引" class="headerlink" title="唯一索引"></a>唯一索引</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.luffylogs.createIndex(&#123;<span class="string">"uid"</span>:<span class="number">1</span>, <span class="string">"aid"</span>:<span class="number">1</span>&#125;, &#123;<span class="string">"unique"</span> : <span class="literal">true</span>, <span class="attr">background</span>: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
-<h1 id="查看索引创建进度"><a href="#查看索引创建进度" class="headerlink" title="查看索引创建进度"></a>查看索引创建进度</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.luffylogs.createIndex(&#123;<span class="string">"uid"</span>:<span class="number">1</span>, <span class="string">"aid"</span>:<span class="number">1</span>&#125;, &#123;<span class="string">"unique"</span> : <span class="literal">true</span>, <span class="attr">background</span>: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="复合索引"><a href="#复合索引" class="headerlink" title="复合索引"></a>复合索引</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.user.createIndex(&#123;<span class="attr">x</span>:<span class="number">1</span>,<span class="attr">y</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="过期索引"><a href="#过期索引" class="headerlink" title="过期索引"></a>过期索引</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.user.createIndex(&#123;<span class="string">"expiredAt"</span>:<span class="number">1</span>&#125;, &#123;<span class="attr">expireAfterSeconds</span>: <span class="number">604800</span>, <span class="attr">background</span>: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="唯一索引"><a href="#唯一索引" class="headerlink" title="唯一索引"></a>唯一索引</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.user.createIndex(&#123;<span class="string">"uid"</span>:<span class="number">1</span>, <span class="string">"aid"</span>:<span class="number">1</span>&#125;, &#123;<span class="string">"unique"</span> : <span class="literal">true</span>, <span class="attr">background</span>: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="查看索引创建进度"><a href="#查看索引创建进度" class="headerlink" title="查看索引创建进度"></a>查看索引创建进度</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.currentOp(</span><br><span class="line">    &#123;</span><br><span class="line">      $or: [</span><br><span class="line">        &#123; <span class="attr">op</span>: <span class="string">"command"</span>, <span class="string">"query.createIndexes"</span>: &#123; <span class="attr">$exists</span>: <span class="literal">true</span> &#125; &#125;,</span><br><span class="line">        &#123; <span class="attr">op</span>: <span class="string">"insert"</span>, <span class="attr">ns</span>: <span class="regexp">/\.system\.indexes\b/</span> &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h1 id="终止索引的创建"><a href="#终止索引的创建" class="headerlink" title="终止索引的创建"></a>终止索引的创建</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.killOp()</span><br></pre></td></tr></table></figure>
 <h1 id="查看索引-1"><a href="#查看索引-1" class="headerlink" title="查看索引"></a>查看索引</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.user.getIndexes()</span><br><span class="line">[</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">"v"</span> : <span class="number">2</span>,</span><br><span class="line">		<span class="string">"key"</span> : &#123;</span><br><span class="line">			<span class="string">"_id"</span> : <span class="number">1</span></span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="string">"name"</span> : <span class="string">"_id_"</span>,</span><br><span class="line">		<span class="string">"ns"</span> : <span class="string">"blog.user"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">"v"</span> : <span class="number">2</span>,</span><br><span class="line">		<span class="string">"key"</span> : &#123;</span><br><span class="line">			<span class="string">"x"</span> : <span class="number">1</span></span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="string">"name"</span> : <span class="string">"x_1"</span>,</span><br><span class="line">		<span class="string">"ns"</span> : <span class="string">"blog.user"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">"v"</span> : <span class="number">2</span>,</span><br><span class="line">		<span class="string">"key"</span> : &#123;</span><br><span class="line">			<span class="string">"x"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"y"</span> : <span class="number">1</span></span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="string">"name"</span> : <span class="string">"x_1_y_1"</span>,</span><br><span class="line">		<span class="string">"ns"</span> : <span class="string">"blog.user"</span></span><br><span class="line">	&#125;</span><br><span class="line">]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-<p><code>`</code></p>
-
       
     </div>
     
@@ -408,8 +407,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/mongodb/CRUD/" rel="next" title="CRUD操作">
-                <i class="fa fa-chevron-left"></i> CRUD操作
+              <a href="/mongodb/导入导出/" rel="next" title="导入导出">
+                <i class="fa fa-chevron-left"></i> 导入导出
               </a>
             
           </div>
@@ -418,8 +417,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/mongodb/mongo聚合/" rel="prev" title="mongo聚合">
-                mongo聚合 <i class="fa fa-chevron-right"></i>
+              <a href="/http/跨域cors/" rel="prev" title="cors(跨域)">
+                cors(跨域) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -497,7 +496,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -510,7 +509,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -550,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#查看索引"><span class="nav-number">1.</span> <span class="nav-text">查看索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#id索引"><span class="nav-number">2.</span> <span class="nav-text">id索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单键索引"><span class="nav-number">3.</span> <span class="nav-text">单键索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复合索引"><span class="nav-number">4.</span> <span class="nav-text">复合索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#过期索引"><span class="nav-number">5.</span> <span class="nav-text">过期索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#唯一索引"><span class="nav-number">6.</span> <span class="nav-text">唯一索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看索引创建进度"><span class="nav-number">7.</span> <span class="nav-text">查看索引创建进度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看索引-1"><span class="nav-number">8.</span> <span class="nav-text">查看索引</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#查看索引"><span class="nav-number">1.</span> <span class="nav-text">查看索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#id索引"><span class="nav-number">2.</span> <span class="nav-text">id索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单键索引"><span class="nav-number">3.</span> <span class="nav-text">单键索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复合索引"><span class="nav-number">4.</span> <span class="nav-text">复合索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#过期索引"><span class="nav-number">5.</span> <span class="nav-text">过期索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#唯一索引"><span class="nav-number">6.</span> <span class="nav-text">唯一索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看索引创建进度"><span class="nav-number">7.</span> <span class="nav-text">查看索引创建进度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#终止索引的创建"><span class="nav-number">8.</span> <span class="nav-text">终止索引的创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看索引-1"><span class="nav-number">9.</span> <span class="nav-text">查看索引</span></a></li></ol></div>
             
 
           </div>
