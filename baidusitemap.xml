@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://chimpss.github.io/linux/awk/</loc>
+    <lastmod>2018-10-17T08:46:44.065Z</lastmod>
+  </url>  <url>
+    <loc>http://chimpss.github.io/linux/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</loc>
+    <lastmod>2018-10-17T08:46:26.661Z</lastmod>
+  </url>  <url>
     <loc>http://chimpss.github.io/git/git%20%E6%B8%85%E9%99%A4%E6%9C%AC%E5%9C%B0%E6%89%80%E6%9C%89%E4%BF%AE%E6%94%B9/</loc>
     <lastmod>2018-10-17T08:44:20.201Z</lastmod>
   </url>  <url>
@@ -123,9 +129,6 @@
   </url>  <url>
     <loc>http://chimpss.github.io/http/%E8%B7%A8%E5%9F%9Fcors/</loc>
     <lastmod>2018-10-07T07:49:54.809Z</lastmod>
-  </url>  <url>
-    <loc>http://chimpss.github.io/linux/Awk/</loc>
-    <lastmod>2018-09-25T10:03:10.242Z</lastmod>
   </url>  <url>
     <loc>http://chimpss.github.io/linux/pdf%E5%A4%84%E7%90%86/</loc>
     <lastmod>2018-09-25T10:02:58.826Z</lastmod>
