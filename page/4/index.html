@@ -1452,6 +1452,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/小坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/小坑/" itemprop="url">小坑</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/golang/小坑/" class="leancloud_visitors" data-flag-title="小坑">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id=""><a href="#" class="headerlink" title=":="></a><code>:=</code></h1><p>如下函数：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetAll</span><span class="params">(sql <span class="keyword">string</span>)</span> <span class="params">(records []<span class="keyword">interface</span>&#123;&#125;, err error)</span></span> &#123;</span><br><span class="line">	query, err := DB.Query(sql)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	column, _ := query.Columns()</span><br><span class="line">	scans := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="built_in">len</span>(column))</span><br><span class="line">	values := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="built_in">len</span>(column))</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> values &#123;</span><br><span class="line">		scans[i] = &amp;values[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> query.Next() &#123;</span><br><span class="line">	    <span class="comment">// 如果此处写成err := query.Scan(scans...)。</span></span><br><span class="line">	    <span class="comment">// 那么在此作用域内，err 和 外层作用域不同，return会报错</span></span><br><span class="line">		err = query.Scan(scans...)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		record := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line">		<span class="keyword">for</span> i, col := <span class="keyword">range</span> values &#123;</span><br><span class="line">			<span class="keyword">if</span> col != <span class="literal">nil</span> &#123;</span><br><span class="line">				record[column[i]] = <span class="keyword">string</span>(col.([]<span class="keyword">byte</span>))</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		records = <span class="built_in">append</span>(records, record)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="mysql-NULL-值"><a href="#mysql-NULL-值" class="headerlink" title="mysql NULL 值"></a>mysql NULL 值</h1><p>如果mysql的某个值为null，go查询数据库时则会报错：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql: Scan error on column index <span class="number">2</span>: unsupported Scan, storing driver.Value <span class="keyword">type</span> &lt;<span class="literal">nil</span>&gt; into <span class="keyword">type</span> *<span class="keyword">string</span></span><br></pre></td></tr></table></figure></p>
+<p>解决办法：</p>
+<ul>
+<li><p>对于可能为NULL的字段读取，go的sql模块提供了一个sql.NullString这样的东东来解析可能为NULL的字符串，对于浮点型或者整形也有类似的数据类型。很蛋疼的样子，不过可以解决问题，下面是遵照这种方案进行的修改。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rows.Next() &#123;</span><br><span class="line">  <span class="keyword">var</span> id <span class="keyword">int</span></span><br><span class="line">  <span class="keyword">var</span> name, info sql.NullString</span><br><span class="line">  <span class="keyword">if</span> err = rows.Scan(&amp;id, &amp;name, &amp;info); err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"获取结果出错："</span> + err.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Println(<span class="string">"id:"</span>, id, <span class="string">"name:"</span>, name.String, <span class="string">"info:"</span>, info.String)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sql语句本身也能解决这种问题<br>此时也不需要修改go代码，继续保持go的强类型风格</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>, <span class="keyword">IFNULL</span>(<span class="string">`name`</span>, <span class="string">''</span>) <span class="keyword">AS</span> <span class="string">`name`</span>, <span class="keyword">IFNULL</span>(info, <span class="string">''</span>) <span class="keyword">AS</span> info <span class="keyword">FROM</span> <span class="keyword">user</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/并发编程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1591,146 +1731,6 @@
 <h2 id="终结验证"><a href="#终结验证" class="headerlink" title="终结验证"></a>终结验证</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="comment">//"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(die <span class="keyword">chan</span> <span class="keyword">bool</span>)</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Begin: This is Worker"</span>)</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="comment">//case xx：</span></span><br><span class="line">        <span class="comment">//做事的分支</span></span><br><span class="line">        <span class="comment">// get channel message</span></span><br><span class="line">        <span class="keyword">case</span> &lt;-die:</span><br><span class="line">            fmt.Println(<span class="string">"Done: This is Worker"</span>)</span><br><span class="line">            <span class="comment">// send channel message</span></span><br><span class="line">            die &lt;- <span class="literal">true</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    die := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">bool</span>)</span><br><span class="line">    <span class="keyword">go</span> worker(die)</span><br><span class="line">    <span class="comment">// send channel message</span></span><br><span class="line">    die &lt;- <span class="literal">true</span></span><br><span class="line">    <span class="comment">// get channel message</span></span><br><span class="line">    &lt;-die</span><br><span class="line">    fmt.Println(<span class="string">"Worker goroutine has been terminated"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#  等待goroutine完成</span></span><br><span class="line"><span class="string">使用`</span>sync<span class="string">`包</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span><span class="keyword">go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">correct</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">    wg.Add(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(n <span class="keyword">int</span>)</span></span> &#123; <span class="comment">// 使用局部变量</span></span><br><span class="line">            fmt.Print(n)</span><br><span class="line">            wg.Done()</span><br><span class="line">        &#125;(i)</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">    fmt.Println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上述只是等待goroutine完成，却没有进行通讯。有错误值也无法返回。所以说，最好还是使用channel<br>如果我们希望通讯，只需要在此基础上增加channel通讯即可<br>例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    people := []<span class="keyword">string</span>&#123;<span class="string">"Anna"</span>, <span class="string">"Bob"</span>, <span class="string">"Cody"</span>, <span class="string">"Dave"</span>, <span class="string">"Eva"</span>&#125;</span><br><span class="line">    match := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>, <span class="number">1</span>) <span class="comment">// 为一个未匹配的发送操作提供空间</span></span><br><span class="line">    wg := <span class="built_in">new</span>(sync.WaitGroup)</span><br><span class="line">    wg.Add(<span class="built_in">len</span>(people))</span><br><span class="line">    <span class="keyword">for</span> _, name := <span class="keyword">range</span> people &#123;</span><br><span class="line">        <span class="keyword">go</span> Seek(name, match, wg)</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> name := &lt;-match:</span><br><span class="line">        fmt.Printf(<span class="string">"No one received %s’s message.\n"</span>, name)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// 没有待处理的发送操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数Seek 发送一个name到match管道或从match管道接收一个peer，结束时通知wait group</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Seek</span><span class="params">(name <span class="keyword">string</span>, match <span class="keyword">chan</span> <span class="keyword">string</span>, wg *sync.WaitGroup)</span></span> &#123;</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> peer := &lt;-match:</span><br><span class="line">        fmt.Printf(<span class="string">"%s sent a message to %s.\n"</span>, peer, name)</span><br><span class="line">    <span class="keyword">case</span> match &lt;- name:</span><br><span class="line">        <span class="comment">// 等待某个goroutine接收我的消息</span></span><br><span class="line">    &#125;</span><br><span class="line">    wg.Done()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="利用多核"><a href="#利用多核" class="headerlink" title="利用多核"></a>利用多核</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    numcpu := runtime.NumCPU()</span><br><span class="line">    runtime.GOMAXPROCS(numcpu) <span class="comment">// 尝试使用所有可用的CPU</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/小坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/小坑/" itemprop="url">小坑</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/golang/小坑/" class="leancloud_visitors" data-flag-title="小坑">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id=""><a href="#" class="headerlink" title=":="></a><code>:=</code></h1><p>如下函数：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetAll</span><span class="params">(sql <span class="keyword">string</span>)</span> <span class="params">(records []<span class="keyword">interface</span>&#123;&#125;, err error)</span></span> &#123;</span><br><span class="line">	query, err := DB.Query(sql)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	column, _ := query.Columns()</span><br><span class="line">	scans := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="built_in">len</span>(column))</span><br><span class="line">	values := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="built_in">len</span>(column))</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> values &#123;</span><br><span class="line">		scans[i] = &amp;values[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> query.Next() &#123;</span><br><span class="line">	    <span class="comment">// 如果此处写成err := query.Scan(scans...)。</span></span><br><span class="line">	    <span class="comment">// 那么在此作用域内，err 和 外层作用域不同，return会报错</span></span><br><span class="line">		err = query.Scan(scans...)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		record := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line">		<span class="keyword">for</span> i, col := <span class="keyword">range</span> values &#123;</span><br><span class="line">			<span class="keyword">if</span> col != <span class="literal">nil</span> &#123;</span><br><span class="line">				record[column[i]] = <span class="keyword">string</span>(col.([]<span class="keyword">byte</span>))</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		records = <span class="built_in">append</span>(records, record)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="mysql-NULL-值"><a href="#mysql-NULL-值" class="headerlink" title="mysql NULL 值"></a>mysql NULL 值</h1><p>如果mysql的某个值为null，go查询数据库时则会报错：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql: Scan error on column index <span class="number">2</span>: unsupported Scan, storing driver.Value <span class="keyword">type</span> &lt;<span class="literal">nil</span>&gt; into <span class="keyword">type</span> *<span class="keyword">string</span></span><br></pre></td></tr></table></figure></p>
-<p>解决办法：</p>
-<ul>
-<li><p>对于可能为NULL的字段读取，go的sql模块提供了一个sql.NullString这样的东东来解析可能为NULL的字符串，对于浮点型或者整形也有类似的数据类型。很蛋疼的样子，不过可以解决问题，下面是遵照这种方案进行的修改。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rows.Next() &#123;</span><br><span class="line">  <span class="keyword">var</span> id <span class="keyword">int</span></span><br><span class="line">  <span class="keyword">var</span> name, info sql.NullString</span><br><span class="line">  <span class="keyword">if</span> err = rows.Scan(&amp;id, &amp;name, &amp;info); err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"获取结果出错："</span> + err.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Println(<span class="string">"id:"</span>, id, <span class="string">"name:"</span>, name.String, <span class="string">"info:"</span>, info.String)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>sql语句本身也能解决这种问题<br>此时也不需要修改go代码，继续保持go的强类型风格</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>, <span class="keyword">IFNULL</span>(<span class="string">`name`</span>, <span class="string">''</span>) <span class="keyword">AS</span> <span class="string">`name`</span>, <span class="keyword">IFNULL</span>(info, <span class="string">''</span>) <span class="keyword">AS</span> info <span class="keyword">FROM</span> <span class="keyword">user</span></span><br></pre></td></tr></table></figure></li>
-</ul>
 
           
         
