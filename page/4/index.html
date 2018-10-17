@@ -369,7 +369,11 @@ id索引默认创建 _id
 创建索引：1db.user.createIndex(&#123;x:1&#125;)
 
 
-索引可以重复创建，如果索引已存在，则直接返回成
+索引可以重复创建，如果索引已存在，则直接返回成功
+复合索引1db.user.createIndex(&#123;x:1,y:1&#125;)
+过期索引1db.user.createIndex(&#123;"expiredAt":1&#125;, &#123;expireAfterSeconds: 604800, background: true&#125;)
+唯一索引1db.user.createIndex(&#123;"uid":1, "aid":1&#125;, &#123;"unique" : true, background: true&#125;)
+查看索引创建进度12345678db.currentOp(    &#123; 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -510,7 +514,7 @@ id索引默认创建 _id
 Keys：mongoexport，mongoimport
 
 导出：示例：
-1234567891011121314151617mongoexport -h dds-********.mongodb.rds.aliyuncs.com:3717 --authentication
+1234567891011121314151617mongoexport -h dds-********.mongodb.rds.aliyuncs.com:3717 --authenticationDatabase admin -u root -p **** -d ranger -c players -o players.json -q '&#123;id: &#123;"$in": [16398, 10001]&#125;&#125;'mongoexport -h dds-********.mongodb.rds.aliyuncs.com:3717 --authenticationDatabase admin -u root -p **** -d pigcome -c dollOrders -o orders.csv -q '&#123;orderId: &#123;"$gte": 1
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -649,7 +653,10 @@ Keys：mongoexport，mongoimport
           
           摘自知乎：吴遇安
 能够解决问题的男人就是成熟的男人这个题目看似很容易写，因为每个人都可以有自己对于“成熟”的理解，但答主更崇尚用较为理性的方式来分析这个命题，所以下面，我会尽可能用一种严谨的方式来解构这个命题。
-我们列出了某个界定标准，符合这个标准的，便是“成熟男人”，而这个问题便是在探讨这个标准是
+我们列出了某个界定标准，符合这个标准的，便是“成熟男人”，而这个问题便是在探讨这个标准是什么，其实这个问题下的许多回答中提出的标准，反例都太好举了，一个挖鼻孔的大色狼坂田银时，恐怕难以符合这里的大多数标准，但是难道有人认为他“不成熟”吗？
+再举一个著名的范例君子君子XXX君子应该XXX君子不应该XXXXXX样的人才能算君子
+类似的叙述，占据了我国古代儒家著述的很大一部分，很熟悉吧？古人讨论君子的时候，其实和我们现在讨论成熟男人的情形是一样的，大家都在纷纷说，梨子是水果，苹果是水果，却没能很好的给水果做一个足够精确的描述。本楼中的回答，男人们的大部分都在描述一个想象中的完美人格，甚至是想象中的自己（如同古人想象“君子”）而女孩子们的回答，则大多都在描述自己理想中的爱人形象。
+须知，
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -789,7 +796,7 @@ Keys：mongoexport，mongoimport
           
 mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档
 
-连接123456789101112131415161718192021222324252627282930313233package databaseimport (	"full_text_search/co
+连接123456789101112131415161718192021222324252627282930313233package databaseimport (	"full_text_search/config"	"gopkg.in/mgo.v2")var Session *mgo.Session// 简单实现单例，只创建一个sessionfunc init() &#123;	if Session == nil &#123;		var err error		Session, err = mgo.Dial(config.MongoDB.Host + ":" + config.MongoDB.Port)		if err != nil &#123;			panic("连接mongodb失败，原因：" + err.Error())		&#125;	&#125;&#125;func Collectio
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -934,7 +941,11 @@ mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档
 大大提高程序的灵活性，特别是与interface结合能够发挥更大的效果
 反射使用TypeOf和ValueOf函数从接口中获取目标对象信息
 反射会将匿名字段设为独立字段（匿名字段本质）
-想要利用反射修改对象信息，前提是interface.data是sett
+想要利用反射修改对象信息，前提是interface.data是settble,即pointer-interface
+通过反射可以动态的调用方法
+
+
+demo实例12345678910111213141516171819202122232425262728293031323334353637type User struct &#123;	Id   int	Name string	Age  int&#125;func (u User) Hello() &#123;	fmt.Println("hello world")&#125;func main() &#123;	u := User&#123;12, "zhangsan", 33&#125;	// 此处不可以传指针
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1071,7 +1082,7 @@ mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档
       
         
           
-          使用json格式12345678910111213141516171819202122232425262728293031package configimport (	"io/ioutil"	"encoding/json"	"fmt"	"log")type mysql struct &#123;	H
+          使用json格式12345678910111213141516171819202122232425262728293031package configimport (	"io/ioutil"	"encoding/json"	"fmt"	"log")type mysql struct &#123;	Host string	Port int&#125;var Data mysqlfunc init() &#123;    // 判断是为了实现单例的效果	if Data.Port == 0 &#123;	    // 当前目录应该为main.go的目录		str, err := ioutil.ReadFile("./config/database.json")		if err != nil &#123;			fmt.Println("err: 读取json配置失败" + err.Error())		&#125;		if err = json.Unmarshal(str, &amp;Data);
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1209,7 +1220,8 @@ mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档
         
           
           邮件的一般格式123456From:chimps@example.comTo:to@163.comSubject:TEST EMAILContent-Type: text/html; chatset=UTF-8&lt;h1&gt;hello go&lt;/h1&gt;
-使用阿里云企业邮注意事项如果你
+使用阿里云企业邮注意事项如果你的域名为example.com在阿里的域名那里都配好之后，发邮件的配置应该如下：1234HOST: smtp.example.comHOST_ADDR: smtp.example.com:25USER: 该企业邮箱所创建的子邮箱PASSWORD：user的password
+代码：主要是使用net/smtp包的SendMail方法1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950package mainimport (	"fmt"	"net/smtp"	"strin
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1346,7 +1358,7 @@ mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档
       
         
           
-          数组12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849// 索引数组a := [10]int&#123;2:20&#125;// 不指定数组长度a := [...]int&
+          数组12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849// 索引数组a := [10]int&#123;2:20&#125;// 不指定数组长度a := [...]int&#123;1,2,3,4&#125;// 多维数组,只有第一维可以使用...a := [...][3]int&#123;    &#123;1,2,3&#125;,    &#123;2,3,4&#125;&#125;a := [2][3]int&#123;    &#123;1,2,3&#125;,    &#123;2,3,4&#125;&#125;//指针数组x,y := 1,2a := [...]*int&#123;&amp;x, &amp;y&#125;//指向数组的指针a :=[...]int&#123;99:1&#125;var p *[100]int = &amp;a// 数组
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1483,7 +1495,7 @@ mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档
       
         
           
-          :=如下函数：12345678910111213141516171819202122232425262728func GetAll(sql string) (records []interface&#123;&#125;, err error) &#123;	query, err := DB.Que
+          :=如下函数：12345678910111213141516171819202122232425262728func GetAll(sql string) (records []interface&#123;&#125;, err error) &#123;	query, err := DB.Query(sql)	if err != nil &#123;		return	&#125;	column, _ := query.Columns()	scans := make([]interface&#123;&#125;, len(column))	values := make([]interface&#123;&#125;, len(column))	for i := range values &#123;		scans[i] = &amp;values[i]	&#125;	for query.Next() &#123;	    // 如果此处写成err := query.Scan(scan
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1620,7 +1632,7 @@ mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档
       
         
           
-          Goroutinedemo12345678910111213141516171819202122232425262728293031type c struct &#123;	word   string	wordId int	err    error	place  int&#125;func main
+          Goroutinedemo12345678910111213141516171819202122232425262728293031type c struct &#123;	word   string	wordId int	err    error	place  int&#125;func main() &#123;	cpunum := runtime.NumCPU()	runtime.GOMAXPROCS(cpunum)	ch := make(chan c, 100)	t1 := time.Now().Unix()	for i := 0; i &lt; 300; i++ &#123;		go test(i, ch)	&#125;	for i := 0; i &lt; 300; i++ &#123;		select &#123;		case res := &lt;-ch:			fmt.Println(res)		&#125;	&#125;	t2 := time.Now().Unix()	
           ...
           <!--noindex-->
           <div class="post-button text-center">

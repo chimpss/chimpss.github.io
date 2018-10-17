@@ -372,7 +372,20 @@ ctrl+a: 移到行首（a是首字母）
 ctrl+e: 移到行尾（end）
 ctrl+x: 行首到当前光标替换
 
-编辑
+编辑命令
+alt+.: 粘帖最后一次命令最后的参数（通常用于mkdir long-long-dir后, cd配合着alt+.）
+alt+d: 删除当前光标到临近右边单词开始(delete)
+ctrl+w: 删除当前光标到临近左边单词结束(word)
+ctrl+h: 删除光标前一个字符（相当于backspace）
+ctrl+d: 删除光标后一个字符（相当于delete）
+ctrl+u: 删除光标左边所有
+ctrl+k: 删除光标右边所有
+ctrl+l: 清屏
+ctrl+shift+c: 复制（相当于鼠标左键拖拽）
+ctrl+shift+v: 粘贴（相当于鼠标中键）
+
+其它
+ctrl+n: 下一条命令
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -510,7 +523,8 @@ ctrl+x: 行首到当前光标替换
         
           
           分组统计shell语法根据等级分组统计1&gt; db.users.aggregate([&#123;"$group":&#123;"_id":"bookLevel", "count":&#123;"$sum":1&#125;&#125;&#125;])
-根据引导分组统计1&gt; db.users
+根据引导分组统计1&gt; db.users.aggregate([&#123;"$group":&#123;"_id":&#123;"guide":"$guide", "guideTwo":"$guideTwo"&#125;, "count":&#123;"$sum":1&#125;&#125;&#125;])
+mgo语法12345678910111213141516// LevelCount 用户等级分布type LevelCount struct &#123;	Level int `bson:"_id"`	Count int `bson:"count"`&#125;var counts []LevelCountmongoInsta
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -652,7 +666,12 @@ ctrl+x: 行首到当前光标替换
 12&gt; db.user.insert(&#123;x:1,y:2,z:3&#125;)WriteResult(&#123; "nInserted" : 1 &#125;)
 
 循环插入
-12&gt; for(var i=1;i&lt;100;i++) db.user.i
+12&gt; for(var i=1;i&lt;100;i++) db.user.insert(&#123;x:i, y:i*10, z:i*100&#125;)WriteResult(&#123; "nInserted" : 1 &#125;)
+
+
+update
+整个更新
+12345678&gt; db.user.find()&#123; "_id" : ObjectId("58d0d844bae387d0c1e8d870"), "x" : 1, "y" : 2 &#125;&#123; "_id" : ObjectId("58d0d84ebae387d0c1e8d871"), "x" : 2, "y" : 3 &#125;&gt; db.user.update(&#123
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -799,7 +818,13 @@ ctrl+x: 行首到当前光标替换
 但是，如果mongodb中没有用户，认证是没有意义的。
 创建用户
 选择库
-12// 用户的存储也是基于库的。管理员用户的话，需要在admin中创建。创建的第一个
+12// 用户的存储也是基于库的。管理员用户的话，需要在admin中创建。创建的第一个用户即为管理员用户&gt; use admin
+
+创建管理员用户
+12345678910db.createUser(&#123;    user:&quot;root&quot;,    pwd:&quot;root&quot;,    roles:[        &#123;            role:&quot;userAdminAnyDatabase&quot;,            db:&quot;admin&quot;        &#125;    ]&#125;)
+
+创建普通用户
+12345678910db.createUser(&#123;    user:"us
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1073,7 +1098,8 @@ ctrl+x: 行首到当前光标替换
       
         
           
-          只允许本机访问一般用于设置内部服务器12345678910111213server &#123;    listen       8888;    server_name  localhost;    root         /www/vux/vux/my;    location / &#123
+          只允许本机访问一般用于设置内部服务器12345678910111213server &#123;    listen       8888;    server_name  localhost;    root         /www/vux/vux/my;    location / &#123;        allow 127.0.0.1;        deny all;        try_files $uri $uri/ /index.php?$query_string;        autoindex  on;        index  index.html index.htm index.php;        include  /etc/nginx/conf.d/php-fpm;    &#125;&#125;
+域名（端口）转发一般用于前后端完全分离的设计1234567891011121314151617181920server &#123;    listen
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1211,7 +1237,7 @@ ctrl+x: 行首到当前光标替换
         
           
           1. location正则写法
-示例：123456789101112131415161718192021222324252627282930313233343536373839404142location  = / &#123;  # 精确匹配 / ，主机名后面不能带任何字符串  [ configu
+示例：123456789101112131415161718192021222324252627282930313233343536373839404142location  = / &#123;  # 精确匹配 / ，主机名后面不能带任何字符串  [ configuration A ]&#125;location  / &#123;  # 因为所有的地址都以 / 开头，所以这条规则将匹配到所有请求  # 但是正则和最长字符串会优先匹配  [ configuration B ]&#125;location /documents/ &#123;  # 匹配任何以 /documents/ 开头的地址，匹配符合以后，还要继续往下搜索  # 只有后面的正则表达式没有匹配到时，这一条才会采用这一条  [ configuration C ]&#125;location ~ /documents/Abc &#123;  # 匹配任何以 /documents/Abc 开头
           ...
           <!--noindex-->
           <div class="post-button text-center">

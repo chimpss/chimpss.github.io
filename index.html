@@ -363,7 +363,8 @@
       
         
           
-          Mac键盘符号和修饰键说明123456789101112131415161718⌘ Command⇧ Shift⌥ Option⌃ Control↩︎ Return/Enter⌫ Delete⌦ 向前删除键（Fn+Delete）↑ 上箭头↓ 下箭头← 左箭头→ 右箭头⇞ Page Up（Fn+↑）⇟
+          Mac键盘符号和修饰键说明123456789101112131415161718⌘ Command⇧ Shift⌥ Option⌃ Control↩︎ Return/Enter⌫ Delete⌦ 向前删除键（Fn+Delete）↑ 上箭头↓ 下箭头← 左箭头→ 右箭头⇞ Page Up（Fn+↑）⇟ Page Down（Fn+↓）Home Fn + ←End Fn + →⇥ 右制表符（Tab键）⇤ 左制表符（Shift+Tab）⎋ Escape (Esc)
+一、Editing（编辑）123456789101112131415161718192021222324252627282930313233343536373839Control + Space 基本的代码补全（补全任何类、方法、变量）Control + Shift + Space 智能代码补全（过滤器方法列表和变量的预期类型）Command + Shift + Enter 自动结束代码，行末自动添加分号Command + P 显示方
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -500,8 +501,10 @@
       
         
           
-          判断是文件还是文件夹1234567import osif os.path.isdir(path):    print &quot;it&apos;s a directory&quot;elif os.path.isfile(path):    print &quot;it&apos;s a norm
-          ...
+          判断是文件还是文件夹1234567import osif os.path.isdir(path):    print &quot;it&apos;s a directory&quot;elif os.path.isfile(path):    print &quot;it&apos;s a normal file&quot;else:    print &quot;it&apos;s a special file(socket,FIFO,device file)&quot;
+判断文件是否存在123456import os &gt;&gt;&gt; os.path.exists(&apos;d:/assist&apos;) True&gt;&gt;&gt; os.path.exists(&apos;d:/assist/getTeacherList.py&apos;) True
+获取文件大小123import os os.path.getsize(path)
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/python/文件操作/#more" rel="contents">
@@ -639,8 +642,8 @@
           
           拿阿里云MongoDB举例
 mongotop1mongotop -h dds-****.mongodb.rds.aliyuncs.com:3717 -u root -p **** --authenticationDatabase admin 10
-mongostat12mongostat -h dd
-          ...
+mongostat12mongostat -h dds-****.mongodb.rds.aliyuncs.com:3717 -u root -p **** --authenticationDatabase adminmongostat --host 100.100.100.100 -u root -p **** --authenticationDatabase admin
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/mongodb/性能监控/#more" rel="contents">
@@ -781,7 +784,13 @@ $0    当前脚本的文件名
 $n    传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。
 $#    传递给脚本或函数的参数个数。
 $*    传递给脚本或函数的所有参数。
-$@    传递给脚本或函数的所有参数。被双引号(“ “)包
+$@    传递给脚本或函数的所有参数。被双引号(“ “)包含时，与 $* 稍有不同，下面将会讲到。
+$?    上个命令的退出状态，或函数的返回值。
+$$    当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。
+
+$* 和 $@ 的区别$* 和 $@ 都表示传递给函数或脚本的所有参数，不被双引号(“ “)包含时，都以”$1” “$2” … “$n” 的形式输出所有参数。
+但是当它们被双引号(“ “)包含时，”$*” 会将所有的参数作为一个整体，以”$1 $2 … $n”的形式输出所有参数；”$@” 会将各个参数分开，以”$1” “$2” … “$n” 的形式输出所有参数。
+下面的例子可以清楚的看到 $* 和 $@ 的区别：
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -919,8 +928,9 @@ $@    传递给脚本或函数的所有参数。被双引号(“ “)包
         
           
           本地修改了许多文件，其中有些是新增的，因为开发需要这些都不要了，想要丢弃掉，可以使用如下命令：
-方案112345678910git checkout . #本地所有修改的。没有的提交的，都返回到原来的状态git stash #把所有没有提交的修改暂存到stash里面。可用git stash pop回
-          ...
+方案112345678910git checkout . #本地所有修改的。没有的提交的，都返回到原来的状态git stash #把所有没有提交的修改暂存到stash里面。可用git stash pop回复。git reset --hard HASH #返回到某个节点，不保留修改。git reset --soft HASH #返回到某个节点。保留修改git clean -df #返回到某个节点git clean 参数    -n 显示 将要 删除的 文件 和  目录    -f 删除 文件    -df 删除 文件 和 目录
+方案21git checkout . &amp;&amp; git clean -xdf
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/git/git 清除本地所有修改/#more" rel="contents">
@@ -1057,8 +1067,12 @@ $@    传递给脚本或函数的所有参数。被双引号(“ “)包
         
           
           首先说一下账号切换
-首先我现在有一个github账号叫A,但是我现在不想用这个账号了，于是我在github上面重新申请了一个账号叫B，我在B账号下新建了一个仓库，然后使用命令行上传我的本地代码出现以下错误12remote: Permission to B/test.git denied to Afa
-          ...
+首先我现在有一个github账号叫A,但是我现在不想用这个账号了，于是我在github上面重新申请了一个账号叫B，我在B账号下新建了一个仓库，然后使用命令行上传我的本地代码出现以下错误12remote: Permission to B/test.git denied to Afatal: unable to access &apos;https://github.com/B/test/&apos;: The requested eror: 403
+原因是Mac电脑上的钥匙串，每次我们设置好用户名和密码都会自动存储到Mac的钥匙串上面，每次使用命令行上传代码的时候，Mac会自动填充A账号和密码
+这时候我只需要打开钥匙串，然后搜索git，把有关Github的账号密码都删除掉。就可以
+此处省略1万字的草泥马。。。
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/git/多账号/#more" rel="contents">
@@ -1196,8 +1210,10 @@ $@    传递给脚本或函数的所有参数。被双引号(“ “)包
           
           “袁承志知道若再谦逊，那就是瞧人不起，展开五行拳，发拳当胸打去。荣彩和旁观三人本来都以为他武功有独到之秘，哪知使出来的竟是武林中最寻常不过的五行拳。
 敌对三人登时意存轻视，温青脸上不自禁露出失望的神色。
-“荣彩心中暗喜，双拳如风，连抢三下攻势，满拟自己的大力魔爪手江南独步，三四招之间就可破去对方五行
-          ...
+“荣彩心中暗喜，双拳如风，连抢三下攻势，满拟自己的大力魔爪手江南独步，三四招之间就可破去对方五行拳，那知袁承志轻描淡写的一一化解。再拆数招，荣彩暗暗吃惊，原来对方所使虽是极寻常的拳术，但每一招均是含劲不吐，意在拳先，举手抬足 之间隐含极浑厚的内力。”
+——金庸《碧血剑》
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/digest/碧血剑/#more" rel="contents">
@@ -1333,8 +1349,15 @@ $@    传递给脚本或函数的所有参数。被双引号(“ “)包
       
         
           
-          介绍诺贝尔奖得主，心理学家DanielKahneman，经过深入研究，发现对体验的记忆由两个因素决定：高峰（无论是正向的还是负向的）时与结束时的感觉，这就是峰终定律（Peak-EndRule）。这条定律基于潜意识总结体验的特点：对一项事物的体验之后，所能记住的就只是在峰与终时的体验，而在过程中好与不
-          ...
+          介绍诺贝尔奖得主，心理学家DanielKahneman，经过深入研究，发现对体验的记忆由两个因素决定：高峰（无论是正向的还是负向的）时与结束时的感觉，这就是峰终定律（Peak-EndRule）。这条定律基于潜意识总结体验的特点：对一项事物的体验之后，所能记住的就只是在峰与终时的体验，而在过程中好与不好体验的比重、好与不好体验的时间长短，对记忆差不多没有影响。而这里的“峰”与“终”其实这就是所谓的“关键时刻MOT”，MOT(MomentofTruth)是服务界最具震撼力与影响力的管理概念与行为模式
+例子一批人去做直肠检查的时候，分成两批人做实验
+第一批人将器械放入直肠检查10分钟，病人忍受艰难的10分钟，然后立刻拔出
+第二批人将器械放入直肠检查10分钟，病人忍受艰难的10分钟，医生出去办事，忘了拔出来了，等回来之后才拔出来，病人在痛苦中逐渐麻木。
+事后询问这两批人，如果下次生病还要不要做这种检查。
+第二批人的态度普遍比第一批人好一些，表示愿意接受这种检查方式。
+这就是典型的峰终定律
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/digest/峰终定律/#more" rel="contents">
@@ -1610,7 +1633,12 @@ $@    传递给脚本或函数的所有参数。被双引号(“ “)包
           
           两个思维系统在我们的大脑中，存在着两个思维系统，丹尼尔·卡尼曼命名它们为系统1（快思考）和系统2（慢思考）。
 系统1系统1 就像大脑的自动反应模式，会根据生活经验总结无数下意识反应的套路，使生活简化，让我们不必每天早上起来都思考一遍如何套上衣服、扣纽扣、拧开牙膏盖、挤牙膏……
-系统1把生活中的很多事
+系统1把生活中的很多事情都变成可一键执行的自动程序，节省我们日常生活中的脑力损耗。
+系统1也能够察觉一些简单的关系，比如“这两个杯子的外型是一样的”、“哥哥比弟弟高一点”……但是它无法处理多个独立话题。
+它可以快速反应出“2+7=9”，但是遇到“27×56=？”这类复杂的问题就会立地蒙圈儿，无法给出答案，而所有令它蒙圈儿的事情，就会移交给系统2处理。
+系统2系统2接到系统1的求助后，就将大脑的注意力分配到系统1碰到的难题上，集中精神处理该问题。
+值得注意的是，系统2的所有运作都需要集中注意力，一旦注意力分散，运作也会随之中断。
+就像你在散步的时候可以天马行空地随便想一些东西，但如果此时有人请你解决一个复杂的问题，比
           ...
           <!--noindex-->
           <div class="post-button text-center">

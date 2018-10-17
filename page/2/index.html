@@ -364,7 +364,9 @@
         
           
           查询索引1234SHOW &#123;INDEX | INDEXES | KEYS&#125;    &#123;FROM | IN&#125; tbl_name    [&#123;FROM | IN&#125; db_name]    [WHERE expr]
-例子：12SHOW INDEX F
+例子：12SHOW INDEX FROM mydb.mytable;show index from authority;
+字段较多时，竖着看更清晰1SHOW INDEX FROM mydb.mytable\G;
+创建索引直通车：https://dev.mysql.com/doc/refman/5.7/en/create-index.html1234567891011121314151617181920212223CREATE [UNIQUE | FULLTEXT | SPATIAL] INDEX index_name    [index_type]    ON tbl_name (key_part,...)    [index
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -503,7 +505,8 @@
           
           ##shell变量作为另一个变量名
 使用eval123#!/bin/shi=1eval echo '$'rediscache$i
-例1：123dev@pirate-test:~chimps (master *%) $ i=1                                      
+例1：123dev@pirate-test:~chimps (master *%) $ i=1                                                                                                              dev@pirate-test:~chimps (master *%) $ eval echo '$'rediscache$i10.100.100.100
+例21234567#!/bin/shfor ((i = 1; i &lt; 60; i++)); do	redis=$(eval echo &apos;$&apos;rediscache$i)	count=$(redis-cli -h $redis -a ***** DEL key1)	echo &
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -642,8 +645,9 @@
           
           在社会学领域，所谓成功就是“优势积累”的结果。
 职业冰球队员一开始只比最初所在球队的队友好一点点，然而这微小的优势带来的机遇，扩大了他和那些队友之间的差距，随后差距与机会交替发挥作用，微小的差距被越拉越大——最终被选中的队员成了真正出众的天才。
-由此可以看出，天才并非一开始就表现出众，一开始他只是比
-          ...
+由此可以看出，天才并非一开始就表现出众，一开始他只是比别人优秀那么一点点。
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/digest/异类摘录/#more" rel="contents">
@@ -921,7 +925,8 @@
           
           今天读的一章为：过分依赖集体，个人的心智就会退化
 推理很到位：
-“自然赋予人自由意志，也就是赋予了人自主选择的权利。人生是有一个接一个的选择组成的，不同的选择导致不同的人生。但是不可否认的是，伴随着自主选择，人也就多了更多的烦恼和痛苦。选择是一件令人烦恼和痛苦的事情。首先选择意味着放弃。选择一条路，
+“自然赋予人自由意志，也就是赋予了人自主选择的权利。人生是有一个接一个的选择组成的，不同的选择导致不同的人生。但是不可否认的是，伴随着自主选择，人也就多了更多的烦恼和痛苦。选择是一件令人烦恼和痛苦的事情。首先选择意味着放弃。选择一条路，意味着放弃其他的路；有了一个选择，意味着要放弃其他选择。由于人们不愿意放弃，所以每当面临选择时，内心总是充满烦恼和痛苦。其次，选择会产生结果，人们必须为自己的选择负责，并承受选择所带来的结果。当然，好的结果令人欣喜，但坏的结果不仅会招致别人的指责、埋怨，也会让自己陷入懊恼和自责之中，令人痛苦不堪。许多人不愿意承受选择所带来的痛苦，便会把自主选择的权利拱手让给他人。这就是弗洛姆所说的逃避自由。
+逃避自由的人放弃了自主选择的权利，也就放弃了独立思考的能力，这意味着他们将失去独立的自我，失去自己的灵魂。一个没有灵魂的人就像一张破碎的纸片，盲目地追随着每一阵风，完全失去了掌控自我的能力，最终会成为魔鬼
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1196,7 +1201,8 @@
       
         
           
-          基本规则12345678minute   hour   day   month   week   command- minute： 表示分钟，可以是从0到59之间的任何整数。- hour：表示小时，可以是从0到23之间的任何整数。- day：表示日期，可以是从1到31之间的任何整数。- month：
+          基本规则12345678minute   hour   day   month   week   command- minute： 表示分钟，可以是从0到59之间的任何整数。- hour：表示小时，可以是从0到23之间的任何整数。- day：表示日期，可以是从1到31之间的任何整数。- month：表示月份，可以是从1到12之间的任何整数。- week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。- command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。
+特殊字符1234星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1334,7 +1340,12 @@
         
           
           什么是max_allowed_packetmax_allowed_packet是mysql允许插入一条数据的大小
-查看目前配置12345678mysql&gt; show VARIABLES like '%max_allowed_packet%';+-------------------------
+查看目前配置12345678mysql&gt; show VARIABLES like '%max_allowed_packet%';+--------------------------+------------+| Variable_name            | Value      |+--------------------------+------------+| max_allowed_packet       | 16777216   || slave_max_allowed_packet | 1073741824 |+--------------------------+------------+2 rows in set (0.01 sec)
+修改方法
+编辑my.cnf文件
+1max_allowed_packet=20M
+保存重启mysql
+如果找不到
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1471,7 +1482,7 @@
       
         
           
-          上传12345678910111213141516171819202122232425262728// 获取form文件file, err := c.FormFile("attachment")if err != nil &#123;	return nil, GenError(err)&#125;n
+          上传12345678910111213141516171819202122232425262728// 获取form文件file, err := c.FormFile("attachment")if err != nil &#123;	return nil, GenError(err)&#125;now := time.Now()// 检查目录dir := fmt.Sprintf("upload/%d%d", now.Year(), now.Month())if !utils.Exists(dir) &#123;	err = os.MkdirAll(dir, os.ModePerm)	if err != nil &#123;		return nil, GenError(err)	&#125;&#125;// 创建文件path := fmt.Sprintf("%s/%d%s", dir, now.Unix()%(3600*24*30), file.Filename)out, err := 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1609,8 +1620,13 @@
         
           
           做人难
-“  海浪卷走了小孩的鞋子，小孩在海滩上写下：大海是小偷！一个男人在海里打捞出了一些好东西，在沙滩上写到：大海真慷慨！ 一少年溺水身亡，他的母亲在海边写了：大海是凶手！ 一个老翁打捞到了珍珠，他写到：大海真仁慈！ …这时一个海浪冲上来抹去了所有的字， 大海平静地说：如果你想成为大海， 就不要
-          ...
+“  海浪卷走了小孩的鞋子，小孩在海滩上写下：大海是小偷！一个男人在海里打捞出了一些好东西，在沙滩上写到：大海真慷慨！ 一少年溺水身亡，他的母亲在海边写了：大海是凶手！ 一个老翁打捞到了珍珠，他写到：大海真仁慈！ …这时一个海浪冲上来抹去了所有的字， 大海平静地说：如果你想成为大海， 就不要在意别人对你的评说！ 因为你做不到让所有人满意。人生如果容易的话，你当初来到这个世界时就不会从哭泣开始！  ” 共勉
+
+喜欢
+有一个民谣青年曾说：最单纯的喜欢就是，就算你拒绝了我，我对你也永远没有埋怨。但我不会再靠近了。如果你有求于我，我依然会鞠躬尽瘁。从今往后我会把喜欢藏起来，不再招摇过市了，我会努力过得好，希望你也是。
+
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/digest/文摘/#more" rel="contents">

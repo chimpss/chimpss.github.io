@@ -363,7 +363,8 @@
       
         
           
-          通过默认的net/http服务12345678910111213func main() &#123;	http.HandleFunc("/", HelloWorld)	errpr := http.ListenAndServe(":8080", nil)	if errpr != nil &#123;	
+          通过默认的net/http服务12345678910111213func main() &#123;	http.HandleFunc("/", HelloWorld)	errpr := http.ListenAndServe(":8080", nil)	if errpr != nil &#123;		log.Fatal("listen falded")	&#125;&#125;// 由于http.ResponseWriter只是一个接口,所以不需要引用传值// 而http.Request是一个数据(结构类型),所以需要引用传值func HelloWorld(w http.ResponseWriter, r *http.Request) &#123;	io.WriteString(w, "hello world")&#125;
+重写ServeHTTP方法123456789101112131415161718type MyHandler struct &#123;&#125;func mai
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -500,7 +501,7 @@
       
         
           
-          并发编程示例定时任务12345678910111213141516171819func demo(input chan interface&#123;&#125;) &#123;    t1 := time.NewTimer(time.Second * 5)    t2 := time.NewTim
+          并发编程示例定时任务12345678910111213141516171819func demo(input chan interface&#123;&#125;) &#123;    t1 := time.NewTimer(time.Second * 5)    t2 := time.NewTimer(time.Second * 10)    for &#123;        select &#123;        case msg &lt;- input:            println(msg)        case &lt;-t1.C:            println("5s timer")            t1.Reset(time.Second * 5)        case &lt;-t2.C:            println("10s timer")            t2.Reset(time.Second * 10)        
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -637,7 +638,9 @@
       
         
           
-          int int64 string之间转换12345678#string到int  int,err:=strconv.Atoi(string)  #string到int64  int64, err := strconv.ParseInt(string, 10, 64)  #int到string  st
+          int int64 string之间转换12345678#string到int  int,err:=strconv.Atoi(string)  #string到int64  int64, err := strconv.ParseInt(string, 10, 64)  #int到string  string:=strconv.Itoa(int)  #int64到string  string:=strconv.FormatInt(int64,10)
+断言value, ok = element.(T)
+demo1123456var a interface&#123;&#125;a = "zhangsan"// interface&#123;&#125; =&gt; string (断言)a = a.(string)// 如果直接string(a), 则报错:cannot convert a (type interface &#123;&#125;) to type string: need 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -774,8 +777,9 @@
       
         
           
-          遍历目录使用ioutil标准包123456789101112func ListDir(filePath string) (files []string, err error) &#123;	paths, err := ioutil.ReadDir(filePath)	if err != nil &#
-          ...
+          遍历目录使用ioutil标准包123456789101112func ListDir(filePath string) (files []string, err error) &#123;	paths, err := ioutil.ReadDir(filePath)	if err != nil &#123;		return	&#125;	for _, f := range paths &#123;		if !f.IsDir() &#123;			files = append(files, f.Name())		&#125;	&#125;	return&#125;
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/golang/文件/#more" rel="contents">
@@ -911,7 +915,7 @@
       
         
           
-          用法单一：12345678910111213141516.                   匹配任意一个字符，如果设置 s = true，则可以匹配换行符[字符类]            匹配“字符类”中的一个字符，“字符类”见后面的说明[^字符类]           匹配“字符类”外的一个字
+          用法单一：12345678910111213141516.                   匹配任意一个字符，如果设置 s = true，则可以匹配换行符[字符类]            匹配“字符类”中的一个字符，“字符类”见后面的说明[^字符类]           匹配“字符类”外的一个字符，“字符类”见后面的说明\小写Perl标记       匹配“Perl类”中的一个字符，“Perl类”见后面的说明\大写Perl标记       匹配“Perl类”外的一个字符，“Perl类”见后面的说明[:ASCII类名:]       匹配“ASCII类”中的一个字符，“ASCII类”见后面的说明[:^ASCII类名:]      匹配“ASCII类”外的一个字符，“ASCII类”见后面的说明\pUnicode普通类名   匹配“Unicode类”中的一个字符(仅普通类)，“Unicode类”见后面的说明\PUnicode普通类名   匹配“Unicode类”外的一个字符(仅普通类)，“
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1048,7 +1052,8 @@
       
         
           
-          实现随机数12345678910111213func CreateRandom(strLen int) string &#123;	strRandom := "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM"	bytes 
+          实现随机数12345678910111213func CreateRandom(strLen int) string &#123;	strRandom := "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM"	bytes := []byte(strRandom)	strByte := []byte&#123;&#125;	// 需要一个随机种子（torrent），不然每次都是一样的随机数	r := rand.New(rand.NewSource(time.Now().UnixNano()))	for i := 0; i &lt; strLen; i++ &#123;		subNum := r.Intn(len(bytes))		sep := bytes[subNum]		strByte = append(strByte, sep)	&#125;	return string(strByte)&#125;
+MD5加
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1185,7 +1190,10 @@
       
         
           
-          安装最为推荐：$ sudo pip install -U docker-compose之后，可以添加 bash 补全命令：curl -L https://raw.githubusercontent.com/docker/compose/1.2.0/contrib/completion/bash/do
+          安装最为推荐：$ sudo pip install -U docker-compose之后，可以添加 bash 补全命令：curl -L https://raw.githubusercontent.com/docker/compose/1.2.0/contrib/completion/bash/docker-compose &gt; /etc/bash_completion.d/docker-compose
+命令说明基本的使用格式是1docker-compose [options] [COMMAND] [ARGS...]
+选项：1234--verbose 输出更多调试信息。--version 打印版本并退出。-f, --file FILE 使用特定的 compose 模板文件，默认为 docker-compose.yml。-p, --project-name NAME 指定项目名称，默认使用目录名称。
+命令build构建或重新构建服务。服务一旦构建后，将会带上一个标记名，例如 web_d
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1328,7 +1336,7 @@
 
 
 查看docker信息（version、info）12345# 查看docker版本  docker version    # 显示docker系统的信息  docker info
-对image的操作（search、pull、images、rmi、history）1
+对image的操作（search、pull、images、rmi、history）1234567891011121314# 检索image  $docker search image_name    # 下载image  $docker pull image_name    # 列出镜像列表; -a, --all=false Show all images; --no-trunc=false Don't truncate output; -q, --quiet=false Only show numeric IDs  $docker images    # 删除一个或者多个镜像; -f, --force=false Force; --no-prune=false Do not
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1467,7 +1475,16 @@
           
           简介PDFtk 是什么？我觉得官网的一句话解释得很好。
 
-If PDF is electronic paper, then PDFtk is an electronic staple-remover, hole-punch, binder, secret-decoder-ring, and X-Ra
+If PDF is electronic paper, then PDFtk is an electronic staple-remover, hole-punch, binder, secret-decoder-ring, and X-Ray-glasses. PDFtk is a simple tool for doing everyday things with PDF documents.
+
+其官方网站为：官网
+PDFtk 目前分为三个版本：
+
+PDFtk Server：命令行工具。支持 windows、Linux、Mac。
+PDFtk Free：图形界面基础免费版；仅限 windows 用户；功能仅限于 PDF 合并和分割；
+PDFtk Pro：图形界面专业收费版；仅限 windows 用户，可以对 PDF 文档进行合并、分割、旋转、加水印、加邮戳、加密。
+
+对于 Linux 用户，唯一的选择是免费的 PDFtk Ser
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1608,7 +1625,12 @@ If PDF is electronic paper, then PDFtk is an electronic staple-remover, hole-pun
 在脚本中执行其他脚本
 fork  ( /directory/script.sh)：
 
-如果shell中
+如果shell中包含执行命令，那么子命令并不影响父级的命令，在子命令执行完后再执行父级命令。子级的环境变量不会影响到父级。fork是最普通的, 就是直接在脚本里面用/directory/script.sh来调用script.sh这个脚本.运行的时候开一个sub-shell执行调用的脚本，sub-shell执行的时候, parent-shell还在。sub-shell执行完毕后返回parent-shell. sub-shell从parent-shell继承环境变量.但是sub-shell中的环境变量不会带回parent-shell
+
+
+exec (exec /directory/script.sh)：
+
+执行子
           ...
           <!--noindex-->
           <div class="post-button text-center">
