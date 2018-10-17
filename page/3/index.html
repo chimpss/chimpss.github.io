@@ -738,6 +738,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/expect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux/expect/" itemprop="url">expect交互编程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/expect/" class="leancloud_visitors" data-flag-title="expect交互编程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu：apt-get install expect</span><br><span class="line">mac: brew install homebrew/dupes/expect</span><br></pre></td></tr></table></figure>
+<h1 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set password  rootddd</span><br></pre></td></tr></table></figure>
+<h1 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set filename [lindex $argv 0]</span><br></pre></td></tr></table></figure>
+<h1 id="一般格式"><a href="#一般格式" class="headerlink" title="一般格式"></a>一般格式</h1><blockquote>
+<p>开头一定要是expect<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line"></span><br><span class="line">set filename [lindex $argv 0]</span><br><span class="line">set password  example_pass</span><br><span class="line"># 开始执行命令</span><br><span class="line">spawn ssh root@example.com</span><br><span class="line"># 匹配（如果包含，则执行下面的send）</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line"># \r回车</span><br><span class="line">send &quot;$password\r&quot;</span><br><span class="line">send &quot;ls\r&quot;</span><br><span class="line">send &quot;exit\r&quot;</span><br><span class="line"># 结束标志</span><br><span class="line">interact</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/ssh/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -848,142 +984,6 @@
 <h1 id="禁止密码登录"><a href="#禁止密码登录" class="headerlink" title="禁止密码登录"></a>禁止密码登录</h1><p>修改SSH的配置文件/etc/ssh/sshd_config，找到下面1行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure></p>
 <p>修改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication no</span><br></pre></td></tr></table></figure></p>
 <p>保存后重启SSH服务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/expect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/expect/" itemprop="url">expect交互编程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/expect/" class="leancloud_visitors" data-flag-title="expect交互编程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu：apt-get install expect</span><br><span class="line">mac: brew install homebrew/dupes/expect</span><br></pre></td></tr></table></figure>
-<h1 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set password  rootddd</span><br></pre></td></tr></table></figure>
-<h1 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set filename [lindex $argv 0]</span><br></pre></td></tr></table></figure>
-<h1 id="一般格式"><a href="#一般格式" class="headerlink" title="一般格式"></a>一般格式</h1><blockquote>
-<p>开头一定要是expect<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line"></span><br><span class="line">set filename [lindex $argv 0]</span><br><span class="line">set password  example_pass</span><br><span class="line"># 开始执行命令</span><br><span class="line">spawn ssh root@example.com</span><br><span class="line"># 匹配（如果包含，则执行下面的send）</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line"># \r回车</span><br><span class="line">send &quot;$password\r&quot;</span><br><span class="line">send &quot;ls\r&quot;</span><br><span class="line">send &quot;exit\r&quot;</span><br><span class="line"># 结束标志</span><br><span class="line">interact</span><br></pre></td></tr></table></figure></p>
-</blockquote>
 
           
         
@@ -1656,7 +1656,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/跨域cors/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/cookie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -1675,7 +1675,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/http/跨域cors/" itemprop="url">cors(跨域)</a></h1>
+                <a class="post-title-link" href="/http/cookie/" itemprop="url">cookie</a></h1>
         
 
         <div class="post-meta">
@@ -1705,7 +1705,7 @@
 
           
           
-             <span id="/http/跨域cors/" class="leancloud_visitors" data-flag-title="cors(跨域)">
+             <span id="/http/cookie/" class="leancloud_visitors" data-flag-title="cookie">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1738,38 +1738,16 @@
       
         
           
-            <blockquote>
-<p>摘自<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">阮老师</a><br>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）</p>
-</blockquote>
-<h1 id="两种请求"><a href="#两种请求" class="headerlink" title="两种请求"></a>两种请求</h1><p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。<br>只要同时满足以下两大条件，就属于简单请求。</p>
-<ul>
-<li><p>请求方法是以下三种方法之一：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HEAD</span><br><span class="line">GET</span><br><span class="line">POST</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>HTTP的头信息不超出以下几种字段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Accept</span><br><span class="line">Accept-Language</span><br><span class="line">Content-Language</span><br><span class="line">Last-Event-ID</span><br><span class="line">Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="简单请求"><a href="#简单请求" class="headerlink" title="简单请求"></a>简单请求</h1><p>对于简单请求，浏览器直接发出CORS请求。具体来说，就是在头信息之中，增加一个Origin字段。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /cors HTTP/1.1</span><br><span class="line">Origin: http://api.bob.com</span><br><span class="line">Host: api.alice.com</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/5.0...</span><br></pre></td></tr></table></figure></p>
-<h2 id="不同意"><a href="#不同意" class="headerlink" title="不同意"></a>不同意</h2><p>如果Origin指定的源，不在许可范围内，服务器会返回一个<code>正常的HTTP回应(虽然是拒绝的回应)</code>。浏览器发现，这个回应的头信息没有包含Access-Control-Allow-Origin字段（详见下文），就知道出错了，从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。注意，这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200。</p>
-<h2 id="同意"><a href="#同意" class="headerlink" title="同意"></a>同意</h2><p>如果Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://api.bob.com</span><br><span class="line">Access-Control-Allow-Credentials: true</span><br><span class="line">Access-Control-Expose-Headers: FooBar</span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br></pre></td></tr></table></figure></p>
-<h3 id="Access-Control-Allow-Origin"><a href="#Access-Control-Allow-Origin" class="headerlink" title="Access-Control-Allow-Origin"></a>Access-Control-Allow-Origin</h3><p>该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。</p>
-<h3 id="Access-Control-Allow-Credentials"><a href="#Access-Control-Allow-Credentials" class="headerlink" title="Access-Control-Allow-Credentials"></a>Access-Control-Allow-Credentials</h3><p>该字段可选。它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。</p>
-<h3 id="Access-Control-Expose-Headers"><a href="#Access-Control-Expose-Headers" class="headerlink" title="Access-Control-Expose-Headers"></a>Access-Control-Expose-Headers</h3><p>该字段可选。CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。<strong>如果想拿到其他字段，就必须在<code>Access-Control-Expose-Headers</code>里面指定</strong>。上面的例子指定，getResponseHeader(‘FooBar’)可以返回FooBar字段的值。</p>
-<h3 id="withCredentials-属性"><a href="#withCredentials-属性" class="headerlink" title="withCredentials 属性"></a>withCredentials 属性</h3><p>上面说到，CORS请求默认不发送Cookie和HTTP认证信息。如果要把Cookie发到服务器，一方面要服务器同意，指定Access-Control-Allow-Credentials字段。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Credentials: true</span><br></pre></td></tr></table></figure></p>
-<p>另一方面，开发者必须在AJAX请求中打开withCredentials属性。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></p>
-<p>否则，即使服务器同意发送Cookie，浏览器也不会发送。或者，服务器要求设置Cookie，浏览器也不会处理。<br>但是，如果省略withCredentials设置，有的浏览器还是会一起发送Cookie。这时，可以显式关闭withCredentials<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.withCredentials = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure></p>
-<p>需要注意的是，如果要发送Cookie，<strong>Access-Control-Allow-Origin就不能设为星号，必须指定明确的、与请求网页一致的域名</strong>。同时，Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且（跨源）原网页代码中的document.cookie也无法读取服务器域名下的Cookie。</p>
-<h1 id="非简单请求"><a href="#非简单请求" class="headerlink" title="非简单请求"></a>非简单请求</h1><h2 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h2><p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是<code>PUT或DELETE</code>，或者<code>Content-Type字段的类型是application/json</code>。<br><strong>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为”预检”请求（preflight）</strong>。<br>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。<br>下面是一段浏览器的JavaScript脚本。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">'http://api.alice.com/cors'</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">'PUT'</span>, url, <span class="literal">true</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">'X-Custom-Header'</span>, <span class="string">'value'</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure></p>
-<p>浏览器发现，这是一个非简单请求，就自动发出一个”预检”请求，要求服务器确认可以这样请求。下面是这个”预检”请求的<code>HTTP头信息</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /cors HTTP/<span class="number">1.1</span></span><br><span class="line">Origin: http:<span class="comment">//api.bob.com</span></span><br><span class="line">Access-Control-Request-Method: PUT</span><br><span class="line">Access-Control-Request-Headers: X-Custom-Header</span><br><span class="line">Host: api.alice.com</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span>...</span><br></pre></td></tr></table></figure></p>
-<h3 id="关键字段是Origin"><a href="#关键字段是Origin" class="headerlink" title="关键字段是Origin"></a>关键字段是Origin</h3><p>“预检”请求用的请求方法是<code>OPTIONS</code>，表示这个请求是用来询问的。头信息里面，<code>关键字段是Origin</code>，表示请求来自哪个源。</p>
-<h3 id="除了Origin字段，”预检”请求的头信息包括两个特殊字段。"><a href="#除了Origin字段，”预检”请求的头信息包括两个特殊字段。" class="headerlink" title="除了Origin字段，”预检”请求的头信息包括两个特殊字段。"></a>除了Origin字段，”预检”请求的头信息包括两个特殊字段。</h3><p>（1）<code>Access-Control-Request-Method</code><br>该字段是必须的，用来列出浏览器的CORS请求会用到哪些HTTP方法，上例是PUT。<br>（2）<code>Access-Control-Request-Headers</code><br>该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是X-Custom-Header。</p>
-<h2 id="预检请求的回应"><a href="#预检请求的回应" class="headerlink" title="预检请求的回应"></a>预检请求的回应</h2><p>服务器收到”预检”请求以后，检查了<code>Origin、Access-Control-Request-Method和Access-Control-Request-Headers</code>字段以后，确认允许跨源请求，就可以做出回应。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Mon, 01 Dec 2008 01:15:39 GMT</span><br><span class="line">Server: Apache/2.0.61 (Unix)</span><br><span class="line">Access-Control-Allow-Origin: http://api.bob.com</span><br><span class="line">Access-Control-Allow-Methods: GET, POST, PUT</span><br><span class="line">Access-Control-Allow-Headers: X-Custom-Header</span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Length: 0</span><br><span class="line">Keep-Alive: timeout=2, max=100</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Content-Type: text/plain</span><br></pre></td></tr></table></figure></p>
-<h3 id="Access-Control-Allow-Methods"><a href="#Access-Control-Allow-Methods" class="headerlink" title="Access-Control-Allow-Methods"></a>Access-Control-Allow-Methods</h3><p>该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次”预检”请求。</p>
-<h3 id="Access-Control-Allow-Headers"><a href="#Access-Control-Allow-Headers" class="headerlink" title="Access-Control-Allow-Headers"></a>Access-Control-Allow-Headers</h3><p>如果浏览器请求包括<code>Access-Control-Request-Headers</code>字段，则Access-Control-Allow-Headers字段是必需的。它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在”预检”中请求的字段。</p>
-<h3 id="Access-Control-Allow-Credentials-1"><a href="#Access-Control-Allow-Credentials-1" class="headerlink" title="Access-Control-Allow-Credentials"></a>Access-Control-Allow-Credentials</h3><p>该字段与简单请求时的含义相同。</p>
-<h3 id="Access-Control-Max-Age"><a href="#Access-Control-Max-Age" class="headerlink" title="Access-Control-Max-Age"></a>Access-Control-Max-Age</h3><p>该字段可选，用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是20天（1728000秒），即允许缓存该条回应1728000秒（即20天），在此期间，不用发出另一条预检请求。</p>
-<h3 id="go-gin-cors设置"><a href="#go-gin-cors设置" class="headerlink" title="go-gin cors设置"></a>go-gin cors设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router = gin.Default()</span><br><span class="line"></span><br><span class="line">config := cors.DefaultConfig()</span><br><span class="line">config.AllowAllOrigins = true</span><br><span class="line">config.AllowMethods = []string&#123;&quot;GET&quot;, &quot;POST&quot;, &quot;OPTIONS&quot;&#125;</span><br><span class="line">config.AllowHeaders = []string&#123;&quot;DNT&quot;, &quot;X-Mx-ReqToken&quot;, &quot;Keep-Alive&quot;, &quot;User-Agent&quot;, &quot;X-Requested-With&quot;, &quot;If-Modified-Since&quot;, &quot;Cache-Control&quot;, &quot;Content-Type&quot;, &quot;Authorization&quot;, &quot;X-Token&quot;&#125;</span><br><span class="line">router.Use(cors.New(config))</span><br></pre></td></tr></table></figure>
+            <h1 id="cookie-是怎么工作的"><a href="#cookie-是怎么工作的" class="headerlink" title="cookie 是怎么工作的"></a>cookie 是怎么工作的</h1><p>当网页要发http请求时，浏览器会先检查是否有相应的<code>cookie</code>，有则自动添加在<code>request header</code>中的<code>cookie</code>字段中。这些是浏览器自动帮我们做的，而且每一次http请求浏览器都会自动帮我们做。这个特点很重要，因为这关系到“<strong>什么样的数据适合存储在cookie中</strong>”。</p>
+<p>存储在cookie中的数据，<code>每次</code>都会被浏览器自动放在<code>http请求</code>中，如果这些数据并不是每个请求都需要发给服务端的数据，浏览器这设置自动处理无疑增加了网络开销；但如果这些数据是每个请求都需要发给服务端的数据（比如身份认证信息），浏览器这设置自动处理就大大免去了重复添加操作。所以对于那设置“每次请求都要携带的信息（最典型的就是身份认证信息）”就特别适合放在cookie中，其他大多数类型的数据就不适合了。</p>
+<h1 id="cookie-属性"><a href="#cookie-属性" class="headerlink" title="cookie 属性"></a>cookie 属性</h1><p>每个cookie都有一定的属性，如什么时候失效，要发送到哪个域名，哪个路径等等。这些属性是通过cookie选项来设置的，cookie选项包括：<code>expires、domain、path、secure、HttpOnly</code>。在设置任一个cookie时都可以设置相关的这些属性，当然也可以不设置，这时会使用这些属性的默认值。在设置这些属性时，属性之间由一个<code>分号和一个空格</code>隔开。代码示例如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"key=name; expires=Thu, 25 Feb 2016 04:18:00 GMT; domain=ppsc.sankuai.com; path=/; secure; HttpOnly"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h2><p>expires选项用来设置“cookie 什么时间内有效”。expires其实是<code>cookie失效日期</code>，expires必须是 GMT 格式的时间（可以通过 <code>new Date().toGMTString()</code>或者 <code>new Date().toUTCString()</code> 来获得）。</p>
+<p>expires 是 http/1.0协议中的选项，在新的http/1.1协议中expires已经由 <code>max-age</code> 选项代替，两者的作用都是限制cookie 的有效时间。expires的值是一个<code>时间点</code>（<code>cookie失效时刻= expires</code>），而max-age 的值是一个<code>以秒为单位时间段</code>（<code>cookie失效时刻= 创建时刻+ max-age</code>）。<br>另外，max-age 的默认值是 <code>-1</code>(即有效期为 session )；若max-age有三种可能值：负数、0、正数。负数：有效期session；0：删除cookie；正数：有效期为创建时刻+ max-age</p>
+<h2 id="domain-和-path"><a href="#domain-和-path" class="headerlink" title="domain 和 path"></a>domain 和 path</h2><p><code>domain</code>是域名，<code>path</code>是路径，两者加起来就构成了 URL，domain和path一起来限制 cookie 能被哪些 URL 访问。<br>一句话概括：某cookie的 <code>domain为“baidu.com”, path为“/ ”</code>，若请求的URL(URL 可以是js/html/img/css资源请求，但不包括 XHR 请求)的域名是“baidu.com”或其子域如“api.baidu.com”、“dev.api.baidu.com”，且 URL 的路径是“/ ”或子路径“/home”、“/home/login”，则浏览器会将此 cookie 添加到该请求的 cookie 头部中。<br>发生<code>跨域xhr</code>请求时，即使请求URL的域名和路径都满足 cookie 的 domain 和 path，默认情况下cookie也不会自动被添加到请求头部中</p>
+<h2 id="secure"><a href="#secure" class="headerlink" title="secure"></a>secure</h2><p>secure选项用来设置cookie只在确保<code>安全</code>的请求中才会发送。当请求是<code>HTTPS或者其他安全协议</code>时，包含 secure 选项的 cookie 才能被发送至服务器。<br>默认情况下，cookie不会带secure选项(即为<code>空</code>)。所以默认情况下，不管是HTTPS协议还是HTTP协议的请求，cookie 都会被发送至服务端</p>
+<h2 id="httpOnly"><a href="#httpOnly" class="headerlink" title="httpOnly"></a>httpOnly</h2><p>这个选项用来设置<code>cookie是否能通过 js 去访问</code>。<br>默认情况下，cookie不会带httpOnly选项(即为空)，所以默认情况下，客户端是可以通过js代码去访问（包括读取、修改、删除等）这个cookie的。<br>当cookie带httpOnly选项时，客户端则无法通过js代码去访问（包括读取、修改、删除等）这个cookie。</p>
+<h1 id="如何设置cookie"><a href="#如何设置cookie" class="headerlink" title="如何设置cookie"></a>如何设置cookie</h1><h2 id="服务端设置-cookie"><a href="#服务端设置-cookie" class="headerlink" title="服务端设置 cookie"></a>服务端设置 cookie</h2><p>不管你是请求一个资源文件（如 html/js/css/图片），还是发送一个ajax请求，服务端都会返回<code>response</code>。而<code>response header</code>中有一项叫<code>set-cookie</code>，是服务端专门用来设置cookie的。<br><code>一个set-Cookie字段只能设置一个cookie</code>，当你要想设置多个 cookie，需要添加同样多的set-Cookie字段。<br>服务端可以设置cookie 的所有选项：expires、domain、path、secure、HttpOnly</p>
+<h2 id="客户端设置cookie"><a href="#客户端设置cookie" class="headerlink" title="客户端设置cookie"></a>客户端设置cookie</h2><p>客户端可以设置cookie 的下列选项：expires、domain、path、secure（有条件：只有在https协议的网页中，客户端设置secure类型的 cookie 才能成功），但无法设置HttpOnly选项。</p>
 
           
         
