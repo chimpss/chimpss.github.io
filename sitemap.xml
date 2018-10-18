@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chimpss.github.io/digest/%E6%88%91%E6%98%AF%E9%82%A3%E5%8F%AA%E7%AD%89%E7%88%B1%E7%9A%84%E7%8B%90%E7%8B%B8/</loc>
+    
+    <lastmod>2018-10-18T12:15:51.329Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chimpss.github.io/lua/redis%E7%BC%96%E5%86%99lua%E8%84%9A%E6%9C%AC/</loc>
     
     <lastmod>2018-10-17T12:11:00.914Z</lastmod>
@@ -166,13 +173,6 @@
     <loc>http://chimpss.github.io/linux/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/</loc>
     
     <lastmod>2018-10-09T04:01:14.547Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chimpss.github.io/test.html</loc>
-    
-    <lastmod>2018-10-09T04:00:58.194Z</lastmod>
     
   </url>
   
