@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chimpss.github.io/"/>
-  <updated>2018-10-18T12:18:51.664Z</updated>
+  <updated>2018-10-21T02:47:05.166Z</updated>
   <id>http://chimpss.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>国产凌凌漆</title>
+    <link href="http://chimpss.github.io/digest/%E5%9B%BD%E4%BA%A7%E5%87%8C%E5%87%8C%E6%BC%86/"/>
+    <id>http://chimpss.github.io/digest/国产凌凌漆/</id>
+    <published>2018-10-21T02:45:56.336Z</published>
+    <updated>2018-10-21T02:47:05.166Z</updated>
+    
+    <content type="html"><![CDATA[<p>你以为躲起来就找不到你了吗？</p><p>没有用的！</p><p>像你这样出色的男人，无论在什么地方，都像漆黑中的萤火虫一样，那样的鲜明，那样的出众。</p><p>你那忧郁的眼神，稀嘘的胡喳子，神乎其神的刀法，和那杯Dry Martine，都深深地迷住了我。</p><p>不过，虽然这是这样的出色，但是行有行规，无论怎样你要付清昨晚的过夜费呀，叫女人不用给钱吗？</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;你以为躲起来就找不到你了吗？&lt;/p&gt;
+&lt;p&gt;没有用的！&lt;/p&gt;
+&lt;p&gt;像你这样出色的男人，无论在什么地方，都像漆黑中的萤火虫一样，那样的鲜明，那样的出众。&lt;/p&gt;
+&lt;p&gt;你那忧郁的眼神，稀嘘的胡喳子，神乎其神的刀法，和那杯Dry Martine，都深深地迷住了我。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="有趣的灵魂" scheme="http://chimpss.github.io/tags/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%81%B5%E9%AD%82/"/>
+    
+  </entry>
   
   <entry>
     <title>我是那只等爱的狐狸（小王子）</title>
@@ -479,29 +506,6 @@
       <category term="linux" scheme="http://chimpss.github.io/tags/linux/"/>
     
       <category term="shell" scheme="http://chimpss.github.io/tags/shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL max_allowed_packet设置</title>
-    <link href="http://chimpss.github.io/mysql/max_allowed_packet/"/>
-    <id>http://chimpss.github.io/mysql/max_allowed_packet/</id>
-    <published>2018-10-08T15:19:12.066Z</published>
-    <updated>2018-10-08T15:28:50.919Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="什么是max-allowed-packet"><a href="#什么是max-allowed-packet" class="headerlink" title="什么是max_allowed_packet"></a>什么是max_allowed_packet</h2><p>max_allowed_packet是mysql允许插入一条数据的大小</p><h2 id="查看目前配置"><a href="#查看目前配置" class="headerlink" title="查看目前配置"></a>查看目前配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show VARIABLES like <span class="string">'%max_allowed_packet%'</span>;</span></span><br><span class="line">+--------------------------+------------+</span><br><span class="line">| Variable_name            | Value      |</span><br><span class="line">+--------------------------+------------+</span><br><span class="line">| max_allowed_packet       | 16777216   |</span><br><span class="line">| slave_max_allowed_packet | 1073741824 |</span><br><span class="line">+--------------------------+------------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure><h2 id="修改方法"><a href="#修改方法" class="headerlink" title="修改方法"></a>修改方法</h2><ol><li><p>编辑<code>my.cnf</code>文件</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">max_allowed_packet</span>=<span class="number">20</span>M</span><br></pre></td></tr></table></figure><p>保存重启mysql</p><p>如果找不到<code>my.cnf</code>，可以通过命令：<code>mysql --help | grep my.cnf</code></p></li><li><p>在mysql 命令行中运行</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> global max_allowed_packet = 2*1024*1024*10</span><br></pre></td></tr></table></figure><p>然后关闭掉这此mysql server链接，再进入</p></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;什么是max-allowed-packet&quot;&gt;&lt;a href=&quot;#什么是max-allowed-packet&quot; class=&quot;headerlink&quot; title=&quot;什么是max_allowed_packet&quot;&gt;&lt;/a&gt;什么是max_allowed_packet&lt;/
-      
-    
-    </summary>
-    
-    
-      <category term="mysql" scheme="http://chimpss.github.io/tags/mysql/"/>
     
   </entry>
   

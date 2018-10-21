@@ -291,6 +291,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/header/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/http/header/" itemprop="url">header</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/http/header/" class="leancloud_visitors" data-flag-title="header">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="判断客户端编码"><a href="#判断客户端编码" class="headerlink" title="判断客户端编码"></a>判断客户端编码</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">get_os</span><span class="params">($agent = null)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!$agent) $agent = $_SERVER[<span class="string">'HTTP_USER_AGENT'</span>];</span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 6.0/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows Vista'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 6.1/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 7'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 6.2/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 8'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 10.0/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 10'</span>;<span class="comment"># 添加win10判断</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 5.1/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows XP'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 5/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 2000'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows NT'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/32/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 32'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/linux/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Linux'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/unix/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Unix'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/sun/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/os/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'SunOS'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/ibm/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/os/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'IBM OS/2'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/Mac/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Macintosh'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/PowerPC/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'PowerPC'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/AIX/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'AIX'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/HPUX/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'HPUX'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/NetBSD/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'NetBSD'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/BSD/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'BSD'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/OSF1/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'OSF1'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/IRIX/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'IRIX'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/FreeBSD/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'FreeBSD'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/teleport/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'teleport'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/flashget/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'flashget'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/webzip/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'webzip'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/offline/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'offline'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $os = <span class="string">'未知操作系统'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> $os;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="页面输出"><a href="#页面输出" class="headerlink" title="页面输出"></a>页面输出</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'HTTP/1.1 200 OK'</span>);  <span class="comment">// ok 正常访问</span></span><br><span class="line">header(<span class="string">'HTTP/1.1 404 Not Found'</span>); <span class="comment">//通知浏览器 页面不存在</span></span><br><span class="line">header(<span class="string">'HTTP/1.1 301 Moved Permanently'</span>); <span class="comment">//设置地址被永久的重定向 301</span></span><br><span class="line">header(<span class="string">'Location: http://www.form1.cn/'</span>); <span class="comment">//跳转到一个新的地址</span></span><br><span class="line">header(<span class="string">'Refresh: 10; url=http://www.form1.cn/'</span>); <span class="comment">//延迟转向 也就是隔几秒跳转</span></span><br><span class="line">header(<span class="string">'X-Powered-By: PHP/6.0.0'</span>); <span class="comment">//修改 X-Powered-By信息</span></span><br><span class="line">header(<span class="string">'Content-language: en'</span>); <span class="comment">//文档语言</span></span><br><span class="line">header(<span class="string">'Content-Length: 1234'</span>); <span class="comment">//设置内容长度</span></span><br><span class="line">header(<span class="string">'Last-Modified: '</span>.gmdate(<span class="string">'D, d M Y H:i:s'</span>, $time).<span class="string">' GMT'</span>); <span class="comment">//告诉浏览器最后一次修改时间</span></span><br><span class="line">header(<span class="string">'HTTP/1.1 304 Not Modified'</span>); <span class="comment">//告诉浏览器文档内容没有发生改变</span></span><br></pre></td></tr></table></figure>
+<h1 id="内容输出"><a href="#内容输出" class="headerlink" title="内容输出"></a>内容输出</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Content-Type: text/html; charset=utf-8'</span>); <span class="comment">//网页编码 </span></span><br><span class="line">header(<span class="string">'Content-Type: text/plain'</span>); <span class="comment">//纯文本格式 </span></span><br><span class="line">header(<span class="string">'Content-Type: image/jpeg'</span>); <span class="comment">//JPG、JPEG  </span></span><br><span class="line">header(<span class="string">'Content-Type: application/zip'</span>); <span class="comment">// ZIP文件 </span></span><br><span class="line">header(<span class="string">'Content-Type: application/pdf'</span>); <span class="comment">// PDF文件 </span></span><br><span class="line">header(<span class="string">'Content-Type: audio/mpeg'</span>); <span class="comment">// 音频文件  </span></span><br><span class="line">header(<span class="string">'Content-type: text/css'</span>); <span class="comment">//css文件</span></span><br><span class="line">header(<span class="string">'Content-type: text/javascript'</span>); <span class="comment">//js文件</span></span><br><span class="line">header(<span class="string">'Content-type: application/json'</span>);  <span class="comment">//json</span></span><br><span class="line">header(<span class="string">'Content-type: application/pdf'</span>); <span class="comment">//pdf </span></span><br><span class="line">header(<span class="string">'Content-type: text/xml'</span>);  <span class="comment">//xml</span></span><br><span class="line">header(<span class="string">'Content-Type: application/x-shockw**e-flash'</span>); <span class="comment">//Flash动画</span></span><br></pre></td></tr></table></figure>
+<h1 id="声明一个下载文件"><a href="#声明一个下载文件" class="headerlink" title="声明一个下载文件"></a>声明一个下载文件</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Content-Type: application/octet-stream'</span>); </span><br><span class="line">header(<span class="string">'Content-Disposition: attachment; filename="ITblog.zip"'</span>); </span><br><span class="line">header(<span class="string">'Content-Transfer-Encoding: binary'</span>); </span><br><span class="line">readfile(<span class="string">'test.zip'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="对当前文档禁用缓存"><a href="#对当前文档禁用缓存" class="headerlink" title="对当前文档禁用缓存"></a>对当前文档禁用缓存</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Cache-Control: no-cache, no-store, max-age=0, must-revalidate'</span>); </span><br><span class="line">header(<span class="string">'Expires: Mon, 26 Jul 1997 05:00:00 GMT'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="身份认证"><a href="#身份认证" class="headerlink" title="身份认证"></a>身份认证</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'HTTP/1.1 401 Unauthorized'</span>);  </span><br><span class="line">header(<span class="string">'WWW-Authenticate: Basic realm="Top Secret"'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="声明一个需要下载的xls文件"><a href="#声明一个需要下载的xls文件" class="headerlink" title="声明一个需要下载的xls文件"></a>声明一个需要下载的xls文件</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Content-Disposition: attachment; filename=ithhc.xlsx'</span>);</span><br><span class="line">header(<span class="string">'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'</span>);</span><br><span class="line">header(<span class="string">'Content-Length: '</span>.filesize(<span class="string">'./test.xls'</span>));  </span><br><span class="line">header(<span class="string">'Content-Transfer-Encoding: binary'</span>);  </span><br><span class="line">header(<span class="string">'Cache-Control: must-revalidate'</span>);  </span><br><span class="line">header(<span class="string">'Pragma: public'</span>);  </span><br><span class="line">readfile(<span class="string">'./test.xls'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="download"><a href="#download" class="headerlink" title="download"></a>download</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type: application/force-download"</span>);</span><br><span class="line"><span class="comment">// 判断编码</span></span><br><span class="line">$use_utf_8 = Utils::get_os() == <span class="string">'Macintosh'</span>;</span><br><span class="line"><span class="keyword">if</span> (!$use_utf_8) &#123;</span><br><span class="line">    <span class="comment">// Disposition中文是处置的意思, 可以理解为文档如何处置</span></span><br><span class="line">    header(<span class="string">"Content-Disposition: attachment;filename="</span> . iconv(<span class="string">"utf-8"</span>, <span class="string">"gb2312//IGNORE"</span>, $zip_title) . <span class="string">".zip"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    header(<span class="string">"Content-Disposition: attachment;filename="</span> . $zip_title . <span class="string">".zip"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> file_get_contents($zip_path);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/跨域cors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1335,136 +1472,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/读取配置文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/读取配置文件/" itemprop="url">读取配置文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/golang/读取配置文件/" class="leancloud_visitors" data-flag-title="读取配置文件">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="使用json格式"><a href="#使用json格式" class="headerlink" title="使用json格式"></a>使用json格式</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mysql <span class="keyword">struct</span> &#123;</span><br><span class="line">	Host <span class="keyword">string</span></span><br><span class="line">	Port <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Data mysql</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 判断是为了实现单例的效果</span></span><br><span class="line">	<span class="keyword">if</span> Data.Port == <span class="number">0</span> &#123;</span><br><span class="line">	    <span class="comment">// 当前目录应该为main.go的目录</span></span><br><span class="line">		str, err := ioutil.ReadFile(<span class="string">"./config/database.json"</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 读取json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err = json.Unmarshal(str, &amp;Data); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 解析json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		log.Println(<span class="string">"读取配置文件成功"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	log.Println(<span class="string">"执行init函数 配置文件"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/发邮件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1599,7 +1606,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/数组与切片/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/读取配置文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -1618,7 +1625,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/golang/数组与切片/" itemprop="url">数组与切片</a></h1>
+                <a class="post-title-link" href="/golang/读取配置文件/" itemprop="url">读取配置文件</a></h1>
         
 
         <div class="post-meta">
@@ -1648,7 +1655,7 @@
 
           
           
-             <span id="/golang/数组与切片/" class="leancloud_visitors" data-flag-title="数组与切片">
+             <span id="/golang/读取配置文件/" class="leancloud_visitors" data-flag-title="读取配置文件">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1681,42 +1688,7 @@
       
         
           
-            <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 索引数组</span></span><br><span class="line">a := [<span class="number">10</span>]<span class="keyword">int</span>&#123;<span class="number">2</span>:<span class="number">20</span>&#125;</span><br><span class="line"><span class="comment">// 不指定数组长度</span></span><br><span class="line">a := [...]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line"><span class="comment">// 多维数组,只有第一维可以使用...</span></span><br><span class="line">a := [...][<span class="number">3</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">    &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">a := [<span class="number">2</span>][<span class="number">3</span>]<span class="keyword">int</span>&#123;</span><br><span class="line">    &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指针数组</span></span><br><span class="line">x,y := <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">a := [...]*<span class="keyword">int</span>&#123;&amp;x, &amp;y&#125;</span><br><span class="line"><span class="comment">//指向数组的指针</span></span><br><span class="line">a :=[...]<span class="keyword">int</span>&#123;<span class="number">99</span>:<span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">var</span> p *[<span class="number">100</span>]<span class="keyword">int</span> = &amp;a</span><br><span class="line"><span class="comment">// 数组之间可以使用 == 或 != 比较,只有长度和类型相同才算相同的数组，才能比较</span></span><br><span class="line">a :=[<span class="number">2</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br><span class="line">b :=[<span class="number">2</span>]<span class="keyword">int</span>&#123;<span class="number">3</span>,<span class="number">2</span>&#125;</span><br><span class="line"><span class="comment">// 使用new关键字，返回指向数组的指针</span></span><br><span class="line">a :=[<span class="number">2</span>]<span class="keyword">int</span>&#123;&#125;</span><br><span class="line">a[<span class="number">1</span>] = <span class="number">2</span></span><br><span class="line">b = <span class="built_in">new</span>([<span class="number">2</span>]<span class="keyword">int</span>)</span><br><span class="line">b[<span class="number">1</span>] = <span class="number">2</span></span><br><span class="line"><span class="comment">// 不论是指向数组的指针还是数组本身，都可以使用a[1]的形式给数组赋值</span></span><br><span class="line"><span class="comment">// go语言的数组是值类型，不是引用类型</span></span><br><span class="line"><span class="comment">//冒泡排序</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	list := [...]<span class="keyword">int</span>&#123;<span class="number">12</span>, <span class="number">323</span>, <span class="number">4</span>, <span class="number">565</span>, <span class="number">67</span>, <span class="number">3</span>&#125;</span><br><span class="line">	fmt.Println(list)</span><br><span class="line">	<span class="keyword">var</span> lenth = <span class="built_in">len</span>(list)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; lenth; i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := i + <span class="number">1</span>; j &lt; lenth; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> list[i] &gt; list[j] &#123;</span><br><span class="line">				tmp := list[i]</span><br><span class="line">				list[i] = list[j]</span><br><span class="line">				list[j] = tmp</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(list)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">12</span> <span class="number">323</span> <span class="number">4</span> <span class="number">565</span> <span class="number">67</span> <span class="number">3</span>]</span><br><span class="line">[<span class="number">3</span> <span class="number">4</span> <span class="number">12</span> <span class="number">67</span> <span class="number">323</span> <span class="number">565</span>]</span><br></pre></td></tr></table></figure>
-<h1 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h1><h2 id="切片与数组的定义区别"><a href="#切片与数组的定义区别" class="headerlink" title="切片与数组的定义区别"></a>切片与数组的定义区别</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vs:=[]<span class="keyword">interface</span>&#123;&#125;&#123;</span><br><span class="line">    []<span class="keyword">int</span>&#123;&#125;,<span class="comment">// slice 切片</span></span><br><span class="line">    []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,<span class="comment">// slice 切片</span></span><br><span class="line">    []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;[:],<span class="comment">//切片再切还是切片</span></span><br><span class="line">    <span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">3</span>,<span class="number">10</span>),<span class="comment">//标准的slice 定义方式</span></span><br><span class="line">    [<span class="number">3</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,<span class="comment">//array 数组，确定数组长度</span></span><br><span class="line">    [...]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,<span class="comment">//array 数组，由编译器自动计算数组长度。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Reslice"><a href="#Reslice" class="headerlink" title="Reslice"></a>Reslice</h2><ul>
-<li>切片本质上是指向类型</li>
-<li>切片不能越界，如果超过底层数组，则报错，而不是追加数组长度</li>
-<li>索引不可超多数组容量<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">a := [<span class="number">10</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;</span><br><span class="line">fpm.Prinln(a)</span><br><span class="line"><span class="comment">// 0~4 容量为10</span></span><br><span class="line">s1 := a[:<span class="number">5</span>]</span><br><span class="line"><span class="comment">// 5-9, 索引5到索引9,索引10不取， 容量为5</span></span><br><span class="line">s1 := a[<span class="number">5</span>,<span class="number">10</span>]</span><br><span class="line"><span class="comment">// 使用make,</span></span><br><span class="line"><span class="comment">// 参数1：类型，</span></span><br><span class="line"><span class="comment">// 参数2：包含几个元素，</span></span><br><span class="line"><span class="comment">// 参数3：容量（先分配10个连续内存地址，如果增加到11个时，则需要从新分配，每次增加一倍，扩容至20，下次40，在下次80，造成这种现象的原因是因为：从新分配内存是一件效率非常低的）如果留空，则和参数相等</span></span><br><span class="line">s1 := <span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">3</span>,<span class="number">10</span>)</span><br><span class="line"><span class="comment">// 获取切片的长度, </span></span><br><span class="line"><span class="built_in">len</span>(s1)</span><br><span class="line"><span class="comment">// 获取切片容量</span></span><br><span class="line"><span class="keyword">map</span>(s1)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Append"><a href="#Append" class="headerlink" title="Append"></a>Append</h2><blockquote>
-<ul>
-<li>可以在slice尾部追加元素</li>
-<li>可以将一个slice追加到另一个slice</li>
-<li>如果最终长度未超过追加到slice的容量，则返回原始slice</li>
-<li>如果超过追加的slice的容量，将重新分配数据<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">s1 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">3</span>, <span class="number">6</span>)</span><br><span class="line">fmt.Printf(<span class="string">"%p\n"</span>, s1)</span><br><span class="line">s1 = <span class="built_in">append</span>(s1, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">fmt.Printf(<span class="string">"%v %p\n"</span>, s1, s1)</span><br><span class="line">s1 = <span class="built_in">append</span>(s1, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">fmt.Printf(<span class="string">"%v %p\n"</span>, s1, s1)</span><br><span class="line"><span class="comment">// 对于指向同一个数组的slice，如果数组改变了，则两个slice指向的部分同样改变</span></span><br><span class="line">a := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">s1 := a[<span class="number">2</span>:<span class="number">5</span>]</span><br><span class="line">s2 := a[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">fmt.Println(s1, s2)</span><br><span class="line">s1[<span class="number">0</span>] = <span class="number">9</span></span><br><span class="line">fmt.Println(s1, s2)</span><br><span class="line"><span class="comment">// 结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">3</span> <span class="number">4</span> <span class="number">5</span>] [<span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">[<span class="number">9</span> <span class="number">4</span> <span class="number">5</span>] [<span class="number">2</span> <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>如果一个slice通过append添加时，如果超过了容量，那么就不在指向原来的数组，而是从新分配了一个<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">	s1 := a[<span class="number">2</span>:<span class="number">5</span>]</span><br><span class="line">	s2 := a[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">	fmt.Println(s1, s2)</span><br><span class="line">	s2 = <span class="built_in">append</span>(s2, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">7</span>)</span><br><span class="line">	s1[<span class="number">0</span>] = <span class="number">9</span></span><br><span class="line">	fmt.Println(s1, s2)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">3</span> <span class="number">4</span> <span class="number">5</span>] [<span class="number">2</span> <span class="number">3</span>]</span><br><span class="line">[<span class="number">9</span> <span class="number">4</span> <span class="number">5</span>] [<span class="number">2</span> <span class="number">3</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">5</span> <span class="number">6</span> <span class="number">6</span> <span class="number">7</span>]</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<h2 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h2><ul>
-<li>从参数2复制到参数1（覆盖）</li>
-<li>该函数主要是切片（slice）的拷贝，不支持数组</li>
-<li>将第二个slice里的元素拷贝到第一个slice里，拷贝的长度为两个slice中长度较小的长度值<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">s1 := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line">s2 := []<span class="keyword">int</span>&#123;<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;</span><br><span class="line"><span class="built_in">copy</span>(s2, s1)</span><br><span class="line"><span class="built_in">copy</span>(s1, s2)</span><br><span class="line">fmt.Println(s2, s1)</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>] [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"><span class="comment">// 当然可以指定位置</span></span><br><span class="line">s1 := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line">s2 := []<span class="keyword">int</span>&#123;<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;</span><br><span class="line"><span class="built_in">copy</span>(s1[<span class="number">3</span>:<span class="number">6</span>], s2)</span><br><span class="line">fmt.Println(s1)</span><br><span class="line"><span class="comment">// 结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="删除切片"><a href="#删除切片" class="headerlink" title="删除切片"></a>删除切片</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 比如想删除下标为k的切片</span></span><br><span class="line">arr = <span class="built_in">append</span>(arr[:k], arr[k+<span class="number">1</span>:]...)</span><br></pre></td></tr></table></figure>
-<h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><blockquote>
-<ul>
-<li>map是无序的<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化map</span></span><br><span class="line">m := <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>&#123;<span class="number">1</span>: <span class="string">"zhangsan"</span>, <span class="number">2</span>: <span class="string">"lisi"</span>, <span class="number">3</span>: <span class="string">"wangwu"</span>, <span class="number">4</span>: <span class="string">"zhaoliu"</span>&#125;</span><br><span class="line"><span class="comment">// 初始化slice</span></span><br><span class="line">s := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="built_in">len</span>(m))</span><br><span class="line">i := <span class="number">0</span></span><br><span class="line"><span class="comment">// range 可遍历slice或map</span></span><br><span class="line"><span class="keyword">for</span> k, _ := <span class="keyword">range</span> m &#123;</span><br><span class="line">    <span class="comment">// 将map的键赋给slice</span></span><br><span class="line">	s[i] = k</span><br><span class="line">	i++</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(s)</span><br><span class="line"><span class="comment">//结果（体现了map的无序性）</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span>]</span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">[<span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果使用range遍历slice和map，</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	m := <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>&#123;<span class="number">1</span>: <span class="string">"zhangsan"</span>, <span class="number">2</span>: <span class="string">"lisi"</span>, <span class="number">3</span>: <span class="string">"wangwu"</span>, <span class="number">4</span>: <span class="string">"zhaoliu"</span>&#125;</span><br><span class="line">	s := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="built_in">len</span>(m))</span><br><span class="line">	i := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> m &#123;</span><br><span class="line">		s[i] = k</span><br><span class="line">		i++</span><br><span class="line">		fmt.Println(k, v)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(s)</span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> s &#123;</span><br><span class="line">		fmt.Println(k, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果如下：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line"><span class="number">4</span> zhaoliu</span><br><span class="line"><span class="number">1</span> zhangsan</span><br><span class="line"><span class="number">2</span> lisi</span><br><span class="line"><span class="number">3</span> wangwu</span><br><span class="line">[<span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"><span class="number">0</span> <span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">2</span> <span class="number">2</span></span><br><span class="line"><span class="number">3</span> <span class="number">3</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</blockquote>
-
+            <h1 id="使用json格式"><a href="#使用json格式" class="headerlink" title="使用json格式"></a>使用json格式</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mysql <span class="keyword">struct</span> &#123;</span><br><span class="line">	Host <span class="keyword">string</span></span><br><span class="line">	Port <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Data mysql</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 判断是为了实现单例的效果</span></span><br><span class="line">	<span class="keyword">if</span> Data.Port == <span class="number">0</span> &#123;</span><br><span class="line">	    <span class="comment">// 当前目录应该为main.go的目录</span></span><br><span class="line">		str, err := ioutil.ReadFile(<span class="string">"./config/database.json"</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 读取json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err = json.Unmarshal(str, &amp;Data); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 解析json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		log.Println(<span class="string">"读取配置文件成功"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	log.Println(<span class="string">"执行init函数 配置文件"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1801,7 +1773,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

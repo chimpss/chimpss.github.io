@@ -291,6 +291,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/docker/常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/docker/常用命令/" itemprop="url">常用命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/docker/常用命令/" class="leancloud_visitors" data-flag-title="常用命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<blockquote>
+<p>最好是查看<a href="https://docker.github.io/engine/reference/commandline/" target="_blank" rel="noopener">docker文档</a></p>
+</blockquote>
+<hr>
+<h1 id="查看docker信息（version、info）"><a href="#查看docker信息（version、info）" class="headerlink" title="查看docker信息（version、info）"></a>查看docker信息（version、info）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 查看docker版本  </span><br><span class="line">docker version  </span><br><span class="line">  </span><br><span class="line"># 显示docker系统的信息  </span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
+<h1 id="对image的操作（search、pull、images、rmi、history）"><a href="#对image的操作（search、pull、images、rmi、history）" class="headerlink" title="对image的操作（search、pull、images、rmi、history）"></a>对image的操作（search、pull、images、rmi、history）</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检索image  </span></span><br><span class="line"><span class="variable">$docker</span> search image_name  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 下载image  </span></span><br><span class="line"><span class="variable">$docker</span> pull image_name  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 列出镜像列表; -a, --all=false Show all images; --no-trunc=false Don't truncate output; -q, --quiet=false Only show numeric IDs  </span></span><br><span class="line"><span class="variable">$docker</span> images  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 删除一个或者多个镜像; -f, --force=false Force; --no-prune=false Do not delete untagged parents  </span></span><br><span class="line"><span class="variable">$docker</span> rmi image_name  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 显示一个镜像的历史; --no-trunc=false Don't truncate output; -q, --quiet=false Only show numeric IDs  </span></span><br><span class="line"><span class="variable">$docker</span> <span class="built_in">history</span> image_name</span><br></pre></td></tr></table></figure>
+<h1 id="启动容器（run）"><a href="#启动容器（run）" class="headerlink" title="启动容器（run）"></a>启动容器（run）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$docker run image_name echo &quot;hello word&quot;  </span><br><span class="line">  </span><br><span class="line"># 交互式进入容器中  </span><br><span class="line">$docker run -i -t image_name /bin/bash  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"># 在容器中安装新的程序  </span><br><span class="line">$docker run image_name apt-get install -y app_name</span><br></pre></td></tr></table></figure>
+<h1 id="查看容器（ps）"><a href="#查看容器（ps）" class="headerlink" title="查看容器（ps）"></a>查看容器（ps）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 列出当前所有正在运行的container  </span><br><span class="line">$docker ps  </span><br><span class="line"># 列出所有的container  </span><br><span class="line">$docker ps -a  </span><br><span class="line"># 列出最近一次启动的container  </span><br><span class="line">$docker ps -l</span><br></pre></td></tr></table></figure>
+<h1 id="保存对容器的修改（commit）"><a href="#保存对容器的修改（commit）" class="headerlink" title="保存对容器的修改（commit）"></a>保存对容器的修改（commit）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 保存对容器的修改; -a, --author=&quot;&quot; Author; -m, --message=&quot;&quot; Commit message  </span><br><span class="line">$docker commit ID new_image_name</span><br></pre></td></tr></table></figure>
+<h1 id="对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）"><a href="#对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）" class="headerlink" title="对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）"></a>对容器的操作（rm、stop、start、kill、logs、diff、top、cp、restart、attach）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 删除所有容器  </span><br><span class="line">$docker rm `docker ps -a -q`  </span><br><span class="line">  </span><br><span class="line"># 删除单个容器; -f, --force=false; -l, --link=false Remove the specified link and not the underlying container; -v, --volumes=false Remove the volumes associated to the container  </span><br><span class="line">$docker rm Name/ID  </span><br><span class="line">  </span><br><span class="line"># 停止、启动、杀死一个容器  </span><br><span class="line">$docker stop Name/ID  </span><br><span class="line">$docker start Name/ID  </span><br><span class="line">$docker kill Name/ID  </span><br><span class="line">  </span><br><span class="line"># 从一个容器中取日志; -f, --follow=false Follow log output; -t, --timestamps=false Show timestamps  </span><br><span class="line">$docker logs Name/ID  </span><br><span class="line">  </span><br><span class="line"># 列出一个容器里面被改变的文件或者目录，list列表会显示出三种事件，A 增加的，D 删除的，C 被改变的  </span><br><span class="line">$docker diff Name/ID  </span><br><span class="line">  </span><br><span class="line"># 显示一个运行的容器里面的进程信息  </span><br><span class="line">$docker top Name/ID  </span><br><span class="line">  </span><br><span class="line"># 从容器里面拷贝文件/目录到本地一个路径  </span><br><span class="line">$docker cp Name:/container_path to_path  </span><br><span class="line">$docker cp ID:/container_path to_path  </span><br><span class="line">  </span><br><span class="line"># 重启一个正在运行的容器; -t, --time=10 Number of seconds to try to stop for before killing the container, Default=10  </span><br><span class="line">$docker restart Name/ID  </span><br><span class="line">  </span><br><span class="line"># 附加到一个运行的容器上面; --no-stdin=false Do not attach stdin; --sig-proxy=true Proxify all received signal to the process  </span><br><span class="line">$docker attach ID</span><br></pre></td></tr></table></figure>
+<h1 id="保存和加载镜像（save、load）"><a href="#保存和加载镜像（save、load）" class="headerlink" title="保存和加载镜像（save、load）"></a>保存和加载镜像（save、load）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$docker save image_name -o file_path  </span><br><span class="line"># 加载一个tar包格式的镜像; -i, --input=&quot;&quot; Read from a tar archive file  </span><br><span class="line">$docker load -i file_path  </span><br><span class="line">  </span><br><span class="line"># 机器a  </span><br><span class="line">$docker save image_name &gt; /home/save.tar  </span><br><span class="line"># 使用scp将save.tar拷到机器b上，然后：  </span><br><span class="line">$docker load &lt; /home/save.tar</span><br></pre></td></tr></table></figure>
+<h1 id="登录registry-server（login）"><a href="#登录registry-server（login）" class="headerlink" title="登录registry server（login）"></a>登录registry server（login）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 登陆registry server; -e, --email=&quot;&quot; Email; -p, --password=&quot;&quot; Password; -u, --username=&quot;&quot; Username  </span><br><span class="line">$docker login</span><br></pre></td></tr></table></figure>
+<h1 id="发布image（push）"><a href="#发布image（push）" class="headerlink" title="发布image（push）"></a>发布image（push）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 发布docker镜像  </span><br><span class="line">$docker push new_image_name</span><br></pre></td></tr></table></figure>
+<h1 id="根据Dockerfile-构建出一个容器（build）"><a href="#根据Dockerfile-构建出一个容器（build）" class="headerlink" title="根据Dockerfile 构建出一个容器（build）"></a>根据Dockerfile 构建出一个容器（build）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#build  </span><br><span class="line">      --no-cache=false Do not use cache when building the image  </span><br><span class="line">      -q, --quiet=false Suppress the verbose output generated by the containers  </span><br><span class="line">      --rm=true Remove intermediate containers after a successful build  </span><br><span class="line">      -t, --tag=&quot;&quot; Repository name (and optionally a tag) to be applied to the resulting image in case of success  </span><br><span class="line">$docker build -t image_name Dockerfile_path</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/pdf处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1683,7 +1827,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
