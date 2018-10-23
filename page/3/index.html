@@ -1002,142 +1002,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/expect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/expect/" itemprop="url">expect交互编程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/expect/" class="leancloud_visitors" data-flag-title="expect交互编程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu：apt-get install expect</span><br><span class="line">mac: brew install homebrew/dupes/expect</span><br></pre></td></tr></table></figure>
-<h1 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set password  rootddd</span><br></pre></td></tr></table></figure>
-<h1 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set filename [lindex $argv 0]</span><br></pre></td></tr></table></figure>
-<h1 id="一般格式"><a href="#一般格式" class="headerlink" title="一般格式"></a>一般格式</h1><blockquote>
-<p>开头一定要是expect<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line"></span><br><span class="line">set filename [lindex $argv 0]</span><br><span class="line">set password  example_pass</span><br><span class="line"># 开始执行命令</span><br><span class="line">spawn ssh root@example.com</span><br><span class="line"># 匹配（如果包含，则执行下面的send）</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line"># \r回车</span><br><span class="line">send &quot;$password\r&quot;</span><br><span class="line">send &quot;ls\r&quot;</span><br><span class="line">send &quot;exit\r&quot;</span><br><span class="line"># 结束标志</span><br><span class="line">interact</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/ssh/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1248,6 +1112,142 @@
 <h1 id="禁止密码登录"><a href="#禁止密码登录" class="headerlink" title="禁止密码登录"></a>禁止密码登录</h1><p>修改SSH的配置文件/etc/ssh/sshd_config，找到下面1行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure></p>
 <p>修改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication no</span><br></pre></td></tr></table></figure></p>
 <p>保存后重启SSH服务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/expect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux/expect/" itemprop="url">expect交互编程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/expect/" class="leancloud_visitors" data-flag-title="expect交互编程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu：apt-get install expect</span><br><span class="line">mac: brew install homebrew/dupes/expect</span><br></pre></td></tr></table></figure>
+<h1 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set password  rootddd</span><br></pre></td></tr></table></figure>
+<h1 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set filename [lindex $argv 0]</span><br></pre></td></tr></table></figure>
+<h1 id="一般格式"><a href="#一般格式" class="headerlink" title="一般格式"></a>一般格式</h1><blockquote>
+<p>开头一定要是expect<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line"></span><br><span class="line">set filename [lindex $argv 0]</span><br><span class="line">set password  example_pass</span><br><span class="line"># 开始执行命令</span><br><span class="line">spawn ssh root@example.com</span><br><span class="line"># 匹配（如果包含，则执行下面的send）</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line"># \r回车</span><br><span class="line">send &quot;$password\r&quot;</span><br><span class="line">send &quot;ls\r&quot;</span><br><span class="line">send &quot;exit\r&quot;</span><br><span class="line"># 结束标志</span><br><span class="line">interact</span><br></pre></td></tr></table></figure></p>
+</blockquote>
 
           
         
@@ -1597,7 +1597,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/并发/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/header/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -1616,7 +1616,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/http/并发/" itemprop="url">进程-线程-协程</a></h1>
+                <a class="post-title-link" href="/http/header/" itemprop="url">header</a></h1>
         
 
         <div class="post-meta">
@@ -1646,7 +1646,7 @@
 
           
           
-             <span id="/http/并发/" class="leancloud_visitors" data-flag-title="进程-线程-协程">
+             <span id="/http/header/" class="leancloud_visitors" data-flag-title="header">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1679,63 +1679,14 @@
       
         
           
-            <h1 id="进程-线程-协程"><a href="#进程-线程-协程" class="headerlink" title="进程-线程-协程"></a>进程-线程-协程</h1><h2 id="简单描述"><a href="#简单描述" class="headerlink" title="简单描述"></a>简单描述</h2><blockquote>
-<p>　　进程、线程和协程之间的关系和区别也困扰我一阵子了，最近有一些心得，写一下。<br>　　进程拥有自己独立的堆和栈，既不共享堆，亦不共享栈，进程由操作系统调度。<br>　　线程拥有自己独立的栈和共享的堆，共享堆，不共享栈，线程亦由操作系统调度(标准线程是的)。<br>　　协程和线程一样共享堆，不共享栈，协程由程序员在协程的代码里显示调度。<br>　　进程和其他两个的区别还是很明显的。<br>　　协程和线程的区别是：协程避免了无意义的调度，由此可以提高性能，但也因此，程序员必须自己承担调度的责任，同时，协程也失去了标准线程使用多CPU的能力。<br>　　打个比方吧，假设有一个操作系统，是单核的，系统上没有其他的程序需要运行，有两个线程 A 和 B ，A 和 B 在单独运行时都需要 10 秒来完成自己的任务，而且任务都是运算操作，A B 之间也没有竞争和共享数据的问题。现在 A B 两个线程并行，操作系统会不停的在 A B 　　两个线程之间切换，达到一种伪并行的效果，假设切换的频率是每秒一次，切换的成本是 0.1 秒(主要是栈切换)，总共需要 20 + 19 <em> 0.1 = 21.9 秒。如果使用协程的方式，可以先运行协程 A ，A 结束的时候让位给协程 B ，只发生一次切换，总时间是 20 + 1 </em> 0.1 = 20.1 秒。如果系统是双核的，而且线程是标准线程，那么 A B 两个线程就可以真并行，总时间只需要 10 秒，而协程的方案仍然需要 20.1 秒。</p>
-</blockquote>
-<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><blockquote>
-<p><code>进程的出现是为了更好的利用CPU资源使到并发成为可能</code>。 假设有两个任务A和B，当A遇到IO操作，CPU默默的等待任务A读取完操作再去执行任务B，这样无疑是对CPU资源的极大的浪费。聪明的老大们就在想若在任务A读取数据时，让任务B执行，当任务A读取完数据后，再切换到任务A执行。注意关键字切换，自然是切换，那么这就涉及到了状态的保存，状态的恢复，加上任务A与任务B所需要的系统资源（内存，硬盘，键盘等等）是不一样的。自然而然的就需要有一个东西去记录任务A和任务B分别需要什么资源，怎样去识别任务A和任务B等等。登登登，进程就被发明出来了。通过进程来分配系统资源，标识任务。如何分配CPU去执行进程称之为调度，进程状态的记录，恢复，切换称之为上下文切换。<code>进程是系统资源分配的最小单位</code>，进程占用的资源有：地址空间，全局变量，文件描述符，各种硬件等等资源。</p>
-</blockquote>
-<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><blockquote>
-<p><code>线程的出现是为了降低上下文切换的消耗，提高系统的并发性，并突破一个进程只能干一样事的缺陷，使到进程内并发成为可能</code>。假设，一个文本程序，需要接受键盘输入，将内容显示在屏幕上，还需要保存信息到硬盘中。若只有一个进程，势必造成同一时间只能干一样事的尴尬（当保存时，就不能通过键盘输入内容）。若有多个进程，每个进程负责一个任务，进程A负责接收键盘输入的任务，进程B负责将内容显示在屏幕上的任务，进程C负责保存内容到硬盘中的任务。这里进程A，B，C间的协作涉及到了进程通信问题，而且有共同都需要拥有的东西——-文本内容，不停的切换造成性能上的损失。若有一种机制，可以使任务A，B，C共享资源，这样上下文切换所需要保存和恢复的内容就少了，同时又可以减少通信所带来的性能损耗，那就好了。是的，这种机制就是线程。<code>线程共享进程的大部分资源，并参与CPU的调度, 当然线程自己也是拥有自己的资源的，例如，栈，寄存器等等</code>。 此时，进程同时也是线程的容器。线程也是有着自己的缺陷的，例如健壮性差，若一个线程挂掉了，整一个进程也挂掉了，这意味着其它线程也挂掉了，进程却没有这个问题，一个进程挂掉，另外的进程还是活着。</p>
-</blockquote>
-<h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><blockquote>
-<p><code>协程通过在线程中实现调度，避免了陷入内核级别的上下文切换造成的性能损失，进而突破了线程在IO上的性能瓶颈</code>。 当涉及到大规模的并发连接时，例如10K连接。以线程作为处理单元，系统调度的开销还是过大。当连接数很多 —&gt; 需要大量的线程来干活 —&gt; 可能大部分的线程处于ready状态 —&gt; 系统会不断地进行上下文切换。既然性能瓶颈在上下文切换，那解决思路也就有了，在线程中自己实现调度，不陷入内核级别的上下文切换。说明一下，在历史上协程比线程要出现得早，在1963年首次提出, 但没有流行开来。为什么没有流行，没有找到信服的资料，先挖个坑，以后那天了解后，再补上。</p>
-</blockquote>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><blockquote>
-<p>进程，线程，协程不断突破，更高效的处理阻塞，不断地提高CPU的利用率。但是并不是说，线程就一定比进程快，而协程就一定不线程要快。具体还是要看应用场景。可以简单粗暴的把应用分为IO密集型应用以及CPU密集型应用。</p>
-</blockquote>
-<ul>
-<li><p>多核CPU，CPU密集型应用</p>
-<blockquote>
-<p>此时多线程的效率是最高的，多线程可以使到全部CPU核心满载，又避免了协程间切换造成性能损失。当CPU密集型任务时，CPU一直在利用着，切换反而会造成性能损失，即便协程上下文切换消耗最小，但也还是有消耗的。</p>
-</blockquote>
-</li>
-<li><p>多核CPU，IO密集型应用</p>
-<blockquote>
-<p>此时采用多线程多协程效率最高，多线程可以使到全部CPU核心满载，而一个线程多协程，则更好的提高了CPU的利用率。</p>
-</blockquote>
-</li>
-<li><p>单核CPU，CPU密集型应用</p>
-<blockquote>
-<p>单进程效率是最高，此时单个进程已经使到CPU满载了。</p>
-</blockquote>
-</li>
-<li><p>单核CPU，IO密集型应用</p>
-<blockquote>
-<p>多协程，效率最高。例如，看了上面应该也是知道的了</p>
-</blockquote>
-</li>
-</ul>
-<h1 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h1><h2 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h2><blockquote>
-<p>并发就是指同一时刻有两个或两个以上的“工作单位”在同时执行，从硬件的角度上来看就是同一时刻有两条或两条以上的指令处于执行阶段。所以，多核是并行的前提，单线程永远无法达到并行状态。可以利用多线程和度进程到达并行状态。另外的，Python的多线程由于GIL的存在，对于Python来说无法通过多线程到达并行状态。</p>
-</blockquote>
-<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><blockquote>
-<p>对于并发的理解，要从两方面去理解，</p>
-</blockquote>
-<ol>
-<li>并发设计 </li>
-<li><p>并发执行。先说并发设计，当说一个程序是并发的，更多的是指这个程序采取了并发设计。</p>
-</li>
-<li><p>并发设计的标准：</p>
-<blockquote>
-<p><code>使多个操作可以在重叠的时间段内进行</code>，这里的重点在于重叠的时间内， 重叠时间可以理解为一段时间内。例如：在时间1s秒内, 具有IO操作的task1和task2都完成，这就可以说是并发执行。所以呢，单线程也是可以做到并发运行的。当然啦，并行肯定是并发的。一个程序能否并发执行，取决于设计，也取决于部署方式。例如, 当给程序开一个线程（协程是不开的），它不可能是并发的，因为在重叠时间内根本就没有两个task在运行。当一个程序被设计成完成一个任务再去完成下一个任务的时候，即便部署是多线程多协程的也是无法达到并发运行的。</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="并行与并发的关系"><a href="#并行与并发的关系" class="headerlink" title="并行与并发的关系:"></a>并行与并发的关系:</h2><blockquote>
-<p>并发的设计使到并发执行成为可能，而并行是并发执行的其中一种模式。</p>
-</blockquote>
-
+            <h1 id="判断客户端编码"><a href="#判断客户端编码" class="headerlink" title="判断客户端编码"></a>判断客户端编码</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">get_os</span><span class="params">($agent = null)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!$agent) $agent = $_SERVER[<span class="string">'HTTP_USER_AGENT'</span>];</span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 6.0/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows Vista'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 6.1/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 7'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 6.2/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 8'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 10.0/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 10'</span>;<span class="comment"># 添加win10判断</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 5.1/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows XP'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 5/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 2000'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows NT'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/32/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 32'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/linux/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Linux'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/unix/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Unix'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/sun/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/os/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'SunOS'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/ibm/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/os/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'IBM OS/2'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/Mac/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Macintosh'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/PowerPC/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'PowerPC'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/AIX/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'AIX'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/HPUX/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'HPUX'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/NetBSD/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'NetBSD'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/BSD/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'BSD'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/OSF1/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'OSF1'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/IRIX/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'IRIX'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/FreeBSD/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'FreeBSD'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/teleport/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'teleport'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/flashget/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'flashget'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/webzip/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'webzip'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/offline/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'offline'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $os = <span class="string">'未知操作系统'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> $os;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="页面输出"><a href="#页面输出" class="headerlink" title="页面输出"></a>页面输出</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'HTTP/1.1 200 OK'</span>);  <span class="comment">// ok 正常访问</span></span><br><span class="line">header(<span class="string">'HTTP/1.1 404 Not Found'</span>); <span class="comment">//通知浏览器 页面不存在</span></span><br><span class="line">header(<span class="string">'HTTP/1.1 301 Moved Permanently'</span>); <span class="comment">//设置地址被永久的重定向 301</span></span><br><span class="line">header(<span class="string">'Location: http://www.form1.cn/'</span>); <span class="comment">//跳转到一个新的地址</span></span><br><span class="line">header(<span class="string">'Refresh: 10; url=http://www.form1.cn/'</span>); <span class="comment">//延迟转向 也就是隔几秒跳转</span></span><br><span class="line">header(<span class="string">'X-Powered-By: PHP/6.0.0'</span>); <span class="comment">//修改 X-Powered-By信息</span></span><br><span class="line">header(<span class="string">'Content-language: en'</span>); <span class="comment">//文档语言</span></span><br><span class="line">header(<span class="string">'Content-Length: 1234'</span>); <span class="comment">//设置内容长度</span></span><br><span class="line">header(<span class="string">'Last-Modified: '</span>.gmdate(<span class="string">'D, d M Y H:i:s'</span>, $time).<span class="string">' GMT'</span>); <span class="comment">//告诉浏览器最后一次修改时间</span></span><br><span class="line">header(<span class="string">'HTTP/1.1 304 Not Modified'</span>); <span class="comment">//告诉浏览器文档内容没有发生改变</span></span><br></pre></td></tr></table></figure>
+<h1 id="内容输出"><a href="#内容输出" class="headerlink" title="内容输出"></a>内容输出</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Content-Type: text/html; charset=utf-8'</span>); <span class="comment">//网页编码 </span></span><br><span class="line">header(<span class="string">'Content-Type: text/plain'</span>); <span class="comment">//纯文本格式 </span></span><br><span class="line">header(<span class="string">'Content-Type: image/jpeg'</span>); <span class="comment">//JPG、JPEG  </span></span><br><span class="line">header(<span class="string">'Content-Type: application/zip'</span>); <span class="comment">// ZIP文件 </span></span><br><span class="line">header(<span class="string">'Content-Type: application/pdf'</span>); <span class="comment">// PDF文件 </span></span><br><span class="line">header(<span class="string">'Content-Type: audio/mpeg'</span>); <span class="comment">// 音频文件  </span></span><br><span class="line">header(<span class="string">'Content-type: text/css'</span>); <span class="comment">//css文件</span></span><br><span class="line">header(<span class="string">'Content-type: text/javascript'</span>); <span class="comment">//js文件</span></span><br><span class="line">header(<span class="string">'Content-type: application/json'</span>);  <span class="comment">//json</span></span><br><span class="line">header(<span class="string">'Content-type: application/pdf'</span>); <span class="comment">//pdf </span></span><br><span class="line">header(<span class="string">'Content-type: text/xml'</span>);  <span class="comment">//xml</span></span><br><span class="line">header(<span class="string">'Content-Type: application/x-shockw**e-flash'</span>); <span class="comment">//Flash动画</span></span><br></pre></td></tr></table></figure>
+<h1 id="声明一个下载文件"><a href="#声明一个下载文件" class="headerlink" title="声明一个下载文件"></a>声明一个下载文件</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Content-Type: application/octet-stream'</span>); </span><br><span class="line">header(<span class="string">'Content-Disposition: attachment; filename="ITblog.zip"'</span>); </span><br><span class="line">header(<span class="string">'Content-Transfer-Encoding: binary'</span>); </span><br><span class="line">readfile(<span class="string">'test.zip'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="对当前文档禁用缓存"><a href="#对当前文档禁用缓存" class="headerlink" title="对当前文档禁用缓存"></a>对当前文档禁用缓存</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Cache-Control: no-cache, no-store, max-age=0, must-revalidate'</span>); </span><br><span class="line">header(<span class="string">'Expires: Mon, 26 Jul 1997 05:00:00 GMT'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="身份认证"><a href="#身份认证" class="headerlink" title="身份认证"></a>身份认证</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'HTTP/1.1 401 Unauthorized'</span>);  </span><br><span class="line">header(<span class="string">'WWW-Authenticate: Basic realm="Top Secret"'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="声明一个需要下载的xls文件"><a href="#声明一个需要下载的xls文件" class="headerlink" title="声明一个需要下载的xls文件"></a>声明一个需要下载的xls文件</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Content-Disposition: attachment; filename=ithhc.xlsx'</span>);</span><br><span class="line">header(<span class="string">'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'</span>);</span><br><span class="line">header(<span class="string">'Content-Length: '</span>.filesize(<span class="string">'./test.xls'</span>));  </span><br><span class="line">header(<span class="string">'Content-Transfer-Encoding: binary'</span>);  </span><br><span class="line">header(<span class="string">'Cache-Control: must-revalidate'</span>);  </span><br><span class="line">header(<span class="string">'Pragma: public'</span>);  </span><br><span class="line">readfile(<span class="string">'./test.xls'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="download"><a href="#download" class="headerlink" title="download"></a>download</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type: application/force-download"</span>);</span><br><span class="line"><span class="comment">// 判断编码</span></span><br><span class="line">$use_utf_8 = Utils::get_os() == <span class="string">'Macintosh'</span>;</span><br><span class="line"><span class="keyword">if</span> (!$use_utf_8) &#123;</span><br><span class="line">    <span class="comment">// Disposition中文是处置的意思, 可以理解为文档如何处置</span></span><br><span class="line">    header(<span class="string">"Content-Disposition: attachment;filename="</span> . iconv(<span class="string">"utf-8"</span>, <span class="string">"gb2312//IGNORE"</span>, $zip_title) . <span class="string">".zip"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    header(<span class="string">"Content-Disposition: attachment;filename="</span> . $zip_title . <span class="string">".zip"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> file_get_contents($zip_path);</span><br></pre></td></tr></table></figure>
           
         
       
