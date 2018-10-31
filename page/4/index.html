@@ -477,6 +477,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/header/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/http/header/" itemprop="url">header</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/http/header/" class="leancloud_visitors" data-flag-title="header">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="判断客户端编码"><a href="#判断客户端编码" class="headerlink" title="判断客户端编码"></a>判断客户端编码</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">get_os</span><span class="params">($agent = null)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!$agent) $agent = $_SERVER[<span class="string">'HTTP_USER_AGENT'</span>];</span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 6.0/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows Vista'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 6.1/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 7'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 6.2/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 8'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 10.0/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 10'</span>;<span class="comment"># 添加win10判断</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 5.1/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows XP'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt 5/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 2000'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/nt/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows NT'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/win/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/32/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Windows 32'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/linux/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Linux'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/unix/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Unix'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/sun/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/os/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'SunOS'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/ibm/i'</span>, $agent) &amp;&amp; preg_match(<span class="string">'/os/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'IBM OS/2'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/Mac/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'Macintosh'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/PowerPC/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'PowerPC'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/AIX/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'AIX'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/HPUX/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'HPUX'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/NetBSD/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'NetBSD'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/BSD/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'BSD'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/OSF1/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'OSF1'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/IRIX/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'IRIX'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/FreeBSD/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'FreeBSD'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/teleport/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'teleport'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/flashget/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'flashget'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/webzip/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'webzip'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (preg_match(<span class="string">'/offline/i'</span>, $agent)) &#123;</span><br><span class="line">            $os = <span class="string">'offline'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $os = <span class="string">'未知操作系统'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> $os;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="页面输出"><a href="#页面输出" class="headerlink" title="页面输出"></a>页面输出</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'HTTP/1.1 200 OK'</span>);  <span class="comment">// ok 正常访问</span></span><br><span class="line">header(<span class="string">'HTTP/1.1 404 Not Found'</span>); <span class="comment">//通知浏览器 页面不存在</span></span><br><span class="line">header(<span class="string">'HTTP/1.1 301 Moved Permanently'</span>); <span class="comment">//设置地址被永久的重定向 301</span></span><br><span class="line">header(<span class="string">'Location: http://www.form1.cn/'</span>); <span class="comment">//跳转到一个新的地址</span></span><br><span class="line">header(<span class="string">'Refresh: 10; url=http://www.form1.cn/'</span>); <span class="comment">//延迟转向 也就是隔几秒跳转</span></span><br><span class="line">header(<span class="string">'X-Powered-By: PHP/6.0.0'</span>); <span class="comment">//修改 X-Powered-By信息</span></span><br><span class="line">header(<span class="string">'Content-language: en'</span>); <span class="comment">//文档语言</span></span><br><span class="line">header(<span class="string">'Content-Length: 1234'</span>); <span class="comment">//设置内容长度</span></span><br><span class="line">header(<span class="string">'Last-Modified: '</span>.gmdate(<span class="string">'D, d M Y H:i:s'</span>, $time).<span class="string">' GMT'</span>); <span class="comment">//告诉浏览器最后一次修改时间</span></span><br><span class="line">header(<span class="string">'HTTP/1.1 304 Not Modified'</span>); <span class="comment">//告诉浏览器文档内容没有发生改变</span></span><br></pre></td></tr></table></figure>
+<h1 id="内容输出"><a href="#内容输出" class="headerlink" title="内容输出"></a>内容输出</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Content-Type: text/html; charset=utf-8'</span>); <span class="comment">//网页编码 </span></span><br><span class="line">header(<span class="string">'Content-Type: text/plain'</span>); <span class="comment">//纯文本格式 </span></span><br><span class="line">header(<span class="string">'Content-Type: image/jpeg'</span>); <span class="comment">//JPG、JPEG  </span></span><br><span class="line">header(<span class="string">'Content-Type: application/zip'</span>); <span class="comment">// ZIP文件 </span></span><br><span class="line">header(<span class="string">'Content-Type: application/pdf'</span>); <span class="comment">// PDF文件 </span></span><br><span class="line">header(<span class="string">'Content-Type: audio/mpeg'</span>); <span class="comment">// 音频文件  </span></span><br><span class="line">header(<span class="string">'Content-type: text/css'</span>); <span class="comment">//css文件</span></span><br><span class="line">header(<span class="string">'Content-type: text/javascript'</span>); <span class="comment">//js文件</span></span><br><span class="line">header(<span class="string">'Content-type: application/json'</span>);  <span class="comment">//json</span></span><br><span class="line">header(<span class="string">'Content-type: application/pdf'</span>); <span class="comment">//pdf </span></span><br><span class="line">header(<span class="string">'Content-type: text/xml'</span>);  <span class="comment">//xml</span></span><br><span class="line">header(<span class="string">'Content-Type: application/x-shockw**e-flash'</span>); <span class="comment">//Flash动画</span></span><br></pre></td></tr></table></figure>
+<h1 id="声明一个下载文件"><a href="#声明一个下载文件" class="headerlink" title="声明一个下载文件"></a>声明一个下载文件</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Content-Type: application/octet-stream'</span>); </span><br><span class="line">header(<span class="string">'Content-Disposition: attachment; filename="ITblog.zip"'</span>); </span><br><span class="line">header(<span class="string">'Content-Transfer-Encoding: binary'</span>); </span><br><span class="line">readfile(<span class="string">'test.zip'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="对当前文档禁用缓存"><a href="#对当前文档禁用缓存" class="headerlink" title="对当前文档禁用缓存"></a>对当前文档禁用缓存</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Cache-Control: no-cache, no-store, max-age=0, must-revalidate'</span>); </span><br><span class="line">header(<span class="string">'Expires: Mon, 26 Jul 1997 05:00:00 GMT'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="身份认证"><a href="#身份认证" class="headerlink" title="身份认证"></a>身份认证</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'HTTP/1.1 401 Unauthorized'</span>);  </span><br><span class="line">header(<span class="string">'WWW-Authenticate: Basic realm="Top Secret"'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="声明一个需要下载的xls文件"><a href="#声明一个需要下载的xls文件" class="headerlink" title="声明一个需要下载的xls文件"></a>声明一个需要下载的xls文件</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Content-Disposition: attachment; filename=ithhc.xlsx'</span>);</span><br><span class="line">header(<span class="string">'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'</span>);</span><br><span class="line">header(<span class="string">'Content-Length: '</span>.filesize(<span class="string">'./test.xls'</span>));  </span><br><span class="line">header(<span class="string">'Content-Transfer-Encoding: binary'</span>);  </span><br><span class="line">header(<span class="string">'Cache-Control: must-revalidate'</span>);  </span><br><span class="line">header(<span class="string">'Pragma: public'</span>);  </span><br><span class="line">readfile(<span class="string">'./test.xls'</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="download"><a href="#download" class="headerlink" title="download"></a>download</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type: application/force-download"</span>);</span><br><span class="line"><span class="comment">// 判断编码</span></span><br><span class="line">$use_utf_8 = Utils::get_os() == <span class="string">'Macintosh'</span>;</span><br><span class="line"><span class="keyword">if</span> (!$use_utf_8) &#123;</span><br><span class="line">    <span class="comment">// Disposition中文是处置的意思, 可以理解为文档如何处置</span></span><br><span class="line">    header(<span class="string">"Content-Disposition: attachment;filename="</span> . iconv(<span class="string">"utf-8"</span>, <span class="string">"gb2312//IGNORE"</span>, $zip_title) . <span class="string">".zip"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    header(<span class="string">"Content-Disposition: attachment;filename="</span> . $zip_title . <span class="string">".zip"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> file_get_contents($zip_path);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/跨域cors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1638,145 +1775,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/发邮件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/发邮件/" itemprop="url">发邮件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/golang/发邮件/" class="leancloud_visitors" data-flag-title="发邮件">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="邮件的一般格式"><a href="#邮件的一般格式" class="headerlink" title="邮件的一般格式"></a>邮件的一般格式</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">From:chimps@example.com</span><br><span class="line">To:to@163.com</span><br><span class="line">Subject:TEST EMAIL</span><br><span class="line">Content-Type: text/html; chatset=UTF-8</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello go<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h1 id="使用阿里云企业邮注意事项"><a href="#使用阿里云企业邮注意事项" class="headerlink" title="使用阿里云企业邮注意事项"></a>使用阿里云企业邮注意事项</h1><p>如果你的域名为example.com<br>在阿里的域名那里都配好之后，发邮件的配置应该如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HOST: smtp.example.com</span><br><span class="line">HOST_ADDR: smtp.example.com:25</span><br><span class="line">USER: 该企业邮箱所创建的子邮箱</span><br><span class="line">PASSWORD：user的password</span><br></pre></td></tr></table></figure></p>
-<h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1><p>主要是使用net/smtp包的<code>SendMail</code>方法<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net/smtp"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	HOST     = <span class="string">"smtp.example.com"</span></span><br><span class="line">	ADDR     = <span class="string">"smtp.example.com:25"</span></span><br><span class="line">	USER     = <span class="string">"chimps@example.com"</span></span><br><span class="line">	PASSWORD = <span class="string">"xxx"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	to := <span class="string">"to1@163.com;to1@163.com"</span></span><br><span class="line">	subject := <span class="string">"TEST EMAIL"</span></span><br><span class="line">	email_type := <span class="string">"html"</span></span><br><span class="line">	message := <span class="string">"&lt;h1&gt;hello go&lt;/h1&gt;"</span></span><br><span class="line">	<span class="keyword">if</span> err := SendEmail(to, subject, email_type, message); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"发送失败, reason:"</span> + err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SendEmail</span><span class="params">(to <span class="keyword">string</span>, subject <span class="keyword">string</span>, email_type <span class="keyword">string</span>, message <span class="keyword">string</span>)</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> content_type <span class="keyword">string</span></span><br><span class="line">	<span class="keyword">switch</span> email_type &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"html"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/html; chatset=UTF-8"</span></span><br><span class="line">	<span class="keyword">case</span> <span class="string">"text"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/plain; chatset=UTF-8"</span></span><br><span class="line">	&#125;</span><br><span class="line">	auth := smtp.PlainAuth(<span class="string">""</span>, USER, PASSWORD, HOST)</span><br><span class="line">	send_to := strings.Split(to, <span class="string">";"</span>)</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> send_to &#123;</span><br><span class="line">		<span class="keyword">var</span> msg []<span class="keyword">string</span></span><br><span class="line">		msg = <span class="built_in">append</span>(msg, <span class="string">"From:"</span>+USER, <span class="string">"To:"</span>+v, <span class="string">"Subject:"</span>+subject, content_type, <span class="string">"\r\n"</span>+message)</span><br><span class="line">		msg_string := strings.Join(msg, <span class="string">"\r\n"</span>)</span><br><span class="line">		fmt.Println(msg_string)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> err = smtp.SendMail(ADDR, auth, USER, []<span class="keyword">string</span>&#123;v&#125;, []<span class="keyword">byte</span>(msg_string)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send fail , reason: "</span> + err.Error())</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send ok :"</span> + v)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>一般情况下，发邮件时间比较耗时的事情，一般走异步处理</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1822,7 +1825,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1835,7 +1838,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

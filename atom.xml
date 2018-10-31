@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chimpss.github.io/"/>
-  <updated>2018-10-21T02:47:05.166Z</updated>
+  <updated>2018-10-31T02:29:14.005Z</updated>
   <id>http://chimpss.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>修改服务器时间</title>
+    <link href="http://chimpss.github.io/linux/time/"/>
+    <id>http://chimpss.github.io/linux/time/</id>
+    <published>2018-10-31T02:27:28.384Z</published>
+    <updated>2018-10-31T02:29:14.005Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="修改时间"><a href="#修改时间" class="headerlink" title="修改时间"></a>修改时间</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo date -s <span class="string">"2018-11-02 17:18:10"</span></span><br></pre></td></tr></table></figure><h2 id="恢复时间"><a href="#恢复时间" class="headerlink" title="恢复时间"></a>恢复时间</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ntpdate us.pool.ntp.org</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;修改时间&quot;&gt;&lt;a href=&quot;#修改时间&quot; class=&quot;headerlink&quot; title=&quot;修改时间&quot;&gt;&lt;/a&gt;修改时间&lt;/h2&gt;&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="http://chimpss.github.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>国产凌凌漆</title>
@@ -481,31 +504,6 @@
     
     
       <category term="有趣的灵魂" scheme="http://chimpss.github.io/tags/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%81%B5%E9%AD%82/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>定时任务</title>
-    <link href="http://chimpss.github.io/linux/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
-    <id>http://chimpss.github.io/linux/定时任务/</id>
-    <published>2018-10-09T03:45:25.101Z</published>
-    <updated>2018-10-09T09:19:48.957Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">minute   hour   day   month   week   <span class="built_in">command</span></span><br><span class="line"></span><br><span class="line">- minute： 表示分钟，可以是从0到59之间的任何整数。</span><br><span class="line">- hour：表示小时，可以是从0到23之间的任何整数。</span><br><span class="line">- day：表示日期，可以是从1到31之间的任何整数。</span><br><span class="line">- month：表示月份，可以是从1到12之间的任何整数。</span><br><span class="line">- week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。</span><br><span class="line">- <span class="built_in">command</span>：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。</span><br></pre></td></tr></table></figure><h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。</span><br><span class="line">逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”</span><br><span class="line">中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</span><br><span class="line">正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</span><br></pre></td></tr></table></figure><h2 id="编辑定时任务"><a href="#编辑定时任务" class="headerlink" title="编辑定时任务"></a>编辑定时任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crontab  -e</span><br><span class="line">*  *  *  *  *       命令</span><br></pre></td></tr></table></figure><h2 id="查看系统定时任务"><a href="#查看系统定时任务" class="headerlink" title="查看系统定时任务"></a>查看系统定时任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -l</span><br></pre></td></tr></table></figure><h2 id="删除定时任务"><a href="#删除定时任务" class="headerlink" title="删除定时任务"></a>删除定时任务</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab  -r</span><br></pre></td></tr></table></figure><h2 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h2><p>/sbin/service crond start    //启动服务<br>/sbin/service crond stop     //关闭服务<br>/sbin/service crond restart  //重启服务<br>/sbin/service crond reload   //重新载入配置</p><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>每1分钟执行一次command<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * <span class="built_in">command</span></span><br></pre></td></tr></table></figure></p><p>每小时的第3和第15分钟执行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 * * * * <span class="built_in">command</span></span><br></pre></td></tr></table></figure></p><p>在上午8点到11点的第3和第15分钟执行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * * <span class="built_in">command</span></span><br></pre></td></tr></table></figure></p><p>每隔两天的上午8点到11点的第3和第15分钟执行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 */2 * * <span class="built_in">command</span></span><br></pre></td></tr></table></figure></p><p>每个星期一的上午8点到11点的第3和第15分钟执行<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * 1 <span class="built_in">command</span></span><br></pre></td></tr></table></figure></p><p>每晚的21:30重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">30 21 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p><p>每月1、10、22日的4 : 45重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 4 1,10,22 * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p><p>每周六、周日的1:10重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 1 * * 6,0 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p><p>每天18 : 00至23 : 00之间每隔30分钟重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0,30 18-23 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p><p>每星期六的晚上11:00 pm重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23 * * 6 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p><p>每一小时重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* */1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p><p>晚上11点到早上7点之间，每隔一小时重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 23-7/1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p><p>每月的4号与每周一到周三的11点重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 11 4 * mon-wed /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p><p>一月一号的4点重启smb<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 4 1 jan * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;基本规则&quot;&gt;&lt;a href=&quot;#基本规则&quot; class=&quot;headerlink&quot; title=&quot;基本规则&quot;&gt;&lt;/a&gt;基本规则&lt;/h2&gt;&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;
-      
-    
-    </summary>
-    
-    
-      <category term="linux" scheme="http://chimpss.github.io/tags/linux/"/>
-    
-      <category term="shell" scheme="http://chimpss.github.io/tags/shell/"/>
     
   </entry>
   

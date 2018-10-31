@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chimpss.github.io/linux/time/</loc>
+    
+    <lastmod>2018-10-31T02:29:14.005Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chimpss.github.io/linux/zsh/</loc>
+    
+    <lastmod>2018-10-31T02:27:52.536Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chimpss.github.io/digest/%E5%9B%BD%E4%BA%A7%E5%87%8C%E5%87%8C%E6%BC%86/</loc>
     
     <lastmod>2018-10-21T02:47:05.166Z</lastmod>
@@ -243,13 +257,6 @@
     <loc>http://chimpss.github.io/golang/http%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/</loc>
     
     <lastmod>2018-10-07T17:40:02.010Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chimpss.github.io/linux/zsh/</loc>
-    
-    <lastmod>2018-10-07T07:54:14.204Z</lastmod>
     
   </url>
   
