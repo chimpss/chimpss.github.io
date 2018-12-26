@@ -291,7 +291,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/并发/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/参数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -310,7 +310,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/http/并发/" itemprop="url">进程-线程-协程</a></h1>
+                <a class="post-title-link" href="/http/参数/" itemprop="url">参数</a></h1>
         
 
         <div class="post-meta">
@@ -340,7 +340,7 @@
 
           
           
-             <span id="/http/并发/" class="leancloud_visitors" data-flag-title="进程-线程-协程">
+             <span id="/http/参数/" class="leancloud_visitors" data-flag-title="参数">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,61 +373,17 @@
       
         
           
-            <h1 id="进程-线程-协程"><a href="#进程-线程-协程" class="headerlink" title="进程-线程-协程"></a>进程-线程-协程</h1><h2 id="简单描述"><a href="#简单描述" class="headerlink" title="简单描述"></a>简单描述</h2><blockquote>
-<p>　　进程、线程和协程之间的关系和区别也困扰我一阵子了，最近有一些心得，写一下。<br>　　进程拥有自己独立的堆和栈，既不共享堆，亦不共享栈，进程由操作系统调度。<br>　　线程拥有自己独立的栈和共享的堆，共享堆，不共享栈，线程亦由操作系统调度(标准线程是的)。<br>　　协程和线程一样共享堆，不共享栈，协程由程序员在协程的代码里显示调度。<br>　　进程和其他两个的区别还是很明显的。<br>　　协程和线程的区别是：协程避免了无意义的调度，由此可以提高性能，但也因此，程序员必须自己承担调度的责任，同时，协程也失去了标准线程使用多CPU的能力。<br>　　打个比方吧，假设有一个操作系统，是单核的，系统上没有其他的程序需要运行，有两个线程 A 和 B ，A 和 B 在单独运行时都需要 10 秒来完成自己的任务，而且任务都是运算操作，A B 之间也没有竞争和共享数据的问题。现在 A B 两个线程并行，操作系统会不停的在 A B 　　两个线程之间切换，达到一种伪并行的效果，假设切换的频率是每秒一次，切换的成本是 0.1 秒(主要是栈切换)，总共需要 20 + 19 <em> 0.1 = 21.9 秒。如果使用协程的方式，可以先运行协程 A ，A 结束的时候让位给协程 B ，只发生一次切换，总时间是 20 + 1 </em> 0.1 = 20.1 秒。如果系统是双核的，而且线程是标准线程，那么 A B 两个线程就可以真并行，总时间只需要 10 秒，而协程的方案仍然需要 20.1 秒。</p>
+            <h1 id="url传参"><a href="#url传参" class="headerlink" title="url传参"></a>url传参</h1><blockquote>
+<p>这种在各种method（get，post，delete，put）都能使用，解析速度快</p>
 </blockquote>
-<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><blockquote>
-<p><code>进程的出现是为了更好的利用CPU资源使到并发成为可能</code>。 假设有两个任务A和B，当A遇到IO操作，CPU默默的等待任务A读取完操作再去执行任务B，这样无疑是对CPU资源的极大的浪费。聪明的老大们就在想若在任务A读取数据时，让任务B执行，当任务A读取完数据后，再切换到任务A执行。注意关键字切换，自然是切换，那么这就涉及到了状态的保存，状态的恢复，加上任务A与任务B所需要的系统资源（内存，硬盘，键盘等等）是不一样的。自然而然的就需要有一个东西去记录任务A和任务B分别需要什么资源，怎样去识别任务A和任务B等等。登登登，进程就被发明出来了。通过进程来分配系统资源，标识任务。如何分配CPU去执行进程称之为调度，进程状态的记录，恢复，切换称之为上下文切换。<code>进程是系统资源分配的最小单位</code>，进程占用的资源有：地址空间，全局变量，文件描述符，各种硬件等等资源。</p>
-</blockquote>
-<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><blockquote>
-<p><code>线程的出现是为了降低上下文切换的消耗，提高系统的并发性，并突破一个进程只能干一样事的缺陷，使到进程内并发成为可能</code>。假设，一个文本程序，需要接受键盘输入，将内容显示在屏幕上，还需要保存信息到硬盘中。若只有一个进程，势必造成同一时间只能干一样事的尴尬（当保存时，就不能通过键盘输入内容）。若有多个进程，每个进程负责一个任务，进程A负责接收键盘输入的任务，进程B负责将内容显示在屏幕上的任务，进程C负责保存内容到硬盘中的任务。这里进程A，B，C间的协作涉及到了进程通信问题，而且有共同都需要拥有的东西——-文本内容，不停的切换造成性能上的损失。若有一种机制，可以使任务A，B，C共享资源，这样上下文切换所需要保存和恢复的内容就少了，同时又可以减少通信所带来的性能损耗，那就好了。是的，这种机制就是线程。<code>线程共享进程的大部分资源，并参与CPU的调度, 当然线程自己也是拥有自己的资源的，例如，栈，寄存器等等</code>。 此时，进程同时也是线程的容器。线程也是有着自己的缺陷的，例如健壮性差，若一个线程挂掉了，整一个进程也挂掉了，这意味着其它线程也挂掉了，进程却没有这个问题，一个进程挂掉，另外的进程还是活着。</p>
-</blockquote>
-<h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><blockquote>
-<p><code>协程通过在线程中实现调度，避免了陷入内核级别的上下文切换造成的性能损失，进而突破了线程在IO上的性能瓶颈</code>。 当涉及到大规模的并发连接时，例如10K连接。以线程作为处理单元，系统调度的开销还是过大。当连接数很多 —&gt; 需要大量的线程来干活 —&gt; 可能大部分的线程处于ready状态 —&gt; 系统会不断地进行上下文切换。既然性能瓶颈在上下文切换，那解决思路也就有了，在线程中自己实现调度，不陷入内核级别的上下文切换。说明一下，在历史上协程比线程要出现得早，在1963年首次提出, 但没有流行开来。为什么没有流行，没有找到信服的资料，先挖个坑，以后那天了解后，再补上。</p>
-</blockquote>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><blockquote>
-<p>进程，线程，协程不断突破，更高效的处理阻塞，不断地提高CPU的利用率。但是并不是说，线程就一定比进程快，而协程就一定不线程要快。具体还是要看应用场景。可以简单粗暴的把应用分为IO密集型应用以及CPU密集型应用。</p>
-</blockquote>
-<ul>
-<li><p>多核CPU，CPU密集型应用</p>
-<blockquote>
-<p>此时多线程的效率是最高的，多线程可以使到全部CPU核心满载，又避免了协程间切换造成性能损失。当CPU密集型任务时，CPU一直在利用着，切换反而会造成性能损失，即便协程上下文切换消耗最小，但也还是有消耗的。</p>
-</blockquote>
-</li>
-<li><p>多核CPU，IO密集型应用</p>
-<blockquote>
-<p>此时采用多线程多协程效率最高，多线程可以使到全部CPU核心满载，而一个线程多协程，则更好的提高了CPU的利用率。</p>
-</blockquote>
-</li>
-<li><p>单核CPU，CPU密集型应用</p>
-<blockquote>
-<p>单进程效率是最高，此时单个进程已经使到CPU满载了。</p>
-</blockquote>
-</li>
-<li><p>单核CPU，IO密集型应用</p>
-<blockquote>
-<p>多协程，效率最高。例如，看了上面应该也是知道的了</p>
-</blockquote>
-</li>
-</ul>
-<h1 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h1><h2 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h2><blockquote>
-<p>并发就是指同一时刻有两个或两个以上的“工作单位”在同时执行，从硬件的角度上来看就是同一时刻有两条或两条以上的指令处于执行阶段。所以，多核是并行的前提，单线程永远无法达到并行状态。可以利用多线程和度进程到达并行状态。另外的，Python的多线程由于GIL的存在，对于Python来说无法通过多线程到达并行状态。</p>
-</blockquote>
-<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><blockquote>
-<p>对于并发的理解，要从两方面去理解，</p>
-</blockquote>
-<ol>
-<li>并发设计 </li>
-<li><p>并发执行。先说并发设计，当说一个程序是并发的，更多的是指这个程序采取了并发设计。</p>
-</li>
-<li><p>并发设计的标准：</p>
-<blockquote>
-<p><code>使多个操作可以在重叠的时间段内进行</code>，这里的重点在于重叠的时间内， 重叠时间可以理解为一段时间内。例如：在时间1s秒内, 具有IO操作的task1和task2都完成，这就可以说是并发执行。所以呢，单线程也是可以做到并发运行的。当然啦，并行肯定是并发的。一个程序能否并发执行，取决于设计，也取决于部署方式。例如, 当给程序开一个线程（协程是不开的），它不可能是并发的，因为在重叠时间内根本就没有两个task在运行。当一个程序被设计成完成一个任务再去完成下一个任务的时候，即便部署是多线程多协程的也是无法达到并发运行的。</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="并行与并发的关系"><a href="#并行与并发的关系" class="headerlink" title="并行与并发的关系:"></a>并行与并发的关系:</h2><blockquote>
-<p>并发的设计使到并发执行成为可能，而并行是并发执行的其中一种模式。</p>
+<h1 id="body体中的参数"><a href="#body体中的参数" class="headerlink" title="body体中的参数"></a>body体中的参数</h1><h2 id="application-x-www-form-urlencoded"><a href="#application-x-www-form-urlencoded" class="headerlink" title="application/x-www-form-urlencoded"></a>application/x-www-form-urlencoded</h2><p>这应该是最常见的 POST 提交数据的方式了。浏览器的原生 <form> 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样（无关的请求头在本文中都省略掉了）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST http://www.example.com HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded;charset=utf-8</span><br><span class="line"></span><br><span class="line">title=test&amp;sub%5B%5D=1&amp;sub%5B%5D=2&amp;sub%5B%5D=3</span><br></pre></td></tr></table></figure></form></p>
+<p>首先，Content-Type 被指定为 application/x-www-form-urlencoded；其次，提交的数据按照 key1=val1&amp;key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码。大部分服务端语言都对这种方式有很好的支持。例如 PHP 中，$_POST[‘title’] 可以获取到 title 的值，$_POST[‘sub’] 可以得到 sub 数组。<br>很多时候，我们用 Ajax 提交数据时，也是使用这种方式。例如 JQuery 和 QWrap 的 Ajax，Content-Type 默认值都是「application/x-www-form-urlencoded;charset=utf-8」。</p>
+<h2 id="multipart-form-data"><a href="#multipart-form-data" class="headerlink" title="multipart/form-data"></a>multipart/form-data</h2><p>这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 <form> 表单的 enctype 等于 multipart/form-data。直接来看一个请求示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST http://www.example.com HTTP/1.1</span><br><span class="line">Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA</span><br><span class="line">Content-Disposition: form-data; name=&quot;text&quot;</span><br><span class="line"></span><br><span class="line">title</span><br><span class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA</span><br><span class="line">Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;chrome.png&quot;</span><br><span class="line">Content-Type: image/png</span><br><span class="line"></span><br><span class="line">PNG ... content of chrome.png ...</span><br><span class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA--</span><br></pre></td></tr></table></figure></form></p>
+<p>这个例子稍微复杂点。首先生成了一个 boundary 用于分割不同的字段，为了避免与正文内容重复，boundary 很长很复杂。然后 Content-Type 里指明了数据是以 multipart/form-data 来编码，本次请求的 boundary 是什么内容。消息主体里按照字段个数又分为多个结构类似的部分，每部分都是以 –boundary 开始，紧接着是内容描述信息，然后是回车，最后是字段具体内容（文本或二进制）。如果传输的是文件，还要包含文件名和文件类型信息。消息主体最后以 –boundary– 标示结束。关于 multipart/form-data 的详细定义，请前往 rfc1867 查看。<br>这种方式一般用来上传文件，各大服务端语言对它也有着良好的支持。<br>上面提到的这两种 POST 数据的方式，都是浏览器原生支持的，而且现阶段标准中原生 <form> 表单也只支持这两种方式（通过 <form> 元素的 enctype 属性指定，默认为 application/x-www-form-urlencoded。其实 enctype 还支持 text/plain，不过用得非常少）。<br>随着越来越多的 Web 站点，尤其是 WebApp，全部使用 Ajax 进行数据交互之后，我们完全可以定义新的数据提交方式，给开发带来更多便利。</form></form></p>
+<h2 id="application-json"><a href="#application-json" class="headerlink" title="application/json"></a>application/json</h2><p>application/json 这个 Content-Type 作为响应头大家肯定不陌生。实际上，现在越来越多的人把它作为请求头，用来告诉服务端消息主体是序列化后的 JSON 字符串。由于 JSON 规范的流行，除了低版本 IE 之外的各大浏览器都原生支持 JSON.stringify，服务端语言也都有处理 JSON 的函数，使用 JSON 不会遇上什么麻烦。<br>JSON 格式支持比键值对复杂得多的结构化数据，这一点也很有用。记得我几年前做一个项目时，需要提交的数据层次非常深，我就是把数据 JSON 序列化之后来提交的。不过当时我是把 JSON 字符串作为 val，仍然放在键值对里，以 x-www-form-urlencoded 方式提交。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST http://www.example.com HTTP/1.1 </span><br><span class="line">Content-Type: application/json;charset=utf-8</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">"title"</span>:<span class="string">"test"</span>,<span class="attr">"sub"</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种方案，可以方便的提交复杂的结构化数据，特别适合 RESTful 的接口。各大抓包工具如 Chrome 自带的开发者工具、Firebug、Fiddler，都会以树形结构展示 JSON 数据，非常友好。但也有些服务端语言还没有支持这种方式，例如 php 就无法通过 $_POST 对象从上面的请求中获得内容。这时候，需要自己动手处理下：在请求头中 Content-Type 为 application/json 时，从 php://input 里获得原始输入流，再 json_decode 成对象。一些 php 框架已经开始这么做了。</p>
+<h2 id="text-xml"><a href="#text-xml" class="headerlink" title="text/xml"></a>text/xml</h2><blockquote>
+<p>本人对此格式有成见，就不赘述了。</p>
 </blockquote>
 
           
@@ -567,6 +523,192 @@
 <h1 id="身份认证"><a href="#身份认证" class="headerlink" title="身份认证"></a>身份认证</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'HTTP/1.1 401 Unauthorized'</span>);  </span><br><span class="line">header(<span class="string">'WWW-Authenticate: Basic realm="Top Secret"'</span>);</span><br></pre></td></tr></table></figure>
 <h1 id="声明一个需要下载的xls文件"><a href="#声明一个需要下载的xls文件" class="headerlink" title="声明一个需要下载的xls文件"></a>声明一个需要下载的xls文件</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">'Content-Disposition: attachment; filename=ithhc.xlsx'</span>);</span><br><span class="line">header(<span class="string">'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'</span>);</span><br><span class="line">header(<span class="string">'Content-Length: '</span>.filesize(<span class="string">'./test.xls'</span>));  </span><br><span class="line">header(<span class="string">'Content-Transfer-Encoding: binary'</span>);  </span><br><span class="line">header(<span class="string">'Cache-Control: must-revalidate'</span>);  </span><br><span class="line">header(<span class="string">'Pragma: public'</span>);  </span><br><span class="line">readfile(<span class="string">'./test.xls'</span>);</span><br></pre></td></tr></table></figure>
 <h1 id="download"><a href="#download" class="headerlink" title="download"></a>download</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Content-type: application/force-download"</span>);</span><br><span class="line"><span class="comment">// 判断编码</span></span><br><span class="line">$use_utf_8 = Utils::get_os() == <span class="string">'Macintosh'</span>;</span><br><span class="line"><span class="keyword">if</span> (!$use_utf_8) &#123;</span><br><span class="line">    <span class="comment">// Disposition中文是处置的意思, 可以理解为文档如何处置</span></span><br><span class="line">    header(<span class="string">"Content-Disposition: attachment;filename="</span> . iconv(<span class="string">"utf-8"</span>, <span class="string">"gb2312//IGNORE"</span>, $zip_title) . <span class="string">".zip"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    header(<span class="string">"Content-Disposition: attachment;filename="</span> . $zip_title . <span class="string">".zip"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> file_get_contents($zip_path);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/http/并发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/http/并发/" itemprop="url">进程-线程-协程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/http/并发/" class="leancloud_visitors" data-flag-title="进程-线程-协程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="进程-线程-协程"><a href="#进程-线程-协程" class="headerlink" title="进程-线程-协程"></a>进程-线程-协程</h1><h2 id="简单描述"><a href="#简单描述" class="headerlink" title="简单描述"></a>简单描述</h2><blockquote>
+<p>　　进程、线程和协程之间的关系和区别也困扰我一阵子了，最近有一些心得，写一下。<br>　　进程拥有自己独立的堆和栈，既不共享堆，亦不共享栈，进程由操作系统调度。<br>　　线程拥有自己独立的栈和共享的堆，共享堆，不共享栈，线程亦由操作系统调度(标准线程是的)。<br>　　协程和线程一样共享堆，不共享栈，协程由程序员在协程的代码里显示调度。<br>　　进程和其他两个的区别还是很明显的。<br>　　协程和线程的区别是：协程避免了无意义的调度，由此可以提高性能，但也因此，程序员必须自己承担调度的责任，同时，协程也失去了标准线程使用多CPU的能力。<br>　　打个比方吧，假设有一个操作系统，是单核的，系统上没有其他的程序需要运行，有两个线程 A 和 B ，A 和 B 在单独运行时都需要 10 秒来完成自己的任务，而且任务都是运算操作，A B 之间也没有竞争和共享数据的问题。现在 A B 两个线程并行，操作系统会不停的在 A B 　　两个线程之间切换，达到一种伪并行的效果，假设切换的频率是每秒一次，切换的成本是 0.1 秒(主要是栈切换)，总共需要 20 + 19 <em> 0.1 = 21.9 秒。如果使用协程的方式，可以先运行协程 A ，A 结束的时候让位给协程 B ，只发生一次切换，总时间是 20 + 1 </em> 0.1 = 20.1 秒。如果系统是双核的，而且线程是标准线程，那么 A B 两个线程就可以真并行，总时间只需要 10 秒，而协程的方案仍然需要 20.1 秒。</p>
+</blockquote>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><blockquote>
+<p><code>进程的出现是为了更好的利用CPU资源使到并发成为可能</code>。 假设有两个任务A和B，当A遇到IO操作，CPU默默的等待任务A读取完操作再去执行任务B，这样无疑是对CPU资源的极大的浪费。聪明的老大们就在想若在任务A读取数据时，让任务B执行，当任务A读取完数据后，再切换到任务A执行。注意关键字切换，自然是切换，那么这就涉及到了状态的保存，状态的恢复，加上任务A与任务B所需要的系统资源（内存，硬盘，键盘等等）是不一样的。自然而然的就需要有一个东西去记录任务A和任务B分别需要什么资源，怎样去识别任务A和任务B等等。登登登，进程就被发明出来了。通过进程来分配系统资源，标识任务。如何分配CPU去执行进程称之为调度，进程状态的记录，恢复，切换称之为上下文切换。<code>进程是系统资源分配的最小单位</code>，进程占用的资源有：地址空间，全局变量，文件描述符，各种硬件等等资源。</p>
+</blockquote>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><blockquote>
+<p><code>线程的出现是为了降低上下文切换的消耗，提高系统的并发性，并突破一个进程只能干一样事的缺陷，使到进程内并发成为可能</code>。假设，一个文本程序，需要接受键盘输入，将内容显示在屏幕上，还需要保存信息到硬盘中。若只有一个进程，势必造成同一时间只能干一样事的尴尬（当保存时，就不能通过键盘输入内容）。若有多个进程，每个进程负责一个任务，进程A负责接收键盘输入的任务，进程B负责将内容显示在屏幕上的任务，进程C负责保存内容到硬盘中的任务。这里进程A，B，C间的协作涉及到了进程通信问题，而且有共同都需要拥有的东西——-文本内容，不停的切换造成性能上的损失。若有一种机制，可以使任务A，B，C共享资源，这样上下文切换所需要保存和恢复的内容就少了，同时又可以减少通信所带来的性能损耗，那就好了。是的，这种机制就是线程。<code>线程共享进程的大部分资源，并参与CPU的调度, 当然线程自己也是拥有自己的资源的，例如，栈，寄存器等等</code>。 此时，进程同时也是线程的容器。线程也是有着自己的缺陷的，例如健壮性差，若一个线程挂掉了，整一个进程也挂掉了，这意味着其它线程也挂掉了，进程却没有这个问题，一个进程挂掉，另外的进程还是活着。</p>
+</blockquote>
+<h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><blockquote>
+<p><code>协程通过在线程中实现调度，避免了陷入内核级别的上下文切换造成的性能损失，进而突破了线程在IO上的性能瓶颈</code>。 当涉及到大规模的并发连接时，例如10K连接。以线程作为处理单元，系统调度的开销还是过大。当连接数很多 —&gt; 需要大量的线程来干活 —&gt; 可能大部分的线程处于ready状态 —&gt; 系统会不断地进行上下文切换。既然性能瓶颈在上下文切换，那解决思路也就有了，在线程中自己实现调度，不陷入内核级别的上下文切换。说明一下，在历史上协程比线程要出现得早，在1963年首次提出, 但没有流行开来。为什么没有流行，没有找到信服的资料，先挖个坑，以后那天了解后，再补上。</p>
+</blockquote>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><blockquote>
+<p>进程，线程，协程不断突破，更高效的处理阻塞，不断地提高CPU的利用率。但是并不是说，线程就一定比进程快，而协程就一定不线程要快。具体还是要看应用场景。可以简单粗暴的把应用分为IO密集型应用以及CPU密集型应用。</p>
+</blockquote>
+<ul>
+<li><p>多核CPU，CPU密集型应用</p>
+<blockquote>
+<p>此时多线程的效率是最高的，多线程可以使到全部CPU核心满载，又避免了协程间切换造成性能损失。当CPU密集型任务时，CPU一直在利用着，切换反而会造成性能损失，即便协程上下文切换消耗最小，但也还是有消耗的。</p>
+</blockquote>
+</li>
+<li><p>多核CPU，IO密集型应用</p>
+<blockquote>
+<p>此时采用多线程多协程效率最高，多线程可以使到全部CPU核心满载，而一个线程多协程，则更好的提高了CPU的利用率。</p>
+</blockquote>
+</li>
+<li><p>单核CPU，CPU密集型应用</p>
+<blockquote>
+<p>单进程效率是最高，此时单个进程已经使到CPU满载了。</p>
+</blockquote>
+</li>
+<li><p>单核CPU，IO密集型应用</p>
+<blockquote>
+<p>多协程，效率最高。例如，看了上面应该也是知道的了</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h1><h2 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h2><blockquote>
+<p>并发就是指同一时刻有两个或两个以上的“工作单位”在同时执行，从硬件的角度上来看就是同一时刻有两条或两条以上的指令处于执行阶段。所以，多核是并行的前提，单线程永远无法达到并行状态。可以利用多线程和度进程到达并行状态。另外的，Python的多线程由于GIL的存在，对于Python来说无法通过多线程到达并行状态。</p>
+</blockquote>
+<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><blockquote>
+<p>对于并发的理解，要从两方面去理解，</p>
+</blockquote>
+<ol>
+<li>并发设计 </li>
+<li><p>并发执行。先说并发设计，当说一个程序是并发的，更多的是指这个程序采取了并发设计。</p>
+</li>
+<li><p>并发设计的标准：</p>
+<blockquote>
+<p><code>使多个操作可以在重叠的时间段内进行</code>，这里的重点在于重叠的时间内， 重叠时间可以理解为一段时间内。例如：在时间1s秒内, 具有IO操作的task1和task2都完成，这就可以说是并发执行。所以呢，单线程也是可以做到并发运行的。当然啦，并行肯定是并发的。一个程序能否并发执行，取决于设计，也取决于部署方式。例如, 当给程序开一个线程（协程是不开的），它不可能是并发的，因为在重叠时间内根本就没有两个task在运行。当一个程序被设计成完成一个任务再去完成下一个任务的时候，即便部署是多线程多协程的也是无法达到并发运行的。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="并行与并发的关系"><a href="#并行与并发的关系" class="headerlink" title="并行与并发的关系:"></a>并行与并发的关系:</h2><blockquote>
+<p>并发的设计使到并发执行成为可能，而并行是并发执行的其中一种模式。</p>
+</blockquote>
+
           
         
       
@@ -1645,136 +1787,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/读取配置文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/读取配置文件/" itemprop="url">读取配置文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/golang/读取配置文件/" class="leancloud_visitors" data-flag-title="读取配置文件">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="使用json格式"><a href="#使用json格式" class="headerlink" title="使用json格式"></a>使用json格式</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mysql <span class="keyword">struct</span> &#123;</span><br><span class="line">	Host <span class="keyword">string</span></span><br><span class="line">	Port <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Data mysql</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 判断是为了实现单例的效果</span></span><br><span class="line">	<span class="keyword">if</span> Data.Port == <span class="number">0</span> &#123;</span><br><span class="line">	    <span class="comment">// 当前目录应该为main.go的目录</span></span><br><span class="line">		str, err := ioutil.ReadFile(<span class="string">"./config/database.json"</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 读取json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err = json.Unmarshal(str, &amp;Data); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 解析json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		log.Println(<span class="string">"读取配置文件成功"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	log.Println(<span class="string">"执行init函数 配置文件"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1825,7 +1837,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
