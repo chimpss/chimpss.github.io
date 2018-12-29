@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chimpss.github.io/"/>
-  <updated>2018-12-26T04:57:10.910Z</updated>
+  <updated>2018-12-29T15:52:27.483Z</updated>
   <id>http://chimpss.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>xorm</title>
+    <link href="http://chimpss.github.io/golang/xorm/"/>
+    <id>http://chimpss.github.io/golang/xorm/</id>
+    <published>2018-12-29T15:49:30.612Z</published>
+    <updated>2018-12-29T15:52:27.483Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在使用xorm存储冷数据时，经常会遇到这种报错：<code>packets.go:36: unexpected EOF (Invalid Connection)</code></p><p>一顿google，发现原来是这样的:</p><p>这个属于<code>github.com/go-sql-driver/mysql</code>连接池中的连接释放问题</p><p>使用DB.SetConnMaxLifetime(time.Second)设置连接最大复用时间，3~10秒即可。orm基本上都有相关的设置。</p><p><code>xorm</code>的话:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">X, err = xorm.NewEngine(env.GetString(env.XOrmDriverName), env.GetString(env.XOrmDataSourceName))</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"><span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">X.SetMaxOpenConns(<span class="number">1000</span>)</span><br><span class="line">X.SetMaxIdleConns(<span class="number">30</span>)</span><br><span class="line">X.SetConnMaxLifetime(time.Second)</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近在使用xorm存储冷数据时，经常会遇到这种报错：&lt;code&gt;packets.go:36: unexpected EOF (Invalid Connection)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;一顿google，发现原来是这样的:&lt;/p&gt;
+&lt;p&gt;这个属于&lt;code&gt;gith
+      
+    
+    </summary>
+    
+    
+      <category term="go" scheme="http://chimpss.github.io/tags/go/"/>
+    
+      <category term="mysql" scheme="http://chimpss.github.io/tags/mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>紧箍咒</title>
@@ -475,31 +502,6 @@
         &lt;p&gt;承认病态的自我需要勇气，佛教有一句名言：海无边，回头是岸&lt;/p&gt;
 &lt;p&gt;圣人改变的是自己，走的是一条修行的路。通过完善自己，可以感召别人，唤醒别人的良知，给别人指引。&lt;/p&gt;
 &lt;p&gt;与之相反，由于大恶之人害怕改变自己，所以便去改变别人，他们不择手段去控制别人，压制别人，甚至
-      
-    
-    </summary>
-    
-    
-      <category term="有趣的灵魂" scheme="http://chimpss.github.io/tags/%E6%9C%89%E8%B6%A3%E7%9A%84%E7%81%B5%E9%AD%82/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>放弃自由</title>
-    <link href="http://chimpss.github.io/digest/%E5%B0%91%E6%9C%89%E4%BA%BA%E8%B5%B0%E7%9A%84%E8%B7%AF1/"/>
-    <id>http://chimpss.github.io/digest/少有人走的路1/</id>
-    <published>2018-10-11T14:29:52.839Z</published>
-    <updated>2018-10-16T03:47:25.991Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天读的一章为：过分依赖集体，个人的心智就会退化</p><p>推理很到位：</p><p>“自然赋予人自由意志，也就是赋予了人自主选择的权利。人生是有一个接一个的选择组成的，不同的选择导致不同的人生。但是不可否认的是，伴随着自主选择，人也就多了更多的烦恼和痛苦。选择是一件令人烦恼和痛苦的事情。首先选择意味着放弃。选择一条路，意味着放弃其他的路；有了一个选择，意味着要放弃其他选择。由于人们不愿意放弃，所以每当面临选择时，内心总是充满烦恼和痛苦。其次，选择会产生结果，人们必须为自己的选择负责，并承受选择所带来的结果。当然，好的结果令人欣喜，但坏的结果不仅会招致别人的指责、埋怨，也会让自己陷入懊恼和自责之中，令人痛苦不堪。许多人不愿意承受选择所带来的痛苦，便会把自主选择的权利拱手让给他人。这就是弗洛姆所说的逃避自由。</p><p>逃避自由的人放弃了自主选择的权利，也就放弃了独立思考的能力，这意味着他们将失去独立的自我，失去自己的灵魂。一个没有灵魂的人就像一张破碎的纸片，盲目地追随着每一阵风，完全失去了掌控自我的能力，最终会成为魔鬼撒旦的工具，干出许多邪恶的事情。”</p><p>我感觉说的很对，想想和以前和朋友一块儿的时候，有什么事情都是让对方做选择，虽然会让别人会觉得你随和，为他人着想。实际上是自己太多胆小，不敢承担选择所带来的风险。是因为怕，才放弃了自主思考的权利，给人一种没有底气，没有底线的感觉。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;今天读的一章为：过分依赖集体，个人的心智就会退化&lt;/p&gt;
-&lt;p&gt;推理很到位：&lt;/p&gt;
-&lt;p&gt;“自然赋予人自由意志，也就是赋予了人自主选择的权利。人生是有一个接一个的选择组成的，不同的选择导致不同的人生。但是不可否认的是，伴随着自主选择，人也就多了更多的烦恼和痛苦。选择是一件
       
     
     </summary>

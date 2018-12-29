@@ -291,7 +291,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/读取配置文件/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/反射/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -310,7 +310,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/golang/读取配置文件/" itemprop="url">读取配置文件</a></h1>
+                <a class="post-title-link" href="/golang/反射/" itemprop="url">反射</a></h1>
         
 
         <div class="post-meta">
@@ -340,7 +340,7 @@
 
           
           
-             <span id="/golang/读取配置文件/" class="leancloud_visitors" data-flag-title="读取配置文件">
+             <span id="/golang/反射/" class="leancloud_visitors" data-flag-title="反射">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,7 +373,27 @@
       
         
           
-            <h1 id="使用json格式"><a href="#使用json格式" class="headerlink" title="使用json格式"></a>使用json格式</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mysql <span class="keyword">struct</span> &#123;</span><br><span class="line">	Host <span class="keyword">string</span></span><br><span class="line">	Port <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Data mysql</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 判断是为了实现单例的效果</span></span><br><span class="line">	<span class="keyword">if</span> Data.Port == <span class="number">0</span> &#123;</span><br><span class="line">	    <span class="comment">// 当前目录应该为main.go的目录</span></span><br><span class="line">		str, err := ioutil.ReadFile(<span class="string">"./config/database.json"</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 读取json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err = json.Unmarshal(str, &amp;Data); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 解析json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		log.Println(<span class="string">"读取配置文件成功"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	log.Println(<span class="string">"执行init函数 配置文件"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <blockquote>
+<p>详见：<a href="http://studygolang.com/pkgdoc" target="_blank" rel="noopener">go标准包：reflect</a></p>
+</blockquote>
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><blockquote>
+<ul>
+<li>大大提高程序的灵活性，特别是与interface结合能够发挥更大的效果</li>
+<li>反射使用TypeOf和ValueOf函数从接口中获取目标对象信息</li>
+<li>反射会将匿名字段设为独立字段（匿名字段本质）</li>
+<li>想要利用反射修改对象信息，前提是interface.data是settble,即pointer-interface</li>
+<li>通过反射可以<code>动态</code>的调用方法</li>
+</ul>
+</blockquote>
+<h1 id="demo实例"><a href="#demo实例" class="headerlink" title="demo实例"></a>demo实例</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id   <span class="keyword">int</span></span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">	Age  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(u User)</span> <span class="title">Hello</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"hello world"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	u := User&#123;<span class="number">12</span>, <span class="string">"zhangsan"</span>, <span class="number">33</span>&#125;</span><br><span class="line">	<span class="comment">// 此处不可以传指针</span></span><br><span class="line">	Info(u)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Info</span><span class="params">(o <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	t := reflect.TypeOf(o)</span><br><span class="line">	fmt.Println(<span class="string">"Type:"</span>, t.Name())</span><br><span class="line">	v := reflect.ValueOf(o)</span><br><span class="line">	fmt.Println(<span class="string">"Field:"</span>)</span><br><span class="line">    <span class="keyword">if</span> k := t.Kind(); k != reflect.Struct &#123;</span><br><span class="line">		fmt.Println(<span class="string">"不是interface的struct类型"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; t.NumField(); i++ &#123;</span><br><span class="line">		f := t.Field(i)</span><br><span class="line">		val := v.Field(i).Interface()</span><br><span class="line">		fmt.Println(f.Name,f.Type,f.Anonymous,val)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">Type: User</span><br><span class="line">Field:</span><br><span class="line">Id <span class="keyword">int</span> <span class="literal">false</span> <span class="number">12</span></span><br><span class="line">Name <span class="keyword">string</span> <span class="literal">false</span> zhangsan</span><br><span class="line">Age <span class="keyword">int</span> <span class="literal">false</span> <span class="number">33</span></span><br></pre></td></tr></table></figure>
+<h1 id="匿名字段的反射"><a href="#匿名字段的反射" class="headerlink" title="匿名字段的反射"></a>匿名字段的反射</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id   <span class="keyword">int</span></span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">	Age  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Manage <span class="keyword">struct</span> &#123;</span><br><span class="line">	User</span><br><span class="line">	Title <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	m := Manage&#123;User&#123;<span class="number">12</span>, <span class="string">"zhangsan"</span>, <span class="number">14</span>&#125;, <span class="string">"wangwu"</span>&#125;</span><br><span class="line">	t := reflect.TypeOf(m)</span><br><span class="line">	<span class="comment">// 匿名字段的反射</span></span><br><span class="line">	fmt.Println(t.Field(<span class="number">1</span>))</span><br><span class="line">	<span class="comment">// 取出匿名字段的值</span></span><br><span class="line">	fmt.Println(t.FieldByIndex([]<span class="keyword">int</span>&#123;<span class="number">0</span>, <span class="number">0</span>&#125;))</span><br><span class="line">	<span class="comment">// 取出正常字段的值</span></span><br><span class="line">	fmt.Println(t.FieldByIndex([]<span class="keyword">int</span>&#123;<span class="number">1</span>&#125;))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果：</span></span><br><span class="line">➜  first <span class="keyword">go</span> run helloworld.<span class="keyword">go</span></span><br><span class="line">&#123;Title  <span class="keyword">string</span>  <span class="number">32</span> [<span class="number">1</span>] <span class="literal">false</span>&#125;</span><br><span class="line">&#123;Id  <span class="keyword">int</span>  <span class="number">0</span> [<span class="number">0</span>] <span class="literal">false</span>&#125;</span><br><span class="line">&#123;Title  <span class="keyword">string</span>  <span class="number">32</span> [<span class="number">1</span>] <span class="literal">false</span>&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="通过反射改变其值"><a href="#通过反射改变其值" class="headerlink" title="通过反射改变其值"></a>通过反射改变其值</h1><blockquote>
+<p>demo1<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x := <span class="number">13</span></span><br><span class="line">v := reflect.ValueOf(&amp;x)</span><br><span class="line">v.Elem().SetInt(<span class="number">999</span>)</span><br><span class="line">fmt.Println(x)</span><br><span class="line"><span class="comment">// 结果：999</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>demo2<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">	Age  <span class="keyword">int</span></span><br><span class="line">	sex  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	u := User&#123;<span class="string">"zhansan"</span>, <span class="number">12</span>, <span class="number">2</span>&#125;</span><br><span class="line">	f := reflect.ValueOf(&amp;u)</span><br><span class="line">	v := reflect.ValueOf(u)</span><br><span class="line">	<span class="comment">// kind方法返回类型,</span></span><br><span class="line">	<span class="comment">// interface方法返回v当前持有的值（表示为/保管在interface&#123;&#125;类型），</span></span><br><span class="line">	<span class="comment">// 等价于：var i interface&#123;&#125; = (v's underlying value)</span></span><br><span class="line">	fmt.Println(v.Kind(), v.Type(), v.Interface())</span><br><span class="line">	<span class="keyword">if</span> f.Kind() == reflect.Ptr &amp;&amp; !f.Elem().CanSet() &#123;</span><br><span class="line">		fmt.Println(<span class="string">"User不能被设置"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	    <span class="comment">// Elem返回v持有的接口保管的值的Value封装，或者v持有的指针指向的值的Value封装。</span></span><br><span class="line">		f = f.Elem()</span><br><span class="line">	&#125;</span><br><span class="line">	val := f.FieldByName(<span class="string">"Name"</span>)</span><br><span class="line">	<span class="comment">// IsValid返回v是否持有一个值。如果v是Value零值会返回假，此时v除了IsValid、String、Kind之外的方法都会导致panic。</span></span><br><span class="line">	<span class="comment">// 绝大多数函数和方法都永远不返回Value零值。如果某个函数/方法返回了非法的Value，它的文档必须显式的说明具体情况。</span></span><br><span class="line">	<span class="keyword">if</span> (!val.IsValid()) &#123;</span><br><span class="line">		fmt.Println(<span class="string">"val不是有效值"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (val.Kind() == reflect.String) &#123;</span><br><span class="line">		<span class="comment">// 设置值</span></span><br><span class="line">		val.SetString(<span class="string">"wangwu"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(u)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="通过反射调用其方法"><a href="#通过反射调用其方法" class="headerlink" title="通过反射调用其方法"></a>通过反射调用其方法</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">	Age  <span class="keyword">int</span></span><br><span class="line">	sex  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	user := User&#123;<span class="string">"zhangsan"</span>, <span class="number">12</span>, <span class="number">2</span>&#125;</span><br><span class="line">	f := reflect.ValueOf(user)</span><br><span class="line">	<span class="comment">// 返回v的名为name的方法的已绑定（到v的持有值的）状态的函数形式的Value封装。</span></span><br><span class="line">	mv := f.MethodByName(<span class="string">"GetName"</span>)</span><br><span class="line">	<span class="comment">// slice格式,reflect.Value为一种reflect的value类型,包含reflect.Int...</span></span><br><span class="line">	<span class="comment">// ValueOf返回一个初始化为i接口保管的具体值的Value</span></span><br><span class="line">	args := []reflect.Value&#123;reflect.ValueOf(<span class="string">"wangwu"</span>)&#125;</span><br><span class="line">	<span class="comment">// func (v Value) Call(in []Value) []Value</span></span><br><span class="line">	<span class="comment">// Call方法使用输入的参数in调用v持有的函数。</span></span><br><span class="line">	mv.Call(args)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(user User)</span> <span class="title">GetName</span><span class="params">(name <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"hello "</span> + name + <span class="string">" my name is "</span> + user.Name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -508,6 +528,136 @@
 <h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1><p>主要是使用net/smtp包的<code>SendMail</code>方法<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net/smtp"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	HOST     = <span class="string">"smtp.example.com"</span></span><br><span class="line">	ADDR     = <span class="string">"smtp.example.com:25"</span></span><br><span class="line">	USER     = <span class="string">"chimps@example.com"</span></span><br><span class="line">	PASSWORD = <span class="string">"xxx"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	to := <span class="string">"to1@163.com;to1@163.com"</span></span><br><span class="line">	subject := <span class="string">"TEST EMAIL"</span></span><br><span class="line">	email_type := <span class="string">"html"</span></span><br><span class="line">	message := <span class="string">"&lt;h1&gt;hello go&lt;/h1&gt;"</span></span><br><span class="line">	<span class="keyword">if</span> err := SendEmail(to, subject, email_type, message); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"发送失败, reason:"</span> + err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SendEmail</span><span class="params">(to <span class="keyword">string</span>, subject <span class="keyword">string</span>, email_type <span class="keyword">string</span>, message <span class="keyword">string</span>)</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> content_type <span class="keyword">string</span></span><br><span class="line">	<span class="keyword">switch</span> email_type &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"html"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/html; chatset=UTF-8"</span></span><br><span class="line">	<span class="keyword">case</span> <span class="string">"text"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/plain; chatset=UTF-8"</span></span><br><span class="line">	&#125;</span><br><span class="line">	auth := smtp.PlainAuth(<span class="string">""</span>, USER, PASSWORD, HOST)</span><br><span class="line">	send_to := strings.Split(to, <span class="string">";"</span>)</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> send_to &#123;</span><br><span class="line">		<span class="keyword">var</span> msg []<span class="keyword">string</span></span><br><span class="line">		msg = <span class="built_in">append</span>(msg, <span class="string">"From:"</span>+USER, <span class="string">"To:"</span>+v, <span class="string">"Subject:"</span>+subject, content_type, <span class="string">"\r\n"</span>+message)</span><br><span class="line">		msg_string := strings.Join(msg, <span class="string">"\r\n"</span>)</span><br><span class="line">		fmt.Println(msg_string)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> err = smtp.SendMail(ADDR, auth, USER, []<span class="keyword">string</span>&#123;v&#125;, []<span class="keyword">byte</span>(msg_string)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send fail , reason: "</span> + err.Error())</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send ok :"</span> + v)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>一般情况下，发邮件时间比较耗时的事情，一般走异步处理</p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/读取配置文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/读取配置文件/" itemprop="url">读取配置文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/golang/读取配置文件/" class="leancloud_visitors" data-flag-title="读取配置文件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用json格式"><a href="#使用json格式" class="headerlink" title="使用json格式"></a>使用json格式</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> mysql <span class="keyword">struct</span> &#123;</span><br><span class="line">	Host <span class="keyword">string</span></span><br><span class="line">	Port <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Data mysql</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 判断是为了实现单例的效果</span></span><br><span class="line">	<span class="keyword">if</span> Data.Port == <span class="number">0</span> &#123;</span><br><span class="line">	    <span class="comment">// 当前目录应该为main.go的目录</span></span><br><span class="line">		str, err := ioutil.ReadFile(<span class="string">"./config/database.json"</span>)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 读取json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> err = json.Unmarshal(str, &amp;Data); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"err: 解析json配置失败"</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">		log.Println(<span class="string">"读取配置文件成功"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	log.Println(<span class="string">"执行init函数 配置文件"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1453,137 +1603,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/golang/文件/" itemprop="url">文件处理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/golang/文件/" class="leancloud_visitors" data-flag-title="文件处理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h1><p>使用ioutil标准包<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ListDir</span><span class="params">(filePath <span class="keyword">string</span>)</span> <span class="params">(files []<span class="keyword">string</span>, err error)</span></span> &#123;</span><br><span class="line">	paths, err := ioutil.ReadDir(filePath)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> paths &#123;</span><br><span class="line">		<span class="keyword">if</span> !f.IsDir() &#123;</span><br><span class="line">			files = <span class="built_in">append</span>(files, f.Name())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/正则表达式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1770,7 +1789,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
