@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="go," />
+  <meta name="keywords" content="go,http," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="实现随机数12345678910111213func CreateRandom(strLen int) string &amp;#123;	strRandom := &quot;qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM&quot;	bytes := []byte(strRandom)	strByte := []byte&amp;#123;&amp;#125;">
-<meta name="keywords" content="go">
+<meta name="description" content="上传12345678910111213141516171819202122232425262728// 获取form文件file, err := c.FormFile(&quot;attachment&quot;)if err != nil &amp;#123;	return nil, GenError(err)&amp;#125;now := time.Now()// 检查目录dir := fmt.Sprintf(&quot;upload/">
+<meta name="keywords" content="go,http">
 <meta property="og:type" content="article">
-<meta property="og:title" content="字符串">
-<meta property="og:url" content="http://chimpss.github.io/golang/字符串/index.html">
+<meta property="og:title" content="net-http">
+<meta property="og:url" content="http://chimpss.github.io/golang/net-http/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="实现随机数12345678910111213func CreateRandom(strLen int) string &amp;#123;	strRandom := &quot;qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM&quot;	bytes := []byte(strRandom)	strByte := []byte&amp;#123;&amp;#125;">
+<meta property="og:description" content="上传12345678910111213141516171819202122232425262728// 获取form文件file, err := c.FormFile(&quot;attachment&quot;)if err != nil &amp;#123;	return nil, GenError(err)&amp;#125;now := time.Now()// 检查目录dir := fmt.Sprintf(&quot;upload/">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-07T07:50:23.446Z">
+<meta property="og:updated_time" content="2019-01-02T04:20:32.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="字符串">
-<meta name="twitter:description" content="实现随机数12345678910111213func CreateRandom(strLen int) string &amp;#123;	strRandom := &quot;qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM&quot;	bytes := []byte(strRandom)	strByte := []byte&amp;#123;&amp;#125;">
+<meta name="twitter:title" content="net-http">
+<meta name="twitter:description" content="上传12345678910111213141516171819202122232425262728// 获取form文件file, err := c.FormFile(&quot;attachment&quot;)if err != nil &amp;#123;	return nil, GenError(err)&amp;#125;now := time.Now()// 检查目录dir := fmt.Sprintf(&quot;upload/">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://chimpss.github.io/golang/字符串/"/>
+  <link rel="canonical" href="http://chimpss.github.io/golang/net-http/"/>
 
 
 
@@ -134,7 +134,7 @@
 <meta name="theme-color" content="#222">
 <meta name="google-site-verification" content="IihE-r8G9GMRO1MueIF67KayEkW375z-kdkot_6ncEE" />
 <meta name="baidu-site-verification" content="e0YKAsKxTN" />
-  <title>字符串 | 秀才</title>
+  <title>net-http | 秀才</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/字符串/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/net-http/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">字符串</h1>
+          <h1 class="post-title" itemprop="name headline">net-http</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T01:34:25+08:00">
+                2018-10-08
               </time>
             
 
@@ -342,7 +342,7 @@
 
           
           
-             <span id="/golang/字符串/" class="leancloud_visitors" data-flag-title="字符串">
+             <span id="/golang/net-http/" class="leancloud_visitors" data-flag-title="net-http">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,8 +373,13 @@
       
 
       
-        <h1 id="实现随机数"><a href="#实现随机数" class="headerlink" title="实现随机数"></a>实现随机数</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CreateRandom</span><span class="params">(strLen <span class="keyword">int</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	strRandom := <span class="string">"qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM"</span></span><br><span class="line">	bytes := []<span class="keyword">byte</span>(strRandom)</span><br><span class="line">	strByte := []<span class="keyword">byte</span>&#123;&#125;</span><br><span class="line">	<span class="comment">// 需要一个随机种子（torrent），不然每次都是一样的随机数</span></span><br><span class="line">	r := rand.New(rand.NewSource(time.Now().UnixNano()))</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; strLen; i++ &#123;</span><br><span class="line">		subNum := r.Intn(<span class="built_in">len</span>(bytes))</span><br><span class="line">		sep := bytes[subNum]</span><br><span class="line">		strByte = <span class="built_in">append</span>(strByte, sep)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">string</span>(strByte)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="MD5加密"><a href="#MD5加密" class="headerlink" title="MD5加密"></a>MD5加密</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Md5</span><span class="params">(str <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	m := md5.New()</span><br><span class="line">	m.Write([]<span class="keyword">byte</span>(str))</span><br><span class="line">	<span class="keyword">return</span> hex.EncodeToString(m.Sum(<span class="literal">nil</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取form文件</span></span><br><span class="line">file, err := c.FormFile(<span class="string">"attachment"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">now := time.Now()</span><br><span class="line"><span class="comment">// 检查目录</span></span><br><span class="line">dir := fmt.Sprintf(<span class="string">"upload/%d%d"</span>, now.Year(), now.Month())</span><br><span class="line"><span class="keyword">if</span> !utils.Exists(dir) &#123;</span><br><span class="line">	err = os.MkdirAll(dir, os.ModePerm)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建文件</span></span><br><span class="line">path := fmt.Sprintf(<span class="string">"%s/%d%s"</span>, dir, now.Unix()%(<span class="number">3600</span>*<span class="number">24</span>*<span class="number">30</span>), file.Filename)</span><br><span class="line">out, err := os.Create(path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">f, err := file.Open()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">_, err = io.Copy(out, f)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">file, err := os.Open(attachment.Path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取文件头信息</span></span><br><span class="line">fileHeader := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">512</span>)</span><br><span class="line">file.Read(fileHeader)</span><br><span class="line">fileContentType := http.DetectContentType(fileHeader)</span><br><span class="line">fileStat, _ := file.Stat()</span><br><span class="line">fileSize := strconv.FormatInt(fileStat.Size(), <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置response header头，gin框架也可以用c.Header("","")</span></span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment; filename="</span>+attachment.Name)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Type"</span>, fileContentType)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Length"</span>, fileSize)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意还原io读取指针</span></span><br><span class="line">file.Seek(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">_, err = io.Copy(c.Writer, file)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="通过默认的net-http服务"><a href="#通过默认的net-http服务" class="headerlink" title="通过默认的net/http服务"></a>通过默认的net/http服务</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	http.HandleFunc(<span class="string">"/"</span>, HelloWorld)</span><br><span class="line">	errpr := http.ListenAndServe(<span class="string">":8080"</span>, <span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">if</span> errpr != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"listen falded"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于http.ResponseWriter只是一个接口,所以不需要引用传值</span></span><br><span class="line"><span class="comment">// 而http.Request是一个数据(结构类型),所以需要引用传值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">HelloWorld</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	io.WriteString(w, <span class="string">"hello world"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="重写ServeHTTP方法"><a href="#重写ServeHTTP方法" class="headerlink" title="重写ServeHTTP方法"></a>重写ServeHTTP方法</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyHandler <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	mux := http.NewServeMux()</span><br><span class="line">	mux.Handle(<span class="string">"/"</span>, &amp;MyHandler&#123;&#125;)</span><br><span class="line">	mux.HandleFunc(<span class="string">"/home"</span>, Home)</span><br><span class="line">	err := http.ListenAndServe(<span class="string">":8080"</span>, mux)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"listen falded"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *MyHandler)</span><span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	io.WriteString(w, <span class="string">"hello world "</span> + r.URL.Path)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Home</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	io.WriteString(w, <span class="string">"home "</span> + r.URL.Path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="重写http-Server"><a href="#重写http-Server" class="headerlink" title="重写http.Server"></a>重写http.Server</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义全局变量</span></span><br><span class="line"><span class="keyword">var</span> mux <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="function"><span class="keyword">func</span><span class="params">(http.ResponseWriter, *http.Request)</span></span></span><br><span class="line"><span class="function"><span class="title">type</span> <span class="title">MyHandler</span> <span class="title">struct</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	server := http.Server&#123;</span><br><span class="line">		Addr: <span class="string">":8080"</span>,</span><br><span class="line">		<span class="comment">// 定义server的默认handler</span></span><br><span class="line">		Handler: &amp;MyHandler&#123;&#125;,</span><br><span class="line">		ReadTimeout: <span class="number">2</span> * time.Second,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 对全局变量赋值</span></span><br><span class="line">	mux = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="function"><span class="keyword">func</span><span class="params">(http.ResponseWriter, *http.Request)</span>)</span></span><br><span class="line"><span class="function">	<span class="title">mux</span>["/<span class="title">home</span>"] = <span class="title">Home</span></span></span><br><span class="line"><span class="function">	<span class="title">mux</span>["/<span class="title">user</span>"] = <span class="title">User</span></span></span><br><span class="line"><span class="function">	<span class="title">err</span> := <span class="title">server</span>.<span class="title">ListenAndServe</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	<span class="title">if</span> <span class="title">err</span> != <span class="title">nil</span></span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"listen faild"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// handler默认执行的方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(*MyHandler)</span><span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 根据map转发路由</span></span><br><span class="line">	<span class="keyword">if</span> v, ok := mux[r.URL.String()]; ok &#123;</span><br><span class="line">		v(w, r)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	io.WriteString(w, <span class="string">"hello world "</span> + r.URL.Path)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Home</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	io.WriteString(w, <span class="string">"home "</span> + r.URL.Path)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">User</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	io.WriteString(w, <span class="string">"user "</span> + r.URL.Path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="原生中间件编写"><a href="#原生中间件编写" class="headerlink" title="原生中间件编写"></a>原生中间件编写</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> SingleMiddle <span class="keyword">struct</span> &#123;</span><br><span class="line">	handler   http.Handler</span><br><span class="line">	allowHost []<span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> myHandler <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> allowHosts []<span class="keyword">string</span></span><br><span class="line">	allowHosts = <span class="built_in">append</span>(allowHosts, <span class="string">"localhost:8080"</span>)</span><br><span class="line">	MyHandler := &amp;myHandler&#123;&#125;</span><br><span class="line">	singleHost := NewSingle(MyHandler, allowHosts)</span><br><span class="line">	http.ListenAndServe(<span class="string">":8080"</span>, singleHost)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// middleware</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewSingle</span><span class="params">(handler http.Handler, allowHost []<span class="keyword">string</span>)</span> <span class="params">(*SingleMiddle)</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;SingleMiddle&#123;handler, allowHost&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// middleware</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *SingleMiddle)</span> <span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	host := r.Host</span><br><span class="line">	isIn := <span class="literal">false</span></span><br><span class="line">	fmt.Println(s.allowHost)</span><br><span class="line">	fmt.Println(host)</span><br><span class="line">	<span class="keyword">for</span> _, allowH := <span class="keyword">range</span> s.allowHost &#123;</span><br><span class="line">		<span class="keyword">if</span> allowH == host &#123;</span><br><span class="line">			isIn = <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> isIn &#123;</span><br><span class="line">		s.handler.ServeHTTP(w, r)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		w.WriteHeader(<span class="number">403</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// custom handler</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *myHandler)</span> <span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	w.WriteHeader(<span class="number">200</span>)</span><br><span class="line">	w.Write([]<span class="keyword">byte</span>(<span class="string">"helle golang"</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -393,6 +398,8 @@
           
             <a href="/tags/go/" rel="tag"># go</a>
           
+            <a href="/tags/http/" rel="tag"># http</a>
+          
         </div>
       
 
@@ -404,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/docker/docker-compose/" rel="next" title="docker-compose">
-                <i class="fa fa-chevron-left"></i> docker-compose
+              <a href="/digest/文摘/" rel="next" title="文摘">
+                <i class="fa fa-chevron-left"></i> 文摘
               </a>
             
           </div>
@@ -414,8 +421,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/golang/正则表达式/" rel="prev" title="正则表达式">
-                正则表达式 <i class="fa fa-chevron-right"></i>
+              <a href="/mysql/max_allowed_packet/" rel="prev" title="MySQL max_allowed_packet设置">
+                MySQL max_allowed_packet设置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -506,7 +513,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -546,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实现随机数"><span class="nav-number">1.</span> <span class="nav-text">实现随机数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MD5加密"><span class="nav-number">2.</span> <span class="nav-text">MD5加密</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传"><span class="nav-number">1.</span> <span class="nav-text">上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">2.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过默认的net-http服务"><span class="nav-number">3.</span> <span class="nav-text">通过默认的net/http服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重写ServeHTTP方法"><span class="nav-number">4.</span> <span class="nav-text">重写ServeHTTP方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重写http-Server"><span class="nav-number">5.</span> <span class="nav-text">重写http.Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原生中间件编写"><span class="nav-number">6.</span> <span class="nav-text">原生中间件编写</span></a></li></ol></div>
             
 
           </div>
@@ -566,7 +573,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

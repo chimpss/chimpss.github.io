@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档  连接123456789101112131415161718192021222324252627282930313233package databaseimport (	&quot;full_text_search/config&quot;	&quot;gopkg.in/mgo.v2&quot;)var Session *mgo.Session//">
+<meta name="description" content="mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档 连接123456789101112131415161718192021222324252627282930313233package databaseimport (	&quot;full_text_search/config&quot;	&quot;gopkg.in/mgo.v2&quot;)var Session *mgo.Session// 简">
 <meta name="keywords" content="go,mongo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mgo">
 <meta property="og:url" content="http://chimpss.github.io/golang/mgo/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档  连接123456789101112131415161718192021222324252627282930313233package databaseimport (	&quot;full_text_search/config&quot;	&quot;gopkg.in/mgo.v2&quot;)var Session *mgo.Session//">
+<meta property="og:description" content="mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档 连接123456789101112131415161718192021222324252627282930313233package databaseimport (	&quot;full_text_search/config&quot;	&quot;gopkg.in/mgo.v2&quot;)var Session *mgo.Session// 简">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-07T07:50:09.841Z">
+<meta property="og:updated_time" content="2019-01-02T04:21:48.032Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mgo">
-<meta name="twitter:description" content="mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档  连接123456789101112131415161718192021222324252627282930313233package databaseimport (	&quot;full_text_search/config&quot;	&quot;gopkg.in/mgo.v2&quot;)var Session *mgo.Session//">
+<meta name="twitter:description" content="mongodb客户端的golang实现mgo很有可能作为golang的标准库mgo文档 连接123456789101112131415161718192021222324252627282930313233package databaseimport (	&quot;full_text_search/config&quot;	&quot;gopkg.in/mgo.v2&quot;)var Session *mgo.Session// 简">
 
 
 
@@ -373,9 +373,7 @@
       
 
       
-        <blockquote>
-<p>mongodb客户端的golang实现<br>mgo很有可能作为golang的标准库<br><a href="https://godoc.org/gopkg.in/mgo.v2" target="_blank" rel="noopener">mgo文档</a></p>
-</blockquote>
+        <p>mongodb客户端的golang实现<br>mgo很有可能作为golang的标准库<br><a href="https://godoc.org/gopkg.in/mgo.v2" target="_blank" rel="noopener">mgo文档</a></p>
 <h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> database</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"full_text_search/config"</span></span><br><span class="line">	<span class="string">"gopkg.in/mgo.v2"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Session *mgo.Session</span><br><span class="line"></span><br><span class="line"><span class="comment">// 简单实现单例，只创建一个session</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> Session == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> err error</span><br><span class="line">		Session, err = mgo.Dial(config.MongoDB.Host + <span class="string">":"</span> + config.MongoDB.Port)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="built_in">panic</span>(<span class="string">"连接mongodb失败，原因："</span> + err.Error())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Collection</span><span class="params">(collectionName <span class="keyword">string</span>, f <span class="keyword">func</span>(collection *mgo.Collection)</span>) <span class="params">(err error)</span></span> &#123;</span><br><span class="line">    <span class="comment">// mgo内部实现了连接池，通过clone获取连接</span></span><br><span class="line">	session := Session.Clone()</span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		session.Close()</span><br><span class="line">		<span class="keyword">if</span> err := <span class="built_in">recover</span>(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line">	collection := session.DB(config.MongoDB.Database).C(collectionName)</span><br><span class="line">	f(collection)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Session, err = mgo.Dial(config.MongoDB.Host + <span class="string">":"</span> + config.MongoDB.Port)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="built_in">panic</span>(<span class="string">"连接mongodb失败，原因："</span> + err.Error())</span><br><span class="line">&#125;</span><br><span class="line">err = Session.DB(<span class="string">"admin"</span>).Login(config.MongoDB.User, config.MongoDB.Password)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</span><br><span class="line">	<span class="built_in">panic</span>(<span class="string">"登录mongodb失败，原因："</span> + err.Error())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h1><p>上述是建立连接，并执行操作</p>
@@ -425,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/golang/反射/" rel="next" title="反射">
-                <i class="fa fa-chevron-left"></i> 反射
+              <a href="/linux/pdf处理/" rel="next" title="pdf处理">
+                <i class="fa fa-chevron-left"></i> pdf处理
               </a>
             
           </div>
@@ -435,8 +433,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/digest/论成熟的男银/" rel="prev" title="论成熟的男银">
-                论成熟的男银 <i class="fa fa-chevron-right"></i>
+              <a href="/docker/常用命令/" rel="prev" title="常用命令">
+                常用命令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -527,7 +525,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -587,7 +585,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="go,http," />
+  <meta name="keywords" content="redis," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="上传12345678910111213141516171819202122232425262728// 获取form文件file, err := c.FormFile(&quot;attachment&quot;)if err != nil &amp;#123;	return nil, GenError(err)&amp;#125;now := time.Now()// 检查目录dir := fmt.Sprintf(&quot;upload/">
-<meta name="keywords" content="go,http">
+<meta name="description" content="批量删除key1redis-cli -h $redistest4 -a Hortor2014 -n 7  keys &amp;quot;cage:*10005:nxf*&amp;quot; | xargs redis-cli -h $redistest4 -a Hortor2014 -n 7 del">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP 上传 下载">
-<meta property="og:url" content="http://chimpss.github.io/golang/http上传下载/index.html">
+<meta property="og:title" content="redis">
+<meta property="og:url" content="http://chimpss.github.io/redis/redis/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="上传12345678910111213141516171819202122232425262728// 获取form文件file, err := c.FormFile(&quot;attachment&quot;)if err != nil &amp;#123;	return nil, GenError(err)&amp;#125;now := time.Now()// 检查目录dir := fmt.Sprintf(&quot;upload/">
+<meta property="og:description" content="批量删除key1redis-cli -h $redistest4 -a Hortor2014 -n 7  keys &amp;quot;cage:*10005:nxf*&amp;quot; | xargs redis-cli -h $redistest4 -a Hortor2014 -n 7 del">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-07T17:40:02.010Z">
+<meta property="og:updated_time" content="2019-01-02T04:26:04.100Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTTP 上传 下载">
-<meta name="twitter:description" content="上传12345678910111213141516171819202122232425262728// 获取form文件file, err := c.FormFile(&quot;attachment&quot;)if err != nil &amp;#123;	return nil, GenError(err)&amp;#125;now := time.Now()// 检查目录dir := fmt.Sprintf(&quot;upload/">
+<meta name="twitter:title" content="redis">
+<meta name="twitter:description" content="批量删除key1redis-cli -h $redistest4 -a Hortor2014 -n 7  keys &amp;quot;cage:*10005:nxf*&amp;quot; | xargs redis-cli -h $redistest4 -a Hortor2014 -n 7 del">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://chimpss.github.io/golang/http上传下载/"/>
+  <link rel="canonical" href="http://chimpss.github.io/redis/redis/"/>
 
 
 
@@ -134,7 +134,7 @@
 <meta name="theme-color" content="#222">
 <meta name="google-site-verification" content="IihE-r8G9GMRO1MueIF67KayEkW375z-kdkot_6ncEE" />
 <meta name="baidu-site-verification" content="e0YKAsKxTN" />
-  <title>HTTP 上传 下载 | 秀才</title>
+  <title>redis | 秀才</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/http上传下载/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/redis/redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HTTP 上传 下载</h1>
+          <h1 class="post-title" itemprop="name headline">redis</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T01:34:25+08:00">
-                2018-10-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-30T11:21:42+08:00">
+                2018-11-30
               </time>
             
 
@@ -342,7 +342,7 @@
 
           
           
-             <span id="/golang/http上传下载/" class="leancloud_visitors" data-flag-title="HTTP 上传 下载">
+             <span id="/redis/redis/" class="leancloud_visitors" data-flag-title="redis">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,8 +373,7 @@
       
 
       
-        <h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取form文件</span></span><br><span class="line">file, err := c.FormFile(<span class="string">"attachment"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">now := time.Now()</span><br><span class="line"><span class="comment">// 检查目录</span></span><br><span class="line">dir := fmt.Sprintf(<span class="string">"upload/%d%d"</span>, now.Year(), now.Month())</span><br><span class="line"><span class="keyword">if</span> !utils.Exists(dir) &#123;</span><br><span class="line">	err = os.MkdirAll(dir, os.ModePerm)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建文件</span></span><br><span class="line">path := fmt.Sprintf(<span class="string">"%s/%d%s"</span>, dir, now.Unix()%(<span class="number">3600</span>*<span class="number">24</span>*<span class="number">30</span>), file.Filename)</span><br><span class="line">out, err := os.Create(path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">f, err := file.Open()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">_, err = io.Copy(out, f)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">file, err := os.Open(attachment.Path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取文件头信息</span></span><br><span class="line">fileHeader := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">512</span>)</span><br><span class="line">file.Read(fileHeader)</span><br><span class="line">fileContentType := http.DetectContentType(fileHeader)</span><br><span class="line">fileStat, _ := file.Stat()</span><br><span class="line">fileSize := strconv.FormatInt(fileStat.Size(), <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置response header头，gin框架也可以用c.Header("","")</span></span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment; filename="</span>+attachment.Name)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Type"</span>, fileContentType)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Length"</span>, fileSize)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意还原io读取指针</span></span><br><span class="line">file.Seek(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">_, err = io.Copy(c.Writer, file)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="批量删除key"><a href="#批量删除key" class="headerlink" title="批量删除key"></a>批量删除key</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h $redistest4 -a Hortor2014 -n 7  keys &quot;cage:*10005:nxf*&quot; | xargs redis-cli -h $redistest4 -a Hortor2014 -n 7 del</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -391,9 +390,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/go/" rel="tag"># go</a>
-          
-            <a href="/tags/http/" rel="tag"># http</a>
+            <a href="/tags/redis/" rel="tag"># redis</a>
           
         </div>
       
@@ -406,8 +403,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/digest/文摘/" rel="next" title="文摘">
-                <i class="fa fa-chevron-left"></i> 文摘
+              <a href="/golang/encoding/" rel="next" title="encoding">
+                <i class="fa fa-chevron-left"></i> encoding
               </a>
             
           </div>
@@ -416,8 +413,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/mysql/max_allowed_packet/" rel="prev" title="MySQL max_allowed_packet设置">
-                MySQL max_allowed_packet设置 <i class="fa fa-chevron-right"></i>
+              <a href="/digest/大话西游-大圣/" rel="prev" title="紧箍咒">
+                紧箍咒 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -508,7 +505,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -548,7 +545,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#上传"><span class="nav-number">1.</span> <span class="nav-text">上传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">2.</span> <span class="nav-text">下载</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#批量删除key"><span class="nav-number">1.</span> <span class="nav-text">批量删除key</span></a></li></ol></div>
             
 
           </div>
@@ -568,7 +565,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

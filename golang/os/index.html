@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="go,mail," />
+  <meta name="keywords" content="go,os," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="邮件的一般格式123456From:chimps@example.comTo:to@163.comSubject:TEST EMAILContent-Type: text/html; chatset=UTF-8&amp;lt;h1&amp;gt;hello go&amp;lt;/h1&amp;gt; 使用阿里云企业邮注意事项如果你的域名为example.com在阿里的域名那里都配好之后，发邮件的配置应该如下：1234HOST:">
-<meta name="keywords" content="go,mail">
+<meta name="description" content="遍历目录使用ioutil标准包123456789101112func ListDir(filePath string) (files []string, err error) &amp;#123;	paths, err := ioutil.ReadDir(filePath)	if err != nil &amp;#123;		return	&amp;#125;	for _, f := range paths &amp;#123;">
+<meta name="keywords" content="go,os">
 <meta property="og:type" content="article">
-<meta property="og:title" content="发邮件">
-<meta property="og:url" content="http://chimpss.github.io/golang/发邮件/index.html">
+<meta property="og:title" content="os">
+<meta property="og:url" content="http://chimpss.github.io/golang/os/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="邮件的一般格式123456From:chimps@example.comTo:to@163.comSubject:TEST EMAILContent-Type: text/html; chatset=UTF-8&amp;lt;h1&amp;gt;hello go&amp;lt;/h1&amp;gt; 使用阿里云企业邮注意事项如果你的域名为example.com在阿里的域名那里都配好之后，发邮件的配置应该如下：1234HOST:">
+<meta property="og:description" content="遍历目录使用ioutil标准包123456789101112func ListDir(filePath string) (files []string, err error) &amp;#123;	paths, err := ioutil.ReadDir(filePath)	if err != nil &amp;#123;		return	&amp;#125;	for _, f := range paths &amp;#123;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-07T07:50:20.590Z">
+<meta property="og:updated_time" content="2019-01-02T04:22:16.416Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="发邮件">
-<meta name="twitter:description" content="邮件的一般格式123456From:chimps@example.comTo:to@163.comSubject:TEST EMAILContent-Type: text/html; chatset=UTF-8&amp;lt;h1&amp;gt;hello go&amp;lt;/h1&amp;gt; 使用阿里云企业邮注意事项如果你的域名为example.com在阿里的域名那里都配好之后，发邮件的配置应该如下：1234HOST:">
+<meta name="twitter:title" content="os">
+<meta name="twitter:description" content="遍历目录使用ioutil标准包123456789101112func ListDir(filePath string) (files []string, err error) &amp;#123;	paths, err := ioutil.ReadDir(filePath)	if err != nil &amp;#123;		return	&amp;#125;	for _, f := range paths &amp;#123;">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://chimpss.github.io/golang/发邮件/"/>
+  <link rel="canonical" href="http://chimpss.github.io/golang/os/"/>
 
 
 
@@ -134,7 +134,7 @@
 <meta name="theme-color" content="#222">
 <meta name="google-site-verification" content="IihE-r8G9GMRO1MueIF67KayEkW375z-kdkot_6ncEE" />
 <meta name="baidu-site-verification" content="e0YKAsKxTN" />
-  <title>发邮件 | 秀才</title>
+  <title>os | 秀才</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/发邮件/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/os/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">发邮件</h1>
+          <h1 class="post-title" itemprop="name headline">os</h1>
         
 
         <div class="post-meta">
@@ -342,7 +342,7 @@
 
           
           
-             <span id="/golang/发邮件/" class="leancloud_visitors" data-flag-title="发邮件">
+             <span id="/golang/os/" class="leancloud_visitors" data-flag-title="os">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,10 +373,8 @@
       
 
       
-        <h1 id="邮件的一般格式"><a href="#邮件的一般格式" class="headerlink" title="邮件的一般格式"></a>邮件的一般格式</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">From:chimps@example.com</span><br><span class="line">To:to@163.com</span><br><span class="line">Subject:TEST EMAIL</span><br><span class="line">Content-Type: text/html; chatset=UTF-8</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello go<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h1 id="使用阿里云企业邮注意事项"><a href="#使用阿里云企业邮注意事项" class="headerlink" title="使用阿里云企业邮注意事项"></a>使用阿里云企业邮注意事项</h1><p>如果你的域名为example.com<br>在阿里的域名那里都配好之后，发邮件的配置应该如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HOST: smtp.example.com</span><br><span class="line">HOST_ADDR: smtp.example.com:25</span><br><span class="line">USER: 该企业邮箱所创建的子邮箱</span><br><span class="line">PASSWORD：user的password</span><br></pre></td></tr></table></figure></p>
-<h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1><p>主要是使用net/smtp包的<code>SendMail</code>方法<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net/smtp"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	HOST     = <span class="string">"smtp.example.com"</span></span><br><span class="line">	ADDR     = <span class="string">"smtp.example.com:25"</span></span><br><span class="line">	USER     = <span class="string">"chimps@example.com"</span></span><br><span class="line">	PASSWORD = <span class="string">"xxx"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	to := <span class="string">"to1@163.com;to1@163.com"</span></span><br><span class="line">	subject := <span class="string">"TEST EMAIL"</span></span><br><span class="line">	email_type := <span class="string">"html"</span></span><br><span class="line">	message := <span class="string">"&lt;h1&gt;hello go&lt;/h1&gt;"</span></span><br><span class="line">	<span class="keyword">if</span> err := SendEmail(to, subject, email_type, message); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"发送失败, reason:"</span> + err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SendEmail</span><span class="params">(to <span class="keyword">string</span>, subject <span class="keyword">string</span>, email_type <span class="keyword">string</span>, message <span class="keyword">string</span>)</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> content_type <span class="keyword">string</span></span><br><span class="line">	<span class="keyword">switch</span> email_type &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"html"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/html; chatset=UTF-8"</span></span><br><span class="line">	<span class="keyword">case</span> <span class="string">"text"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/plain; chatset=UTF-8"</span></span><br><span class="line">	&#125;</span><br><span class="line">	auth := smtp.PlainAuth(<span class="string">""</span>, USER, PASSWORD, HOST)</span><br><span class="line">	send_to := strings.Split(to, <span class="string">";"</span>)</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> send_to &#123;</span><br><span class="line">		<span class="keyword">var</span> msg []<span class="keyword">string</span></span><br><span class="line">		msg = <span class="built_in">append</span>(msg, <span class="string">"From:"</span>+USER, <span class="string">"To:"</span>+v, <span class="string">"Subject:"</span>+subject, content_type, <span class="string">"\r\n"</span>+message)</span><br><span class="line">		msg_string := strings.Join(msg, <span class="string">"\r\n"</span>)</span><br><span class="line">		fmt.Println(msg_string)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> err = smtp.SendMail(ADDR, auth, USER, []<span class="keyword">string</span>&#123;v&#125;, []<span class="keyword">byte</span>(msg_string)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send fail , reason: "</span> + err.Error())</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send ok :"</span> + v)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>一般情况下，发邮件时间比较耗时的事情，一般走异步处理</p>
+        <h3 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h3><p>使用ioutil标准包<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ListDir</span><span class="params">(filePath <span class="keyword">string</span>)</span> <span class="params">(files []<span class="keyword">string</span>, err error)</span></span> &#123;</span><br><span class="line">	paths, err := ioutil.ReadDir(filePath)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> paths &#123;</span><br><span class="line">		<span class="keyword">if</span> !f.IsDir() &#123;</span><br><span class="line">			files = <span class="built_in">append</span>(files, f.Name())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="按行读取文件"><a href="#按行读取文件" class="headerlink" title="按行读取文件"></a>按行读取文件</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	f, err := os.Open(<span class="string">"bugIds.txt"</span>)</span><br><span class="line">	utils.Check(<span class="string">"os.Open"</span>, err)</span><br><span class="line">	bf := bufio.NewReader(f)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		line, _, e := bf.ReadLine()</span><br><span class="line">		<span class="keyword">if</span> e == io.EOF &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		fix(<span class="keyword">string</span>(line))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -396,7 +394,7 @@
           
             <a href="/tags/go/" rel="tag"># go</a>
           
-            <a href="/tags/mail/" rel="tag"># mail</a>
+            <a href="/tags/os/" rel="tag"># os</a>
           
         </div>
       
@@ -409,8 +407,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/golang/数组与切片/" rel="next" title="数组与切片">
-                <i class="fa fa-chevron-left"></i> 数组与切片
+              <a href="/golang/正则表达式/" rel="next" title="正则表达式">
+                <i class="fa fa-chevron-left"></i> 正则表达式
               </a>
             
           </div>
@@ -419,8 +417,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/golang/读取配置文件/" rel="prev" title="读取配置文件">
-                读取配置文件 <i class="fa fa-chevron-right"></i>
+              <a href="/golang/builtin/" rel="prev" title="builtin">
+                builtin <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -511,7 +509,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -551,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#邮件的一般格式"><span class="nav-number">1.</span> <span class="nav-text">邮件的一般格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用阿里云企业邮注意事项"><span class="nav-number">2.</span> <span class="nav-text">使用阿里云企业邮注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码："><span class="nav-number">3.</span> <span class="nav-text">代码：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#改进"><span class="nav-number">4.</span> <span class="nav-text">改进</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历目录"><span class="nav-number">1.</span> <span class="nav-text">遍历目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按行读取文件"><span class="nav-number">2.</span> <span class="nav-text">按行读取文件</span></a></li></ol></div>
             
 
           </div>
@@ -571,7 +569,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

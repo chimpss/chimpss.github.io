@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="go,mysql," />
+  <meta name="keywords" content="go - mysql - xorm," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="最近在使用xorm存储冷数据时，经常会遇到这种报错：packets.go:36: unexpected EOF (Invalid Connection) 一顿google，发现原来是这样的: 这个属于github.com/go-sql-driver/mysql连接池中的连接释放问题:12DB.SetConnMaxLifetime(time.Second)使用设置连接最大复用时间，3~10秒即可。o">
-<meta name="keywords" content="go,mysql">
+<meta name="description" content="packets.go:36: unexpected EOF (Invalid Connection)github.com/go-sql-driver/mysql 连接池中的连接释放问题 使用DB.SetConnMaxLifetime(time.Second)设置连接最大复用时间，3~10秒即可。orm基本上都有相关的设置。">
+<meta name="keywords" content="go - mysql - xorm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="xorm">
 <meta property="og:url" content="http://chimpss.github.io/golang/xorm/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="最近在使用xorm存储冷数据时，经常会遇到这种报错：packets.go:36: unexpected EOF (Invalid Connection) 一顿google，发现原来是这样的: 这个属于github.com/go-sql-driver/mysql连接池中的连接释放问题:12DB.SetConnMaxLifetime(time.Second)使用设置连接最大复用时间，3~10秒即可。o">
+<meta property="og:description" content="packets.go:36: unexpected EOF (Invalid Connection)github.com/go-sql-driver/mysql 连接池中的连接释放问题 使用DB.SetConnMaxLifetime(time.Second)设置连接最大复用时间，3~10秒即可。orm基本上都有相关的设置。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-29T15:55:03.584Z">
+<meta property="og:updated_time" content="2019-01-02T04:24:18.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="xorm">
-<meta name="twitter:description" content="最近在使用xorm存储冷数据时，经常会遇到这种报错：packets.go:36: unexpected EOF (Invalid Connection) 一顿google，发现原来是这样的: 这个属于github.com/go-sql-driver/mysql连接池中的连接释放问题:12DB.SetConnMaxLifetime(time.Second)使用设置连接最大复用时间，3~10秒即可。o">
+<meta name="twitter:description" content="packets.go:36: unexpected EOF (Invalid Connection)github.com/go-sql-driver/mysql 连接池中的连接释放问题 使用DB.SetConnMaxLifetime(time.Second)设置连接最大复用时间，3~10秒即可。orm基本上都有相关的设置。">
 
 
 
@@ -324,7 +324,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-29T23:49:30+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-29T23:47:40+08:00">
                 2018-12-29
               </time>
             
@@ -373,12 +373,8 @@
       
 
       
-        <p>最近在使用xorm存储冷数据时，经常会遇到这种报错：<code>packets.go:36: unexpected EOF (Invalid Connection)</code></p>
-<p>一顿google，发现原来是这样的:</p>
-<p>这个属于<code>github.com/go-sql-driver/mysql</code>连接池中的连接释放问题:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DB.SetConnMaxLifetime(time.Second)</span><br><span class="line">使用设置连接最大复用时间，<span class="number">3</span>~<span class="number">10</span>秒即可。orm基本上都有相关的设置。</span><br></pre></td></tr></table></figure></p>
-<p><code>xorm</code>的话:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">X, err = xorm.NewEngine(env.GetString(env.XOrmDriverName), env.GetString(env.XOrmDataSourceName))</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">X.SetMaxOpenConns(<span class="number">1000</span>)</span><br><span class="line">X.SetMaxIdleConns(<span class="number">30</span>)</span><br><span class="line">X.SetConnMaxLifetime(time.Second)</span><br></pre></td></tr></table></figure></p>
-<p>当然，还有一种解决方式：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.SetMaxIdleConns(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
-<p>不过这种方式有些取巧，没有使用缓存连接，量大了很容易出问题</p>
+        <h2 id="packets-go-36-unexpected-EOF-Invalid-Connection"><a href="#packets-go-36-unexpected-EOF-Invalid-Connection" class="headerlink" title="packets.go:36: unexpected EOF (Invalid Connection)"></a>packets.go:36: unexpected EOF (Invalid Connection)</h2><p>github.com/go-sql-driver/mysql 连接池中的连接释放问题</p>
+<p>使用DB.SetConnMaxLifetime(time.Second)设置连接最大复用时间，3~10秒即可。orm基本上都有相关的设置。</p>
 
       
     </div>
@@ -396,9 +392,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/go/" rel="tag"># go</a>
-          
-            <a href="/tags/mysql/" rel="tag"># mysql</a>
+            <a href="/tags/go-mysql-xorm/" rel="tag"># go - mysql - xorm</a>
           
         </div>
       
@@ -471,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -500,7 +503,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -531,6 +534,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#packets-go-36-unexpected-EOF-Invalid-Connection"><span class="nav-number">1.</span> <span class="nav-text">packets.go:36: unexpected EOF (Invalid Connection)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -544,7 +563,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

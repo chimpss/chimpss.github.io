@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="go," />
+  <meta name="keywords" content="go,smtp," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content=":=如下函数：12345678910111213141516171819202122232425262728func GetAll(sql string) (records []interface&amp;#123;&amp;#125;, err error) &amp;#123;	query, err := DB.Query(sql)	if err != nil &amp;#123;		return	&amp;#125;	column">
-<meta name="keywords" content="go">
+<meta name="description" content="邮件的一般格式123456From:chimps@example.comTo:to@163.comSubject:TEST EMAILContent-Type: text/html; chatset=UTF-8&amp;lt;h1&amp;gt;hello go&amp;lt;/h1&amp;gt; 使用阿里云企业邮注意事项如果你的域名为example.com在阿里的域名那里都配好之后，发邮件的配置应该如下：1234HOST:">
+<meta name="keywords" content="go,smtp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小坑">
-<meta property="og:url" content="http://chimpss.github.io/golang/小坑/index.html">
+<meta property="og:title" content="net-smtp">
+<meta property="og:url" content="http://chimpss.github.io/golang/net-smtp/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content=":=如下函数：12345678910111213141516171819202122232425262728func GetAll(sql string) (records []interface&amp;#123;&amp;#125;, err error) &amp;#123;	query, err := DB.Query(sql)	if err != nil &amp;#123;		return	&amp;#125;	column">
+<meta property="og:description" content="邮件的一般格式123456From:chimps@example.comTo:to@163.comSubject:TEST EMAILContent-Type: text/html; chatset=UTF-8&amp;lt;h1&amp;gt;hello go&amp;lt;/h1&amp;gt; 使用阿里云企业邮注意事项如果你的域名为example.com在阿里的域名那里都配好之后，发邮件的配置应该如下：1234HOST:">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-07T07:50:26.519Z">
+<meta property="og:updated_time" content="2019-01-02T04:21:03.577Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小坑">
-<meta name="twitter:description" content=":=如下函数：12345678910111213141516171819202122232425262728func GetAll(sql string) (records []interface&amp;#123;&amp;#125;, err error) &amp;#123;	query, err := DB.Query(sql)	if err != nil &amp;#123;		return	&amp;#125;	column">
+<meta name="twitter:title" content="net-smtp">
+<meta name="twitter:description" content="邮件的一般格式123456From:chimps@example.comTo:to@163.comSubject:TEST EMAILContent-Type: text/html; chatset=UTF-8&amp;lt;h1&amp;gt;hello go&amp;lt;/h1&amp;gt; 使用阿里云企业邮注意事项如果你的域名为example.com在阿里的域名那里都配好之后，发邮件的配置应该如下：1234HOST:">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://chimpss.github.io/golang/小坑/"/>
+  <link rel="canonical" href="http://chimpss.github.io/golang/net-smtp/"/>
 
 
 
@@ -134,7 +134,7 @@
 <meta name="theme-color" content="#222">
 <meta name="google-site-verification" content="IihE-r8G9GMRO1MueIF67KayEkW375z-kdkot_6ncEE" />
 <meta name="baidu-site-verification" content="e0YKAsKxTN" />
-  <title>小坑 | 秀才</title>
+  <title>net-smtp | 秀才</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/小坑/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/net-smtp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">小坑</h1>
+          <h1 class="post-title" itemprop="name headline">net-smtp</h1>
         
 
         <div class="post-meta">
@@ -342,7 +342,7 @@
 
           
           
-             <span id="/golang/小坑/" class="leancloud_visitors" data-flag-title="小坑">
+             <span id="/golang/net-smtp/" class="leancloud_visitors" data-flag-title="net-smtp">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,16 +373,10 @@
       
 
       
-        <h1 id=""><a href="#" class="headerlink" title=":="></a><code>:=</code></h1><p>如下函数：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetAll</span><span class="params">(sql <span class="keyword">string</span>)</span> <span class="params">(records []<span class="keyword">interface</span>&#123;&#125;, err error)</span></span> &#123;</span><br><span class="line">	query, err := DB.Query(sql)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	column, _ := query.Columns()</span><br><span class="line">	scans := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="built_in">len</span>(column))</span><br><span class="line">	values := <span class="built_in">make</span>([]<span class="keyword">interface</span>&#123;&#125;, <span class="built_in">len</span>(column))</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> values &#123;</span><br><span class="line">		scans[i] = &amp;values[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> query.Next() &#123;</span><br><span class="line">	    <span class="comment">// 如果此处写成err := query.Scan(scans...)。</span></span><br><span class="line">	    <span class="comment">// 那么在此作用域内，err 和 外层作用域不同，return会报错</span></span><br><span class="line">		err = query.Scan(scans...)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		record := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line">		<span class="keyword">for</span> i, col := <span class="keyword">range</span> values &#123;</span><br><span class="line">			<span class="keyword">if</span> col != <span class="literal">nil</span> &#123;</span><br><span class="line">				record[column[i]] = <span class="keyword">string</span>(col.([]<span class="keyword">byte</span>))</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		records = <span class="built_in">append</span>(records, record)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="mysql-NULL-值"><a href="#mysql-NULL-值" class="headerlink" title="mysql NULL 值"></a>mysql NULL 值</h1><p>如果mysql的某个值为null，go查询数据库时则会报错：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql: Scan error on column index <span class="number">2</span>: unsupported Scan, storing driver.Value <span class="keyword">type</span> &lt;<span class="literal">nil</span>&gt; into <span class="keyword">type</span> *<span class="keyword">string</span></span><br></pre></td></tr></table></figure></p>
-<p>解决办法：</p>
-<ul>
-<li><p>对于可能为NULL的字段读取，go的sql模块提供了一个sql.NullString这样的东东来解析可能为NULL的字符串，对于浮点型或者整形也有类似的数据类型。很蛋疼的样子，不过可以解决问题，下面是遵照这种方案进行的修改。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">rows.Next() &#123;</span><br><span class="line">  <span class="keyword">var</span> id <span class="keyword">int</span></span><br><span class="line">  <span class="keyword">var</span> name, info sql.NullString</span><br><span class="line">  <span class="keyword">if</span> err = rows.Scan(&amp;id, &amp;name, &amp;info); err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"获取结果出错："</span> + err.Error())</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  fmt.Println(<span class="string">"id:"</span>, id, <span class="string">"name:"</span>, name.String, <span class="string">"info:"</span>, info.String)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>sql语句本身也能解决这种问题<br>此时也不需要修改go代码，继续保持go的强类型风格</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">id</span>, <span class="keyword">IFNULL</span>(<span class="string">`name`</span>, <span class="string">''</span>) <span class="keyword">AS</span> <span class="string">`name`</span>, <span class="keyword">IFNULL</span>(info, <span class="string">''</span>) <span class="keyword">AS</span> info <span class="keyword">FROM</span> <span class="keyword">user</span></span><br></pre></td></tr></table></figure></li>
-</ul>
+        <h1 id="邮件的一般格式"><a href="#邮件的一般格式" class="headerlink" title="邮件的一般格式"></a>邮件的一般格式</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">From:chimps@example.com</span><br><span class="line">To:to@163.com</span><br><span class="line">Subject:TEST EMAIL</span><br><span class="line">Content-Type: text/html; chatset=UTF-8</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello go<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="使用阿里云企业邮注意事项"><a href="#使用阿里云企业邮注意事项" class="headerlink" title="使用阿里云企业邮注意事项"></a>使用阿里云企业邮注意事项</h1><p>如果你的域名为example.com<br>在阿里的域名那里都配好之后，发邮件的配置应该如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HOST: smtp.example.com</span><br><span class="line">HOST_ADDR: smtp.example.com:25</span><br><span class="line">USER: 该企业邮箱所创建的子邮箱</span><br><span class="line">PASSWORD：user的password</span><br></pre></td></tr></table></figure></p>
+<h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1><p>主要是使用net/smtp包的<code>SendMail</code>方法<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net/smtp"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	HOST     = <span class="string">"smtp.example.com"</span></span><br><span class="line">	ADDR     = <span class="string">"smtp.example.com:25"</span></span><br><span class="line">	USER     = <span class="string">"chimps@example.com"</span></span><br><span class="line">	PASSWORD = <span class="string">"xxx"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	to := <span class="string">"to1@163.com;to1@163.com"</span></span><br><span class="line">	subject := <span class="string">"TEST EMAIL"</span></span><br><span class="line">	email_type := <span class="string">"html"</span></span><br><span class="line">	message := <span class="string">"&lt;h1&gt;hello go&lt;/h1&gt;"</span></span><br><span class="line">	<span class="keyword">if</span> err := SendEmail(to, subject, email_type, message); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"发送失败, reason:"</span> + err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SendEmail</span><span class="params">(to <span class="keyword">string</span>, subject <span class="keyword">string</span>, email_type <span class="keyword">string</span>, message <span class="keyword">string</span>)</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> content_type <span class="keyword">string</span></span><br><span class="line">	<span class="keyword">switch</span> email_type &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"html"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/html; chatset=UTF-8"</span></span><br><span class="line">	<span class="keyword">case</span> <span class="string">"text"</span>:</span><br><span class="line">		content_type = <span class="string">"Content-Type: text/plain; chatset=UTF-8"</span></span><br><span class="line">	&#125;</span><br><span class="line">	auth := smtp.PlainAuth(<span class="string">""</span>, USER, PASSWORD, HOST)</span><br><span class="line">	send_to := strings.Split(to, <span class="string">";"</span>)</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> send_to &#123;</span><br><span class="line">		<span class="keyword">var</span> msg []<span class="keyword">string</span></span><br><span class="line">		msg = <span class="built_in">append</span>(msg, <span class="string">"From:"</span>+USER, <span class="string">"To:"</span>+v, <span class="string">"Subject:"</span>+subject, content_type, <span class="string">"\r\n"</span>+message)</span><br><span class="line">		msg_string := strings.Join(msg, <span class="string">"\r\n"</span>)</span><br><span class="line">		fmt.Println(msg_string)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> err = smtp.SendMail(ADDR, auth, USER, []<span class="keyword">string</span>&#123;v&#125;, []<span class="keyword">byte</span>(msg_string)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send fail , reason: "</span> + err.Error())</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"send ok :"</span> + v)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h1><p>一般情况下，发邮件时间比较耗时的事情，一般走异步处理</p>
 
       
     </div>
@@ -402,6 +396,8 @@
           
             <a href="/tags/go/" rel="tag"># go</a>
           
+            <a href="/tags/smtp/" rel="tag"># smtp</a>
+          
         </div>
       
 
@@ -413,8 +409,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/golang/并发编程/" rel="next" title="并发编程（1）">
-                <i class="fa fa-chevron-left"></i> 并发编程（1）
+              <a href="/golang/数组与切片/" rel="next" title="数组与切片">
+                <i class="fa fa-chevron-left"></i> 数组与切片
               </a>
             
           </div>
@@ -423,8 +419,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/golang/数组与切片/" rel="prev" title="数组与切片">
-                数组与切片 <i class="fa fa-chevron-right"></i>
+              <a href="/golang/reflect/" rel="prev" title="reflect">
+                reflect <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -515,7 +511,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -555,7 +551,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">:=</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql-NULL-值"><span class="nav-number">2.</span> <span class="nav-text">mysql NULL 值</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#邮件的一般格式"><span class="nav-number">1.</span> <span class="nav-text">邮件的一般格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用阿里云企业邮注意事项"><span class="nav-number">2.</span> <span class="nav-text">使用阿里云企业邮注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码："><span class="nav-number">3.</span> <span class="nav-text">代码：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#改进"><span class="nav-number">4.</span> <span class="nav-text">改进</span></a></li></ol></div>
             
 
           </div>
@@ -575,7 +571,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

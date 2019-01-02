@@ -291,6 +291,405 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/eval/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/linux/eval/" itemprop="url">拼接新的变量名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-16T10:56:40+08:00">
+                2018-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/eval/" class="leancloud_visitors" data-flag-title="拼接新的变量名">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##shell变量作为另一个变量名</p>
+<p>使用eval<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">i=1</span><br><span class="line"><span class="built_in">eval</span> <span class="built_in">echo</span> <span class="string">'$'</span>rediscache<span class="variable">$i</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="例1："><a href="#例1：" class="headerlink" title="例1："></a>例1：</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dev@pirate-test:~chimps (master *%) $ i=1                                                                                                              </span><br><span class="line">dev@pirate-test:~chimps (master *%) $ <span class="built_in">eval</span> <span class="built_in">echo</span> <span class="string">'$'</span>rediscache<span class="variable">$i</span></span><br><span class="line">10.100.100.100</span><br></pre></td></tr></table></figure>
+<h2 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">for ((i = 1; i &lt; 60; i++)); do</span><br><span class="line">	redis=$(eval echo &apos;$&apos;rediscache$i)</span><br><span class="line">	count=$(redis-cli -h $redis -a ***** DEL key1)</span><br><span class="line">	echo &#123;idx:,$i,redis:,$redis,count:,$count&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/digest/异类摘录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/digest/异类摘录/" itemprop="url">优秀一点点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-11T22:32:35+08:00">
+                2018-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/digest/异类摘录/" class="leancloud_visitors" data-flag-title="优秀一点点">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在社会学领域，所谓成功就是“优势积累”的结果。</p>
+<p>职业冰球队员一开始只比最初所在球队的队友好一点点，然而这微小的优势带来的机遇，扩大了他和那些队友之间的差距，随后差距与机会交替发挥作用，微小的差距被越拉越大——最终被选中的队员成了真正出众的天才。</p>
+<p>由此可以看出，天才并非一开始就表现出众，一开始他只是比别人优秀那么一点点。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/digest/少有人走的路2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/digest/少有人走的路2/" itemprop="url">承认病态的自我</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-11T22:31:21+08:00">
+                2018-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/digest/少有人走的路2/" class="leancloud_visitors" data-flag-title="承认病态的自我">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>承认病态的自我需要勇气，佛教有一句名言：海无边，回头是岸</p>
+<p>圣人改变的是自己，走的是一条修行的路。通过完善自己，可以感召别人，唤醒别人的良知，给别人指引。</p>
+<p>与之相反，由于大恶之人害怕改变自己，所以便去改变别人，他们不择手段去控制别人，压制别人，甚至毁灭别人的生命。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/digest/少有人走的路1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -850,7 +1249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/http上传下载/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/net-http/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -869,7 +1268,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/golang/http上传下载/" itemprop="url">HTTP 上传 下载</a></h1>
+                <a class="post-title-link" href="/golang/net-http/" itemprop="url">net-http</a></h1>
         
 
         <div class="post-meta">
@@ -899,7 +1298,7 @@
 
           
           
-             <span id="/golang/http上传下载/" class="leancloud_visitors" data-flag-title="HTTP 上传 下载">
+             <span id="/golang/net-http/" class="leancloud_visitors" data-flag-title="net-http">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -932,8 +1331,13 @@
       
         
           
-            <h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取form文件</span></span><br><span class="line">file, err := c.FormFile(<span class="string">"attachment"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">now := time.Now()</span><br><span class="line"><span class="comment">// 检查目录</span></span><br><span class="line">dir := fmt.Sprintf(<span class="string">"upload/%d%d"</span>, now.Year(), now.Month())</span><br><span class="line"><span class="keyword">if</span> !utils.Exists(dir) &#123;</span><br><span class="line">	err = os.MkdirAll(dir, os.ModePerm)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建文件</span></span><br><span class="line">path := fmt.Sprintf(<span class="string">"%s/%d%s"</span>, dir, now.Unix()%(<span class="number">3600</span>*<span class="number">24</span>*<span class="number">30</span>), file.Filename)</span><br><span class="line">out, err := os.Create(path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">f, err := file.Open()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">_, err = io.Copy(out, f)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">file, err := os.Open(attachment.Path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取文件头信息</span></span><br><span class="line">fileHeader := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">512</span>)</span><br><span class="line">file.Read(fileHeader)</span><br><span class="line">fileContentType := http.DetectContentType(fileHeader)</span><br><span class="line">fileStat, _ := file.Stat()</span><br><span class="line">fileSize := strconv.FormatInt(fileStat.Size(), <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置response header头，gin框架也可以用c.Header("","")</span></span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment; filename="</span>+attachment.Name)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Type"</span>, fileContentType)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Length"</span>, fileSize)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意还原io读取指针</span></span><br><span class="line">file.Seek(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">_, err = io.Copy(c.Writer, file)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取form文件</span></span><br><span class="line">file, err := c.FormFile(<span class="string">"attachment"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">now := time.Now()</span><br><span class="line"><span class="comment">// 检查目录</span></span><br><span class="line">dir := fmt.Sprintf(<span class="string">"upload/%d%d"</span>, now.Year(), now.Month())</span><br><span class="line"><span class="keyword">if</span> !utils.Exists(dir) &#123;</span><br><span class="line">	err = os.MkdirAll(dir, os.ModePerm)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建文件</span></span><br><span class="line">path := fmt.Sprintf(<span class="string">"%s/%d%s"</span>, dir, now.Unix()%(<span class="number">3600</span>*<span class="number">24</span>*<span class="number">30</span>), file.Filename)</span><br><span class="line">out, err := os.Create(path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">f, err := file.Open()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br><span class="line">_, err = io.Copy(out, f)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>, GenError(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">file, err := os.Open(attachment.Path)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取文件头信息</span></span><br><span class="line">fileHeader := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">512</span>)</span><br><span class="line">file.Read(fileHeader)</span><br><span class="line">fileContentType := http.DetectContentType(fileHeader)</span><br><span class="line">fileStat, _ := file.Stat()</span><br><span class="line">fileSize := strconv.FormatInt(fileStat.Size(), <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置response header头，gin框架也可以用c.Header("","")</span></span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment; filename="</span>+attachment.Name)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Type"</span>, fileContentType)</span><br><span class="line">c.Writer.Header().Set(<span class="string">"Content-Length"</span>, fileSize)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意还原io读取指针</span></span><br><span class="line">file.Seek(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">_, err = io.Copy(c.Writer, file)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	OnError(c, err)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="通过默认的net-http服务"><a href="#通过默认的net-http服务" class="headerlink" title="通过默认的net/http服务"></a>通过默认的net/http服务</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	http.HandleFunc(<span class="string">"/"</span>, HelloWorld)</span><br><span class="line">	errpr := http.ListenAndServe(<span class="string">":8080"</span>, <span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">if</span> errpr != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"listen falded"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于http.ResponseWriter只是一个接口,所以不需要引用传值</span></span><br><span class="line"><span class="comment">// 而http.Request是一个数据(结构类型),所以需要引用传值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">HelloWorld</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	io.WriteString(w, <span class="string">"hello world"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="重写ServeHTTP方法"><a href="#重写ServeHTTP方法" class="headerlink" title="重写ServeHTTP方法"></a>重写ServeHTTP方法</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyHandler <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	mux := http.NewServeMux()</span><br><span class="line">	mux.Handle(<span class="string">"/"</span>, &amp;MyHandler&#123;&#125;)</span><br><span class="line">	mux.HandleFunc(<span class="string">"/home"</span>, Home)</span><br><span class="line">	err := http.ListenAndServe(<span class="string">":8080"</span>, mux)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"listen falded"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *MyHandler)</span><span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	io.WriteString(w, <span class="string">"hello world "</span> + r.URL.Path)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Home</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	io.WriteString(w, <span class="string">"home "</span> + r.URL.Path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="重写http-Server"><a href="#重写http-Server" class="headerlink" title="重写http.Server"></a>重写http.Server</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义全局变量</span></span><br><span class="line"><span class="keyword">var</span> mux <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="function"><span class="keyword">func</span><span class="params">(http.ResponseWriter, *http.Request)</span></span></span><br><span class="line"><span class="function"><span class="title">type</span> <span class="title">MyHandler</span> <span class="title">struct</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	server := http.Server&#123;</span><br><span class="line">		Addr: <span class="string">":8080"</span>,</span><br><span class="line">		<span class="comment">// 定义server的默认handler</span></span><br><span class="line">		Handler: &amp;MyHandler&#123;&#125;,</span><br><span class="line">		ReadTimeout: <span class="number">2</span> * time.Second,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 对全局变量赋值</span></span><br><span class="line">	mux = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="function"><span class="keyword">func</span><span class="params">(http.ResponseWriter, *http.Request)</span>)</span></span><br><span class="line"><span class="function">	<span class="title">mux</span>["/<span class="title">home</span>"] = <span class="title">Home</span></span></span><br><span class="line"><span class="function">	<span class="title">mux</span>["/<span class="title">user</span>"] = <span class="title">User</span></span></span><br><span class="line"><span class="function">	<span class="title">err</span> := <span class="title">server</span>.<span class="title">ListenAndServe</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	<span class="title">if</span> <span class="title">err</span> != <span class="title">nil</span></span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"listen faild"</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// handler默认执行的方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(*MyHandler)</span><span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 根据map转发路由</span></span><br><span class="line">	<span class="keyword">if</span> v, ok := mux[r.URL.String()]; ok &#123;</span><br><span class="line">		v(w, r)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	io.WriteString(w, <span class="string">"hello world "</span> + r.URL.Path)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Home</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	io.WriteString(w, <span class="string">"home "</span> + r.URL.Path)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">User</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	io.WriteString(w, <span class="string">"user "</span> + r.URL.Path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="原生中间件编写"><a href="#原生中间件编写" class="headerlink" title="原生中间件编写"></a>原生中间件编写</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> SingleMiddle <span class="keyword">struct</span> &#123;</span><br><span class="line">	handler   http.Handler</span><br><span class="line">	allowHost []<span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> myHandler <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> allowHosts []<span class="keyword">string</span></span><br><span class="line">	allowHosts = <span class="built_in">append</span>(allowHosts, <span class="string">"localhost:8080"</span>)</span><br><span class="line">	MyHandler := &amp;myHandler&#123;&#125;</span><br><span class="line">	singleHost := NewSingle(MyHandler, allowHosts)</span><br><span class="line">	http.ListenAndServe(<span class="string">":8080"</span>, singleHost)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// middleware</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewSingle</span><span class="params">(handler http.Handler, allowHost []<span class="keyword">string</span>)</span> <span class="params">(*SingleMiddle)</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;SingleMiddle&#123;handler, allowHost&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// middleware</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *SingleMiddle)</span> <span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	host := r.Host</span><br><span class="line">	isIn := <span class="literal">false</span></span><br><span class="line">	fmt.Println(s.allowHost)</span><br><span class="line">	fmt.Println(host)</span><br><span class="line">	<span class="keyword">for</span> _, allowH := <span class="keyword">range</span> s.allowHost &#123;</span><br><span class="line">		<span class="keyword">if</span> allowH == host &#123;</span><br><span class="line">			isIn = <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> isIn &#123;</span><br><span class="line">		s.handler.ServeHTTP(w, r)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		w.WriteHeader(<span class="number">403</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// custom handler</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *myHandler)</span> <span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	w.WriteHeader(<span class="number">200</span>)</span><br><span class="line">	w.Write([]<span class="keyword">byte</span>(<span class="string">"helle golang"</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -1069,142 +1473,6 @@
 <h1 id="喜欢"><a href="#喜欢" class="headerlink" title="喜欢"></a>喜欢</h1><blockquote>
 <p>有一个民谣青年曾说：最单纯的喜欢就是，就算你拒绝了我，我对你也永远没有埋怨。但我不会再靠近了。如果你有求于我，我依然会鞠躬尽瘁。从今往后我会把喜欢藏起来，不再招摇过市了，我会努力过得好，希望你也是。</p>
 </blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/zsh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/zsh/" itemprop="url">zsh</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:51+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/zsh/" class="leancloud_visitors" data-flag-title="zsh">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="安装-zsh"><a href="#安装-zsh" class="headerlink" title="安装 zsh"></a>安装 zsh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install zsh</span><br></pre></td></tr></table></figure>
-<h2 id="oh-my-zsh："><a href="#oh-my-zsh：" class="headerlink" title="oh-my-zsh："></a>oh-my-zsh：</h2><p>摘自：<br><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener">https://github.com/robbyrussell/oh-my-zsh</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="命令高亮"><a href="#命令高亮" class="headerlink" title="命令高亮"></a>命令高亮</h2><p>摘自：<br><a href="https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md" target="_blank" rel="noopener">https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git</span><br><span class="line">echo &quot;source $&#123;(q-)PWD&#125;/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; $&#123;ZDOTDIR:-$HOME&#125;/.zshrc</span><br><span class="line">source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</span><br></pre></td></tr></table></figure>
-<h2 id="可以设置默认sh"><a href="#可以设置默认sh" class="headerlink" title="可以设置默认sh"></a>可以设置默认sh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1405,300 +1673,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/ssh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/ssh/" itemprop="url">ssh无密码登录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/ssh/" class="leancloud_visitors" data-flag-title="ssh无密码登录">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="ssh无密码登录"><a href="#ssh无密码登录" class="headerlink" title="ssh无密码登录"></a>ssh无密码登录</h1><h2 id="公钥认证的基本思想"><a href="#公钥认证的基本思想" class="headerlink" title="公钥认证的基本思想"></a>公钥认证的基本思想</h2><p>对信息的加密和解密采用不同的key，这对key分别称作private key和public key，其中，public key存放在欲登录的服务器上，而private key为特定的客户机所持有。</p>
-<p>当客户机向服务器发出建立安全连接的请求时，首先发送自己的public key，如果这个public key是被服务器所允许的，服务器就发送一个经过public key加密的随机数据给客户机，这个数据只能通过private key解密，客户机将解密后的信息发还给服务器，服务器验证正确后即确认客户机是可信任的，从而建立起一条安全的信息通道。</p>
-<p>通过这种方式，客户机不需要向外发送自己的身份标志“private key”即可达到校验的目的，并且private key是不能通过public key反向推断出来的。这避免了网络窃听可能造成的密码泄露。客户机需要小心的保存自己的private key，以免被其他人窃取，一旦这样的事情发生，就需要各服务器更换受信的public key列表。</p>
-<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><ul>
-<li><p>用ssh-keygen创建公钥</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@Server1 ~]<span class="comment"># ssh-keygen -t rsa</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key(/root/.ssh/id_rsa):</span><br><span class="line">Created directory <span class="string">'/root/.ssh'</span>.</span><br><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved <span class="keyword">in</span>/root/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved <span class="keyword">in</span>/root/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">7b:aa:08:a0:99:<span class="built_in">fc</span>:d9:cc:d8:2e:4b:1a:c0:6b:da:e4root@Server1</span><br><span class="line">The key<span class="string">'s randomart image is:</span></span><br><span class="line"><span class="string">+--[ RSA 2048]----+</span></span><br><span class="line"><span class="string">| |</span></span><br><span class="line"><span class="string">| |</span></span><br><span class="line"><span class="string">| |</span></span><br><span class="line"><span class="string">|. |</span></span><br><span class="line"><span class="string">|o. S |</span></span><br><span class="line"><span class="string">|++. . |</span></span><br><span class="line"><span class="string">|+=o. . . |</span></span><br><span class="line"><span class="string">|o+=oB. o |</span></span><br><span class="line"><span class="string">|..E==*... |</span></span><br><span class="line"><span class="string">+-----------------+</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">补充说明</span></span><br><span class="line"><span class="string">ssh-keygen:生成秘钥</span></span><br><span class="line"><span class="string">其中：</span></span><br><span class="line"><span class="string">  -t指定算法</span></span><br><span class="line"><span class="string">  -f 指定生成秘钥路径</span></span><br><span class="line"><span class="string">  -N 指定密码</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看钥匙</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@Server1 ~]<span class="comment"># ls -l .ssh  </span></span><br><span class="line">总用量 8  </span><br><span class="line">-rw-------. 1 root root 1675 12月 10 22:20 id_rsa  </span><br><span class="line">-rw-r--r--. 1 root root 394 12月 10 22:20 id_rsa.pub</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将公钥复制到被管理机器Server2和Server3下的.ssh目录下（先确保存在这个目录）</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 .ssh]<span class="comment"># scp id_rsa.pub root@192.168.1.3:~/.ssh/  </span></span><br><span class="line">The authenticity of host <span class="string">'192.168.1.3(192.168.1.3)'</span> can<span class="string">'t be established.  </span></span><br><span class="line"><span class="string">RSA key fingerprint is93:eb:f9:47:b1:f6:3f:b4:2e:21:c3:d5:ab:1d:ae:65.  </span></span><br><span class="line"><span class="string">Are you sure you want to continueconnecting (yes/no)? yes  </span></span><br><span class="line"><span class="string">Warning: Permanently added '</span>192.168.1.3<span class="string">'(RSA) to the list of known hosts.  </span></span><br><span class="line"><span class="string">root@192.168.1.3'</span>s password:  </span><br><span class="line">id_rsa.pub   </span><br><span class="line">[root@server1 .ssh]<span class="comment"># scp id_rsa.pub root@192.168.1.4:~/.ssh/authorized_keys  </span></span><br><span class="line">The authenticity of host <span class="string">'192.168.1.4(192.168.1.4)'</span> can<span class="string">'t be established.  </span></span><br><span class="line"><span class="string">RSA key fingerprint is93:eb:f9:47:b1:f6:3f:b4:2e:21:c3:d5:ab:1d:ae:65.  </span></span><br><span class="line"><span class="string">Are you sure you want to continueconnecting (yes/no)? yes  </span></span><br><span class="line"><span class="string">Warning: Permanently added '</span>192.168.1.4<span class="string">'(RSA) to the list of known hosts.  </span></span><br><span class="line"><span class="string">root@192.168.1.4'</span>s password:  </span><br><span class="line">id_rsa.pub</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>到Server2和Server3目录下执行下面的命令</p>
-</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>设置文件和目录权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 authorized_keys</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>验证使用SSH IP地址的方式无密码访问</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 .ssh]# ssh 192.168.1.3</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="禁止密码登录"><a href="#禁止密码登录" class="headerlink" title="禁止密码登录"></a>禁止密码登录</h1><p>修改SSH的配置文件/etc/ssh/sshd_config，找到下面1行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure></p>
-<p>修改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication no</span><br></pre></td></tr></table></figure></p>
-<p>保存后重启SSH服务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/expect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/linux/expect/" itemprop="url">expect交互编程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/expect/" class="leancloud_visitors" data-flag-title="expect交互编程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu：apt-get install expect</span><br><span class="line">mac: brew install homebrew/dupes/expect</span><br></pre></td></tr></table></figure>
-<h1 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set password  rootddd</span><br></pre></td></tr></table></figure>
-<h1 id="获取参数"><a href="#获取参数" class="headerlink" title="获取参数"></a>获取参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set filename [lindex $argv 0]</span><br></pre></td></tr></table></figure>
-<h1 id="一般格式"><a href="#一般格式" class="headerlink" title="一般格式"></a>一般格式</h1><blockquote>
-<p>开头一定要是expect<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line"></span><br><span class="line">set filename [lindex $argv 0]</span><br><span class="line">set password  example_pass</span><br><span class="line"># 开始执行命令</span><br><span class="line">spawn ssh root@example.com</span><br><span class="line"># 匹配（如果包含，则执行下面的send）</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line"># \r回车</span><br><span class="line">send &quot;$password\r&quot;</span><br><span class="line">send &quot;ls\r&quot;</span><br><span class="line">send &quot;exit\r&quot;</span><br><span class="line"># 结束标志</span><br><span class="line">interact</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1762,7 +1736,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1806,7 +1780,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
