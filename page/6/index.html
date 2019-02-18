@@ -291,6 +291,138 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/os/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chimps">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秀才">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/golang/os/" itemprop="url">os</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T17:29:50+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/golang/os/" class="leancloud_visitors" data-flag-title="os">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h3><p>使用ioutil标准包<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ListDir</span><span class="params">(filePath <span class="keyword">string</span>)</span> <span class="params">(files []<span class="keyword">string</span>, err error)</span></span> &#123;</span><br><span class="line">	paths, err := ioutil.ReadDir(filePath)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> paths &#123;</span><br><span class="line">		<span class="keyword">if</span> !f.IsDir() &#123;</span><br><span class="line">			files = <span class="built_in">append</span>(files, f.Name())</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="按行读取文件"><a href="#按行读取文件" class="headerlink" title="按行读取文件"></a>按行读取文件</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	f, err := os.Open(<span class="string">"bugIds.txt"</span>)</span><br><span class="line">	utils.Check(<span class="string">"os.Open"</span>, err)</span><br><span class="line">	bf := bufio.NewReader(f)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		line, _, e := bf.ReadLine()</span><br><span class="line">		<span class="keyword">if</span> e == io.EOF &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		fix(<span class="keyword">string</span>(line))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/strings/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1677,157 +1809,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/mongodb/auth/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chimps">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秀才">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/mongodb/auth/" itemprop="url">auth认证</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-25T10:19:36+08:00">
-                2017-04-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/mongodb/auth/" class="leancloud_visitors" data-flag-title="auth认证">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="以auth认证方式启动"><a href="#以auth认证方式启动" class="headerlink" title="以auth认证方式启动"></a>以auth认证方式启动</h1><ul>
-<li><p>可以在config文件中加一项：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以在命令行中，添加一个option，<code>--auth</code></p>
-</li>
-</ul>
-<p>但是，如果mongodb中没有用户，认证是没有意义的。</p>
-<h1 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h1><ul>
-<li><p>选择库</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户的存储也是基于库的。管理员用户的话，需要在admin中创建。创建的第一个用户即为管理员用户</span></span><br><span class="line">&gt; use admin</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建管理员用户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;</span><br><span class="line">    user:&quot;root&quot;,</span><br><span class="line">    pwd:&quot;root&quot;,</span><br><span class="line">    roles:[</span><br><span class="line">        &#123;</span><br><span class="line">            role:&quot;userAdminAnyDatabase&quot;,</span><br><span class="line">            db:&quot;admin&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建普通用户</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;</span><br><span class="line">    user:<span class="string">"user1"</span>,</span><br><span class="line">    pwd:<span class="string">"pwd1"</span>,</span><br><span class="line">    roles:[</span><br><span class="line">        &#123;</span><br><span class="line">            role:<span class="string">"readWrite"</span>,</span><br><span class="line">            db:<span class="string">"db1"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h1><h2 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// user所存储的库</span><br><span class="line">&gt; use admin</span><br><span class="line">&gt; db.auth(username, password)</span><br><span class="line">// 返回原数据库</span><br><span class="line">&gt; use blog</span><br></pre></td></tr></table></figure>
-<h2 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; mongo --host ip:port -u 用户 -p 密码 --authenticationDatabase admin</span><br></pre></td></tr></table></figure>
-<h1 id="mongodb配置文件相关参数"><a href="#mongodb配置文件相关参数" class="headerlink" title="mongodb配置文件相关参数"></a>mongodb配置文件相关参数</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#数据库数据存放目录</span><br><span class="line">dbpath=<span class="regexp">/usr/</span>local/mongodb304/data</span><br><span class="line">#数据库日志存放目录</span><br><span class="line">logpath=<span class="regexp">/usr/</span>local/mongodb304/logs/mongodb.log </span><br><span class="line">#以追加的方式记录日志</span><br><span class="line">logappend = <span class="literal">true</span></span><br><span class="line">#端口号 默认为27017</span><br><span class="line">port=<span class="number">27017</span> </span><br><span class="line">#以后台方式运行进程</span><br><span class="line">fork=<span class="literal">true</span> </span><br><span class="line"> #开启用户认证</span><br><span class="line">auth=<span class="literal">true</span></span><br><span class="line">#关闭http接口，默认关闭http端口访问</span><br><span class="line">nohttpinterface=<span class="literal">true</span></span><br><span class="line">#mongodb所绑定的ip地址</span><br><span class="line">bind_ip = <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>,<span class="number">192.168</span><span class="number">.1</span><span class="number">.140</span></span><br><span class="line">#启用日志文件，默认启用</span><br><span class="line">journal=<span class="literal">true</span> </span><br><span class="line">#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false</span><br><span class="line">quiet=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1878,7 +1859,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1891,7 +1872,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

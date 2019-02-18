@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="linux," />
+  <meta name="keywords" content="go,pprof," />
 
 
 
@@ -81,18 +81,21 @@
 
 
 
-<meta name="description" content="修改时间1sudo date -s &quot;2018-11-02 17:18:10&quot; 恢复时间1sudo ntpdate us.pool.ntp.org">
-<meta name="keywords" content="linux">
+<meta name="description" content="golang的火焰图，多用于跟踪程序运行的状态，CPU消耗，内存消耗等 搜集方式做 Profiling 第一步就是怎么获取应用程序的运行情况数据。go 语言提供了 runtime/pprof 和 net/http/pprof 两个库 工具型应用pprof 封装了很好的接口供我们使用，比如要想进行 CPU Profiling，可以调用 pprof.StartCPUProfile() 方法，它会对当前">
+<meta name="keywords" content="go,pprof">
 <meta property="og:type" content="article">
-<meta property="og:title" content="修改服务器时间">
-<meta property="og:url" content="http://chimpss.github.io/linux/time/index.html">
+<meta property="og:title" content="golang profiling">
+<meta property="og:url" content="http://chimpss.github.io/golang/profiling/index.html">
 <meta property="og:site_name" content="秀才">
-<meta property="og:description" content="修改时间1sudo date -s &quot;2018-11-02 17:18:10&quot; 恢复时间1sudo ntpdate us.pool.ntp.org">
+<meta property="og:description" content="golang的火焰图，多用于跟踪程序运行的状态，CPU消耗，内存消耗等 搜集方式做 Profiling 第一步就是怎么获取应用程序的运行情况数据。go 语言提供了 runtime/pprof 和 net/http/pprof 两个库 工具型应用pprof 封装了很好的接口供我们使用，比如要想进行 CPU Profiling，可以调用 pprof.StartCPUProfile() 方法，它会对当前">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-31T02:29:14.005Z">
+<meta property="og:image" content="https://lihaoquan.me/media/2018/hard_profile.png">
+<meta property="og:image" content="https://lihaoquan.me/media/2018/go-torch.png">
+<meta property="og:updated_time" content="2019-02-18T07:24:33.424Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="修改服务器时间">
-<meta name="twitter:description" content="修改时间1sudo date -s &quot;2018-11-02 17:18:10&quot; 恢复时间1sudo ntpdate us.pool.ntp.org">
+<meta name="twitter:title" content="golang profiling">
+<meta name="twitter:description" content="golang的火焰图，多用于跟踪程序运行的状态，CPU消耗，内存消耗等 搜集方式做 Profiling 第一步就是怎么获取应用程序的运行情况数据。go 语言提供了 runtime/pprof 和 net/http/pprof 两个库 工具型应用pprof 封装了很好的接口供我们使用，比如要想进行 CPU Profiling，可以调用 pprof.StartCPUProfile() 方法，它会对当前">
+<meta name="twitter:image" content="https://lihaoquan.me/media/2018/hard_profile.png">
 
 
 
@@ -122,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://chimpss.github.io/linux/time/"/>
+  <link rel="canonical" href="http://chimpss.github.io/golang/profiling/"/>
 
 
 
@@ -134,7 +137,7 @@
 <meta name="theme-color" content="#222">
 <meta name="google-site-verification" content="IihE-r8G9GMRO1MueIF67KayEkW375z-kdkot_6ncEE" />
 <meta name="baidu-site-verification" content="e0YKAsKxTN" />
-  <title>修改服务器时间 | 秀才</title>
+  <title>golang profiling | 秀才</title>
   
 
 
@@ -295,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/linux/time/">
+    <link itemprop="mainEntityOfPage" href="http://chimpss.github.io/golang/profiling/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chimps">
@@ -312,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">修改服务器时间</h1>
+          <h1 class="post-title" itemprop="name headline">golang profiling</h1>
         
 
         <div class="post-meta">
@@ -324,8 +327,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-31T10:27:28+08:00">
-                2018-10-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-18T15:24:30+08:00">
+                2019-02-18
               </time>
             
 
@@ -342,7 +345,7 @@
 
           
           
-             <span id="/linux/time/" class="leancloud_visitors" data-flag-title="修改服务器时间">
+             <span id="/golang/profiling/" class="leancloud_visitors" data-flag-title="golang profiling">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -373,8 +376,40 @@
       
 
       
-        <h2 id="修改时间"><a href="#修改时间" class="headerlink" title="修改时间"></a>修改时间</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo date -s <span class="string">"2018-11-02 17:18:10"</span></span><br></pre></td></tr></table></figure>
-<h2 id="恢复时间"><a href="#恢复时间" class="headerlink" title="恢复时间"></a>恢复时间</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ntpdate us.pool.ntp.org</span><br></pre></td></tr></table></figure>
+        <p>golang的火焰图，多用于跟踪程序运行的状态，CPU消耗，内存消耗等</p>
+<h2 id="搜集方式"><a href="#搜集方式" class="headerlink" title="搜集方式"></a>搜集方式</h2><p>做 Profiling 第一步就是怎么获取应用程序的运行情况数据。<br>go 语言提供了 runtime/pprof 和 net/http/pprof 两个库</p>
+<h4 id="工具型应用"><a href="#工具型应用" class="headerlink" title="工具型应用"></a>工具型应用</h4><p>pprof 封装了很好的接口供我们使用，比如要想进行 CPU Profiling，可以调用 pprof.StartCPUProfile() 方法，它会对当前应用程序进行 CPU profiling，并写入到提供的参数中（w io.Writer），要停止调用 StopCPUProfile() 即可。</p>
+<p><strong>对于CPU：</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f, err := os.Create(*cpuprofile)</span><br><span class="line">...</span><br><span class="line">pprof.StartCPUProfile(f)</span><br><span class="line"><span class="keyword">defer</span> pprof.StopCPUProfile()</span><br></pre></td></tr></table></figure>
+<p><strong>对于内存</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f, err := os.Create(*memprofile)</span><br><span class="line">pprof.WriteHeapProfile(f)</span><br><span class="line">f.Close()</span><br></pre></td></tr></table></figure>
+<h4 id="服务型应用"><a href="#服务型应用" class="headerlink" title="服务型应用"></a>服务型应用</h4><p><strong>默认的net/http</strong></p>
+<p>如果server是默认的net/http包，那就很简答了，net/http已经集成了profiling<br>只需要添加一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import _ &quot;net/http/pprof&quot;</span><br></pre></td></tr></table></figure></p>
+<p><strong>自定义的 Mux</strong></p>
+<p>如果你使用自定义的 Mux，则需要手动注册一些路由规则：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">r.HandleFunc(<span class="string">"/debug/pprof/"</span>, pprof.Index)</span><br><span class="line">r.HandleFunc(<span class="string">"/debug/pprof/cmdline"</span>, pprof.Cmdline)</span><br><span class="line">r.HandleFunc(<span class="string">"/debug/pprof/profile"</span>, pprof.Profile)</span><br><span class="line">r.HandleFunc(<span class="string">"/debug/pprof/symbol"</span>, pprof.Symbol)</span><br><span class="line">r.HandleFunc(<span class="string">"/debug/pprof/trace"</span>, pprof.Trace)</span><br></pre></td></tr></table></figure></p>
+<p><strong>beego</strong></p>
+<p>beego框架也是可以自定义profiling的，需要做两步</p>
+<p>第一步，加一个controller<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> controllers</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"net/http/pprof"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"github.com/astaxie/beego"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ProfController <span class="keyword">struct</span> &#123;</span><br><span class="line">	beego.Controller</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ProfController)</span> <span class="title">Get</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> c.Ctx.Input.Param(<span class="string">":pp"</span>) &#123;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		pprof.Index(c.Ctx.ResponseWriter, c.Ctx.Request)</span><br><span class="line">	<span class="keyword">case</span> <span class="string">""</span>:</span><br><span class="line">		pprof.Index(c.Ctx.ResponseWriter, c.Ctx.Request)</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"cmdline"</span>:</span><br><span class="line">		pprof.Cmdline(c.Ctx.ResponseWriter, c.Ctx.Request)</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"profile"</span>:</span><br><span class="line">		pprof.Profile(c.Ctx.ResponseWriter, c.Ctx.Request)</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"symbol"</span>:</span><br><span class="line">		pprof.Symbol(c.Ctx.ResponseWriter, c.Ctx.Request)</span><br><span class="line">	&#125;</span><br><span class="line">	c.Ctx.ResponseWriter.WriteHeader(<span class="number">200</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第二步，注册路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">beego.Router(`/debug/pprof`, &amp;controllers.ProfController&#123;&#125;)</span><br><span class="line">beego.Router(`/debug/pprof/:pp([\w]+)`, &amp;controllers.ProfController&#123;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><strong>gin</strong></p>
+<p>先装一个包<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com/DeanThompson/ginpprof</span><br></pre></td></tr></table></figure></p>
+<p>然后在使用 ginpprof.Wrapper 即可，例如：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"github.com/gin-gonic/gin"</span></span><br><span class="line">    <span class="string">"github.com/DeanThompson/ginpprof"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    router := gin.Default()</span><br><span class="line"></span><br><span class="line">    router.GET(<span class="string">"/ping"</span>, <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        c.String(<span class="number">200</span>, <span class="string">"pong"</span>)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    ginpprof.Wrapper(router)</span><br><span class="line">    router.Run(<span class="string">":8080"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="获取svg"><a href="#获取svg" class="headerlink" title="获取svg"></a>获取svg</h2><p><strong>安装依赖</strong></p>
+<p>在后面我们会生成调用关系图和火焰图，需要安装 graphviz 软件包<br>Ubuntu安装graphviz<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install -y graphviz</span><br></pre></td></tr></table></figure></p>
+<p>mac安装graphviz<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install graphviz</span><br></pre></td></tr></table></figure></p>
+<p>当然，还需要golang的<code>go tool</code>和<code>go-torch(可选)</code></p>
+<p><strong>使用go tool</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof --seconds 5 http://test-server.com/debug/pprof/profile</span><br><span class="line">go tool pprof --seconds 5 http://test-server.com/game/pprof/default</span><br><span class="line">go tool pprof --seconds 5 http://test-server.com/game/pprof/cmdline</span><br><span class="line">go tool pprof --seconds 5 http://test-server.com/game/pprof/symbol</span><br></pre></td></tr></table></figure></p>
+<p>这种情况下获得的图是这样子的<br><img src="https://lihaoquan.me/media/2018/hard_profile.png" alt="alt text"><br>那么问题来了，可以看个大概，但是还是不够友好，这就引出了<code>go-torch</code></p>
+<p><strong>使用go torch</strong></p>
+<p>go-torch是Uber公司开源的一款针对Go语言程序的火焰图生成工具，能收集 stack traces,并把它们整理成火焰图，直观地程序给开发人员。<br>我们通过go-torch，可以获取到火焰图svg<br>获取到的svg，拖动到Chrome浏览器即可。</p>
+<p>安装go-torch<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get -v github.com/uber/go-torch</span><br></pre></td></tr></table></figure></p>
+<p>使用go-torch获取svg<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go-torch -t 30 -u http://test-server.com -f ./test1.svg</span><br></pre></td></tr></table></figure></p>
+<p>会得到如下所示的结果<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; go-torch -t 25 -u http://<span class="built_in">test</span>-server.com -f ./test1.svg</span><br><span class="line">INFO[14:31:49] Run pprof <span class="built_in">command</span>: go tool pprof -raw -seconds 25 http://<span class="built_in">test</span>-server.com/debug/pprof/profile</span><br><span class="line">INFO[14:32:15] Writing svg to ./test1.svg</span><br></pre></td></tr></table></figure></p>
+<p>打开svg如下图所示<br><img src="https://lihaoquan.me/media/2018/go-torch.png" alt="alt text"></p>
+<p>这么看，是不是就可以明白了</p>
+<h2 id="火焰图分析"><a href="#火焰图分析" class="headerlink" title="火焰图分析"></a>火焰图分析</h2><blockquote>
+<p>未完待续、、、</p>
+</blockquote>
 
       
     </div>
@@ -392,7 +427,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag"># linux</a>
+            <a href="/tags/go/" rel="tag"># go</a>
+          
+            <a href="/tags/pprof/" rel="tag"># pprof</a>
           
         </div>
       
@@ -405,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/digest/国产凌凌漆/" rel="next" title="国产凌凌漆">
-                <i class="fa fa-chevron-left"></i> 国产凌凌漆
+              <a href="/golang/xorm/" rel="next" title="xorm">
+                <i class="fa fa-chevron-left"></i> xorm
               </a>
             
           </div>
@@ -414,10 +451,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/golang/encoding/" rel="prev" title="encoding">
-                encoding <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -547,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改时间"><span class="nav-number">1.</span> <span class="nav-text">修改时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复时间"><span class="nav-number">2.</span> <span class="nav-text">恢复时间</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搜集方式"><span class="nav-number">1.</span> <span class="nav-text">搜集方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工具型应用"><span class="nav-number">1.0.1.</span> <span class="nav-text">工具型应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务型应用"><span class="nav-number">1.0.2.</span> <span class="nav-text">服务型应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取svg"><span class="nav-number">2.</span> <span class="nav-text">获取svg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#火焰图分析"><span class="nav-number">3.</span> <span class="nav-text">火焰图分析</span></a></li></ol></div>
             
 
           </div>
