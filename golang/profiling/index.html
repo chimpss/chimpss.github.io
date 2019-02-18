@@ -91,7 +91,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://lihaoquan.me/media/2018/hard_profile.png">
 <meta property="og:image" content="https://lihaoquan.me/media/2018/go-torch.png">
-<meta property="og:updated_time" content="2019-02-18T07:54:27.936Z">
+<meta property="og:updated_time" content="2019-02-18T07:56:12.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang profiling">
 <meta name="twitter:description" content="golang的火焰图，多用于跟踪程序运行的状态，CPU消耗，内存消耗等 应用（server）搜集数据做 Profiling 第一步就是怎么获取应用程序的运行情况数据。go 语言提供了 runtime/pprof 和 net/http/pprof 两个库 工具型应用pprof 封装了很好的接口供我们使用，比如要想进行 CPU Profiling，可以调用 pprof.StartCPUProfile(">
@@ -378,12 +378,12 @@
       
         <p>golang的火焰图，多用于跟踪程序运行的状态，CPU消耗，内存消耗等</p>
 <h2 id="应用（server）搜集数据"><a href="#应用（server）搜集数据" class="headerlink" title="应用（server）搜集数据"></a>应用（server）搜集数据</h2><p>做 Profiling 第一步就是怎么获取应用程序的运行情况数据。<br>go 语言提供了 runtime/pprof 和 net/http/pprof 两个库</p>
-<h4 id="工具型应用"><a href="#工具型应用" class="headerlink" title="工具型应用"></a>工具型应用</h4><p>pprof 封装了很好的接口供我们使用，比如要想进行 CPU Profiling，可以调用 pprof.StartCPUProfile() 方法，它会对当前应用程序进行 CPU profiling，并写入到提供的参数中（w io.Writer），要停止调用 StopCPUProfile() 即可。</p>
+<h3 id="工具型应用"><a href="#工具型应用" class="headerlink" title="工具型应用"></a>工具型应用</h3><p>pprof 封装了很好的接口供我们使用，比如要想进行 CPU Profiling，可以调用 pprof.StartCPUProfile() 方法，它会对当前应用程序进行 CPU profiling，并写入到提供的参数中（w io.Writer），要停止调用 StopCPUProfile() 即可。</p>
 <p><strong>对于CPU：</strong></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f, err := os.Create(*cpuprofile)</span><br><span class="line">...</span><br><span class="line">pprof.StartCPUProfile(f)</span><br><span class="line"><span class="keyword">defer</span> pprof.StopCPUProfile()</span><br></pre></td></tr></table></figure>
 <p><strong>对于内存</strong></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f, err := os.Create(*memprofile)</span><br><span class="line">pprof.WriteHeapProfile(f)</span><br><span class="line">f.Close()</span><br></pre></td></tr></table></figure>
-<h4 id="服务型应用"><a href="#服务型应用" class="headerlink" title="服务型应用"></a>服务型应用</h4><p><strong>默认的net/http</strong></p>
+<h3 id="服务型应用"><a href="#服务型应用" class="headerlink" title="服务型应用"></a>服务型应用</h3><p><strong>默认的net/http</strong></p>
 <p>如果server是默认的net/http包，那就很简答了，net/http已经集成了profiling<br>只需要添加一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import _ &quot;net/http/pprof&quot;</span><br></pre></td></tr></table></figure></p>
 <p><strong>自定义的 Mux</strong></p>
 <p>如果你使用自定义的 Mux，则需要手动注册一些路由规则：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">r.HandleFunc(<span class="string">"/debug/pprof/"</span>, pprof.Index)</span><br><span class="line">r.HandleFunc(<span class="string">"/debug/pprof/cmdline"</span>, pprof.Cmdline)</span><br><span class="line">r.HandleFunc(<span class="string">"/debug/pprof/profile"</span>, pprof.Profile)</span><br><span class="line">r.HandleFunc(<span class="string">"/debug/pprof/symbol"</span>, pprof.Symbol)</span><br><span class="line">r.HandleFunc(<span class="string">"/debug/pprof/trace"</span>, pprof.Trace)</span><br></pre></td></tr></table></figure></p>
@@ -580,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用（server）搜集数据"><span class="nav-number">1.</span> <span class="nav-text">应用（server）搜集数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工具型应用"><span class="nav-number">1.0.1.</span> <span class="nav-text">工具型应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务型应用"><span class="nav-number">1.0.2.</span> <span class="nav-text">服务型应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取svg"><span class="nav-number">2.</span> <span class="nav-text">获取svg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#火焰图分析"><span class="nav-number">3.</span> <span class="nav-text">火焰图分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用（server）搜集数据"><span class="nav-number">1.</span> <span class="nav-text">应用（server）搜集数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工具型应用"><span class="nav-number">1.1.</span> <span class="nav-text">工具型应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务型应用"><span class="nav-number">1.2.</span> <span class="nav-text">服务型应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取svg"><span class="nav-number">2.</span> <span class="nav-text">获取svg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#火焰图分析"><span class="nav-number">3.</span> <span class="nav-text">火焰图分析</span></a></li></ol></div>
             
 
           </div>
