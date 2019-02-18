@@ -374,7 +374,7 @@
         
           
             <p>golang的火焰图，多用于跟踪程序运行的状态，CPU消耗，内存消耗等</p>
-<h2 id="搜集方式"><a href="#搜集方式" class="headerlink" title="搜集方式"></a>搜集方式</h2><p>做 Profiling 第一步就是怎么获取应用程序的运行情况数据。<br>go 语言提供了 runtime/pprof 和 net/http/pprof 两个库</p>
+<h2 id="应用（server）搜集数据"><a href="#应用（server）搜集数据" class="headerlink" title="应用（server）搜集数据"></a>应用（server）搜集数据</h2><p>做 Profiling 第一步就是怎么获取应用程序的运行情况数据。<br>go 语言提供了 runtime/pprof 和 net/http/pprof 两个库</p>
 <h4 id="工具型应用"><a href="#工具型应用" class="headerlink" title="工具型应用"></a>工具型应用</h4><p>pprof 封装了很好的接口供我们使用，比如要想进行 CPU Profiling，可以调用 pprof.StartCPUProfile() 方法，它会对当前应用程序进行 CPU profiling，并写入到提供的参数中（w io.Writer），要停止调用 StopCPUProfile() 即可。</p>
 <p><strong>对于CPU：</strong></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f, err := os.Create(*cpuprofile)</span><br><span class="line">...</span><br><span class="line">pprof.StartCPUProfile(f)</span><br><span class="line"><span class="keyword">defer</span> pprof.StopCPUProfile()</span><br></pre></td></tr></table></figure>
