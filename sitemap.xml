@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chimpss.github.io/digest/%E7%A2%A7%E8%A1%80%E5%89%91/</loc>
+    
+    <lastmod>2019-12-21T07:55:13.336Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chimpss.github.io/golang/profiling/</loc>
     
     <lastmod>2019-02-18T07:56:12.108Z</lastmod>
@@ -180,13 +187,6 @@
     <loc>http://chimpss.github.io/git/%E5%A4%9A%E8%B4%A6%E5%8F%B7/</loc>
     
     <lastmod>2018-10-17T08:43:07.684Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chimpss.github.io/digest/%E7%A2%A7%E8%A1%80%E5%89%91/</loc>
-    
-    <lastmod>2018-10-16T12:12:57.294Z</lastmod>
     
   </url>
   
